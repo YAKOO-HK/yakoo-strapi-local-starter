@@ -11,10 +11,11 @@ import 'yet-another-react-lightbox/styles.css';
 import 'yet-another-react-lightbox/plugins/thumbnails.css';
 import { cn } from '@/lib/utils';
 
-export default function GallerySection({ layout, slides }: ComponentGallery) {
+export default function GallerySection({ as, layout, slides }: ComponentGallery & { as: 'section' | 'div' }) {
+  const Component = as;
   const [index, setIndex] = useState(-1);
   return (
-    <section
+    <Component
       className={cn({
         container: layout === 'container',
         'prose prose-neutral dark:prose-invert mx-auto': layout === 'prose',
@@ -84,6 +85,6 @@ export default function GallerySection({ layout, slides }: ComponentGallery) {
         open={index >= 0}
         close={() => setIndex(-1)}
       />
-    </section>
+    </Component>
   );
 }

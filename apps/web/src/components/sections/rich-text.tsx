@@ -2,9 +2,10 @@ import { StrapiRichtext } from '@/components/ui/strapi-richtext';
 import { cn } from '@/lib/utils';
 import { ComponentRichText } from '@/strapi/components';
 
-export function RichTextSection({ layout, content }: ComponentRichText) {
+export function RichTextSection({ as, layout, content }: ComponentRichText & { as: 'section' | 'div' }) {
+  const Component = as;
   return (
-    <section
+    <Component
       className={cn('py-8', {
         container: layout === 'container' || layout === 'prose',
       })}
@@ -15,6 +16,6 @@ export function RichTextSection({ layout, content }: ComponentRichText) {
           'max-w-full': layout === 'full-width' || layout === 'container',
         })}
       />
-    </section>
+    </Component>
   );
 }

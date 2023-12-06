@@ -39,7 +39,8 @@ function Slide({ image, title, caption }: Omit<ComponentSlide, 'link' | 'id' | '
   );
 }
 
-export function CarouselSection({ slides }: ComponentCarousel) {
+export function CarouselSection({ as, slides }: ComponentCarousel & { as: 'section' | 'div' }) {
+  const Component = as;
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 5000, stopOnMouseEnter: true })]);
   const [label, setLabel] = useState('');
   useEffect(() => {
@@ -57,7 +58,7 @@ export function CarouselSection({ slides }: ComponentCarousel) {
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
   return (
-    <div className="relative">
+    <Component className="relative">
       <span className="sr-only" aria-live="polite">
         {label}
       </span>
@@ -102,6 +103,6 @@ export function CarouselSection({ slides }: ComponentCarousel) {
           })}
         </div>
       </div>
-    </div>
+    </Component>
   );
 }

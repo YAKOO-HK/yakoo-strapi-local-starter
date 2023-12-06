@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_page_components_page_titles",
+  "info": {
+    "displayName": "Page Title",
+    "icon": "pin"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "layout": {
+      "type": "enumeration",
+      "enum": [
+        "container",
+        "prose"
+      ],
+      "required": true,
+      "default": "prose"
+    }
+  }
+}

@@ -8,9 +8,19 @@ import { cn } from '@/lib/utils';
 import { ComponentHeroSection } from '@/strapi/components';
 import { StrapiImageLoader } from '@/strapi/image-loader';
 
-export function HeroSection({ bgColor, image, title, tagline, buttonLink, buttonText, content }: ComponentHeroSection) {
+export function HeroSection({
+  as,
+  bgColor,
+  image,
+  title,
+  tagline,
+  buttonLink,
+  buttonText,
+  content,
+}: ComponentHeroSection & { as: 'section' | 'div' }) {
+  const Component = as;
   return (
-    <section
+    <Component
       className={cn('text-foreground grid items-center md:grid-cols-2', {
         dark: bgColor && tinycolor(bgColor).isDark(),
       })}
@@ -37,6 +47,6 @@ export function HeroSection({ bgColor, image, title, tagline, buttonLink, button
           </Link>
         )}
       </div>
-    </section>
+    </Component>
   );
 }

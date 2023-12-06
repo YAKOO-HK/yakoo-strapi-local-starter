@@ -1,8 +1,9 @@
 {
   "collectionName": "components_page_components_rich_texts",
   "info": {
-    "displayName": "RichText",
-    "icon": "file"
+    "displayName": "Rich Text (blocks)",
+    "icon": "file",
+    "description": ""
   },
   "options": {},
   "attributes": {

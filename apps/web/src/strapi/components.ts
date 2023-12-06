@@ -16,6 +16,13 @@ export type ComponentHeroSection = {
   buttonText: string | null;
 };
 
+export type ComponentPageTitle = {
+  id: number;
+  __component: 'page-components.page-title';
+  layout: ComponentLayout;
+  title: string;
+};
+
 export type ComponentRichText = {
   id: number;
   __component: 'page-components.rich-text';
@@ -56,6 +63,7 @@ export type ComponentGallery = {
 };
 
 export type PageComponent =
+  | ComponentPageTitle
   | ComponentHeroSection
   | ComponentRichText
   | ComponentFeatureImage

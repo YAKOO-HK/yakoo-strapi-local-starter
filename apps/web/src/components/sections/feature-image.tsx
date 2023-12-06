@@ -3,9 +3,10 @@ import { cn } from '@/lib/utils';
 import { ComponentFeatureImage } from '@/strapi/components';
 import { StrapiImageLoader } from '@/strapi/image-loader';
 
-export function FeatureImageSection({ layout, image }: ComponentFeatureImage) {
+export function FeatureImageSection({ as, layout, image }: ComponentFeatureImage & { as: 'section' | 'div' }) {
+  const Component = as;
   return (
-    <section
+    <Component
       className={cn({
         container: layout === 'container',
         'prose mx-auto': layout === 'prose',
@@ -20,6 +21,6 @@ export function FeatureImageSection({ layout, image }: ComponentFeatureImage) {
         sizes="100vw"
         placeholder={image.data.attributes.placeholder || 'empty'}
       />
-    </section>
+    </Component>
   );
 }
