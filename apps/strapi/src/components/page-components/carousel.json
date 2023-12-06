@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_page_components_carousels",
+  "info": {
+    "displayName": "Carousel",
+    "icon": "slideshow"
+  },
+  "options": {},
+  "attributes": {
+    "slides": {
+      "type": "component",
+      "repeatable": true,
+      "component": "page-components.slide",
+      "required": true
+    }
+  }
+}

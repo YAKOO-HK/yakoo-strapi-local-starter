@@ -1,0 +1,42 @@
+{
+  "collectionName": "components_page_components_hero_sections",
+  "info": {
+    "displayName": "Hero Section",
+    "icon": "priceTag",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "tagline": {
+      "type": "string"
+    },
+    "content": {
+      "type": "blocks"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "bgColor": {
+      "type": "customField",
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
+      "required": false,
+      "customField": "plugin::color-picker.color"
+    },
+    "buttonLink": {
+      "type": "string"
+    },
+    "buttonText": {
+      "type": "string",
+      "default": "Read More"
+    }
+  }
+}

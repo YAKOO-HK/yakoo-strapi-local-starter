@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_page_components_feature_images",
+  "info": {
+    "displayName": "Feature Image",
+    "icon": "picture"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "layout": {
+      "type": "enumeration",
+      "enum": [
+        "full-width",
+        "container"
+      ],
+      "default": "full-width",
+      "required": true
+    }
+  }
+}

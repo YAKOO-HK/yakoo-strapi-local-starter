@@ -1,0 +1,47 @@
+{
+  "name": "strapi",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A Strapi application",
+  "scripts": {
+    "dev": "strapi dev",
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi"
+  },
+  "dependencies": {
+    "@strapi/plugin-color-picker": "^4.15.5",
+    "@strapi/plugin-i18n": "4.15.5",
+    "@strapi/plugin-seo": "^1.9.8",
+    "@strapi/plugin-users-permissions": "4.15.5",
+    "@strapi/provider-email-nodemailer": "^4.15.5",
+    "@strapi/provider-upload-local": "^4.15.5",
+    "@strapi/strapi": "4.15.5",
+    "mysql2": "^3.6.5",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "5.3.4",
+    "sharp": "^0.33.0",
+    "strapi-plugin-config-sync": "^1.2.3",
+    "strapi-plugin-local-image-sharp": "^1.7.0",
+    "strapi-plugin-placeholder": "^4.4.0",
+    "strapi-plugin-rest-cache": "^4.2.8",
+    "styled-components": "5.3.3"
+  },
+  "author": {
+    "name": "A Strapi developer"
+  },
+  "strapi": {
+    "uuid": "db859789-82bd-459a-8d53-6aa76ab92ec9"
+  },
+  "engines": {
+    "node": ">=18.0.0 <=20.x.x",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@strapi/typescript-utils": "^4.15.5",
+    "@types/node": "^17.0.12"
+  }
+}
