@@ -6,7 +6,7 @@ import { HeroSection } from './sections/hero-section';
 import { PageTitleSection } from './sections/page-title';
 import { RichTextSection } from './sections/rich-text';
 
-export function DynamicZone({ as = 'div', sections }: { as: 'section' | 'div'; sections: PageComponent[] }) {
+export function DynamicZone({ as = 'div', sections }: { as?: 'div' | 'section'; sections: PageComponent[] }) {
   return sections.map((section) => {
     switch (section.__component) {
       case 'page-components.rich-text':
