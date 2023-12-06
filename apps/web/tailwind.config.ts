@@ -21,7 +21,7 @@ const TailwindConfig = {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-noto-sans-hk)', ...defaultTheme.fontFamily.sans],
+        sans: ['var(--font-inter)', 'Microsoft JhengHei', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         border: 'hsl(var(--border))',

@@ -1,5 +1,5 @@
 import { type Metadata } from 'next';
-import { Noto_Sans_HK } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import Script from 'next/script';
 import { Toaster } from '@/components/ui/toaster';
 import { env } from '@/env';
@@ -8,12 +8,7 @@ import { getOpenGraphImage } from '@/strapi/strapi';
 import './global.css';
 import { cn } from '@/lib/utils';
 
-// const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
-const notoSansHk = Noto_Sans_HK({
-  variable: '--font-noto-sans-hk',
-  // preload: false,
-  subsets: ['latin'],
-});
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export async function generateMetadata() {
   const seo = await getSiteMetadata();
@@ -63,7 +58,7 @@ gtag('config', '${env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID}');
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" dir="ltr">
-      <body className={cn(notoSansHk.variable, 'bg-background text-foreground')}>
+      <body className={cn(inter.variable)}>
         <GoogleAnalytics />
         {children}
         <Toaster />
