@@ -2,17 +2,18 @@
   "collectionName": "components_page_components_galleries",
   "info": {
     "displayName": "Gallery",
-    "icon": "landscape"
+    "icon": "landscape",
+    "description": ""
   },
   "options": {},
   "attributes": {
-    "images": {
-      "allowedTypes": [
-        "images"
-      ],
+    "slides": {
       "type": "media",
       "multiple": true,
-      "required": true
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
     },
     "layout": {
       "type": "enumeration",

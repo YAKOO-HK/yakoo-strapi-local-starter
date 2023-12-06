@@ -1,6 +1,7 @@
 import { PageComponent } from '@/strapi/components';
 import { CarouselSection } from './sections/carousel';
 import { FeatureImageSection } from './sections/feature-image';
+import GallerySection from './sections/gallery';
 import { HeroSection } from './sections/hero-section';
 import { RichTextSection } from './sections/rich-text';
 
@@ -16,6 +17,8 @@ export function DynamicZone({ sections }: { sections: PageComponent[] }) {
       case 'page-components.carousel':
         // console.log(section);
         return <CarouselSection key={`carousel-${section.id}`} {...section} />;
+      case 'page-components.gallery':
+        return <GallerySection key={`gallery-${section.id}`} {...section} />;
       default:
         console.warn('Unknown component:', section);
         return null;

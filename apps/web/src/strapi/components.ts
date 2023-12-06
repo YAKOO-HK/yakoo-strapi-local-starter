@@ -48,4 +48,16 @@ export type ComponentCarousel = {
   slides: Array<ComponentSlide>;
 };
 
-export type PageComponent = ComponentHeroSection | ComponentRichText | ComponentFeatureImage | ComponentCarousel;
+export type ComponentGallery = {
+  id: number;
+  __component: 'page-components.gallery';
+  layout: ComponentLayout;
+  slides: { data: Array<StrapiMedia> };
+};
+
+export type PageComponent =
+  | ComponentHeroSection
+  | ComponentRichText
+  | ComponentFeatureImage
+  | ComponentCarousel
+  | ComponentGallery;
