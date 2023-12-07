@@ -20,15 +20,17 @@ export function MainNavigation({ items }: { items: NavigationItem[] }) {
           const isExternal = isExternalLink(parentItem.path);
           if (!parentItem.items?.length) {
             return (
-              <Button asChild key={parentItem.id} variant="ghost">
-                <Link
-                  href={isExternal ? parentItem.path : `${parentItem.path}`}
-                  target={isExternal ? '_blank' : undefined}
-                  rel={isExternal ? 'noopener noreferrer' : undefined}
-                >
-                  {parentItem.title}
-                </Link>
-              </Button>
+              <li key={parentItem.id}>
+                <Button asChild variant="ghost">
+                  <Link
+                    href={isExternal ? parentItem.path : `${parentItem.path}`}
+                    target={isExternal ? '_blank' : undefined}
+                    rel={isExternal ? 'noopener noreferrer' : undefined}
+                  >
+                    {parentItem.title}
+                  </Link>
+                </Button>
+              </li>
             );
           }
           // console.log(parentItem.items);
