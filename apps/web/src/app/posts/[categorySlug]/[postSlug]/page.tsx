@@ -58,7 +58,7 @@ export default async function SinglePostPage({ params }: { params: { categorySlu
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
           <span className="inline-flex items-center gap-2">
             <CalendarIcon className="h-4 w-4" aria-label="Published At" />
-            {parseISO(post.attributes.publishedAt).toLocaleDateString(post.attributes.locale)}
+            {parseISO(post.attributes.publishedAt).toLocaleDateString(post.attributes.locale, { dateStyle: 'long' })}
           </span>
           <Link
             className="inline-flex items-center gap-2 font-medium hover:underline"

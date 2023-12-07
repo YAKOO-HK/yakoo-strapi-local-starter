@@ -68,7 +68,7 @@ export default async function PostsPage({ searchParams }: { searchParams: unknow
                     <time dateTime={attributes.publishedAt} className="inline-flex items-center">
                       <CalendarIcon className="mr-2 h-4 w-4" aria-hidden="true" />
                       <span className="sr-only">Published on </span>
-                      {parseISO(attributes.publishedAt).toLocaleDateString(locale)}
+                      {parseISO(attributes.publishedAt).toLocaleDateString(locale, { dateStyle: 'long' })}
                     </time>
                   </CardDescription>
                 </CardHeader>

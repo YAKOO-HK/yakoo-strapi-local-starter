@@ -75,7 +75,9 @@ export default async function PostCategoryListPage({ params }: { params: { categ
                     <time dateTime={attributes.publishedAt} className="inline-flex items-center">
                       <CalendarIcon className="mr-2 h-4 w-4" aria-hidden="true" />
                       <span className="sr-only">Published on </span>
-                      {parseISO(attributes.publishedAt).toLocaleDateString(category.attributes.locale)}
+                      {parseISO(attributes.publishedAt).toLocaleDateString(category.attributes.locale, {
+                        dateStyle: 'long',
+                      })}
                     </time>
                   </CardDescription>
                 </CardHeader>
