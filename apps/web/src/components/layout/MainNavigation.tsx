@@ -10,15 +10,24 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { NavigationItem } from '@/strapi/navigation';
 
+const isExternalLink = (path: string) => path.includes('://');
+
 export function MainNavigation({ items }: { items: NavigationItem[] }) {
   return (
     <nav className="container flex max-w-5xl items-center justify-between pt-4">
       <ul className="flex flex-wrap items-center gap-4">
         {items.map((parentItem) => {
+          const isExternal = isExternalLink(parentItem.path);
           if (!parentItem.items?.length) {
             return (
-              <Button asChild key={parentItem.id}>
-                <Link href={parentItem.external ? parentItem.path : `${parentItem.path}`}>{parentItem.title}</Link>
+              <Button asChild key={parentItem.id} variant="ghost">
+                <Link
+                  href={isExternal ? parentItem.path : `${parentItem.path}`}
+                  target={isExternal ? '_blank' : undefined}
+                  rel={isExternal ? 'noopener noreferrer' : undefined}
+                >
+                  {parentItem.title}
+                </Link>
               </Button>
             );
           }
@@ -27,15 +36,18 @@ export function MainNavigation({ items }: { items: NavigationItem[] }) {
             <li key={parentItem.id}>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button>{parentItem.title}</Button>
+                  <Button variant="ghost">{parentItem.title}</Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   {parentItem.items.map(({ id, path, title, external }) => {
                     // console.log({ id, path, title, external, parent: parentItem.path });
+                    const isExternal = isExternalLink(path);
                     return (
                       <DropdownMenuItem asChild className="cursor-pointer text-lg" key={id}>
                         <Link
-                          href={external ? path : `${parentItem.path == '/' ? '' : parentItem}${path}`}
+                          href={external ? path : `${parentItem.path === '/' ? '' : parentItem}${path}`}
+                          target={isExternal ? '_blank' : undefined}
+                          rel={isExternal ? 'noopener noreferrer' : undefined}
                           prefetch={false}
                         >
                           {title}

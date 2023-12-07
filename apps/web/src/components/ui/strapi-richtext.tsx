@@ -1,6 +1,7 @@
 'use client';
 
 import { ComponentPropsWithoutRef } from 'react';
+import Link from 'next/link';
 import { BlocksRenderer } from '@strapi/blocks-react-renderer';
 import { cn } from '@/lib/utils';
 import { StrapiRawImageLoader } from '@/strapi/image-loader';
@@ -46,6 +47,21 @@ export function StrapiRichtext({ className, prose = true, ...props }: StrapiRich
                 srcSet={srcSet.join(', ')}
                 {...props}
               />
+            );
+          },
+          link: ({ children, url, ...props }) => {
+            const external = url.includes('://');
+            if (external) {
+              return (
+                <a href={url} {...props} target="_blank" rel="noreferrer noopener">
+                  {children}
+                </a>
+              );
+            }
+            return (
+              <Link href={url} {...props} prefetch={false}>
+                {children}
+              </Link>
             );
           },
         }}

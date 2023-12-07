@@ -1,16 +1,13 @@
 import { type Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import Image from 'next/image';
-import Link from 'next/link';
 import Script from 'next/script';
 import { Toaster } from '@/components/ui/toaster';
 import { env } from '@/env';
 import { getSiteMetadata } from '@/strapi/site-metadata';
 import { getOpenGraphImage } from '@/strapi/strapi';
 import './global.css';
-import { MainNavigation } from '@/components/layout/MainNavigation';
+import { Header } from '@/components/layout/Header';
 import { cn } from '@/lib/utils';
-import { StrapiImageLoader } from '@/strapi/image-loader';
 import { getMainNavigation } from '@/strapi/navigation';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
@@ -62,30 +59,13 @@ gtag('config', '${env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID}');
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { logo, locale } = await getSiteMetadata(); // TODO: Locale?
-  const data = await getMainNavigation();
+  const navigationItems = await getMainNavigation();
   // console.log(data);
   return (
     <html lang={locale} dir="ltr">
       <body className={cn(inter.variable)}>
         <GoogleAnalytics />
-        <header className="border-b-border border-b py-2 shadow-md">
-          <div className="container flex">
-            <div>
-              <Link href="/">
-                <Image
-                  loader={StrapiImageLoader}
-                  src={logo.data.attributes.url}
-                  width={(64 * logo.data.attributes.width) / logo.data.attributes.height}
-                  height={64}
-                  alt={logo.data.attributes.alternativeText || ''}
-                  priority
-                />
-                <span className="sr-only">Home</span>
-              </Link>
-            </div>
-          </div>
-          <MainNavigation items={data} />
-        </header>
+        <Header logo={logo.data} navigationItems={navigationItems} />
         {children}
         <Toaster />
         {process.env.NODE_ENV === 'development' && (
