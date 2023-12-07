@@ -1,21 +1,24 @@
 import qs from 'qs';
 import { env } from '@/env';
 import { fetchResponseHandler } from '@/lib/fetch-utils';
-import { StrapiSEO } from './strapi';
+import { StrapiLocale, StrapiMedia, StrapiSEO } from './strapi';
 
 type SiteMetadataResponse = {
   data: {
     id: number;
     attributes: {
-      favicon: { data: StrapiSEO };
+      locale: StrapiLocale;
+      favicon: { data: StrapiMedia };
+      logo: { data: StrapiMedia };
       seo: StrapiSEO;
     };
   };
 };
-export async function getSiteMetadata() {
+export async function getSiteMetadata(locale: StrapiLocale = 'en') {
   const querystring = qs.stringify(
     {
-      populate: ['seo', 'seo.metaImage', 'favicon'],
+      populate: ['seo', 'seo.metaImage', 'favicon', 'logo'],
+      locale,
     },
     { encodeValuesOnly: true }
   );
@@ -27,5 +30,5 @@ export async function getSiteMetadata() {
     },
   }).then(fetchResponseHandler<SiteMetadataResponse>());
 
-  return data.attributes.seo;
+  return data.attributes;
 }

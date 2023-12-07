@@ -87,7 +87,7 @@ export default async function PostCategoryListPage({ params }: { params: { categ
                   height={attributes.image.data.attributes.height}
                   placeholder={attributes.image.data.attributes.placeholder || 'empty'}
                 />
-                <CardContent>
+                <CardContent className="p-6">
                   <p className="whitespace-pre-wrap">{attributes.abstract}</p>
                 </CardContent>
                 <CardFooter>

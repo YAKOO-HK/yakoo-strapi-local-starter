@@ -48,6 +48,20 @@
           "sortable": false
         }
       },
+      "logo": {
+        "edit": {
+          "label": "logo",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "logo",
+          "searchable": false,
+          "sortable": false
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -110,6 +124,10 @@
     "layouts": {
       "edit": [
         [
+          {
+            "name": "logo",
+            "size": 6
+          },
           {
             "name": "favicon",
             "size": 6

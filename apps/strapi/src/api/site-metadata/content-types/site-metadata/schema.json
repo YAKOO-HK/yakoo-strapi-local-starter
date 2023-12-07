@@ -28,6 +28,19 @@
       "required": true
     },
     "favicon": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "logo": {
       "allowedTypes": [
         "images"
       ],
@@ -35,7 +48,7 @@
       "multiple": false,
       "pluginOptions": {
         "i18n": {
-          "localized": false
+          "localized": true
         }
       },
       "required": true
