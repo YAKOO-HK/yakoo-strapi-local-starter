@@ -2,13 +2,15 @@
   "collectionName": "components_page_components_embed_youtubes",
   "info": {
     "displayName": "Embed Youtube",
-    "icon": "cast"
+    "icon": "cast",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "url": {
       "type": "string",
-      "required": true
+      "required": true,
+      "regex": "https://www.youtube.com/embed/[.]+"
     },
     "layout": {
       "type": "enumeration",

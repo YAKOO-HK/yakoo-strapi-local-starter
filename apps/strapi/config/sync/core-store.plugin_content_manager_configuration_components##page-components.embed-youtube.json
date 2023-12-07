@@ -1,0 +1,76 @@
+{
+  "key": "plugin_content_manager_configuration_components::page-components.embed-youtube",
+  "value": {
+    "uid": "page-components.embed-youtube",
+    "settings": {
+      "bulkable": true,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 10,
+      "mainField": "url",
+      "defaultSortBy": "url",
+      "defaultSortOrder": "ASC"
+    },
+    "metadatas": {
+      "id": {
+        "edit": {},
+        "list": {
+          "label": "id",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "url": {
+        "edit": {
+          "label": "url",
+          "description": "Starts with https://www.youtube.com/embed/",
+          "placeholder": "https://www.youtube.com/embed/xxxxxxxxxxx",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "url",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "layout": {
+        "edit": {
+          "label": "layout",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "layout",
+          "searchable": true,
+          "sortable": true
+        }
+      }
+    },
+    "layouts": {
+      "list": [
+        "id",
+        "url",
+        "layout"
+      ],
+      "edit": [
+        [
+          {
+            "name": "url",
+            "size": 6
+          },
+          {
+            "name": "layout",
+            "size": 6
+          }
+        ]
+      ]
+    },
+    "isComponent": true
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}

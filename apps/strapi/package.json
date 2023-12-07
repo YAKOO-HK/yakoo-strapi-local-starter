@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "description": "A Strapi application",
   "scripts": {
+    "cs": "config-sync",
     "dev": "strapi dev",
     "develop": "strapi develop",
     "start": "strapi start",

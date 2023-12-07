@@ -1,0 +1,76 @@
+{
+  "key": "plugin_content_manager_configuration_components::page-components.gallery",
+  "value": {
+    "uid": "page-components.gallery",
+    "settings": {
+      "bulkable": true,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 10,
+      "mainField": "id",
+      "defaultSortBy": "id",
+      "defaultSortOrder": "ASC"
+    },
+    "metadatas": {
+      "id": {
+        "edit": {},
+        "list": {
+          "label": "id",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "slides": {
+        "edit": {
+          "label": "slides",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "slides",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "layout": {
+        "edit": {
+          "label": "layout",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "layout",
+          "searchable": true,
+          "sortable": true
+        }
+      }
+    },
+    "layouts": {
+      "list": [
+        "id",
+        "layout",
+        "slides"
+      ],
+      "edit": [
+        [
+          {
+            "name": "layout",
+            "size": 6
+          },
+          {
+            "name": "slides",
+            "size": 6
+          }
+        ]
+      ]
+    },
+    "isComponent": true
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}
