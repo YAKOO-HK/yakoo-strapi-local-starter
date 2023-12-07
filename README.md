@@ -29,7 +29,9 @@ uuidgen
 ### Setup Database and secrets for Strapi
 
 1. Copy `apps/strapi/.env.example` to `apps/strapi/.env`
-2. Generate secrets with `openssl` for APP_KEYS (4 sets concat with ",") ,API_TOKEN_SALT, ADMIN_JWT_SECRET and JWT_SECRET
+2. Our default database is MySQL 8 (mysql2). If you want to use other database, please refer to [Strapi Database Documentation](https://docs.strapi.io/dev-docs/configurations/database)
+   and install the required dependencies
+3. Generate secrets with `openssl` for APP_KEYS (4 sets concat with ",") ,API_TOKEN_SALT, ADMIN_JWT_SECRET and JWT_SECRET
 
 ```bash
 cd apps/strapi
@@ -41,8 +43,8 @@ echo "TRANSFER_TOKEN_SALT="`openssl rand 16 | base64` >> .env
 echo "JWT_SECRET="`openssl rand 16 | base64` >> .env
 ```
 
-3. Fill in the database credentials in `apps/strapi/.env`
-4. (Optional) Fill in SMTP credentials in `apps/strapi/.env`. For testing purpose, you can use [Ethereal](https://ethereal.email/)
+4. Fill in the database credentials in `apps/strapi/.env`
+5. (Optional) Fill in SMTP credentials in `apps/strapi/.env`. For testing purpose, you can use [Ethereal](https://ethereal.email/)
 
 ### Generate Strapi admin API Token for NextJS
 
@@ -66,6 +68,19 @@ STRAPI_API_TOKEN=<generated token>
 ```
 
 ### Setup Webhooks on Strapi to trigger NextJS revalidate
+
+1. Login to Strapi Admin Dashboard
+2. Go to "Settings" > "Global Settings" > "Webhooks"
+3. Click "Create new Webhook"
+4. Fill in the fill
+
+```
+Name:revalidateTag
+Url:http://localhost:3000/api/revalidateTag
+Under Events: Check all on "Entry"
+```
+
+5. Click "Save"
 
 ### Start DEV server
 
