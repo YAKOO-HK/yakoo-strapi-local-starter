@@ -2,7 +2,7 @@ import qs from 'qs';
 import { env } from '@/env';
 import { fetchResponseHandler } from '@/lib/fetch-utils';
 import { PageComponent } from './components';
-import { StrapiLocale, StrapiPagination, StrapiSEO } from './strapi';
+import { StrapiLocale, StrapiMedia, StrapiPagination, StrapiSEO } from './strapi';
 
 export type PostCategoriesResponse = {
   data: Array<{
@@ -53,14 +53,20 @@ export type PostsResponse = {
     attributes: {
       title: string;
       slug: string;
+      abstract: string;
       updatedAt: string;
       publishedAt: string;
       locale: StrapiLocale;
+      image: { data: StrapiMedia };
       seo?: StrapiSEO;
       sections?: Array<PageComponent>;
       category?: {
         data: {
           id: number;
+          attributes: {
+            title: string;
+            slug: string;
+          };
         };
       };
       localizations?: {
@@ -84,6 +90,7 @@ export async function getPostBySlug(slug: string) {
       populate: [
         'seo',
         'category',
+        'image',
         'localizations',
         'sections',
         'sections.image',
@@ -97,9 +104,43 @@ export async function getPostBySlug(slug: string) {
   );
   const response = await fetch(`${env.NEXT_PUBLIC_STRAPI_URL}/api/posts?${querystring}`, {
     headers: { Authorization: `Bearer ${env.STRAPI_ADMIN_API_TOKEN}` },
-    next: { revalidate: env.STRAPI_CACHE_PERIOD, tags: ['post', 'post-category'] }, // should also revalidate when post-category is updated
+    next: { revalidate: env.STRAPI_CACHE_PERIOD, tags: ['post'] },
   }).then(fetchResponseHandler<PostsResponse>());
 
   if (!response.data?.[0]) return null;
   return response.data[0];
+}
+
+export async function getPostsByCategory(categoryId: number, locale: StrapiLocale, page: number = 1) {
+  const querystring = qs.stringify(
+    {
+      filters: { category: { id: { $eq: categoryId } } },
+      populate: ['image'],
+      pagination: { pageSize: 12, page },
+      locale,
+    },
+    { encodeValuesOnly: true }
+  );
+  const response = await fetch(`${env.NEXT_PUBLIC_STRAPI_URL}/api/posts?${querystring}`, {
+    headers: { Authorization: `Bearer ${env.STRAPI_ADMIN_API_TOKEN}` },
+    next: { revalidate: env.STRAPI_CACHE_PERIOD, tags: ['post'] },
+  }).then(fetchResponseHandler<PostsResponse>());
+
+  return response;
+}
+
+export async function getPosts(locale: StrapiLocale, page: number = 1) {
+  const querystring = qs.stringify(
+    {
+      populate: ['image', 'category'],
+      pagination: { pageSize: 12, page },
+      locale,
+    },
+    { encodeValuesOnly: true }
+  );
+  const response = await fetch(`${env.NEXT_PUBLIC_STRAPI_URL}/api/posts?${querystring}`, {
+    headers: { Authorization: `Bearer ${env.STRAPI_ADMIN_API_TOKEN}` },
+    next: { revalidate: env.STRAPI_CACHE_PERIOD, tags: ['post'] },
+  }).then(fetchResponseHandler<PostsResponse>());
+  return response;
 }

@@ -1,59 +1,46 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
 import { parseISO } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
+import { z } from 'zod';
 import { Main } from '@/components/layout/Main';
 import { buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { typographyVariants } from '@/components/ui/typography';
 import { cn } from '@/lib/utils';
 import { StrapiImageLoader } from '@/strapi/image-loader';
-import { getPostCategoryBySlug, getPostsByCategory } from '@/strapi/posts';
-import { StrapiLocale, StrapiLocaleNames, toMetadata } from '@/strapi/strapi';
+import { getPosts } from '@/strapi/posts';
+import { StrapiLocale } from '@/strapi/strapi';
 
-export async function generateMetadata({ params }: { params: { categorySlug: string } }) {
-  const category = await getPostCategoryBySlug(params.categorySlug);
-  if (!category) {
-    notFound();
+const LocaleSchema = z.object({
+  locale: z.enum(['en', 'zh-Hant']).default('en'),
+  page: z.coerce.number().int().min(1).default(1),
+});
+export default async function PostsPage({ searchParams }: { searchParams: unknown }) {
+  let params = LocaleSchema.safeParse(searchParams);
+  let locale: StrapiLocale = 'en';
+  let page = 1;
+  if (params.success) {
+    locale = params.data.locale;
+    page = params.data.page;
   }
-  return toMetadata(category.attributes.seo);
-}
+  const posts = await getPosts(locale, page);
 
-function LinksToOtherLocale({
-  localizations,
-}: {
-  localizations: Array<{ id: number; attributes: { locale: StrapiLocale; slug: string } }>;
-}) {
-  return localizations.map(({ id, attributes }) => (
-    <Link
-      href={`/posts/${attributes.slug}`}
-      hrefLang={attributes.locale}
-      className={cn(buttonVariants({ variant: 'outline' }))}
-      key={id}
-    >
-      {StrapiLocaleNames[attributes.locale]}
-    </Link>
-  ));
-}
-
-export default async function PostCategoryListPage({ params }: { params: { categorySlug: string } }) {
-  const category = await getPostCategoryBySlug(params.categorySlug);
-  if (!category) {
-    notFound();
-  }
-  // console.log({ localizations: category.attributes.localizations?.data[0]?.attributes });
-  const posts = await getPostsByCategory(category.id, category.attributes.locale, 1); // TODO: pagination
-  console.log({ posts });
   return (
     <Main>
       <div className="container py-8">
         <div className="flex justify-end">
-          {category.attributes.localizations?.data && (
-            <LinksToOtherLocale localizations={category.attributes.localizations?.data} />
+          {locale == 'en' ? (
+            <Link href="?locale=zh-Hant" className={cn(buttonVariants({ variant: 'outline' }))}>
+              繁體中文
+            </Link>
+          ) : (
+            <Link href="?locale=en" className={cn(buttonVariants({ variant: 'outline' }))}>
+              English
+            </Link>
           )}
         </div>
-        <h1 className={cn(typographyVariants({ variant: 'h1' }), 'mb-8')}>{category.attributes.title}</h1>
+        <h1 className={cn(typographyVariants({ variant: 'h1' }), 'mb-8')}>All Posts</h1>
         <div className="grid grid-cols-1 items-stretch gap-8 md:grid-cols-2">
           {posts.data.map(({ id, attributes }) => {
             // console.log(attributes.image.data);
@@ -65,7 +52,7 @@ export default async function PostCategoryListPage({ params }: { params: { categ
                     <time dateTime={attributes.publishedAt} className="inline-flex items-center">
                       <CalendarIcon className="mr-2 h-4 w-4" aria-hidden="true" />
                       <span className="sr-only">Published on </span>
-                      {parseISO(attributes.publishedAt).toLocaleDateString(category.attributes.locale)}
+                      {parseISO(attributes.publishedAt).toLocaleDateString(locale)}
                     </time>
                   </CardDescription>
                 </CardHeader>
@@ -82,7 +69,7 @@ export default async function PostCategoryListPage({ params }: { params: { categ
                 </CardContent>
                 <CardFooter>
                   <Link
-                    href={`/posts/${category.attributes.slug}/${attributes.slug}`}
+                    href={`/posts/${attributes.category?.data.attributes.slug}/${attributes.slug}`}
                     className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}
                   >
                     Read more

@@ -10,7 +10,7 @@
     "url": {
       "type": "string",
       "required": true,
-      "regex": "https://www.youtube.com/embed/[.]+"
+      "regex": "https:\\/\\/www\\.youtube\\.com\\/embed\\/.+"
     },
     "layout": {
       "type": "enumeration",

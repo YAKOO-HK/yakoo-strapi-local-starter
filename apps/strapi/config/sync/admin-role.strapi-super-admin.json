@@ -189,7 +189,9 @@
           "seo.metaViewport",
           "seo.canonicalURL",
           "slug",
-          "category"
+          "category",
+          "abstract",
+          "image"
         ],
         "locales": [
           "en",
@@ -243,7 +245,9 @@
           "seo.metaViewport",
           "seo.canonicalURL",
           "slug",
-          "category"
+          "category",
+          "abstract",
+          "image"
         ],
         "locales": [
           "en",
@@ -273,7 +277,9 @@
           "seo.metaViewport",
           "seo.canonicalURL",
           "slug",
-          "category"
+          "category",
+          "abstract",
+          "image"
         ],
         "locales": [
           "en",

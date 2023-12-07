@@ -91,6 +91,34 @@
           "sortable": true
         }
       },
+      "abstract": {
+        "edit": {
+          "label": "abstract",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "abstract",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "image": {
+        "edit": {
+          "label": "image",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "image",
+          "searchable": false,
+          "sortable": false
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -166,6 +194,16 @@
           {
             "name": "category",
             "size": 6
+          },
+          {
+            "name": "image",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "abstract",
+            "size": 12
           }
         ],
         [
@@ -184,7 +222,8 @@
       "list": [
         "id",
         "title",
-        "category"
+        "category",
+        "abstract"
       ]
     }
   },
