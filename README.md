@@ -1,11 +1,29 @@
 # Yakoo Strapi + NEXT.js local-hosting starter template
 
-## Basic Setup
+## Setup Procedure
 
 ### Install dependencies
 
 ```bash
 pnpm install
+```
+
+### Update Strapi UUID
+
+1. Generate UUID with `uuidgen` command
+
+```bash
+uuidgen
+```
+
+2. Edit `apps/strapi/package.json`
+
+```json
+{
+  "strapi": {
+    "uuid": "your-uuid-here"
+  }
+}
 ```
 
 ### Setup Database and secrets for Strapi
@@ -39,12 +57,15 @@ pnpm dev
 3. Create the initial Admin User
 4. Go to "Settings" > "Global Settings" > "API Tokens"
 5. Click "Create new API Token"
-6. Fill in the form, select "Unlimited" for Token duration, "Read-only" for Token Type and click "Save"
-7. Copy the generated token and save it to `apps/web/.env.local` file as `STRAPI_API_TOKEN`
+6. Fill in the form, select "Unlimited" for Token duration, "Read-only" for Token Type (so it auto-check all find/findOne on all Content-Type) and then Select "Custom". Under "Navigation", select all. Click Save
+7. Edit the token and select "Custom"
+8. Copy the generated token and save it to `apps/web/.env.local` file as `STRAPI_API_TOKEN`
 
 ```env
 STRAPI_API_TOKEN=<generated token>
 ```
+
+### Setup Webhooks on Strapi to trigger NextJS revalidate
 
 ### Start DEV server
 
@@ -70,7 +91,8 @@ pnpm dev --filter web
 | strapi-plugin-local-image-sharp   | Image Optimization                  | For image optimization in NextJS Image and cache in local storage |
 | strapi-plugin-placeholder         | Generate image blurHash             | Generate image placeholder for NextJS Image                       |
 | strapi-plugin-rest-cache          | Cache REST API response             | (Optional) Deep populate can be costly.                           |
-| strapi-plugin-config-sync         | Sync Strapi config to database      | (Optional) Sync config to database                                |
+| strapi-plugin-config-sync         | Sync Strapi config to database      | (Optional) Sync config between Databases                          |
+| strapi-plugin-navigation          | Navigation Menu                     |                                                                   |
 
 ## NextJS Dependencies
 

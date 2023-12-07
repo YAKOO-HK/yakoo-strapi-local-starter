@@ -31,7 +31,7 @@ export function MainNavigation({ items }: { items: NavigationItem[] }) {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   {parentItem.items.map(({ id, path, title, external }) => {
-                    console.log({ id, path, title, external, parent: parentItem.path });
+                    // console.log({ id, path, title, external, parent: parentItem.path });
                     return (
                       <DropdownMenuItem asChild className="cursor-pointer text-lg" key={id}>
                         <Link
