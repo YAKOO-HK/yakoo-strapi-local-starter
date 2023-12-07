@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_page_components_embed_youtubes",
+  "info": {
+    "displayName": "Embed Youtube",
+    "icon": "cast"
+  },
+  "options": {},
+  "attributes": {
+    "url": {
+      "type": "string",
+      "required": true
+    },
+    "layout": {
+      "type": "enumeration",
+      "enum": [
+        "full-width",
+        "container",
+        "prose"
+      ],
+      "default": "container",
+      "required": true
+    }
+  }
+}

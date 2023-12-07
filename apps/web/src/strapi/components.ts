@@ -5,6 +5,7 @@ export type ComponentLayout = 'full-width' | 'container' | 'prose';
 export type ComponentHeroSection = {
   id: number;
   __component: 'page-components.hero-section';
+  layout: ComponentLayout;
   title: string;
   tagline: string | null;
   content: any | null;
@@ -62,10 +63,18 @@ export type ComponentGallery = {
   slides: { data: Array<StrapiMedia> };
 };
 
+export type ComponentEmbedYoutube = {
+  id: number;
+  __component: 'page-components.embed-youtube';
+  layout: ComponentLayout;
+  url: string;
+};
+
 export type PageComponent =
   | ComponentPageTitle
   | ComponentHeroSection
   | ComponentRichText
   | ComponentFeatureImage
   | ComponentCarousel
-  | ComponentGallery;
+  | ComponentGallery
+  | ComponentEmbedYoutube;

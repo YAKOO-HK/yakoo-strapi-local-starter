@@ -10,6 +10,7 @@ import { StrapiImageLoader } from '@/strapi/image-loader';
 
 export function HeroSection({
   as,
+  layout,
   bgColor,
   image,
   title,
@@ -23,6 +24,7 @@ export function HeroSection({
     <Component
       className={cn('text-foreground grid items-center md:grid-cols-2', {
         dark: bgColor && tinycolor(bgColor).isDark(),
+        container: layout === 'container',
       })}
       style={{ backgroundColor: bgColor || 'transparent' }}
     >

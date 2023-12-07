@@ -37,6 +37,15 @@
     "buttonText": {
       "type": "string",
       "default": "Read More"
+    },
+    "layout": {
+      "type": "enumeration",
+      "enum": [
+        "full-width",
+        "container"
+      ],
+      "default": "container",
+      "required": true
     }
   }
 }

@@ -2,6 +2,10 @@ import { type Metadata } from 'next';
 import { env } from '@/env';
 
 export type StrapiLocale = 'en' | 'zh-Hant';
+export const StrapiLocaleNames = {
+  en: 'English',
+  'zh-Hant': '繁體中文',
+} as const;
 
 export type StrapiImageFormat = {
   url: string;
@@ -58,7 +62,10 @@ export function getOpenGraphImage(seo: StrapiSEO) {
   return undefined;
 }
 
-export function toMetadata(seo: StrapiSEO) {
+export function toMetadata(seo?: StrapiSEO) {
+  if (!seo) {
+    return {} satisfies Metadata;
+  }
   return {
     title: seo.metaTitle,
     description: seo.metaDescription,
