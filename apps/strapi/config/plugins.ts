@@ -48,10 +48,20 @@ export default ({ env }) => ({
         // resetOnStartup: true,
         contentTypes: [
           // List of content types to cache
+          'api::post.post',
+          'api::post-category.post-category',
+          'api::page.page',
+          // 'api::navigations.navigation',
           'api::site-metadata.site-metadata',
           'api::homepage.homepage',
         ],
       },
+    },
+  },
+  navigation: {
+    enabled: true,
+    config: {
+      allowedLevels: 2,
     },
   },
 });

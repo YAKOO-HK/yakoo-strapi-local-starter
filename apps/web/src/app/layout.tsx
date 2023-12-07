@@ -8,8 +8,10 @@ import { env } from '@/env';
 import { getSiteMetadata } from '@/strapi/site-metadata';
 import { getOpenGraphImage } from '@/strapi/strapi';
 import './global.css';
+import { MainNavigation } from '@/components/layout/MainNavigation';
 import { cn } from '@/lib/utils';
 import { StrapiImageLoader } from '@/strapi/image-loader';
+import { getMainNavigation } from '@/strapi/navigation';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -60,6 +62,8 @@ gtag('config', '${env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID}');
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { logo, locale } = await getSiteMetadata(); // TODO: Locale?
+  const data = await getMainNavigation();
+  // console.log(data);
   return (
     <html lang={locale} dir="ltr">
       <body className={cn(inter.variable)}>
@@ -80,6 +84,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               </Link>
             </div>
           </div>
+          <MainNavigation items={data} />
         </header>
         {children}
         <Toaster />

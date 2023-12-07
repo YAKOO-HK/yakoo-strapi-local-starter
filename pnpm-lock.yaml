@@ -71,6 +71,9 @@ importers:
       strapi-plugin-local-image-sharp:
         specifier: ^1.7.0
         version: 1.7.0(@strapi/strapi@4.15.5)(yup@0.32.9)
+      strapi-plugin-navigation:
+        specifier: ^2.3.1
+        version: 2.3.1(@strapi/strapi@4.15.5)(typescript@5.2.2)
       strapi-plugin-placeholder:
         specifier: ^4.4.0
         version: 4.4.0(@strapi/strapi@4.15.5)(mime-types@2.1.35)(sharp@0.33.0)(yup@0.32.9)
@@ -12562,6 +12565,27 @@ packages:
       yup: 0.32.9
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /strapi-plugin-navigation@2.3.1(@strapi/strapi@4.15.5)(typescript@5.2.2):
+    resolution: {integrity: sha512-kGZ5axF+Iclg12BNy7D/HhFmcER4DL3y/Zkf954O9h9QZc6dGsr+R1eXzEOyktoJlwMFcZseOxX7EXss4ixj8Q==}
+    engines: {node: '>=18.0.0 <=20.x.x', npm: '>=6.0.0'}
+    peerDependencies:
+      '@strapi/strapi': 4.x
+    dependencies:
+      '@sindresorhus/slugify': 1.1.0
+      '@strapi/strapi': 4.15.5(@babel/runtime@7.23.5)(@codemirror/autocomplete@6.11.1)(@codemirror/language@6.9.3)(@codemirror/lint@6.4.2)(@codemirror/search@6.5.5)(@codemirror/state@6.3.2)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.22.1)(@types/node@17.0.45)(codemirror@6.0.1)(mysql2@3.6.5)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3)
+      '@strapi/utils': 4.15.5
+      lodash: 4.17.21
+      pluralize: 8.0.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-intl: 6.4.1(react@18.2.0)(typescript@5.2.2)
+      react-router: 5.3.4(react@18.2.0)
+      react-router-dom: 5.3.4(react@18.2.0)
+      uuid: 8.3.2
+    transitivePeerDependencies:
+      - typescript
     dev: false
 
   /strapi-plugin-placeholder@4.4.0(@strapi/strapi@4.15.5)(mime-types@2.1.35)(sharp@0.33.0)(yup@0.32.9):
