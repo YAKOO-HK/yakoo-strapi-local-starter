@@ -2,7 +2,8 @@
   "collectionName": "components_page_components_page_titles",
   "info": {
     "displayName": "Page Title",
-    "icon": "pin"
+    "icon": "pin",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -17,7 +18,7 @@
         "prose"
       ],
       "required": true,
-      "default": "prose"
+      "default": "container"
     }
   }
 }

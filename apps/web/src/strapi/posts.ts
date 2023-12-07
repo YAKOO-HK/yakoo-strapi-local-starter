@@ -40,11 +40,26 @@ export async function getPostCategoryBySlug(slug: string) {
   );
   const response = await fetch(`${env.NEXT_PUBLIC_STRAPI_URL}/api/post-categories?${querystring}`, {
     headers: { Authorization: `Bearer ${env.STRAPI_ADMIN_API_TOKEN}` },
-    next: { revalidate: env.STRAPI_CACHE_PERIOD, tags: ['post-category'] },
+    next: { revalidate: env.STRAPI_CACHE_PERIOD_LONG, tags: ['post-category'] },
   }).then(fetchResponseHandler<PostCategoriesResponse>());
 
   if (!response.data?.[0]) return null;
   return response.data[0];
+}
+
+export async function getAllCategories(locale: StrapiLocale) {
+  const querystring = qs.stringify(
+    {
+      pagination: { pageSize: 100 }, // assume won't have so many categories
+      locale,
+    },
+    { encodeValuesOnly: true }
+  );
+  const response = await fetch(`${env.NEXT_PUBLIC_STRAPI_URL}/api/post-categories?${querystring}`, {
+    headers: { Authorization: `Bearer ${env.STRAPI_ADMIN_API_TOKEN}` },
+    next: { revalidate: env.STRAPI_CACHE_PERIOD_LONG, tags: ['post-category'] },
+  }).then(fetchResponseHandler<PostCategoriesResponse>());
+  return response.data;
 }
 
 export type PostsResponse = {
