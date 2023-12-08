@@ -64,4 +64,13 @@ export default ({ env }) => ({
       allowedLevels: 2,
     },
   },
+  publisher: {
+    enabled: true,
+    components: {
+      dateTimePicker: {
+        step: 15,
+      },
+    },
+    contentTypes: ['api::post.post'],
+  },
 });

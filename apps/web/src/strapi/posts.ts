@@ -10,6 +10,7 @@ export type PostCategoriesResponse = {
     attributes: {
       title: string;
       slug: string;
+      postDate: string;
       updatedAt: string;
       publishedAt: string;
       locale: StrapiLocale;

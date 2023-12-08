@@ -76,7 +76,7 @@ STRAPI_API_TOKEN=<generated token>
 
 ```
 Name:revalidateTag
-Url:http://localhost:3000/api/revalidateTag
+Url:http://localhost:3000/api/revalidate
 Under Events: Check all on "Entry"
 ```
 
