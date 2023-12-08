@@ -33,18 +33,39 @@
           "searchable": false,
           "sortable": false
         }
+      },
+      "layout": {
+        "edit": {
+          "label": "layout",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "layout",
+          "searchable": true,
+          "sortable": true
+        }
       }
     },
     "layouts": {
       "list": [
         "id",
-        "slides"
+        "slides",
+        "layout"
       ],
       "edit": [
         [
           {
             "name": "slides",
             "size": 12
+          }
+        ],
+        [
+          {
+            "name": "layout",
+            "size": 6
           }
         ]
       ]

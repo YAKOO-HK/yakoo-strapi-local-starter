@@ -1,14 +1,14 @@
 {
-  "key": "plugin_content_manager_configuration_components::page-components.hero-section",
+  "key": "plugin_content_manager_configuration_content_types::plugin::publisher.action",
   "value": {
-    "uid": "page-components.hero-section",
+    "uid": "plugin::publisher.action",
     "settings": {
       "bulkable": true,
       "filterable": true,
       "searchable": true,
       "pageSize": 10,
-      "mainField": "title",
-      "defaultSortBy": "title",
+      "mainField": "mode",
+      "defaultSortBy": "mode",
       "defaultSortOrder": "ASC"
     },
     "metadatas": {
@@ -16,132 +16,120 @@
         "edit": {},
         "list": {
           "label": "id",
-          "searchable": false,
-          "sortable": false
-        }
-      },
-      "title": {
-        "edit": {
-          "label": "title",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "title",
           "searchable": true,
           "sortable": true
         }
       },
-      "tagline": {
+      "executeAt": {
         "edit": {
-          "label": "tagline",
+          "label": "executeAt",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "tagline",
+          "label": "executeAt",
           "searchable": true,
           "sortable": true
         }
       },
-      "content": {
+      "mode": {
         "edit": {
-          "label": "content",
+          "label": "mode",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "content",
-          "searchable": false,
-          "sortable": false
-        }
-      },
-      "image": {
-        "edit": {
-          "label": "image",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "image",
-          "searchable": false,
-          "sortable": false
-        }
-      },
-      "bgColor": {
-        "edit": {
-          "label": "bgColor",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "bgColor",
+          "label": "mode",
           "searchable": true,
           "sortable": true
         }
       },
-      "buttonLink": {
+      "entityId": {
         "edit": {
-          "label": "buttonLink",
+          "label": "entityId",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "buttonLink",
+          "label": "entityId",
           "searchable": true,
           "sortable": true
         }
       },
-      "buttonText": {
+      "entitySlug": {
         "edit": {
-          "label": "buttonText",
+          "label": "entitySlug",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "buttonText",
+          "label": "entitySlug",
           "searchable": true,
           "sortable": true
         }
       },
-      "layout": {
+      "createdAt": {
         "edit": {
-          "label": "layout",
+          "label": "createdAt",
           "description": "",
           "placeholder": "",
-          "visible": true,
+          "visible": false,
           "editable": true
         },
         "list": {
-          "label": "layout",
+          "label": "createdAt",
           "searchable": true,
           "sortable": true
         }
       },
-      "arrangement": {
+      "updatedAt": {
         "edit": {
-          "label": "arrangement",
+          "label": "updatedAt",
           "description": "",
           "placeholder": "",
-          "visible": true,
+          "visible": false,
           "editable": true
         },
         "list": {
-          "label": "arrangement",
+          "label": "updatedAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "createdBy": {
+        "edit": {
+          "label": "createdBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "createdBy",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedBy": {
+        "edit": {
+          "label": "updatedBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "updatedBy",
           "searchable": true,
           "sortable": true
         }
@@ -150,60 +138,33 @@
     "layouts": {
       "list": [
         "id",
-        "title",
-        "tagline",
-        "image"
+        "executeAt",
+        "mode",
+        "entityId"
       ],
       "edit": [
         [
           {
-            "name": "title",
+            "name": "executeAt",
             "size": 6
           },
           {
-            "name": "tagline",
+            "name": "mode",
             "size": 6
           }
         ],
         [
           {
-            "name": "content",
-            "size": 12
-          }
-        ],
-        [
-          {
-            "name": "image",
-            "size": 6
+            "name": "entityId",
+            "size": 4
           },
           {
-            "name": "bgColor",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "buttonLink",
-            "size": 6
-          },
-          {
-            "name": "buttonText",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "layout",
-            "size": 6
-          },
-          {
-            "name": "arrangement",
+            "name": "entitySlug",
             "size": 6
           }
         ]
       ]
-    },
-    "isComponent": true
+    }
   },
   "type": "object",
   "environment": null,
