@@ -72,6 +72,12 @@ export type ComponentEmbedYoutube = {
   url: string;
 };
 
+export type ComponentHTML = {
+  id: number;
+  __component: 'page-components.html';
+  content: string;
+};
+
 export type PageComponent =
   | ComponentPageTitle
   | ComponentHeroSection
@@ -79,4 +85,5 @@ export type PageComponent =
   | ComponentFeatureImage
   | ComponentCarousel
   | ComponentGallery
-  | ComponentEmbedYoutube;
+  | ComponentEmbedYoutube
+  | ComponentHTML;

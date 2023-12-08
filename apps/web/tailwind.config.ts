@@ -7,6 +7,8 @@ import defaultTheme from 'tailwindcss/defaultTheme';
 const TailwindConfig = {
   darkMode: ['class'],
   content: ['./src/**/*.{ts,tsx}'],
+  // Caution: this will include all tailwind classes, uncomment only if you need it for custom HTML
+  // safelist: [{ pattern: /./ }],
   theme: {
     container: {
       center: true,

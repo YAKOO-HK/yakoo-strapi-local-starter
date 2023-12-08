@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_page_components_htmls",
+  "info": {
+    "displayName": "HTML",
+    "icon": "code",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "content": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "rich"
+      },
+      "required": true,
+      "customField": "plugin::ckeditor.CKEditor"
+    }
+  }
+}

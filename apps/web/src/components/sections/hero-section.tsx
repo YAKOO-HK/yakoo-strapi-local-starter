@@ -21,7 +21,7 @@ export function HeroSection({
   arrangement,
 }: ComponentHeroSection & { as: 'section' | 'div' }) {
   const Component = as;
-  console.log({ arrangement });
+  // console.log({ arrangement });
   return (
     <Component
       className={cn('text-foreground flex flex-col items-center md:flex-row', {

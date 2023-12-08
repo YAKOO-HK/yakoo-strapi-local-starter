@@ -64,6 +64,9 @@ export default ({ env }) => ({
       allowedLevels: 2,
     },
   },
+  ckeditor: {
+    enabled: true,
+  },
   publisher: {
     enabled: true,
     config: {

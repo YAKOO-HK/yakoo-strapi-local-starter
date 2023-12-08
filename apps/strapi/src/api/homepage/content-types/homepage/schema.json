@@ -30,7 +30,8 @@
         "page-components.gallery",
         "page-components.rich-text",
         "page-components.page-title",
-        "page-components.embed-youtube"
+        "page-components.embed-youtube",
+        "page-components.html"
       ],
       "required": true
     }

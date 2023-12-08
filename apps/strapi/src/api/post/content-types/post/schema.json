@@ -39,7 +39,8 @@
         "page-components.hero-section",
         "page-components.rich-text",
         "page-components.page-title",
-        "page-components.embed-youtube"
+        "page-components.embed-youtube",
+        "page-components.html"
       ],
       "required": true
     },
@@ -79,17 +80,17 @@
       "required": true
     },
     "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images"
       ],
-      "type": "media",
-      "multiple": false,
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      },
-      "required": true
+      }
     }
   }
 }
