@@ -1,6 +1,7 @@
 {
   "name": "yakoo-strapi-local-starter",
-  "private": true,
+  "private": false,
+  "license": "MIT",
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
