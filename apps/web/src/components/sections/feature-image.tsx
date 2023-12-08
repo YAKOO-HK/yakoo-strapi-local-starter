@@ -7,10 +7,13 @@ export function FeatureImageSection({ as, layout, image }: ComponentFeatureImage
   const Component = as;
   return (
     <Component
-      className={cn({
-        container: layout === 'container',
-        'prose mx-auto': layout === 'prose',
-      })}
+      className={cn(
+        {
+          container: layout === 'container',
+          'prose mx-auto': layout === 'prose',
+        },
+        'px-0'
+      )}
     >
       <Image
         loader={StrapiImageLoader}

@@ -46,6 +46,15 @@
       ],
       "default": "container",
       "required": true
+    },
+    "arrangement": {
+      "type": "enumeration",
+      "enum": [
+        "image-first",
+        "image-last"
+      ],
+      "required": true,
+      "default": "image-first"
     }
   }
 }

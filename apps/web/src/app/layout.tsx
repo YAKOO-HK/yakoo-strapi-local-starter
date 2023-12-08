@@ -6,7 +6,10 @@ import { env } from '@/env';
 import { getSiteMetadata } from '@/strapi/site-metadata';
 import { getOpenGraphImage } from '@/strapi/strapi';
 import './global.css';
+import { BackToTopButton } from '@/components/layout/BackToTopButton';
+import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
+import { SkipToMain } from '@/components/layout/SkipToMain';
 import { cn } from '@/lib/utils';
 import { getMainNavigation } from '@/strapi/navigation';
 
@@ -65,8 +68,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang={locale} dir="ltr">
       <body className={cn(inter.variable)}>
         <GoogleAnalytics />
+        <SkipToMain />
         <Header logo={logo.data} navigationItems={navigationItems} />
         {children}
+        <Footer />
+        <BackToTopButton />
         <Toaster />
         {process.env.NODE_ENV === 'development' && (
           <div className="fixed bottom-0 right-0 z-[99999] bg-teal-200 px-2 py-1 text-sm text-teal-900">

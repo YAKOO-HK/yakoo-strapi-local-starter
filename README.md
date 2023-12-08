@@ -1,5 +1,7 @@
 # Yakoo Strapi + NEXT.js local-hosting starter template
 
+By [Yakoo Technology Limited](https://www.yakoo.com.hk)
+
 ## Setup Procedure
 
 ### Install dependencies

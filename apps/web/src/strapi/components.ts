@@ -15,6 +15,7 @@ export type ComponentHeroSection = {
   };
   buttonLink: string | null;
   buttonText: string | null;
+  arrangement: 'image-first' | 'image-last';
 };
 
 export type ComponentPageTitle = {
@@ -53,6 +54,7 @@ export type ComponentSlide = {
 export type ComponentCarousel = {
   id: number;
   __component: 'page-components.carousel';
+  layout: ComponentLayout;
   slides: Array<ComponentSlide>;
 };
 

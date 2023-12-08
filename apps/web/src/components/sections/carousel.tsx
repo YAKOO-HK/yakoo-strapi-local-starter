@@ -7,13 +7,14 @@ import Autoplay from 'embla-carousel-autoplay';
 import useEmblaCarousel from 'embla-carousel-react';
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
+import { cn } from '@/lib/utils';
 import { ComponentCarousel, ComponentSlide } from '@/strapi/components';
 import { StrapiImageLoader } from '@/strapi/image-loader';
 import { typographyVariants } from '../ui/typography';
 
 function Slide({ image, title, caption }: Omit<ComponentSlide, 'link' | 'id' | '__component'>) {
   return (
-    <AspectRatio ratio={5 / 1}>
+    <AspectRatio ratio={16 / 9}>
       <Image
         loader={StrapiImageLoader}
         src={image.data.attributes.url}
@@ -39,7 +40,7 @@ function Slide({ image, title, caption }: Omit<ComponentSlide, 'link' | 'id' | '
   );
 }
 
-export function CarouselSection({ as, slides }: ComponentCarousel & { as: 'section' | 'div' }) {
+export function CarouselSection({ as, slides, layout }: ComponentCarousel & { as: 'section' | 'div' }) {
   const Component = as;
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 5000, stopOnMouseEnter: true })]);
   const [label, setLabel] = useState('');
@@ -58,7 +59,12 @@ export function CarouselSection({ as, slides }: ComponentCarousel & { as: 'secti
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
   return (
-    <Component className="relative">
+    <Component
+      className={cn('relative', {
+        'container px-0': layout === 'container',
+        'mx-auto max-w-[65ch]': layout === 'prose',
+      })}
+    >
       <span className="sr-only" aria-live="polite">
         {label}
       </span>
@@ -88,8 +94,8 @@ export function CarouselSection({ as, slides }: ComponentCarousel & { as: 'secti
                   prefetch={false}
                   key={id}
                   className="embla__slide h-auto w-full min-w-0 shrink-0 grow-0 basis-[100%]"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target={link.includes('://') ? '_blank' : undefined}
+                  rel={link.includes('://') ? 'noopener noreferrer' : undefined}
                 >
                   <Slide image={image} title={title} caption={caption} />
                 </Link>

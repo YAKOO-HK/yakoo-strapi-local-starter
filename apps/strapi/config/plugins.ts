@@ -66,11 +66,13 @@ export default ({ env }) => ({
   },
   publisher: {
     enabled: true,
-    components: {
-      dateTimePicker: {
-        step: 15,
+    config: {
+      components: {
+        dateTimePicker: {
+          step: 15,
+        },
       },
+      contentTypes: ['api::post.post'],
     },
-    contentTypes: ['api::post.post'],
   },
 });

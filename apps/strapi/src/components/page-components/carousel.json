@@ -2,7 +2,8 @@
   "collectionName": "components_page_components_carousels",
   "info": {
     "displayName": "Carousel",
-    "icon": "slideshow"
+    "icon": "slideshow",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -11,6 +12,16 @@
       "repeatable": true,
       "component": "page-components.slide",
       "required": true
+    },
+    "layout": {
+      "type": "enumeration",
+      "enum": [
+        "full-width",
+        "container",
+        "prose"
+      ],
+      "required": true,
+      "default": "full-width"
     }
   }
 }
