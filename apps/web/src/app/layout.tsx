@@ -1,17 +1,17 @@
 import { type Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
-import { Toaster } from '@/components/ui/toaster';
-import { env } from '@/env';
-import { getSiteMetadata } from '@/strapi/site-metadata';
-import { getOpenGraphImage } from '@/strapi/strapi';
-import './global.css';
 import { BackToTopButton } from '@/components/layout/BackToTopButton';
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
 import { SkipToMain } from '@/components/layout/SkipToMain';
+import { Toaster } from '@/components/ui/toaster';
+import { env } from '@/env';
 import { cn } from '@/lib/utils';
 import { getMainNavigation } from '@/strapi/navigation';
+import { getSiteMetadata } from '@/strapi/site-metadata';
+import { getOpenGraphImage } from '@/strapi/strapi';
+import './global.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
