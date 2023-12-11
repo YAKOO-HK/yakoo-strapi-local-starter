@@ -17,7 +17,6 @@ export function DynamicZone({ as = 'div', sections }: { as?: 'div' | 'section'; 
       case 'page-components.feature-image':
         return <FeatureImageSection key={`feature-image-${section.id}`} {...section} as={as} />;
       case 'page-components.carousel':
-        // console.log(section);
         return <CarouselSection key={`carousel-${section.id}`} {...section} as={as} />;
       case 'page-components.gallery':
         return <GallerySection key={`gallery-${section.id}`} {...section} as={as} />;
@@ -26,7 +25,6 @@ export function DynamicZone({ as = 'div', sections }: { as?: 'div' | 'section'; 
       case 'page-components.embed-youtube':
         return <EmbedYoutubeSection key={`embed-youtube-${section.id}`} {...section} as={as} />;
       case 'page-components.html':
-        console.log(section);
         return <div key={`html-${section.id}`} dangerouslySetInnerHTML={{ __html: section.content }} />;
       default:
         console.warn('Unknown component:', section);
