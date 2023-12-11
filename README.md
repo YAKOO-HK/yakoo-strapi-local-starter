@@ -69,6 +69,13 @@ pnpm dev
 STRAPI_API_TOKEN=<generated token>
 ```
 
+### Import default Strapi Configuration
+
+```bash
+cd apps/strapi
+pnpm cs import
+```
+
 ### Setup Webhooks on Strapi to trigger NextJS revalidate
 
 1. Login to Strapi Admin Dashboard
@@ -97,30 +104,36 @@ pnpm dev --filter web
 
 ## Strapi Plugins used
 
-| Plugin                            | Description                         | Why?                                                              |
-| --------------------------------- | ----------------------------------- | ----------------------------------------------------------------- |
-| @strapi/plugin-i18n               | Official Internationalization       |                                                                   |
-| @strapi/plugin-seo                | Official SEO Components             |                                                                   |
-| @strapi/plugin-users-permissions  | Official Access Control             |                                                                   |
-| @strapi/provider-email-nodemailer | Official EmailProvider (NodeMailer) | Use SMTP so no vendor lock-in                                     |
-| @strapi/provider-upload-local     | Official Local Upload Provider      | Use local storage for upload                                      |
-| @strapi/plugin-color-picker       | Official Color Picker               |                                                                   |
-| strapi-plugin-local-image-sharp   | Image Optimization                  | For image optimization in NextJS Image and cache in local storage |
-| strapi-plugin-placeholder         | Generate image blurHash             | Generate image placeholder for NextJS Image                       |
-| strapi-plugin-rest-cache          | Cache REST API response             | (Optional) Deep populate can be costly.                           |
-| strapi-plugin-config-sync         | Sync Strapi config to database      | (Optional) Sync config between Databases                          |
-| strapi-plugin-navigation          | Navigation Menu                     |                                                                   |
+| Plugin                            | Description                             | Why?                                                              |
+| --------------------------------- | --------------------------------------- | ----------------------------------------------------------------- |
+| @strapi/plugin-i18n               | Official Internationalization           |                                                                   |
+| @strapi/plugin-seo                | Official SEO Components                 |                                                                   |
+| @strapi/plugin-users-permissions  | Official Access Control                 |                                                                   |
+| @strapi/provider-email-nodemailer | Official EmailProvider (NodeMailer)     | Use SMTP so no vendor lock-in                                     |
+| @strapi/provider-upload-local     | Official Local Upload Provider          | Use local storage for upload                                      |
+| @strapi/plugin-color-picker       | Official Color Picker                   |                                                                   |
+| strapi-plugin-local-image-sharp   | Image Optimization                      | For image optimization in NextJS Image and cache in local storage |
+| strapi-plugin-placeholder         | Generate image blurHash                 | Generate image placeholder for NextJS Image                       |
+| strapi-plugin-rest-cache          | Cache REST API response                 | (Optional) Deep populate can be costly.                           |
+| strapi-plugin-config-sync         | Sync Strapi config to database          | (Optional) Sync config between Databases                          |
+| strapi-plugin-navigation          | Navigation Menu                         |                                                                   |
+| strapi-plugin-ezforms             | Simple Form submission and notification |                                                                   |
 
 ## NextJS Dependencies
 
-| Category         | Library             | URL                                                 |
-| ---------------- | ------------------- | --------------------------------------------------- |
-| Web              | NextJS (app-router) | [https://nextjs.org/docs]()                         |
-| UI               | shadcn/ui           | [https://ui.shadcn.com]()                           |
-| UI               | Tailwindcss         | [https://tailwindcss.com]()                         |
-| UI/Accessibility | Radix-UI            | [https://radix-ui.com]()                            |
-| Icons            | Lucide Icons        | [https://lucide.dev/icons/]()                       |
-| Form             | React Hook Foorm    | [https://react-hook-form.com]()                     |
-| Validation       | Zod                 | [https://zod.dev]()                                 |
-| Env Control      | @t3-oss/env-nextjs  | [https://github.com/t3-oss/t3-env]()                |
-| SEO              | Next-Sitemap        | [https://github.com/iamvishnusankar/next-sitemap]() |
+| Category         | Library                    | URL                                                   |
+| ---------------- | -------------------------- | ----------------------------------------------------- |
+| Web              | NextJS (app-router)        | [https://nextjs.org/docs]()                           |
+| UI               | shadcn/ui                  | [https://ui.shadcn.com]()                             |
+| UI               | Tailwindcss                | [https://tailwindcss.com]()                           |
+| UI               | Framer Motion.             | [https://www.framer.com/motion/]()                    |
+| UI/Accessibility | Radix-UI                   | [https://radix-ui.com]()                              |
+| Icons            | Lucide Icons               | [https://lucide.dev/icons/]()                         |
+| Form             | React Hook Foorm           | [https://react-hook-form.com]()                       |
+| Validation       | Zod                        | [https://zod.dev]()                                   |
+| Env Control      | @t3-oss/env-nextjs         | [https://github.com/t3-oss/t3-env]()                  |
+| SEO              | Next-Sitemap               | [https://github.com/iamvishnusankar/next-sitemap]()   |
+| CAPTCHA          | react-hcaptcha             | [https://docs.hcaptcha.com/]()                        |
+| Components       | yet-another-react-lightbox | [https://yet-another-react-lightbox.com/]()           |
+| Components       | react-photo-album          | [https://react-photo-album.com/]()                    |
+| Components       | embla-carousel-react       | [https://www.embla-carousel.com/get-started/react/]() |

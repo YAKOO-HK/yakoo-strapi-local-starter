@@ -78,4 +78,27 @@ export default ({ env }) => ({
       contentTypes: ['api::post.post'],
     },
   },
+  ezforms: {
+    config: {
+      enableFormName: true,
+      captchaProvider: {
+        // name: 'none',
+        name: 'hcaptcha',
+        config: {
+          secret: env('HCAPTCHA_SECRET'),
+          sitekey: env('HCAPTCHA_SITEKEY'),
+          score: 0.3,
+        },
+      },
+      notificationProviders: [
+        {
+          name: 'email',
+          enabled: true,
+          config: {
+            from: env('SMTP_DEFAULT_FROM', ''),
+          },
+        },
+      ],
+    },
+  },
 });

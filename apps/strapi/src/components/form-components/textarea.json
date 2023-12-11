@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_form_components_textareas",
+  "info": {
+    "displayName": "Textarea",
+    "icon": "quote"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "regex": "[a-zA-Z][a-zA-Z0-9_\\-]+"
+    },
+    "label": {
+      "type": "string",
+      "required": false
+    },
+    "placeholder": {
+      "type": "string"
+    },
+    "required": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}
