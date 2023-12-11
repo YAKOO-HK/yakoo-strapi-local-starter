@@ -1,15 +1,11 @@
-import Image from 'next/image';
 import Link from 'next/link';
-import { parseISO } from 'date-fns';
-import { CalendarIcon } from 'lucide-react';
 import { z } from 'zod';
 import { Main } from '@/components/layout/Main';
 import { buttonVariants } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-import { StrapiImageLoader } from '@/strapi/image-loader';
 import { getAllCategories, getPosts } from '@/strapi/posts';
 import { StrapiLocale } from '@/strapi/strapi';
+import { PostCard } from './post-card';
 
 const LocaleSchema = z.object({
   locale: z.enum(['en', 'zh-Hant']).default('en'),
@@ -53,50 +49,14 @@ export default async function PostsPage({ searchParams }: { searchParams: unknow
           ))}
         </div>
         <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-2">
-          {posts.data.map(({ id, attributes }) => {
-            // console.log(attributes.image.data);
-            return (
-              <Card key={id}>
-                <CardHeader>
-                  <Link
-                    href={`/posts/${attributes.category?.data.attributes.slug}/${attributes.slug}`}
-                    prefetch={false}
-                  >
-                    <CardTitle>{attributes.title}</CardTitle>
-                  </Link>
-                  <CardDescription>
-                    <time dateTime={attributes.publishedAt} className="inline-flex items-center">
-                      <CalendarIcon className="mr-2 h-4 w-4" aria-hidden="true" />
-                      <span className="sr-only">Published on </span>
-                      {parseISO(attributes.publishedAt).toLocaleDateString(locale, { dateStyle: 'long' })}
-                    </time>
-                  </CardDescription>
-                </CardHeader>
-                <Link href={`/posts/${attributes.category?.data.attributes.slug}/${attributes.slug}`} prefetch={false}>
-                  <Image
-                    loader={StrapiImageLoader}
-                    src={attributes.image.data.attributes.url}
-                    alt={attributes.image.data.attributes.alternativeText || ''}
-                    width={attributes.image.data.attributes.width}
-                    height={attributes.image.data.attributes.height}
-                    placeholder={attributes.image.data.attributes.placeholder || 'empty'}
-                  />
-                </Link>
-                <CardContent className="p-6">
-                  <p className="whitespace-pre-wrap text-justify">{attributes.abstract}</p>
-                </CardContent>
-                <CardFooter>
-                  <Link
-                    href={`/posts/${attributes.category?.data.attributes.slug}/${attributes.slug}`}
-                    className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}
-                    prefetch={false}
-                  >
-                    Read more
-                  </Link>
-                </CardFooter>
-              </Card>
-            );
-          })}
+          {posts.data.map((post) => (
+            <PostCard
+              post={post}
+              key={post.id}
+              locale={locale}
+              categorySlug={post.attributes.category!?.data.attributes.slug}
+            />
+          ))}
         </div>
       </div>
     </Main>
