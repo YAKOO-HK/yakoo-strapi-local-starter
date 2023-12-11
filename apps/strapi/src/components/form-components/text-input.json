@@ -1,0 +1,43 @@
+{
+  "collectionName": "components_form_components_text_inputs",
+  "info": {
+    "displayName": "Text Input",
+    "icon": "pencil"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "regex": "[a-zA-Z][a-zA-Z0-9_\\-]+",
+      "unique": false
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "text",
+        "password",
+        "number",
+        "email",
+        "tel",
+        "url"
+      ],
+      "required": true,
+      "default": "text"
+    },
+    "label": {
+      "type": "string"
+    },
+    "placeholder": {
+      "type": "string"
+    },
+    "required": {
+      "type": "boolean",
+      "default": false,
+      "required": false
+    },
+    "regExp": {
+      "type": "string"
+    }
+  }
+}

@@ -4,6 +4,9 @@
   "type": "public",
   "permissions": [
     {
+      "action": "plugin::ezforms.submitController.index"
+    },
+    {
       "action": "plugin::users-permissions.auth.callback"
     },
     {

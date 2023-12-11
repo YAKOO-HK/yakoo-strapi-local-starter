@@ -29,6 +29,7 @@ export const env = createEnv({
     NEXT_PUBLIC_SITE_URL: z.string().url().default('http://localhost:3000'),
     NEXT_PUBLIC_STRAPI_URL: z.string().url().default('http://localhost:1337'),
     NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID: z.string().trim().nullish(),
+    NEXT_PUBLIC_HCAPTCHA_SITEKEY: z.string().trim(),
   },
   /*
    * Due to how Next.js bundles environment variables on Edge and Client,
@@ -43,6 +44,7 @@ export const env = createEnv({
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
     NEXT_PUBLIC_STRAPI_URL: process.env.NEXT_PUBLIC_STRAPI_URL,
     NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID,
+    NEXT_PUBLIC_HCAPTCHA_SITEKEY: process.env.NEXT_PUBLIC_HCAPTCHA_SITEKEY,
   },
   emptyStringAsUndefined: true,
 });

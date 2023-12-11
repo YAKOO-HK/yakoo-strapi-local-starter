@@ -50,7 +50,8 @@
         "page-components.hero-section",
         "page-components.page-title",
         "page-components.rich-text",
-        "page-components.html"
+        "page-components.html",
+        "page-components.contact-form"
       ],
       "required": true
     },

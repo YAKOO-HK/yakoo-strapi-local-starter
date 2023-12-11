@@ -78,6 +78,12 @@ export type ComponentHTML = {
   content: string;
 };
 
+export type ComponentContactForm = {
+  id: number;
+  __component: 'page-components.contact-form';
+  layout: ComponentLayout;
+};
+
 export type PageComponent =
   | ComponentPageTitle
   | ComponentHeroSection
@@ -86,4 +92,35 @@ export type PageComponent =
   | ComponentCarousel
   | ComponentGallery
   | ComponentEmbedYoutube
-  | ComponentHTML;
+  | ComponentHTML
+  | ComponentContactForm;
+
+export type FormTextInput = {
+  id: number;
+  __component: 'form-components.text-input';
+  name: string;
+  type: 'text' | 'email' | 'tel' | 'password' | 'url' | 'number';
+  label: string | null;
+  placeholder: string | null;
+  required: boolean | null;
+  regExp: string | null;
+};
+export type FormTextarea = {
+  id: number;
+  __component: 'form-components.textarea';
+  name: string;
+  label: string | null;
+  placeholder: string | null;
+  required: boolean | null;
+};
+export type FormSelect = {
+  id: number;
+  __component: 'form-components.select';
+  name: string;
+  label: string | null;
+  placeholder: string | null;
+  required: boolean | null;
+  options: Array<{ value: string; label: string }>;
+};
+
+export type FormComponent = FormTextInput | FormTextarea | FormSelect;

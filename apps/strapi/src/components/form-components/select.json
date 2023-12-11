@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_form_components_selects",
+  "info": {
+    "displayName": "Select",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "regex": "[a-zA-Z][a-zA-Z0-9_\\-]+"
+    },
+    "options": {
+      "type": "json",
+      "required": true
+    },
+    "label": {
+      "type": "string"
+    },
+    "placeholder": {
+      "type": "string"
+    },
+    "required": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}
