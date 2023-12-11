@@ -67,3 +67,20 @@ export async function getPageBySlug(slug: string) {
   if (!response.data?.[0]) return null;
   return response.data[0];
 }
+
+export async function getAllPages(locale: StrapiLocale = 'en') {
+  const querystring = qs.stringify(
+    {
+      // populate: ['localizations'],
+      pagination: { pageSize: 100 }, // assume we have less than 100 pages
+      locale,
+    },
+    { encodeValuesOnly: true }
+  );
+
+  const response = await fetch(`${env.NEXT_PUBLIC_STRAPI_URL}/api/pages?${querystring}`, {
+    headers: { Authorization: `Bearer ${env.STRAPI_ADMIN_API_TOKEN}` },
+    next: { revalidate: env.STRAPI_CACHE_PERIOD, tags: ['page'] },
+  }).then(fetchResponseHandler<PagesResponse>());
+  return response.data ?? [];
+}

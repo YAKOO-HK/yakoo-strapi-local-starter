@@ -9,12 +9,13 @@ module.exports = {
     '/*.png',
     '/*.jpg',
     '/*.gif',
+    '/icon',
     // exclude all api routes
     '/api/*',
     // sitemap
-    // '/server-sitemap.xml',
+    '/server-sitemap.xml',
   ],
   robotsTxtOptions: {
-    // additionalSitemaps: [`${process.env.NEXT_PUBLIC_SITE_URL}/server-sitemap.xml`],
+    additionalSitemaps: [`${process.env.NEXT_PUBLIC_SITE_URL}/server-sitemap.xml`],
   },
 };
