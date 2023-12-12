@@ -1,5 +1,4 @@
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { parseISO } from 'date-fns';
 import { CalendarIcon, TagIcon } from 'lucide-react';
 import { DynamicZone } from '@/components/DynamicZone';
@@ -7,6 +6,7 @@ import { Main } from '@/components/layout/Main';
 import { buttonVariants } from '@/components/ui/button';
 import { typographyVariants } from '@/components/ui/typography';
 import { cn } from '@/lib/utils';
+import { Link } from '@/navigation';
 import { getPostBySlug, getPostCategoryBySlug } from '@/strapi/posts';
 import { StrapiLocale, StrapiLocaleNames, toMetadata } from '@/strapi/strapi';
 
@@ -30,6 +30,7 @@ function LinksToOtherLocale({
       href={`/posts/${categoryLocalizations.find((category) => category.attributes.locale === attributes.locale)
         ?.attributes.slug}/${attributes.slug}`} // TODO category
       hrefLang={attributes.locale}
+      locale={attributes.locale}
       className={cn(buttonVariants({ variant: 'outline' }))}
       key={id}
     >
@@ -37,14 +38,32 @@ function LinksToOtherLocale({
     </Link>
   ));
 }
-export default async function SinglePostPage({ params }: { params: { categorySlug: string; postSlug: string } }) {
+export default async function SinglePostPage({
+  params,
+}: {
+  params: { categorySlug: string; postSlug: string; locale: StrapiLocale };
+}) {
   const category = await getPostCategoryBySlug(params.categorySlug);
   const post = await getPostBySlug(params.postSlug);
   if (!category || !post || category.id !== post.attributes.category?.data.id) {
     notFound();
   }
-  // console.log(post);
-  // console.log({ localizations: post.attributes.localizations?.data[0]?.attributes });
+  if (params.locale !== post.attributes.locale) {
+    const localization = post.attributes.localizations?.data?.find(
+      (localization) => localization.attributes.locale === params.locale
+    );
+    const categoryLocalization = category.attributes.localizations?.data?.find(
+      (localization) => localization.attributes.locale === params.locale
+    );
+    if (localization && categoryLocalization) {
+      // redirect to the page to the correct locale
+      redirect(
+        `/${localization.attributes.locale}/posts/${categoryLocalization.attributes.slug}/${localization.attributes.slug}`
+      );
+    }
+    redirect(`/${post.attributes.locale}/posts/${category.attributes.slug}/${post.attributes.slug}`);
+  }
+
   return (
     <Main>
       <div className="container py-8">

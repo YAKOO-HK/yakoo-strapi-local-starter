@@ -1,14 +1,24 @@
 import Image from 'next/image';
-import Link from 'next/link';
+import { getTranslations } from 'next-intl/server';
+import { isExternalLink } from '@/lib/link';
+import { Link, locales } from '@/navigation';
 import { StrapiImageLoader } from '@/strapi/image-loader';
 import { type NavigationItem } from '@/strapi/navigation';
-import { StrapiMedia } from '@/strapi/strapi';
+import { StrapiLocale, StrapiMedia } from '@/strapi/strapi';
+import { LanguageSwitcher } from './LanguageSwitcher';
 import { MainNavigation } from './MainNavigation';
 import { MobileMenu } from './MobileMenu';
 
-const isExternalLink = (path: string) => path.includes('://');
-
-export async function Header({ logo, navigationItems }: { logo: StrapiMedia; navigationItems: NavigationItem[] }) {
+export async function Header({
+  logo,
+  navigationItems,
+  locale,
+}: {
+  logo: StrapiMedia;
+  navigationItems: NavigationItem[];
+  locale: StrapiLocale;
+}) {
+  const t = await getTranslations({ locale, namespace: 'navigation' });
   return (
     <>
       <header className="border-b-border hidden border-b py-2 shadow-md md:block">
@@ -26,7 +36,14 @@ export async function Header({ logo, navigationItems }: { logo: StrapiMedia; nav
               <span className="sr-only">Home</span>
             </Link>
           </div>
-          <MainNavigation items={navigationItems} />
+          <MainNavigation items={navigationItems} className="grow" />
+          <LanguageSwitcher
+            locales={locales.map((code) => ({
+              locale: code,
+              label: t(`locales.${code}`),
+              current: locale === code,
+            }))}
+          />
         </div>
       </header>
       <header className="border-b-border flex gap-4 border-b py-2 shadow-md md:hidden">
@@ -39,7 +56,7 @@ export async function Header({ logo, navigationItems }: { logo: StrapiMedia; nav
                   return (
                     <li key={parentItem.id}>
                       <Link
-                        href={isExternal ? parentItem.path : `${parentItem.path}`}
+                        href={parentItem.path}
                         target={isExternal ? '_blank' : undefined}
                         rel={isExternal ? 'noopener noreferrer' : undefined}
                       >

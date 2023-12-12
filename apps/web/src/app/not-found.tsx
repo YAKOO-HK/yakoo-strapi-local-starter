@@ -1,20 +1,13 @@
-import { type Metadata } from 'next';
-import { Main } from '@/components/layout/Main';
-import { typographyVariants } from '@/components/ui/typography';
-import { cn } from '@/lib/utils';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'Page Not Found (404)',
-  robots: {
-    index: false,
-    follow: false,
-  },
-};
+import { redirect, usePathname } from 'next/navigation';
+
+// Can be imported from a shared config
+const defaultLocale = 'en';
+
 export default function NotFound() {
-  return (
-    <Main className="prose prose-neutral container py-8">
-      <h1 className={cn(typographyVariants({ variant: 'h1' }))}>Page Not Found (404)</h1>
-      <p>Could not find requested resource.</p>
-    </Main>
-  );
+  const pathname = usePathname();
+
+  // Add a locale prefix to show a localized not found page
+  redirect(`/${defaultLocale}${pathname}`);
 }

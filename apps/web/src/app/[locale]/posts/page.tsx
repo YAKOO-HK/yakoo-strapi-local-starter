@@ -1,22 +1,25 @@
-import Link from 'next/link';
 import { z } from 'zod';
 import { Main } from '@/components/layout/Main';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { Link } from '@/navigation';
 import { getAllCategories, getPosts } from '@/strapi/posts';
 import { StrapiLocale } from '@/strapi/strapi';
 import { PostCard } from './post-card';
 
 const LocaleSchema = z.object({
-  locale: z.enum(['en', 'zh-Hant']).default('en'),
   page: z.coerce.number().int().min(1).default(1),
 });
-export default async function PostsPage({ searchParams }: { searchParams: unknown }) {
+export default async function PostsPage({
+  searchParams,
+  params: { locale },
+}: {
+  searchParams: unknown;
+  params: { locale: StrapiLocale };
+}) {
   let params = LocaleSchema.safeParse(searchParams);
-  let locale: StrapiLocale = 'en';
   let page = 1;
   if (params.success) {
-    locale = params.data.locale;
     page = params.data.page;
   }
   const posts = await getPosts(locale, page);
@@ -27,11 +30,16 @@ export default async function PostsPage({ searchParams }: { searchParams: unknow
       <div className="container py-8">
         <div className="flex justify-end">
           {locale == 'en' ? (
-            <Link href="?locale=zh-Hant" className={cn(buttonVariants({ variant: 'outline' }))}>
+            <Link
+              href="/posts"
+              locale="zh-Hant"
+              className={cn(buttonVariants({ variant: 'outline' }))}
+              hrefLang="zh-Hant"
+            >
               繁體中文
             </Link>
           ) : (
-            <Link href="?locale=en" className={cn(buttonVariants({ variant: 'outline' }))}>
+            <Link href="/posts" locale="en" className={cn(buttonVariants({ variant: 'outline' }))} hrefLang="en">
               English
             </Link>
           )}

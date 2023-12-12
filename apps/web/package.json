@@ -36,6 +36,7 @@
     "leaflet": "^1.9.4",
     "lucide-react": "^0.294.0",
     "next": "^14.0.4",
+    "next-intl": "^3.3.2",
     "next-sitemap": "^4.2.3",
     "qs": "^6.11.2",
     "react": "^18.2.0",
