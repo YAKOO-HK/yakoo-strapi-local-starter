@@ -2,6 +2,7 @@ import qs from 'qs';
 import { env } from '@/env';
 import { fetchResponseHandler } from '@/lib/fetch-utils';
 import { PageComponent } from './components';
+import { StrapiLocale } from './strapi';
 
 // import { StrapiMedia } from './strapi';
 
@@ -11,10 +12,11 @@ export type StrapiHomepage = {
     sections: Array<PageComponent>;
   };
 };
-export async function getHomepage() {
+export async function getHomepage(locale: StrapiLocale = 'en') {
   const querystring = qs.stringify(
     {
       populate: ['sections', 'sections.image', 'sections.slides', 'sections.slides.image'],
+      locale,
     },
     { encodeValuesOnly: true }
   );

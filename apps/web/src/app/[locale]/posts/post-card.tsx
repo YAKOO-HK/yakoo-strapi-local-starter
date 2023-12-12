@@ -1,10 +1,10 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { parseISO } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
 import { buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
+import { Link } from '@/navigation';
 import { StrapiImageLoader } from '@/strapi/image-loader';
 import { PostsResponse } from '@/strapi/posts';
 import { StrapiLocale } from '@/strapi/strapi';
@@ -20,7 +20,6 @@ export function PostCard({
   categorySlug?: string;
 }) {
   const { id, attributes } = post;
-  // console.log(attributes.image.data);
   return (
     <Card key={id}>
       <CardHeader>

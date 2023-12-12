@@ -3,6 +3,7 @@
 import { ComponentPropsWithoutRef } from 'react';
 import Link from 'next/link';
 import { BlocksRenderer } from '@strapi/blocks-react-renderer';
+import { isExternalLink } from '@/lib/link';
 import { cn } from '@/lib/utils';
 import { StrapiRawImageLoader } from '@/strapi/image-loader';
 
@@ -50,7 +51,7 @@ export function StrapiRichtext({ className, prose = true, ...props }: StrapiRich
             );
           },
           link: ({ children, url, ...props }) => {
-            const external = url.includes('://');
+            const external = isExternalLink(url);
             if (external) {
               return (
                 <a href={url} {...props} target="_blank" rel="noreferrer noopener">

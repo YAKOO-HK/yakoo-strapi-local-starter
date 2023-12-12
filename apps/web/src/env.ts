@@ -11,12 +11,12 @@ export const env = createEnv({
     STRAPI_CACHE_PERIOD: z.coerce
       .number()
       .int()
-      .positive()
+      .nonnegative()
       .default(60 * 60),
     STRAPI_CACHE_PERIOD_LONG: z.coerce
       .number()
       .int()
-      .positive()
+      .nonnegative()
       .default(60 * 60 * 24),
   },
   /*

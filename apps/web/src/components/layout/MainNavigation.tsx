@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -8,13 +7,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { isExternalLink } from '@/lib/link';
+import { cn } from '@/lib/utils';
+import { Link } from '@/navigation';
 import { NavigationItem } from '@/strapi/navigation';
 
-const isExternalLink = (path: string) => path.includes('://');
-
-export function MainNavigation({ items }: { items: NavigationItem[] }) {
+export function MainNavigation({ items, className }: { items: NavigationItem[]; className?: string }) {
   return (
-    <nav className="container flex max-w-5xl items-center justify-between pt-4">
+    <nav className={cn('pt-4', className)}>
       <ul className="flex flex-wrap items-center gap-4">
         {items.map((parentItem) => {
           const isExternal = isExternalLink(parentItem.path);

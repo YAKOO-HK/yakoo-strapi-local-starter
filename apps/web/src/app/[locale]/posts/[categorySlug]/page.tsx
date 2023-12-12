@@ -1,10 +1,10 @@
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { CloseIcon } from 'yet-another-react-lightbox';
 import { Main } from '@/components/layout/Main';
 import { buttonVariants } from '@/components/ui/button';
 import { typographyVariants } from '@/components/ui/typography';
 import { cn } from '@/lib/utils';
+import { Link } from '@/navigation';
 import { getPostCategoryBySlug, getPostsByCategory } from '@/strapi/posts';
 import { StrapiLocale, StrapiLocaleNames, toMetadata } from '@/strapi/strapi';
 import { PostCard } from '../post-card';
@@ -24,6 +24,7 @@ function LinksToOtherLocale({
 }) {
   return localizations.map(({ id, attributes }) => (
     <Link
+      locale={attributes.locale}
       href={`/posts/${attributes.slug}`}
       hrefLang={attributes.locale}
       className={cn(buttonVariants({ variant: 'outline' }))}
@@ -34,14 +35,20 @@ function LinksToOtherLocale({
   ));
 }
 
-export default async function PostCategoryListPage({ params }: { params: { categorySlug: string } }) {
+export default async function PostCategoryListPage({
+  params,
+}: {
+  params: { categorySlug: string; locale: StrapiLocale };
+}) {
   const category = await getPostCategoryBySlug(params.categorySlug);
   if (!category) {
     notFound();
   }
-  // console.log({ localizations: category.attributes.localizations?.data[0]?.attributes });
+  if (params.locale !== category.attributes.locale) {
+    redirect(`/${category.attributes.locale}/posts/${category.attributes.slug}`); // TODO: should redirect to the post with the same slug in the locale?
+  }
   const posts = await getPostsByCategory(category.id, category.attributes.locale, 1); // TODO: pagination
-  // console.log({ posts });
+
   return (
     <Main>
       <div className="container py-8">
@@ -52,10 +59,7 @@ export default async function PostCategoryListPage({ params }: { params: { categ
         </div>
         <div className="mb-8 flex items-end">
           <h1 className={cn(typographyVariants({ variant: 'h1' }))}>{category.attributes.title}</h1>
-          <Link
-            href={`/posts?locale=${category.attributes.locale}`}
-            className={cn(buttonVariants({ variant: 'ghost', size: 'icon' }))}
-          >
+          <Link href="/posts" className={cn(buttonVariants({ variant: 'ghost', size: 'icon' }))}>
             <span className="sr-only">Back to All Posts</span>
             <CloseIcon className="h-4 w-4" aria-hidden="true" />
           </Link>
