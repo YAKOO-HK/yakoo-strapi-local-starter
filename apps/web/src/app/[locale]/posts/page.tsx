@@ -1,5 +1,8 @@
+import { type Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 import { z } from 'zod';
 import { Main } from '@/components/layout/Main';
+import { SingleBreadcrumbLdJson } from '@/components/ldjson/breadcrumb';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Link } from '@/navigation';
@@ -7,9 +10,24 @@ import { getAllCategories, getPosts } from '@/strapi/posts';
 import { StrapiLocale } from '@/strapi/strapi';
 import { PostCard } from './post-card';
 
-const LocaleSchema = z.object({
-  page: z.coerce.number().int().min(1).default(1),
-});
+export async function generateMetadata({ params }: { params: { locale: StrapiLocale } }) {
+  const t = await getTranslations({ locale: params.locale, namespace: 'posts' });
+  return {
+    title: t('title'),
+    openGraph: {
+      title: t('title'),
+    },
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/${params.locale}/posts`,
+      languages: {
+        en: params.locale !== 'en' ? `${process.env.NEXT_PUBLIC_SITE_URL}/en/posts` : undefined,
+        'zh-Hant': params.locale !== 'zh-Hant' ? `${process.env.NEXT_PUBLIC_SITE_URL}/zh-Hant/posts` : undefined,
+      },
+    },
+  } satisfies Metadata;
+}
+
+const ParamsSchema = z.object({ page: z.coerce.number().int().min(1).default(1) });
 export default async function PostsPage({
   searchParams,
   params: { locale },
@@ -17,16 +35,18 @@ export default async function PostsPage({
   searchParams: unknown;
   params: { locale: StrapiLocale };
 }) {
-  let params = LocaleSchema.safeParse(searchParams);
+  let params = ParamsSchema.safeParse(searchParams);
   let page = 1;
   if (params.success) {
     page = params.data.page;
   }
   const posts = await getPosts(locale, page);
   const categories = await getAllCategories(locale);
+  const t = await getTranslations({ locale, namespace: 'posts' });
 
   return (
     <Main>
+      <SingleBreadcrumbLdJson itemList={[{ name: t('title') }]} />
       <div className="container py-8">
         <div className="flex justify-end">
           {locale == 'en' ? (

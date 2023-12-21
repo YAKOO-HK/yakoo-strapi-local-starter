@@ -1,21 +1,51 @@
+import { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
 import { parseISO } from 'date-fns';
 import { CalendarIcon, TagIcon } from 'lucide-react';
+import { getTranslations } from 'next-intl/server';
 import { DynamicZone } from '@/components/DynamicZone';
 import { Main } from '@/components/layout/Main';
+import { SingleBreadcrumbLdJson } from '@/components/ldjson/breadcrumb';
+import { LdJson } from '@/components/ldjson/ldjson';
 import { buttonVariants } from '@/components/ui/button';
 import { typographyVariants } from '@/components/ui/typography';
+import { env } from '@/env';
 import { cn } from '@/lib/utils';
 import { Link } from '@/navigation';
 import { getPostBySlug, getPostCategoryBySlug } from '@/strapi/posts';
 import { StrapiLocale, StrapiLocaleNames, toMetadata } from '@/strapi/strapi';
 
-export async function generateMetadata({ params }: { params: { categorySlug: string; postSlug: string } }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: StrapiLocale; categorySlug: string; postSlug: string };
+}) {
   const post = await getPostBySlug(params.postSlug);
-  if (!post) {
+  const category = await getPostCategoryBySlug(params.categorySlug);
+  if (!category || !post || category.id !== post.attributes.category?.data.id) {
     notFound();
   }
-  return toMetadata(post.attributes.seo);
+  const metadata = toMetadata(post.attributes.seo);
+  // eslint-disable-next-line no-unused-vars
+  const languages: { [key in StrapiLocale]?: string } = {};
+  post.attributes.localizations?.data
+    ?.filter((localization) => localization.attributes.locale !== params.locale)
+    .forEach(({ attributes }) => {
+      const categoryLocalization = category.attributes.localizations?.data?.find(
+        (localization) => localization.attributes.locale === attributes.locale
+      );
+      languages[attributes.locale] = `${env.NEXT_PUBLIC_SITE_URL}/${attributes.locale}/posts/${
+        categoryLocalization?.attributes.slug ?? params.categorySlug
+      }/${attributes.slug}`;
+    });
+  // console.log(languages);
+  return {
+    ...metadata,
+    alternates: {
+      ...metadata.alternates,
+      languages,
+    },
+  } satisfies Metadata;
 }
 
 function LinksToOtherLocale({
@@ -63,9 +93,23 @@ export default async function SinglePostPage({
     }
     redirect(`/${post.attributes.locale}/posts/${category.attributes.slug}/${post.attributes.slug}`);
   }
+  const t = await getTranslations({ locale: params.locale, namespace: 'posts' });
 
   return (
     <Main>
+      <SingleBreadcrumbLdJson
+        itemList={[
+          { name: t('title'), item: `${env.NEXT_PUBLIC_SITE_URL}/${params.locale}/posts` },
+          {
+            name: category.attributes.title,
+            item: `${env.NEXT_PUBLIC_SITE_URL}/${params.locale}/posts/${category.attributes.slug}`,
+          },
+          {
+            name: post.attributes.title,
+          },
+        ]}
+      />
+      <LdJson structuredData={post.attributes.seo?.structuredData} />
       <div className="container py-8">
         <div className="mb-4 flex justify-end">
           <LinksToOtherLocale

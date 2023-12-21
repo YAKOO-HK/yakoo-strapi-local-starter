@@ -47,6 +47,8 @@ export type StrapiSEO = {
   metaRobots: string | null;
   keywords: string | null;
   metaImage?: { data: StrapiMedia | null };
+  structuredData: unknown | null;
+  canonicalURL: string | null;
 };
 
 export function getOpenGraphImage(seo: StrapiSEO) {
@@ -71,6 +73,7 @@ export function toMetadata(seo?: StrapiSEO) {
     description: seo.metaDescription,
     robots: seo.metaRobots,
     keywords: seo.keywords,
+    alternates: seo.canonicalURL ? { canonical: seo.canonicalURL } : undefined,
     openGraph: {
       title: seo.metaTitle,
       description: seo.metaDescription || undefined,

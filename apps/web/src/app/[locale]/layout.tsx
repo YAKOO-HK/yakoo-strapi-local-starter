@@ -15,6 +15,7 @@ import { getMainNavigation } from '@/strapi/navigation';
 import { getSiteMetadata } from '@/strapi/site-metadata';
 import { getOpenGraphImage, StrapiLocale } from '@/strapi/strapi';
 import '../global.css';
+import { LdJson } from '@/components/ldjson/ldjson';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -78,13 +79,14 @@ export default async function LocaleLayout({
     notFound();
   }
   unstable_setRequestLocale(params.locale);
-  const { logo, locale } = await getSiteMetadata(params.locale);
+  const { logo, locale, seo } = await getSiteMetadata(params.locale);
   const navigationItems = await getMainNavigation(params.locale);
 
   // console.log(data);
   return (
     <html lang={locale} dir="ltr">
       <body className={cn(inter.variable)}>
+        <LdJson structuredData={seo.structuredData} />
         <GoogleAnalytics />
         <SkipToMain />
         <Header logo={logo.data} navigationItems={navigationItems} locale={locale} />
