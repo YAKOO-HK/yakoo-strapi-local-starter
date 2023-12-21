@@ -4,5 +4,8 @@
       "en": "English",
       "zh-Hant": "正體中文"
     }
+  },
+  "posts": {
+    "title": "Posts"
   }
 }

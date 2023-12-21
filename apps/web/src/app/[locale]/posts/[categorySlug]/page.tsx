@@ -1,20 +1,39 @@
+import { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
+import { getTranslations } from 'next-intl/server';
 import { CloseIcon } from 'yet-another-react-lightbox';
 import { Main } from '@/components/layout/Main';
+import { SingleBreadcrumbLdJson } from '@/components/ldjson/breadcrumb';
+import { LdJson } from '@/components/ldjson/ldjson';
 import { buttonVariants } from '@/components/ui/button';
 import { typographyVariants } from '@/components/ui/typography';
+import { env } from '@/env';
 import { cn } from '@/lib/utils';
 import { Link } from '@/navigation';
 import { getPostCategoryBySlug, getPostsByCategory } from '@/strapi/posts';
 import { StrapiLocale, StrapiLocaleNames, toMetadata } from '@/strapi/strapi';
 import { PostCard } from '../post-card';
 
-export async function generateMetadata({ params }: { params: { categorySlug: string } }) {
+export async function generateMetadata({ params }: { params: { locale: StrapiLocale; categorySlug: string } }) {
   const category = await getPostCategoryBySlug(params.categorySlug);
   if (!category) {
     notFound();
   }
-  return toMetadata(category.attributes.seo);
+  const metadata = toMetadata(category.attributes.seo);
+  // eslint-disable-next-line no-unused-vars
+  const languages: { [key in StrapiLocale]?: string } = {};
+  category.attributes.localizations?.data
+    ?.filter((localization) => localization.attributes.locale !== params.locale)
+    .forEach(({ attributes }) => {
+      languages[attributes.locale] = `${env.NEXT_PUBLIC_SITE_URL}/${attributes.locale}/posts/${attributes.slug}`;
+    });
+  return {
+    ...metadata,
+    alternates: {
+      canonical: `${env.NEXT_PUBLIC_SITE_URL}/${params.locale}/posts/${params.categorySlug}`,
+      languages,
+    },
+  } satisfies Metadata;
 }
 
 function LinksToOtherLocale({
@@ -48,9 +67,19 @@ export default async function PostCategoryListPage({
     redirect(`/${category.attributes.locale}/posts/${category.attributes.slug}`); // TODO: should redirect to the post with the same slug in the locale?
   }
   const posts = await getPostsByCategory(category.id, category.attributes.locale, 1); // TODO: pagination
+  const t = await getTranslations({ locale: params.locale, namespace: 'posts' });
 
   return (
     <Main>
+      <SingleBreadcrumbLdJson
+        itemList={[
+          { name: t('title'), item: `${env.NEXT_PUBLIC_SITE_URL}/${params.locale}/posts` },
+          {
+            name: category.attributes.title,
+          },
+        ]}
+      />
+      <LdJson structuredData={category.attributes.seo?.structuredData} />
       <div className="container py-8">
         <div className="flex justify-end">
           {category.attributes.localizations?.data && (
