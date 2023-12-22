@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: { locale: StrapiLoc
   return {
     ...metadata,
     alternates: {
-      ...metadata.alternates,
+      canonical: metadata.alternates?.canonical || `${env.NEXT_PUBLIC_SITE_URL}/${params.locale}/${params.pageSlug}`,
       languages,
     },
   } satisfies Metadata;
