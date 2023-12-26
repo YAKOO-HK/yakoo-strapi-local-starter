@@ -2,9 +2,11 @@ import { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { CloseIcon } from 'yet-another-react-lightbox';
+import { z } from 'zod';
 import { Main } from '@/components/layout/Main';
 import { SingleBreadcrumbLdJson } from '@/components/ldjson/breadcrumb';
 import { LdJson } from '@/components/ldjson/ldjson';
+import { StrapiMetaPagination } from '@/components/StrapiMetaPagination';
 import { buttonVariants } from '@/components/ui/button';
 import { typographyVariants } from '@/components/ui/typography';
 import { env } from '@/env';
@@ -54,9 +56,12 @@ function LinksToOtherLocale({
   ));
 }
 
+const ParamsSchema = z.object({ page: z.coerce.number().int().min(1).default(1) });
 export default async function PostCategoryListPage({
   params,
+  searchParams,
 }: {
+  searchParams: unknown;
   params: { categorySlug: string; locale: StrapiLocale };
 }) {
   const category = await getPostCategoryBySlug(params.categorySlug);
@@ -64,9 +69,15 @@ export default async function PostCategoryListPage({
     notFound();
   }
   if (params.locale !== category.attributes.locale) {
-    redirect(`/${category.attributes.locale}/posts/${category.attributes.slug}`); // TODO: should redirect to the post with the same slug in the locale?
+    redirect(`/${category.attributes.locale}/posts/${category.attributes.slug}`); // redirect to the post with the same slug in the locale
   }
-  const posts = await getPostsByCategory(category.id, category.attributes.locale, 1); // TODO: pagination
+
+  const parsedSearchParams = ParamsSchema.safeParse(searchParams);
+  let page = 1;
+  if (parsedSearchParams.success) {
+    page = parsedSearchParams.data.page;
+  }
+  const posts = await getPostsByCategory(category.id, category.attributes.locale, page);
   const t = await getTranslations({ locale: params.locale, namespace: 'posts' });
 
   return (
@@ -103,6 +114,16 @@ export default async function PostCategoryListPage({
             />
           ))}
         </div>
+        <StrapiMetaPagination
+          pagination={posts.meta.pagination}
+          getHref={(page) => {
+            if (page === 1) {
+              return `/posts/${category.attributes.slug}`;
+            }
+            return `/posts/${category.attributes.slug}?page=${page}`;
+          }}
+          className="py-4"
+        />
       </div>
     </Main>
   );

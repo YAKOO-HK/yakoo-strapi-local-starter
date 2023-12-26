@@ -26,7 +26,9 @@ export type PostCategoriesResponse = {
       };
     };
   }>;
-  meta: StrapiPagination;
+  meta: {
+    pagination: StrapiPagination;
+  };
 };
 
 export async function getPostCategoryBySlug(slug: string) {
@@ -96,7 +98,9 @@ export type PostsResponse = {
       };
     };
   }>;
-  meta: StrapiPagination;
+  meta: {
+    pagination: StrapiPagination;
+  };
 };
 
 export async function getPostBySlug(slug: string) {

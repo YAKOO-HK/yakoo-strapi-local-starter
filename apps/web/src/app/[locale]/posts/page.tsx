@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { z } from 'zod';
 import { Main } from '@/components/layout/Main';
 import { SingleBreadcrumbLdJson } from '@/components/ldjson/breadcrumb';
+import { StrapiMetaPagination } from '@/components/StrapiMetaPagination';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Link } from '@/navigation';
@@ -35,7 +36,7 @@ export default async function PostsPage({
   searchParams: unknown;
   params: { locale: StrapiLocale };
 }) {
-  let params = ParamsSchema.safeParse(searchParams);
+  const params = ParamsSchema.safeParse(searchParams);
   let page = 1;
   if (params.success) {
     page = params.data.page;
@@ -82,10 +83,20 @@ export default async function PostsPage({
               post={post}
               key={post.id}
               locale={locale}
-              categorySlug={post.attributes.category!?.data.attributes.slug}
+              categorySlug={post.attributes.category?.data.attributes.slug}
             />
           ))}
         </div>
+        <StrapiMetaPagination
+          pagination={posts.meta.pagination}
+          getHref={(page) => {
+            if (page === 1) {
+              return `/posts`;
+            }
+            return `/posts?page=${page}`;
+          }}
+          className="py-4"
+        />
       </div>
     </Main>
   );

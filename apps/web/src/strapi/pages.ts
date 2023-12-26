@@ -37,7 +37,9 @@ export type PagesResponse = {
       };
     };
   }>;
-  meta: StrapiPagination;
+  meta: {
+    pagination: StrapiPagination;
+  };
 };
 
 export async function getPageBySlug(slug: string) {
