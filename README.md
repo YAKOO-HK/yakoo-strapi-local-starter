@@ -78,15 +78,17 @@ pnpm cs import
 
 ### Setup Webhooks on Strapi to trigger NextJS revalidate
 
-1. Login to Strapi Admin Dashboard
-2. Go to "Settings" > "Global Settings" > "Webhooks"
-3. Click "Create new Webhook"
-4. Fill in the fill
+1. Generate a secret with `openssl` for x-internal-api-secret (INTERNAL_API_SECRET)
+2. Login to Strapi Admin Dashboard
+3. Go to "Settings" > "Global Settings" > "Webhooks"
+4. Click "Create new Webhook"
+5. Fill in the fill
 
 ```
 Name:revalidateTag
 Url:http://localhost:3000/api/revalidate
 Under Events: Check all on "Entry"
+Under Header: "x-internal-api-secret: <your secret>"
 ```
 
 5. Click "Save"
@@ -101,6 +103,10 @@ pnpm dev --filter strapi
 # start only NextJS
 pnpm dev --filter web
 ```
+
+### Semantics Search and Chatbot with AWS Bedrock and Typesense (POC)
+
+[typesense.md](./typesense.md)
 
 ## Strapi Plugins used
 
@@ -137,3 +143,4 @@ pnpm dev --filter web
 | Components       | yet-another-react-lightbox | [https://yet-another-react-lightbox.com/]()           |
 | Components       | react-photo-album          | [https://react-photo-album.com/]()                    |
 | Components       | embla-carousel-react       | [https://www.embla-carousel.com/get-started/react/]() |
+| Client State     | TanStack Query             | [https://tanstack.com/query/latest/]()                |
