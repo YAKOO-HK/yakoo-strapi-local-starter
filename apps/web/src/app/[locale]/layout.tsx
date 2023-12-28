@@ -15,6 +15,7 @@ import { getMainNavigation } from '@/strapi/navigation';
 import { getSiteMetadata } from '@/strapi/site-metadata';
 import { getOpenGraphImage, StrapiLocale } from '@/strapi/strapi';
 import '../global.css';
+import { AskAi } from '@/components/AskAi';
 import { LdJson } from '@/components/ldjson/ldjson';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
@@ -92,6 +93,11 @@ export default async function LocaleLayout({
         <Header logo={logo.data} navigationItems={navigationItems} locale={locale} />
         {children}
         <Footer />
+        {env.TYPESENSE_ENABLED ? (
+          <div className="fixed bottom-2 left-2 z-10">
+            <AskAi />
+          </div>
+        ) : null}
         <BackToTopButton />
         <Toaster />
         {process.env.NODE_ENV === 'development' && (
