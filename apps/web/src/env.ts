@@ -18,6 +18,19 @@ export const env = createEnv({
       .int()
       .nonnegative()
       .default(60 * 60 * 24),
+    TYPESENSE_ENABLED: z
+      .enum(['true', 'false'])
+      .default('true')
+      .transform((val) => val === 'true'),
+    TYPESENSE_HOST: z.string().trim().default('localhost'),
+    TYPESENSE_PORT: z.coerce.number().int().nonnegative().default(8108),
+    TYPESENSE_PROTOCOL: z.string().trim().default('http'),
+    TYPESENSE_API_KEY: z.string().trim().default(''),
+    TYPESENSE_EMBEDDINGS_CACHE_PATH: z.string().trim().default('.cache/embeddings'),
+    AWS_REGION: z.string().trim().default('us-east-1'),
+    AWS_ACCESS_KEY_ID: z.string().trim().default(''),
+    AWS_SECRET_ACCESS_KEY: z.string().trim().default(''),
+    INTERNAL_API_SECRET: z.string().trim(),
   },
   /*
    * Environment variables available on the client (and server).
@@ -41,6 +54,16 @@ export const env = createEnv({
     STRAPI_ADMIN_API_TOKEN: process.env.STRAPI_ADMIN_API_TOKEN,
     STRAPI_CACHE_PERIOD: process.env.STRAPI_CACHE_PERIOD,
     STRAPI_CACHE_PERIOD_LONG: process.env.STRAPI_CACHE_PERIOD_LONG,
+    TYPESENSE_ENABLED: process.env.TYPESENSE_ENABLED,
+    TYPESENSE_HOST: process.env.TYPESENSE_HOST,
+    TYPESENSE_PORT: process.env.TYPESENSE_PORT,
+    TYPESENSE_PROTOCOL: process.env.TYPESENSE_PROTOCOL,
+    TYPESENSE_API_KEY: process.env.TYPESENSE_API_KEY,
+    TYPESENSE_EMBEDDINGS_CACHE_PATH: process.env.TYPESENSE_EMBEDDINGS_CACHE_PATH,
+    AWS_REGION: process.env.AWS_REGION,
+    AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
+    AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
+    INTERNAL_API_SECRET: process.env.INTERNAL_API_SECRET,
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
     NEXT_PUBLIC_STRAPI_URL: process.env.NEXT_PUBLIC_STRAPI_URL,
     NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID,

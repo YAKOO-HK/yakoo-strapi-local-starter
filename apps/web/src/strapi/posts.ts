@@ -53,7 +53,7 @@ export async function getPostCategoryBySlug(slug: string) {
 export async function getAllCategories(locale: StrapiLocale | 'all' = 'en') {
   const querystring = qs.stringify(
     {
-      pagination: { pageSize: 100 }, // assume won't have so many categories
+      pagination: { pageSize: 250 }, // assume won't have so many categories
       locale,
     },
     { encodeValuesOnly: true }
@@ -170,7 +170,7 @@ export async function getAllPosts() {
   const querystring = qs.stringify(
     {
       populate: ['category'],
-      pagination: { pageSize: 100 }, // assume won't have so many posts
+      pagination: { pageSize: 250 }, // TODO: assume won't have so many posts, which may be a bad assumption
       sort: 'publishedAt:desc',
       locale: 'all',
     },

@@ -5,7 +5,7 @@
     "build": {
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"],
-      "env": ["NODE_ENV", "NEXT_PUBLIC_*", "!NEXT_PUBLIC_GIT_*", "STRAPI_*"]
+      "env": ["NODE_ENV", "NEXT_PUBLIC_*", "!NEXT_PUBLIC_GIT_*", "STRAPI_*", "TYPESENSE_*", "AWS_"]
     },
     "lint": {
       "dependsOn": ["^lint"]

@@ -10,6 +10,7 @@ module.exports = {
     '@next/next/no-html-link-for-pages': 'off',
     'react/jsx-key': 'off',
     'tailwindcss/no-custom-classname': 'off',
+    '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
   },
   ignorePatterns: ['*.config.js', 'node_modules/'],
   settings: {

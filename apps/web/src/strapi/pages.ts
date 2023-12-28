@@ -10,7 +10,6 @@ export type PagesResponse = {
     attributes: {
       title: string;
       slug: string;
-      abstract: string;
       updatedAt: string;
       publishedAt: string;
       locale: StrapiLocale;
@@ -74,7 +73,7 @@ export async function getAllPages(locale: StrapiLocale = 'en') {
   const querystring = qs.stringify(
     {
       // populate: ['localizations'],
-      pagination: { pageSize: 100 }, // assume we have less than 100 pages
+      pagination: { pageSize: 250 }, // assume we have less than 250 pages
       locale,
     },
     { encodeValuesOnly: true }

@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
+import { TypesenseSearch } from '@/components/TypesenseSearch';
+import { env } from '@/env';
 import { isExternalLink } from '@/lib/link';
 import { Link, locales } from '@/navigation';
 import { StrapiImageLoader } from '@/strapi/image-loader';
@@ -37,6 +39,7 @@ export async function Header({
             </Link>
           </div>
           <MainNavigation items={navigationItems} className="grow" />
+          {env.TYPESENSE_ENABLED ? <TypesenseSearch /> : null}
           <LanguageSwitcher
             locales={locales.map((code) => ({
               locale: code,
