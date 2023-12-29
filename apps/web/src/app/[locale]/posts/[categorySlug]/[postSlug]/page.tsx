@@ -112,29 +112,33 @@ export default async function SinglePostPage({
         ]}
       />
       <LdJson structuredData={post.attributes.seo?.structuredData} />
-      <div className="container py-8">
-        <div className="mb-4 flex justify-end">
-          <LinksToOtherLocale
-            localizations={post.attributes.localizations?.data || []}
-            categoryLocalizations={category.attributes.localizations?.data || []}
-          />
+      <article data-post-id={post.id}>
+        <div className="container py-8">
+          <div className="mb-4 flex justify-end">
+            <LinksToOtherLocale
+              localizations={post.attributes.localizations?.data || []}
+              categoryLocalizations={category.attributes.localizations?.data || []}
+            />
+          </div>
+          <h1 className={cn(typographyVariants({ variant: 'h1' }), 'mb-8 text-center')}>{post.attributes.title}</h1>
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            <time dateTime={post.attributes.publishedAt} className="inline-flex items-center gap-2">
+              <CalendarIcon className="h-4 w-4" aria-label="Published on" />
+              {parseISO(post.attributes.publishedAt).toLocaleDateString(post.attributes.locale, {
+                dateStyle: 'long',
+              })}
+            </time>
+            <Link
+              className="inline-flex items-center gap-2 font-medium hover:underline"
+              href={`/posts/${category.attributes.slug}`}
+            >
+              <TagIcon className="h-4 w-4" aria-label="Category" />
+              {category.attributes.title}
+            </Link>
+          </div>
         </div>
-        <h1 className={cn(typographyVariants({ variant: 'h1' }), 'mb-8 text-center')}>{post.attributes.title}</h1>
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-          <span className="inline-flex items-center gap-2">
-            <CalendarIcon className="h-4 w-4" aria-label="Published At" />
-            {parseISO(post.attributes.publishedAt).toLocaleDateString(post.attributes.locale, { dateStyle: 'long' })}
-          </span>
-          <Link
-            className="inline-flex items-center gap-2 font-medium hover:underline"
-            href={`/posts/${category.attributes.slug}`}
-          >
-            <TagIcon className="h-4 w-4" aria-label="Category" />
-            {category.attributes.title}
-          </Link>
-        </div>
-      </div>
-      <DynamicZone sections={post.attributes.sections || []} />
+        <DynamicZone sections={post.attributes.sections || []} />
+      </article>
     </Main>
   );
 }

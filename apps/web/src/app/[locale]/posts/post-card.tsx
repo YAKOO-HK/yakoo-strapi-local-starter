@@ -21,41 +21,47 @@ export function PostCard({
 }) {
   const { id, attributes } = post;
   return (
-    <Card key={id}>
-      <CardHeader>
-        <Link href={`/posts/${categorySlug}/${attributes.slug}`} prefetch={false}>
-          <CardTitle>{attributes.title}</CardTitle>
-        </Link>
-        <CardDescription>
-          <time dateTime={attributes.publishedAt} className="inline-flex items-center">
-            <CalendarIcon className="mr-2 h-4 w-4" aria-hidden="true" />
-            <span className="sr-only">Published on </span>
-            {parseISO(attributes.publishedAt).toLocaleDateString(locale, { dateStyle: 'long' })}
-          </time>
-        </CardDescription>
-      </CardHeader>
-      <Link href={`/posts/${categorySlug}/${attributes.slug}`} prefetch={false}>
-        <Image
-          loader={StrapiImageLoader}
-          src={attributes.image.data.attributes.url}
-          alt={attributes.image.data.attributes.alternativeText || ''}
-          width={attributes.image.data.attributes.width}
-          height={attributes.image.data.attributes.height}
-          placeholder={attributes.image.data.attributes.placeholder || 'empty'}
-        />
-      </Link>
-      <CardContent className="p-6">
-        <p className="whitespace-pre-wrap text-justify">{attributes.abstract}</p>
-      </CardContent>
-      <CardFooter>
+    <article data-post-id={id}>
+      <Card>
+        <CardHeader>
+          <Link href={`/posts/${categorySlug}/${attributes.slug}`} prefetch={false}>
+            <CardTitle>{attributes.title}</CardTitle>
+          </Link>
+          <CardDescription>
+            <time dateTime={attributes.publishedAt} className="inline-flex items-center gap-2">
+              <CalendarIcon className="h-4 w-4" aria-label="Published on" />
+              {parseISO(attributes.publishedAt).toLocaleDateString(locale, { dateStyle: 'long' })}
+            </time>
+          </CardDescription>
+        </CardHeader>
         <Link
           href={`/posts/${categorySlug}/${attributes.slug}`}
-          className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}
           prefetch={false}
+          rel="nofollow" // we have a page link on header already
         >
-          Read more
+          <Image
+            loader={StrapiImageLoader}
+            src={attributes.image.data.attributes.url}
+            alt={attributes.image.data.attributes.alternativeText || ''}
+            width={attributes.image.data.attributes.width}
+            height={attributes.image.data.attributes.height}
+            placeholder={attributes.image.data.attributes.placeholder || 'empty'}
+          />
         </Link>
-      </CardFooter>
-    </Card>
+        <CardContent className="p-6">
+          <p className="whitespace-pre-wrap text-justify">{attributes.abstract}</p>
+        </CardContent>
+        <CardFooter>
+          <Link
+            href={`/posts/${categorySlug}/${attributes.slug}`}
+            className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}
+            prefetch={false}
+            rel="nofollow" // we have a page link on header already
+          >
+            Read more
+          </Link>
+        </CardFooter>
+      </Card>
+    </article>
   );
 }
