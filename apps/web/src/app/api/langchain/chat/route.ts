@@ -80,20 +80,9 @@ export async function POST(req: Request) {
       context: async () => {
         const relevantDocs = await retriever.getRelevantDocuments(lastMessage.content);
         const serialized = formatDocumentsAsString(relevantDocs);
-        console.log('context', serialized);
+        // console.log('context', serialized);
         return serialized;
       },
-      // chat_history: async () => {
-      //   const history = [];
-      //   for (const message of messages) {
-      //     if (message.role === 'user') {
-      //       history.push(`User: ${message.content}`);
-      //     } else if (message.role === 'assistant') {
-      //       history.push(`Assistant: ${message.content}`);
-      //     }
-      //   }
-      //   return history.join('\n');
-      // },
     },
     prompt,
     llm,
