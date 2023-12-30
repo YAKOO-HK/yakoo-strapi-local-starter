@@ -27,8 +27,10 @@ function getEmbedding() {
         }
       ),
       llm: new OpenAI({
-        modelName: 'gpt-3.5-turbo-instruct', // Defaults to "gpt-3.5-turbo-instruct" if no model provided.
-        temperature: 0.9,
+        modelName: 'gpt-3.5-turbo',
+        temperature: 0.8,
+        maxTokens: 512,
+        streaming: true,
         openAIApiKey: env.OPENAI_API_KEY, // In Node.js defaults to process.env.OPENAI_API_KEY
       }),
     };
@@ -54,6 +56,8 @@ function getEmbedding() {
     llm: new Bedrock({
       model: 'meta.llama2-13b-chat-v1',
       region: env.AWS_REGION,
+      temperature: 0.8,
+      maxTokens: 512,
       credentials: {
         accessKeyId: env.AWS_ACCESS_KEY_ID,
         secretAccessKey: env.AWS_SECRET_ACCESS_KEY,

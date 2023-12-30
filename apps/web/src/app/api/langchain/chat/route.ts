@@ -2,7 +2,12 @@ import { NextResponse } from 'next/server';
 import { env } from 'process';
 import { StreamingTextResponse } from 'ai';
 import { experimental_buildLlama2Prompt as buildLlama2Prompt } from 'ai/prompts';
-import { ChatPromptTemplate, PromptTemplate } from 'langchain/prompts';
+import {
+  ChatMessagePromptTemplate,
+  ChatPromptTemplate,
+  PromptTemplate,
+  SystemMessagePromptTemplate,
+} from 'langchain/prompts';
 import { BytesOutputParser } from 'langchain/schema/output_parser';
 import { RunnableSequence } from 'langchain/schema/runnable';
 import { formatDocumentsAsString } from 'langchain/util/document';
@@ -24,31 +29,38 @@ const MessagesSchema = z.object({
 });
 type ChatMessage = UnwrapArray<z.infer<typeof MessagesSchema>['messages']>;
 
-const SYSTEM_INSTRUCTION = {
-  role: 'system',
-  content:
-    'You are a helpful and honest assistant. You can only speak English and never answer in other language. Always answer in shortest possible way, skip all the unnecessary words. ' +
-    `Use the following pieces of context to answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer.:\n{context}`,
-} as const;
-
 // TODO: move this to @/lib/typesense
 function getPrompt(messages: ChatMessage[]) {
   if (env.TYPESENSE_EMBEDDINGS_PROVIDER === 'openai') {
     return ChatPromptTemplate.fromMessages([
-      ['system', SYSTEM_INSTRUCTION.content],
+      SystemMessagePromptTemplate.fromTemplate(
+        'You are a helpful and honest assistant. Always answer in shortest possible way, skip all the unnecessary words. ' +
+          `Use the following pieces of context answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer.` +
+          `Context:\n{context}`
+      ),
       ...(messages
         .map((message) => {
-          if (message.role === 'assistant') {
-            return ['assistant', message.content];
-          } else if (message.role === 'user') {
-            return ['user', message.content];
+          if (message.role === 'user') {
+            return ChatMessagePromptTemplate.fromTemplate(message.content, 'user');
+          } else if (message.role === 'assistant') {
+            return ChatMessagePromptTemplate.fromTemplate(message.content, 'assistant');
           }
           return null;
         })
-        .filter((x) => !!x) as [string, string][]),
+        .filter(Boolean) as ChatMessagePromptTemplate[]),
     ]);
   }
-  return PromptTemplate.fromTemplate(buildLlama2Prompt([SYSTEM_INSTRUCTION, ...messages]));
+  return PromptTemplate.fromTemplate(
+    buildLlama2Prompt([
+      {
+        role: 'system',
+        content:
+          'You are a helpful and honest assistant. You can only speak English and never answer in other language. Keep the answer short and precise, skip all the unnecessary words. ' +
+          `Use the following pieces of context to answer the question at the end but they may or may not relevant to the question. Only pick relevant information. If you don't know the answer, just say that you don't know, don't try to make up an answer.:\n{context}`,
+      },
+      ...messages,
+    ])
+  );
 }
 
 export async function POST(req: Request) {
@@ -68,8 +80,20 @@ export async function POST(req: Request) {
       context: async () => {
         const relevantDocs = await retriever.getRelevantDocuments(lastMessage.content);
         const serialized = formatDocumentsAsString(relevantDocs);
+        console.log('context', serialized);
         return serialized;
       },
+      // chat_history: async () => {
+      //   const history = [];
+      //   for (const message of messages) {
+      //     if (message.role === 'user') {
+      //       history.push(`User: ${message.content}`);
+      //     } else if (message.role === 'assistant') {
+      //       history.push(`Assistant: ${message.content}`);
+      //     }
+      //   }
+      //   return history.join('\n');
+      // },
     },
     prompt,
     llm,

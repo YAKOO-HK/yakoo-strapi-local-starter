@@ -166,10 +166,10 @@ export async function getPosts(locale: StrapiLocale, page: number = 1) {
   return response;
 }
 
-export async function getAllPosts() {
+export async function getAllPosts(populate: string[] = ['category']) {
   const querystring = qs.stringify(
     {
-      populate: ['category'],
+      populate,
       pagination: { pageSize: 250 }, // TODO: assume won't have so many posts, which may be a bad assumption
       sort: 'publishedAt:desc',
       locale: 'all',

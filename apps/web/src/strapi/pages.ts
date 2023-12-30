@@ -69,10 +69,10 @@ export async function getPageBySlug(slug: string) {
   return response.data[0];
 }
 
-export async function getAllPages(locale: StrapiLocale = 'en') {
+export async function getAllPages(locale: StrapiLocale | 'all' = 'en', populate?: string[]) {
   const querystring = qs.stringify(
     {
-      // populate: ['localizations'],
+      populate,
       pagination: { pageSize: 250 }, // assume we have less than 250 pages
       locale,
     },

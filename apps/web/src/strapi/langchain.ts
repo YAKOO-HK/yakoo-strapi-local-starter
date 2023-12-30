@@ -56,14 +56,15 @@ export function pageComponentToText(sections?: PageComponent[]) {
             return '';
         }
       })
-      .join('\n\n') ?? ''
+      .join('\n') ?? ''
   );
 }
 
 export function postToDocument(
   post: Pick<UnwrapArray<PostsResponse['data']>['attributes'], 'title' | 'abstract' | 'sections' | 'slug' | 'locale'>
 ) {
-  const text = post.title + '\n\n' + post.abstract + '\n\n' + pageComponentToText(post.sections);
+  const text = post.title + '\n' + post.abstract + '\n' + pageComponentToText(post.sections);
+  // console.log(text);
   return new Document({
     pageContent: text,
     metadata: {
@@ -78,7 +79,8 @@ export function postToDocument(
 export function pageToDocument(
   page: Pick<UnwrapArray<PagesResponse['data']>['attributes'], 'title' | 'sections' | 'slug' | 'locale'>
 ) {
-  const text = page.title + '\n\n' + pageComponentToText(page.sections);
+  const text = page.title + '\n' + pageComponentToText(page.sections);
+  // console.log(text);
   return new Document({
     pageContent: text,
     metadata: {

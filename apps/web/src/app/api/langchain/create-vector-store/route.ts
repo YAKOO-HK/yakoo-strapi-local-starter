@@ -15,8 +15,8 @@ export async function POST(req: NextRequest) {
   }
 
   // TODO: Implement secret key
-  const posts = await getAllPosts();
-  const pages = await getAllPages();
+  const posts = await getAllPosts(['sections']);
+  const pages = await getAllPages('all', ['sections']);
 
   // compress posts dynamic zones to string
   const documents = [
