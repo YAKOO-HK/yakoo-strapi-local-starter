@@ -24,8 +24,8 @@ export async function POST(req: NextRequest) {
     ...pages.map(({ attributes }) => pageToDocument(attributes)),
   ];
   const splitter = new RecursiveCharacterTextSplitter({
-    chunkSize: 256,
-    chunkOverlap: 24,
+    chunkSize: 500,
+    chunkOverlap: 100,
   });
   // recreate vector store
   await splitter.splitDocuments(documents).then((documents) => createVectorStoreWithTypesense(documents));

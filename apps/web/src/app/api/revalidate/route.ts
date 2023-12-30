@@ -1,20 +1,26 @@
 import { revalidateTag } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
-import { env } from 'process';
 import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
+import { env } from '@/env';
 import { getVectorStoreWithTypesense, typesenseClient } from '@/lib/typesense';
 import { pageToDocument, postToDocument } from '@/strapi/langchain';
 
+/**
+ * This function indexes the Strapi entry in Typesense.
+ * For this template, we demonstrate with the `post` and `page` models, each with specific logic to compress to text.
+ * TODO: consider a more generic approach
+ * @param body body of the webhook, which should be a Strapi entry
+ */
 async function indexTypesense(body: any) {
   const vectorStore = await getVectorStoreWithTypesense();
   if (['entry.create', 'entry.update', 'entry.delete', 'entry.publish', 'entry.unpublish'].includes(body.event)) {
     const splitter = new RecursiveCharacterTextSplitter({
-      chunkSize: 256,
-      chunkOverlap: 24,
+      chunkSize: 500,
+      chunkOverlap: 100,
     });
     if (body.model === 'post' && body.entry?.slug) {
       await typesenseClient
-        .collections('langchain')
+        .collections(env.TYPESENSE_COLLECTION_NAME)
         .documents()
         .delete({
           filter_by: `slug:=${body.entry.slug} && type:=post`,
@@ -26,7 +32,7 @@ async function indexTypesense(body: any) {
       }
     } else if (body.model === 'page' && body.entry?.slug) {
       await typesenseClient
-        .collections('langchain')
+        .collections(env.TYPESENSE_COLLECTION_NAME)
         .documents()
         .delete({
           filter_by: `slug:=${body.entry.slug} && type:=page`,

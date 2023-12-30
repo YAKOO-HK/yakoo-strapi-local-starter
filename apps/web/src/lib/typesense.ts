@@ -1,35 +1,68 @@
+import { mkdirSync } from 'node:fs';
+import { join } from 'node:path';
 import { Document } from 'langchain/document';
 import { BedrockEmbeddings } from 'langchain/embeddings/bedrock';
 import { CacheBackedEmbeddings } from 'langchain/embeddings/cache_backed';
+import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
 import { Bedrock } from 'langchain/llms/bedrock';
+import { OpenAI } from 'langchain/llms/openai';
 import { LocalFileStore } from 'langchain/storage/file_system';
 import { Typesense, TypesenseConfig } from 'langchain/vectorstores/typesense';
 import { Client } from 'typesense';
 import { env } from '@/env';
-import 'server-only';
 
-const embeddings = CacheBackedEmbeddings.fromBytesStore(
-  new BedrockEmbeddings({
-    region: env.AWS_REGION,
-    credentials: {
-      accessKeyId: env.AWS_ACCESS_KEY_ID,
-      secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
-    },
-    model: 'amazon.titan-embed-text-v1', // Default value
-  }),
-  new LocalFileStore({ rootPath: env.TYPESENSE_EMBEDDINGS_CACHE_PATH }),
-  {
-    namespace: 'amazon.titan-embed-text-v1',
+function getEmbedding() {
+  if (env.TYPESENSE_EMBEDDINGS_PROVIDER === 'openai') {
+    console.log('Using OpenAI');
+    mkdirSync(join(env.TYPESENSE_EMBEDDINGS_CACHE_PATH, 'openai'), { recursive: true });
+    return {
+      embeddings: CacheBackedEmbeddings.fromBytesStore(
+        new OpenAIEmbeddings({
+          openAIApiKey: env.OPENAI_API_KEY,
+          modelName: 'text-embedding-ada-002',
+        }),
+        new LocalFileStore({ rootPath: join(env.TYPESENSE_EMBEDDINGS_CACHE_PATH, 'openai') }),
+        {
+          namespace: 'text-embedding-ada-002',
+        }
+      ),
+      llm: new OpenAI({
+        modelName: 'gpt-3.5-turbo-instruct', // Defaults to "gpt-3.5-turbo-instruct" if no model provided.
+        temperature: 0.9,
+        openAIApiKey: env.OPENAI_API_KEY, // In Node.js defaults to process.env.OPENAI_API_KEY
+      }),
+    };
   }
-);
-const llm = new Bedrock({
-  model: 'meta.llama2-13b-chat-v1',
-  region: env.AWS_REGION,
-  credentials: {
-    accessKeyId: env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
-  },
-});
+  // defaults to bedrock
+  console.log('Using AWS Bedrock');
+  mkdirSync(join(env.TYPESENSE_EMBEDDINGS_CACHE_PATH, 'bedrock'), { recursive: true });
+  return {
+    embeddings: CacheBackedEmbeddings.fromBytesStore(
+      new BedrockEmbeddings({
+        region: env.AWS_REGION,
+        credentials: {
+          accessKeyId: env.AWS_ACCESS_KEY_ID,
+          secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
+        },
+        model: 'amazon.titan-embed-text-v1', // Default value
+      }),
+      new LocalFileStore({ rootPath: join(env.TYPESENSE_EMBEDDINGS_CACHE_PATH, 'bedrock') }),
+      {
+        namespace: 'amazon.titan-embed-text-v1',
+      }
+    ),
+    llm: new Bedrock({
+      model: 'meta.llama2-13b-chat-v1',
+      region: env.AWS_REGION,
+      credentials: {
+        accessKeyId: env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
+      },
+    }),
+  };
+}
+
+const { llm, embeddings } = getEmbedding();
 
 const typesenseClient = new Client({
   nodes: [{ host: env.TYPESENSE_HOST, port: env.TYPESENSE_PORT, protocol: env.TYPESENSE_PROTOCOL }],
@@ -42,7 +75,7 @@ const typesenseVectorStoreConfig = {
   // Typesense client
   typesenseClient: typesenseClient,
   // Name of the collection to store the vectors in
-  schemaName: 'langchain',
+  schemaName: env.TYPESENSE_COLLECTION_NAME,
   // Optional column names to be used in Typesense
   columnNames: {
     // "vec" is the default name for the vector column in Typesense but you can change it to whatever you want

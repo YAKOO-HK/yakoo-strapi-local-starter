@@ -1,14 +1,14 @@
 import { typesenseClient } from '@/lib/typesense';
 
 const schema = {
-  name: 'langchain',
+  name: process.env.TYPESENSE_COLLECTION_NAME ?? 'langchain',
   fields: [
     {
       name: 'vec',
       type: 'float[]' as const,
       index: true,
       facet: false,
-      num_dim: 1536, // 'amazon.titan-embed-text-v1'
+      num_dim: 1536, // 'amazon.titan-embed-text-v1' and 'text-embedding-ada-002' both have 1536 dimensions
     },
     {
       name: 'text',
