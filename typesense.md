@@ -15,6 +15,7 @@
 | TYPESENSE_PROTOCOL              | Protocol of Typesense server  | http              |
 | TYPESENSE_API_KEY               | API key of Typesense server   |                   |
 | TYPESENSE_EMBEDDINGS_CACHE_PATH | Path of embeddings cache      | .cache/embeddings |
+| TYPESENSE_EMBEDDINGS_PROVIDER   | 'openai' or 'bedrock'         | bedrock           |
 
 3. Create the "langchain" collection in Typesense:
 
@@ -38,6 +39,14 @@ bun scripts/typesense.ts
    | AWS_ACCESS_KEY | AWS Access Key | |
    | AWS_SECRET_KEY | AWS Secret Key | |
    | AWS_REGION | AWS Region | us-east-1 |
+
+### OpenAI Setup
+
+1. Create an OpenAI account and create an API key
+2. Fill in OPENAI\_\* variables in .env file
+   | Variable | Description | default |
+   | -------------- | -------------- | --------- |
+   | OPENAI_API_KEY | OpenAI API Key | |
 
 ### Connect Typesense to your Strapi models
 

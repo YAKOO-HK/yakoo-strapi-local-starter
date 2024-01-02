@@ -104,7 +104,7 @@ pnpm dev --filter strapi
 pnpm dev --filter web
 ```
 
-### Semantics Search and Chatbot with AWS Bedrock and Typesense (POC)
+### Semantics Search and AI Chatbot with AWS Bedrock / OpenAI and Typesense (POC)
 
 [typesense.md](./typesense.md)
 
