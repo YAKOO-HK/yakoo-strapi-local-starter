@@ -16,7 +16,7 @@ function blocksToText(json: unknown): string {
     return json.toLocaleDateString();
   }
   if (Array.isArray(json)) {
-    return json.map(blocksToText).join(' ');
+    return json.map(blocksToText).join('\n');
   }
   if (typeof json === 'object') {
     return Object.entries(json)
@@ -42,7 +42,7 @@ export function pageComponentToText(sections?: PageComponent[]) {
             // console.log('sections', section.content, blocksToText(section.content));
             return blocksToText(section.content);
           case 'page-components.hero-section':
-            return section.title + ' ' + section.tagline + ' ';
+            return section.title + ' ' + section.tagline;
           case 'page-components.page-title':
             return section.title;
           case 'page-components.html':

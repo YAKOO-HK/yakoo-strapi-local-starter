@@ -6,6 +6,52 @@
     {
       "action": "plugin::content-manager.explorer.create",
       "actionParameters": {},
+      "subject": "api::chat.chat",
+      "properties": {
+        "fields": [
+          "history",
+          "name",
+          "uuid"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "actionParameters": {},
+      "subject": "api::chat.chat",
+      "properties": {},
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "api::chat.chat",
+      "properties": {
+        "fields": [
+          "history",
+          "name",
+          "uuid"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "actionParameters": {},
+      "subject": "api::chat.chat",
+      "properties": {
+        "fields": [
+          "history",
+          "name",
+          "uuid"
+        ]
+      },
+      "conditions": []
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
+      "actionParameters": {},
       "subject": "api::contact-form.contact-form",
       "properties": {
         "fields": [

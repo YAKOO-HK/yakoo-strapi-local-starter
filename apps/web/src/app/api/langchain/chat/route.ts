@@ -1,6 +1,7 @@
+import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { env } from 'process';
-import { StreamingTextResponse } from 'ai';
+import { nanoid, StreamingTextResponse } from 'ai';
 import { experimental_buildLlama2Prompt as buildLlama2Prompt } from 'ai/prompts';
 import {
   ChatMessagePromptTemplate,
@@ -8,11 +9,12 @@ import {
   PromptTemplate,
   SystemMessagePromptTemplate,
 } from 'langchain/prompts';
-import { BytesOutputParser } from 'langchain/schema/output_parser';
+import { StringOutputParser } from 'langchain/schema/output_parser';
 import { RunnableSequence } from 'langchain/schema/runnable';
 import { formatDocumentsAsString } from 'langchain/util/document';
 import { z } from 'zod';
-import { getVectorStoreWithTypesense, llm } from '@/lib/typesense';
+import { getLLM, getVectorStoreWithTypesense, llm } from '@/lib/typesense';
+import { getChatByUUID, updateChat } from '@/strapi/chat';
 import { UnwrapArray } from '@/types/helpers';
 
 const MessagesSchema = z.object({
@@ -22,14 +24,13 @@ const MessagesSchema = z.object({
         id: z.string().trim().optional(),
         content: z.string().trim(),
         role: z.enum(['user', 'system', 'assistant']),
-        createdAt: z.date().optional(),
+        createdAt: z.coerce.date().optional(),
       })
     )
     .min(1),
 });
 type ChatMessage = UnwrapArray<z.infer<typeof MessagesSchema>['messages']>;
 
-// TODO: move this to @/lib/typesense
 function getPrompt(messages: ChatMessage[]) {
   if (env.TYPESENSE_EMBEDDINGS_PROVIDER === 'openai') {
     return ChatPromptTemplate.fromMessages([
@@ -48,6 +49,7 @@ function getPrompt(messages: ChatMessage[]) {
           return null;
         })
         .filter(Boolean) as ChatMessagePromptTemplate[]),
+      ChatMessagePromptTemplate.fromTemplate('', 'assistant'),
     ]);
   }
   return PromptTemplate.fromTemplate(
@@ -63,7 +65,36 @@ function getPrompt(messages: ChatMessage[]) {
   );
 }
 
+function getStandaloneQuestionPrompt(messages: ChatMessage[]) {
+  return ChatPromptTemplate.fromMessages([
+    SystemMessagePromptTemplate.fromTemplate(
+      'Given the following conversation, rephrase the last question to be a standalone question with background information in the same language.'
+    ),
+    ...(messages
+      .map((message) => {
+        if (message.role === 'user') {
+          return ChatMessagePromptTemplate.fromTemplate(message.content, 'user');
+        } else if (message.role === 'assistant') {
+          return ChatMessagePromptTemplate.fromTemplate(message.content, 'assistant');
+        }
+        return null;
+      })
+      .filter(Boolean) as ChatMessagePromptTemplate[]),
+    ChatMessagePromptTemplate.fromTemplate('Standalone question:', 'assistant'),
+  ]);
+}
+
 export async function POST(req: Request) {
+  const uuid = cookies().get('langchain-chat-id')?.value ?? '';
+  const chatHistory = await getChatByUUID(uuid);
+  if (!chatHistory) {
+    return new NextResponse('Chat History Not Found', { status: 400 });
+  }
+  if (chatHistory.attributes.history.length >= 40) {
+    // (user + assistant) x 20 = 40
+    return new NextResponse('Limit Exceeded', { status: 400 });
+  }
+
   // Extract the `prompt` from the body of the request
   const data = MessagesSchema.safeParse(await req.json());
   if (!data.success) {
@@ -71,14 +102,20 @@ export async function POST(req: Request) {
   }
 
   const { messages } = data.data; // TODO: pick only last 5 messages?
-  const lastMessage = messages.slice(-1)[0]!;
+
+  let question = messages.slice(-1)[0]!.content;
+  if (env.TYPESENSE_CONVERSATIONAL_RETRIEVAL_QA_ENABLED && messages.length > 1) {
+    question = await getLLM({ streaming: false }).call(await getStandaloneQuestionPrompt(messages).format({}));
+    // console.log({ question });
+  }
   const vectorStore = await getVectorStoreWithTypesense();
   const retriever = vectorStore.asRetriever(5); // pick 5 top relevant documents
   const prompt = getPrompt(messages);
   const chain = RunnableSequence.from([
     {
+      userName: () => chatHistory.attributes.name,
       context: async () => {
-        const relevantDocs = await retriever.getRelevantDocuments(lastMessage.content);
+        const relevantDocs = await retriever.getRelevantDocuments(question);
         const serialized = formatDocumentsAsString(relevantDocs);
         // console.log('context', serialized);
         return serialized;
@@ -86,8 +123,27 @@ export async function POST(req: Request) {
     },
     prompt,
     llm,
-    new BytesOutputParser(),
+    new StringOutputParser(),
   ]);
-  const stream = await chain.stream({});
+  const stream = await chain.stream(
+    {},
+    {
+      callbacks: [
+        {
+          async handleChainEnd(outputs, runId, parentRunId) {
+            // console.log({ runId, parentRunId, outputs: JSON.stringify(outputs) });
+            // check that main chain (without parent) is finished:
+            if (parentRunId == null) {
+              // console.log(JSON.stringify(outputs));
+              await updateChat(chatHistory.id, [
+                ...messages.map((message) => ({ ...message, id: message.id || nanoid() })),
+                { id: nanoid(), role: 'assistant', content: outputs.output, createdAt: new Date() },
+              ]);
+            }
+          },
+        },
+      ],
+    }
+  );
   return new StreamingTextResponse(stream);
 }

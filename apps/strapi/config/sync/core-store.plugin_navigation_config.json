@@ -22,7 +22,7 @@
         "Page"
       ]
     },
-    "i18nEnabled": false,
+    "i18nEnabled": true,
     "pruneObsoleteI18nNavigations": false,
     "pathDefaultFields": {
       "api::page.page": [

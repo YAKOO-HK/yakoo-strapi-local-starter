@@ -13,6 +13,7 @@
         "STRAPI_*",
         "TYPESENSE_*",
         "AWS_*",
+        "HCAPTCHA_*",
         "*_API_KEY"
       ]
     },

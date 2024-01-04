@@ -3,10 +3,12 @@ import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import Script from 'next/script';
 import { unstable_setRequestLocale } from 'next-intl/server';
+import { AskAi } from '@/components/AskAi';
 import { BackToTopButton } from '@/components/layout/BackToTopButton';
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
 import { SkipToMain } from '@/components/layout/SkipToMain';
+import { LdJson } from '@/components/ldjson/ldjson';
 import { Toaster } from '@/components/ui/toaster';
 import { env } from '@/env';
 import { cn } from '@/lib/utils';
@@ -15,8 +17,6 @@ import { getMainNavigation } from '@/strapi/navigation';
 import { getSiteMetadata } from '@/strapi/site-metadata';
 import { getOpenGraphImage, StrapiLocale } from '@/strapi/strapi';
 import '../global.css';
-import { AskAi } from '@/components/AskAi';
-import { LdJson } from '@/components/ldjson/ldjson';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 

@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "chats",
+  "info": {
+    "singularName": "chat",
+    "pluralName": "chats",
+    "displayName": "Chat",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "history": {
+      "type": "json",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "uuid": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    }
+  }
+}
