@@ -7,15 +7,16 @@
 1. Install Typesense server locally: (https://typesense.org/docs/guide/install-typesense.html#option-2-local-machine-self-hosting)
 2. Fill in TYPESENSE\_\* variables in .env file
 
-| Variable                        | Description                   | default           |
-| ------------------------------- | ----------------------------- | ----------------- |
-| TYPESENSE_ENABLED               | Enable Semantic Search and AI | false             |
-| TYPESENSE_HOST                  | Host of Typesense server      | localhost         |
-| TYPESENSE_PORT                  | Port of Typesense server      | 8108              |
-| TYPESENSE_PROTOCOL              | Protocol of Typesense server  | http              |
-| TYPESENSE_API_KEY               | API key of Typesense server   |                   |
-| TYPESENSE_EMBEDDINGS_CACHE_PATH | Path of embeddings cache      | .cache/embeddings |
-| TYPESENSE_EMBEDDINGS_PROVIDER   | 'openai' or 'bedrock'         | bedrock           |
+| Variable                                      | Description                                                              | default           |
+| --------------------------------------------- | ------------------------------------------------------------------------ | ----------------- |
+| TYPESENSE_ENABLED                             | Enable Semantic Search and AI                                            | false             |
+| TYPESENSE_HOST                                | Host of Typesense server                                                 | localhost         |
+| TYPESENSE_PORT                                | Port of Typesense server                                                 | 8108              |
+| TYPESENSE_PROTOCOL                            | Protocol of Typesense server                                             | http              |
+| TYPESENSE_API_KEY                             | API key of Typesense server                                              |                   |
+| TYPESENSE_EMBEDDINGS_CACHE_PATH               | Path of embeddings cache                                                 | .cache/embeddings |
+| TYPESENSE_EMBEDDINGS_PROVIDER                 | 'openai' or 'bedrock'                                                    | bedrock           |
+| TYPESENSE_CONVERSATIONAL_RETRIEVAL_QA_ENABLED | Rephrase chat history to a standalone question for VectorStore Retrieval | false             |
 
 3. Create the "langchain" collection in Typesense:
 
@@ -57,10 +58,3 @@ bun scripts/typesense.ts
 ```bash
 curl -H "x-internal-api-secret: XXXXX" -X POST http://localhost:3000/api/langchain/create-vector-store
 ```
-
-## TODO
-
-Limit Chatbot API
-
-- Rate Limit by IP and/or Session Cookie
-- Add CAPTCHA to prevent abuse

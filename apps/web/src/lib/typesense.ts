@@ -11,62 +11,64 @@ import { Typesense, TypesenseConfig } from 'langchain/vectorstores/typesense';
 import { Client } from 'typesense';
 import { env } from '@/env';
 
-function getEmbedding() {
+export function getEmbedding() {
   if (env.TYPESENSE_EMBEDDINGS_PROVIDER === 'openai') {
-    console.log('Using OpenAI');
     mkdirSync(join(env.TYPESENSE_EMBEDDINGS_CACHE_PATH, 'openai'), { recursive: true });
-    return {
-      embeddings: CacheBackedEmbeddings.fromBytesStore(
-        new OpenAIEmbeddings({
-          openAIApiKey: env.OPENAI_API_KEY,
-          modelName: 'text-embedding-ada-002',
-        }),
-        new LocalFileStore({ rootPath: join(env.TYPESENSE_EMBEDDINGS_CACHE_PATH, 'openai') }),
-        {
-          namespace: 'text-embedding-ada-002',
-        }
-      ),
-      llm: new OpenAI({
-        modelName: 'gpt-3.5-turbo-1106',
-        temperature: 0.8,
-        maxTokens: 512,
-        streaming: true,
-        openAIApiKey: env.OPENAI_API_KEY, // In Node.js defaults to process.env.OPENAI_API_KEY
+    return CacheBackedEmbeddings.fromBytesStore(
+      new OpenAIEmbeddings({
+        openAIApiKey: env.OPENAI_API_KEY,
+        modelName: 'text-embedding-ada-002',
       }),
-    };
+      new LocalFileStore({ rootPath: join(env.TYPESENSE_EMBEDDINGS_CACHE_PATH, 'openai') }),
+      {
+        namespace: 'text-embedding-ada-002',
+      }
+    );
   }
   // defaults to bedrock
-  console.log('Using AWS Bedrock');
   mkdirSync(join(env.TYPESENSE_EMBEDDINGS_CACHE_PATH, 'bedrock'), { recursive: true });
-  return {
-    embeddings: CacheBackedEmbeddings.fromBytesStore(
-      new BedrockEmbeddings({
-        region: env.AWS_REGION,
-        credentials: {
-          accessKeyId: env.AWS_ACCESS_KEY_ID,
-          secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
-        },
-        model: 'amazon.titan-embed-text-v1', // Default value
-      }),
-      new LocalFileStore({ rootPath: join(env.TYPESENSE_EMBEDDINGS_CACHE_PATH, 'bedrock') }),
-      {
-        namespace: 'amazon.titan-embed-text-v1',
-      }
-    ),
-    llm: new Bedrock({
-      model: 'meta.llama2-13b-chat-v1',
+  return CacheBackedEmbeddings.fromBytesStore(
+    new BedrockEmbeddings({
       region: env.AWS_REGION,
-      temperature: 0.8,
-      maxTokens: 512,
       credentials: {
         accessKeyId: env.AWS_ACCESS_KEY_ID,
         secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
       },
+      model: 'amazon.titan-embed-text-v1', // Default value
     }),
-  };
+    new LocalFileStore({ rootPath: join(env.TYPESENSE_EMBEDDINGS_CACHE_PATH, 'bedrock') }),
+    {
+      namespace: 'amazon.titan-embed-text-v1',
+    }
+  );
 }
 
-const { llm, embeddings } = getEmbedding();
+export function getLLM({ streaming = true }) {
+  if (env.TYPESENSE_EMBEDDINGS_PROVIDER === 'openai') {
+    return new OpenAI({
+      modelName: 'gpt-3.5-turbo-1106',
+      temperature: 0.8,
+      maxTokens: 512,
+      streaming,
+      openAIApiKey: env.OPENAI_API_KEY, // In Node.js defaults to process.env.OPENAI_API_KEY
+    });
+  }
+  // defaults to bedrock
+  return new Bedrock({
+    model: 'meta.llama2-13b-chat-v1',
+    region: env.AWS_REGION,
+    temperature: 0.8,
+    maxTokens: 512,
+    streaming,
+    credentials: {
+      accessKeyId: env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
+    },
+  });
+}
+
+const embeddings = getEmbedding();
+const llm = getLLM({ streaming: true });
 
 const typesenseClient = new Client({
   nodes: [{ host: env.TYPESENSE_HOST, port: env.TYPESENSE_PORT, protocol: env.TYPESENSE_PROTOCOL }],
