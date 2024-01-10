@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { TypesenseSearch } from '@/components/TypesenseSearch';
@@ -40,13 +41,15 @@ export async function Header({
           </div>
           <MainNavigation items={navigationItems} className="grow" />
           {env.TYPESENSE_ENABLED ? <TypesenseSearch /> : null}
-          <LanguageSwitcher
-            locales={locales.map((code) => ({
-              locale: code,
-              label: t(`locales.${code}`),
-              current: locale === code,
-            }))}
-          />
+          <Suspense>
+            <LanguageSwitcher
+              locales={locales.map((code) => ({
+                locale: code,
+                label: t(`locales.${code}`),
+                current: locale === code,
+              }))}
+            />
+          </Suspense>
         </div>
       </header>
       <header className="border-b-border flex gap-4 border-b py-2 shadow-md md:hidden">

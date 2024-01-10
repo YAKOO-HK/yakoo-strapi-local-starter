@@ -38,6 +38,7 @@ function ChatBottomAnchor({ isLoading }: { isLoading: boolean }) {
         entry?.target.scrollIntoView({ block: 'start' });
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView, isLoading]);
   return <div id="chat-anchor" ref={ref} className="h-2" />;
 }

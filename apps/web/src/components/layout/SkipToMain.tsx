@@ -3,7 +3,6 @@
 import React from 'react';
 import Link from 'next/link';
 
-// eslint-disable-next-line no-unused-vars
 function useKeyboardCallback<T>(callback: (e: React.UIEvent<T>) => unknown) {
   return React.useCallback(
     (e: React.KeyboardEvent<T>) => {
@@ -25,7 +24,7 @@ const SkipToMain = ({ target = '#main' }: { target?: `#${string}` }) => {
     (e: React.UIEvent<unknown>) => {
       e.preventDefault();
       // eslint-disable-next-line no-undef
-      let ele = document.querySelector<HTMLElement>(target);
+      const ele = document.querySelector<HTMLElement>(target);
       ele?.scrollIntoView();
       ele?.focus();
     },

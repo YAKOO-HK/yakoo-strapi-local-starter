@@ -15,7 +15,7 @@ import { env } from '@/env';
 import type { FormComponent } from '@/strapi/components';
 
 function getDefaultValues({ sections }: { sections: Array<FormComponent> }) {
-  const defaultValues: { [key: string]: any } = {
+  const defaultValues: { [key: string]: unknown } = {
     hCaptcha: '',
   };
   return sections.reduce((acc, section) => {

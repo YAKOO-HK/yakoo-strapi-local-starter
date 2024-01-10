@@ -46,7 +46,7 @@ export const ControlledDropdown = <
   labelProps,
   helperText,
   description,
-  // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   init,
   ...props
 }: ControlledDropdownProps<TFieldValues, TName>) => {

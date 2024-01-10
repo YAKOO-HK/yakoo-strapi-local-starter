@@ -8,7 +8,7 @@ export type ComponentHeroSection = {
   layout: ComponentLayout;
   title: string;
   tagline: string | null;
-  content: any | null;
+  content: any | null; // TODO: fix this
   bgColor: string | null;
   image: {
     data: StrapiMedia;

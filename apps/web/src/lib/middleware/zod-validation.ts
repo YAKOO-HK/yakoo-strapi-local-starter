@@ -3,9 +3,9 @@ import { z } from 'zod';
 
 export function withBodyValidation<T extends z.ZodSchema>(
   schema: T,
-  handler: (req: NextRequest, body: z.infer<T>, ...args: any[]) => Promise<Response> | Response
+  handler: (req: NextRequest, body: z.infer<T>, ...args: unknown[]) => Promise<Response> | Response
 ) {
-  return async function (req: NextRequest, ...args: any[]) {
+  return async function (req: NextRequest, ...args: unknown[]) {
     try {
       const json = await req.json();
       const body = await schema.parse(json);
