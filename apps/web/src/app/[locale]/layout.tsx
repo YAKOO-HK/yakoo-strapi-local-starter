@@ -1,7 +1,7 @@
 import { type Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
-import Script from 'next/script';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { unstable_setRequestLocale } from 'next-intl/server';
 import { AskAi } from '@/components/AskAi';
 import { BackToTopButton } from '@/components/layout/BackToTopButton';
@@ -42,29 +42,6 @@ export async function generateMetadata({ params }: { params: { locale: StrapiLoc
   } satisfies Metadata;
 }
 
-function GoogleAnalytics() {
-  if (!env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID) {
-    return null;
-  }
-  return (
-    <>
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID}`}
-        strategy="afterInteractive"
-      />
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-
-gtag('config', '${env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID}');
-`}
-      </Script>
-    </>
-  );
-}
-
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
@@ -88,7 +65,9 @@ export default async function LocaleLayout({
     <html lang={locale} dir="ltr">
       <body className={cn(inter.variable)}>
         <LdJson structuredData={seo.structuredData} />
-        <GoogleAnalytics />
+        {env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID ? (
+          <GoogleAnalytics gaId={env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID} />
+        ) : null}
         <SkipToMain />
         <Header logo={logo.data} navigationItems={navigationItems} locale={locale} />
         {children}
