@@ -2,6 +2,7 @@ import { type Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { GoogleAnalytics } from '@next/third-parties/google';
+import { NextIntlClientProvider } from 'next-intl';
 import { unstable_setRequestLocale } from 'next-intl/server';
 import { AskAi } from '@/components/AskAi';
 import { BackToTopButton } from '@/components/layout/BackToTopButton';
@@ -64,32 +65,34 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} dir="ltr">
       <body className={cn(inter.variable)}>
-        <LdJson structuredData={seo.structuredData} />
-        {env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID ? (
-          <GoogleAnalytics gaId={env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID} />
-        ) : null}
-        <SkipToMain />
-        <Header logo={logo.data} navigationItems={navigationItems} locale={locale} />
-        {children}
-        <Footer />
-        {env.TYPESENSE_ENABLED ? (
-          <div className="fixed bottom-2 left-2 z-10">
-            <AskAi />
-          </div>
-        ) : null}
-        <BackToTopButton />
-        <Toaster />
-        {process.env.NODE_ENV === 'development' && (
-          <div className="fixed bottom-0 right-0 z-[99999] bg-teal-200 px-2 py-1 text-sm text-teal-900">
-            Breakpoint:
-            <span className="ml-1 font-bold sm:hidden">xs</span>
-            <span className="ml-1 hidden font-bold sm:inline-block md:hidden">sm</span>
-            <span className="ml-1 hidden font-bold md:inline-block lg:hidden">md</span>
-            <span className="ml-1 hidden font-bold lg:inline-block xl:hidden">lg</span>
-            <span className="ml-1 hidden font-bold xl:inline-block 2xl:hidden">xl</span>
-            <span className="ml-1 hidden font-bold 2xl:inline-block">2xl</span>
-          </div>
-        )}
+        <NextIntlClientProvider locale={locale} messages={(await import(`@/../messages/${locale}.json`)).default}>
+          <LdJson structuredData={seo.structuredData} />
+          {env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID ? (
+            <GoogleAnalytics gaId={env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID} />
+          ) : null}
+          <SkipToMain />
+          <Header logo={logo.data} navigationItems={navigationItems} locale={locale} />
+          {children}
+          <Footer />
+          {env.TYPESENSE_ENABLED ? (
+            <div className="fixed bottom-2 left-2 z-10">
+              <AskAi />
+            </div>
+          ) : null}
+          <BackToTopButton />
+          <Toaster />
+          {process.env.NODE_ENV === 'development' && (
+            <div className="fixed bottom-0 right-0 z-[99999] bg-teal-200 px-2 py-1 text-sm text-teal-900">
+              Breakpoint:
+              <span className="ml-1 font-bold sm:hidden">xs</span>
+              <span className="ml-1 hidden font-bold sm:inline-block md:hidden">sm</span>
+              <span className="ml-1 hidden font-bold md:inline-block lg:hidden">md</span>
+              <span className="ml-1 hidden font-bold lg:inline-block xl:hidden">lg</span>
+              <span className="ml-1 hidden font-bold xl:inline-block 2xl:hidden">xl</span>
+              <span className="ml-1 hidden font-bold 2xl:inline-block">2xl</span>
+            </div>
+          )}
+        </NextIntlClientProvider>
       </body>
     </html>
   );

@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import Image from 'next/image';
-import { getTranslations } from 'next-intl/server';
+import { useTranslations } from 'next-intl';
 import { TypesenseSearch } from '@/components/TypesenseSearch';
 import { env } from '@/env';
 import { isExternalLink } from '@/lib/link';
@@ -12,7 +12,7 @@ import { LanguageSwitcher } from './LanguageSwitcher';
 import { MainNavigation } from './MainNavigation';
 import { MobileMenu } from './MobileMenu';
 
-export async function Header({
+export function Header({
   logo,
   navigationItems,
   locale,
@@ -21,7 +21,7 @@ export async function Header({
   navigationItems: NavigationItem[];
   locale: StrapiLocale;
 }) {
-  const t = await getTranslations({ locale, namespace: 'navigation' });
+  const t = useTranslations('navigation');
   return (
     <>
       <header className="border-b-border hidden border-b py-2 shadow-md md:block">

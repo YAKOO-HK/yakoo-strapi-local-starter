@@ -5,6 +5,7 @@ import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Message, useChat } from 'ai/react';
 import { MoreVerticalIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useInView } from 'react-intersection-observer';
 import { useMediaQuery } from '@/hooks/use-media-query';
 import { useZodForm } from '@/hooks/useZodForm';
@@ -52,6 +53,7 @@ function ChatUI({
   initialMessages?: Message[];
   name?: string;
 }) {
+  const t = useTranslations('layout.chatbot');
   const { messages, input, handleInputChange, handleSubmit, stop, isLoading, error } = useChat({
     id: uuid,
     api: '/api/langchain/chat',
@@ -86,16 +88,16 @@ function ChatUI({
         <Input
           value={input}
           onChange={handleInputChange}
-          placeholder="Ask AI a question"
+          placeholder={t('userInputPlaceholder')}
           className="flex-1"
           disabled={isLoading}
         />
         {isLoading ? (
           <Button variant="secondary" onClick={stop}>
-            Stop
+            {t('stop')}
           </Button>
         ) : (
-          <Button type="submit">Send</Button>
+          <Button type="submit"> {t('send')}</Button>
         )}
         <EndChatButton />
       </form>
@@ -104,6 +106,7 @@ function ChatUI({
 }
 
 function EndChatButton() {
+  const t = useTranslations('layout.chatbot');
   const queryClient = useQueryClient();
   const { mutateAsync } = useMutation({
     mutationFn: () => fetch('/api/langchain/chat/end', { method: 'POST' }).then(fetchResponseHandler()),
@@ -118,17 +121,18 @@ function EndChatButton() {
       <DropdownMenuTrigger asChild>
         <Button variant="secondary" size="icon">
           <MoreVerticalIcon className="h-4 w-4" aria-hidden />
-          <span className="sr-only">More actions</span>
+          <span className="sr-only">{t('moreActions')}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuItem onClick={() => mutateAsync()}>End Chat</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => mutateAsync()}>{t('endChat')}</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
 }
 
 function StatChatUI() {
+  const t = useTranslations('layout.chatbot');
   const queryClient = useQueryClient();
   const hCaptchaRef = useRef<HCaptcha>(null);
   const methods = useZodForm({
@@ -151,15 +155,16 @@ function StatChatUI() {
   return (
     <Form {...methods}>
       <form onSubmit={onFormSubmit} className="grid grid-cols-1 gap-2">
-        <ControlledTextField control={control} name="name" label="Tell us your name:" className="w-full" />
+        <ControlledTextField control={control} name="name" label={t('userNameLabel')} className="w-full" />
         <ControlledHCaptcha control={control} name="hCaptcha" hCaptchaRef={hCaptchaRef} />
-        <Button type="submit">Start Chat</Button>
+        <Button type="submit">{t('startChat')}</Button>
       </form>
     </Form>
   );
 }
 
 export function AskAi({ className }: { className?: string }) {
+  const t = useTranslations('layout.chatbot');
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery('(min-width: 768px)');
   const { data } = useQuery({
@@ -172,7 +177,7 @@ export function AskAi({ className }: { className?: string }) {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button className={className} variant="default" size="lg">
-            Ask AI
+            {t('title')}
           </Button>
         </DialogTrigger>
         <DialogContent
@@ -182,7 +187,7 @@ export function AskAi({ className }: { className?: string }) {
           className="px-3 sm:p-6"
         >
           <DialogHeader>
-            <DialogTitle>Ask AI</DialogTitle>
+            <DialogTitle>{t('title')}</DialogTitle>
           </DialogHeader>
           {data?.uuid ? <ChatUI uuid={data.uuid} initialMessages={data.history} name={data.name} /> : <StatChatUI />}
         </DialogContent>
@@ -193,12 +198,12 @@ export function AskAi({ className }: { className?: string }) {
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
         <Button className={className} variant="default" size="lg">
-          Ask AI
+          {t('title')}
         </Button>
       </DrawerTrigger>
       <DrawerContent key={data?.uuid ?? ''} className="">
         <DrawerHeader className="text-left">
-          <DrawerTitle>Ask AI</DrawerTitle>
+          <DrawerTitle>{t('title')}</DrawerTitle>
         </DrawerHeader>
         <div className="px-2 pb-2">
           {data?.uuid ? <ChatUI uuid={data.uuid} initialMessages={data.history} name={data.name} /> : <StatChatUI />}

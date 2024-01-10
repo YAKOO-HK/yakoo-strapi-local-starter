@@ -1,4 +1,22 @@
 {
+  "layout": {
+    "quickSearch": "Press <kbd>⌘+K</kbd> to search",
+    "quickSearchPlaceholder": "Search ...",
+    "quickSearchHeading": "Results",
+    "loading": "Loading ...",
+    "emptyResults": "No results found.",
+    "poweredBy": "Powered by <a>yakoo-strapi-local-starter</a>.",
+    "chatbot": {
+      "title": "Ask AI",
+      "userNameLabel": "Tell us your name:",
+      "userInputPlaceholder": "Ask AI a question",
+      "moreActions": "More Actions",
+      "startChat": "Start Chat",
+      "endChat": "End Chat",
+      "send": "Send",
+      "stop": "Stop"
+    }
+  },
   "navigation": {
     "locales": {
       "en": "English",
@@ -6,6 +24,7 @@
     }
   },
   "posts": {
-    "title": "Posts"
+    "title": "Posts",
+    "readMore": "Read More"
   }
 }

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Command } from 'cmdk';
 import { Loader2Icon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useDebounce } from '@/hooks/use-debounce';
 import { Link } from '@/navigation';
 import { StrapiLocale } from '@/strapi/strapi';
@@ -38,6 +39,7 @@ function ItemLink({ item }: { item: DocumentMetadata }) {
 }
 
 export function TypesenseSearch() {
+  const t = useTranslations('layout');
   const [open, setOpen] = useState(false);
   const [searchInput, setSearchInput] = useState<string>('');
   const debouncedValue = useDebounce(searchInput, 500);
@@ -67,31 +69,33 @@ export function TypesenseSearch() {
   return (
     <>
       <Button variant="ghost" onClick={() => setOpen(true)}>
-        Press{' '}
-        <kbd className="bg-muted text-muted-foreground pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium opacity-100">
-          <span className="text-xs">⌘</span>K
-        </kbd>
-        to search
+        {t.rich('quickSearch', {
+          kbd: (chunks) => (
+            <kbd className="bg-muted text-muted-foreground pointer-events-none mx-1 inline-flex h-5 select-none items-center gap-1 rounded border px-1.5 font-mono font-medium opacity-100">
+              {chunks}
+            </kbd>
+          ),
+        })}
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen} commandProps={{ shouldFilter: false }}>
-        <CommandInput placeholder="Search..." value={searchInput} onValueChange={setSearchInput} />
+        <CommandInput placeholder={t('quickSearchPlaceholder')} value={searchInput} onValueChange={setSearchInput} />
         <CommandList>
           {isFetching && (
             <Command.Loading>
               <div className="text-muted-foreground inline-flex px-4 py-6 text-center text-sm">
                 <Loader2Icon className="mr-2 h-4 w-4 animate-spin" />
-                <span>Loading …</span>
+                <span>{t('loading')}</span>
               </div>
             </Command.Loading>
           )}
-          <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Results">
+          <CommandGroup heading={t('quickSearchHeading')}>
             {data?.documents.map((item) => (
               <CommandItem key={item.slug} value={item.slug} onSelect={() => setOpen(false)}>
                 <ItemLink item={item} />
               </CommandItem>
             ))}
           </CommandGroup>
+          <CommandEmpty>{t('emptyResults')}</CommandEmpty>
         </CommandList>
       </CommandDialog>
     </>

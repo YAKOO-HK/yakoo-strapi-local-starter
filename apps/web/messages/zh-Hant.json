@@ -1,4 +1,22 @@
 {
+  "layout": {
+    "quickSearch": "按<kbd>⌘+K</kbd>搜尋",
+    "quickSearchPlaceholder": "搜尋 ...",
+    "quickSearchHeading": "搜尋結果",
+    "loading": "搜尋中 ...",
+    "emptyResults": "沒有找到相關結果",
+    "poweredBy": "由 <a>yakoo-strapi-local-starter</a> 提供支持",
+    "chatbot": {
+      "title": "問AI",
+      "userNameLabel": "告訴我們你的名字:",
+      "userInputPlaceholder": "向AI提問",
+      "moreActions": "更多操作",
+      "startChat": "開始對話",
+      "endChat": "結束對話",
+      "send": "發送",
+      "stop": "停止"
+    }
+  },
   "navigation": {
     "locales": {
       "en": "English",
@@ -6,6 +24,7 @@
     }
   },
   "posts": {
-    "title": "文章"
+    "title": "文章",
+    "readMore": "閱讀更多"
   }
 }

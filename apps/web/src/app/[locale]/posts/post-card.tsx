@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { parseISO } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
+import { getTranslations } from 'next-intl/server';
 import { buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
@@ -10,7 +11,7 @@ import { PostsResponse } from '@/strapi/posts';
 import { StrapiLocale } from '@/strapi/strapi';
 import { UnwrapArray } from '@/types/helpers';
 
-export function PostCard({
+export async function PostCard({
   post,
   locale,
   categorySlug,
@@ -19,6 +20,7 @@ export function PostCard({
   locale: StrapiLocale;
   categorySlug?: string;
 }) {
+  const t = await getTranslations({ locale, namespace: 'posts' });
   const { id, attributes } = post;
   return (
     <article data-post-id={id}>
@@ -58,7 +60,7 @@ export function PostCard({
             prefetch={false}
             rel="nofollow" // we have a page link on header already
           >
-            Read more
+            {t('readMore')}
           </Link>
         </CardFooter>
       </Card>
