@@ -1,13 +1,12 @@
 import { mkdirSync } from 'node:fs';
 import { join } from 'node:path';
-import { Document } from 'langchain/document';
-import { BedrockEmbeddings } from 'langchain/embeddings/bedrock';
+import { BedrockEmbeddings } from '@langchain/community/embeddings/bedrock';
+import { Bedrock } from '@langchain/community/llms/bedrock';
+import { Typesense, TypesenseConfig } from '@langchain/community/vectorstores/typesense';
+import { Document } from '@langchain/core/documents';
+import { OpenAI, OpenAIEmbeddings } from '@langchain/openai';
 import { CacheBackedEmbeddings } from 'langchain/embeddings/cache_backed';
-import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
-import { Bedrock } from 'langchain/llms/bedrock';
-import { OpenAI } from 'langchain/llms/openai';
 import { LocalFileStore } from 'langchain/storage/file_system';
-import { Typesense, TypesenseConfig } from 'langchain/vectorstores/typesense';
 import { Client } from 'typesense';
 import { env } from '@/env';
 
