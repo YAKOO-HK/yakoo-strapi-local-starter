@@ -1,16 +1,16 @@
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { env } from 'process';
-import { nanoid, StreamingTextResponse } from 'ai';
-import { experimental_buildLlama2Prompt as buildLlama2Prompt } from 'ai/prompts';
+import { StringOutputParser } from '@langchain/core/output_parsers';
 import {
   ChatMessagePromptTemplate,
   ChatPromptTemplate,
   PromptTemplate,
   SystemMessagePromptTemplate,
-} from 'langchain/prompts';
-import { StringOutputParser } from 'langchain/schema/output_parser';
-import { RunnableSequence } from 'langchain/schema/runnable';
+} from '@langchain/core/prompts';
+import { RunnableSequence } from '@langchain/core/runnables';
+import { nanoid, StreamingTextResponse } from 'ai';
+import { experimental_buildLlama2Prompt as buildLlama2Prompt } from 'ai/prompts';
 import { formatDocumentsAsString } from 'langchain/util/document';
 import { z } from 'zod';
 import { getLLM, getVectorStoreWithTypesense, llm } from '@/lib/typesense';
@@ -101,21 +101,20 @@ export async function POST(req: Request) {
     return NextResponse.json(data.error, { status: 400 });
   }
 
-  const { messages } = data.data; // TODO: pick only last 5 messages?
-
+  const { messages } = data.data;
   let question = messages.slice(-1)[0]!.content;
   if (env.TYPESENSE_CONVERSATIONAL_RETRIEVAL_QA_ENABLED && messages.length > 1) {
-    question = await getLLM({ streaming: false }).call(await getStandaloneQuestionPrompt(messages).format({}));
-    // console.log({ question });
+    question = await getLLM({ streaming: false }).invoke(await getStandaloneQuestionPrompt(messages).format({}));
   }
+  // console.log({ question });
   const vectorStore = await getVectorStoreWithTypesense();
   const retriever = vectorStore.asRetriever(5); // pick 5 top relevant documents
+  const relevantDocs = await retriever.getRelevantDocuments(question);
   const prompt = getPrompt(messages);
   const chain = RunnableSequence.from([
     {
       userName: () => chatHistory.attributes.name,
       context: async () => {
-        const relevantDocs = await retriever.getRelevantDocuments(question);
         const serialized = formatDocumentsAsString(relevantDocs);
         // console.log('context', serialized);
         return serialized;

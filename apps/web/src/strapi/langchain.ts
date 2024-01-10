@@ -1,6 +1,6 @@
-import { BlocksContent } from '@strapi/blocks-react-renderer';
+import type { Document } from '@langchain/core/documents';
+import type { BlocksContent } from '@strapi/blocks-react-renderer';
 import { htmlToText } from 'html-to-text';
-import { Document } from 'langchain/document';
 import { PostsResponse } from '@/strapi/posts';
 import { UnwrapArray } from '@/types/helpers';
 import { PageComponent } from './components';
