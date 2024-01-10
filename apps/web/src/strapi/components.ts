@@ -1,3 +1,4 @@
+import { BlocksContent } from '@strapi/blocks-react-renderer';
 import { StrapiMedia } from './strapi';
 
 export type ComponentLayout = 'full-width' | 'container' | 'prose';
@@ -8,7 +9,7 @@ export type ComponentHeroSection = {
   layout: ComponentLayout;
   title: string;
   tagline: string | null;
-  content: any | null; // TODO: fix this
+  content: BlocksContent | null;
   bgColor: string | null;
   image: {
     data: StrapiMedia;
@@ -29,7 +30,7 @@ export type ComponentRichText = {
   id: number;
   __component: 'page-components.rich-text';
   layout: ComponentLayout;
-  content: any; // TODO: fix this
+  content: BlocksContent;
 };
 
 export type ComponentFeatureImage = {

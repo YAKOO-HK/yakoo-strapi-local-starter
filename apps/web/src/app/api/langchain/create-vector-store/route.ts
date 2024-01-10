@@ -26,6 +26,8 @@ export async function POST(req: NextRequest) {
   const splitter = new RecursiveCharacterTextSplitter({
     chunkSize: 500,
     chunkOverlap: 100,
+    separators: ['\n\n', '  \n', '\n', '  ', ' ', ''],
+    keepSeparator: false,
   });
   // recreate vector store
   await splitter.splitDocuments(documents).then((documents) => createVectorStoreWithTypesense(documents));

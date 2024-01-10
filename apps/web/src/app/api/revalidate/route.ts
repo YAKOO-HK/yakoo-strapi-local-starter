@@ -17,6 +17,8 @@ async function indexTypesense(body: any) {
     const splitter = new RecursiveCharacterTextSplitter({
       chunkSize: 500,
       chunkOverlap: 100,
+      separators: ['\n\n', '  \n', '\n', ' ', ''],
+      keepSeparator: false,
     });
     if (body.model === 'post' && body.entry?.slug) {
       await typesenseClient
@@ -26,9 +28,10 @@ async function indexTypesense(body: any) {
           filter_by: `slug:=${body.entry.slug} && type:=post`,
         }); // delete old entries
       if (body.event !== 'entry.delete' && body.entry.publishedAt) {
-        await splitter
-          .splitDocuments([postToDocument(body.entry)])
-          .then((documents) => vectorStore.addDocuments(documents));
+        await splitter.splitDocuments([postToDocument(body.entry)]).then((documents) => {
+          // console.log('documents', documents);
+          return vectorStore.addDocuments(documents);
+        });
       }
     } else if (body.model === 'page' && body.entry?.slug) {
       await typesenseClient
