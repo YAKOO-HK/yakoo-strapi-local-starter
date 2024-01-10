@@ -1,4 +1,4 @@
-export function fetchResponseHandler<TReturn = any>() {
+export function fetchResponseHandler<TReturn = unknown>() {
   return async (response: Response): Promise<TReturn> => {
     if (response.ok) {
       return await response.json();

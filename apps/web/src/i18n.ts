@@ -1,7 +1,9 @@
 import { getRequestConfig } from 'next-intl/server';
 
-export default getRequestConfig(async ({ locale }) => {
+type GetRequestConfig = ReturnType<typeof getRequestConfig>;
+const requestConfigGetter: GetRequestConfig = getRequestConfig(async ({ locale }) => {
   return {
     messages: (await import(`../messages/${locale}.json`)).default,
   };
-}) as any; // TODO: fix type problem
+});
+export default requestConfigGetter;

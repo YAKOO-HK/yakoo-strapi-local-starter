@@ -11,6 +11,7 @@ import { pageToDocument, postToDocument } from '@/strapi/langchain';
  * TODO: consider a more generic approach
  * @param body body of the webhook, which should be a Strapi entry
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function indexTypesense(body: any) {
   const vectorStore = await getVectorStoreWithTypesense();
   if (['entry.create', 'entry.update', 'entry.delete', 'entry.publish', 'entry.unpublish'].includes(body.event)) {

@@ -13,6 +13,7 @@ function convertError(zodErrors?: z.ZodIssue[]) {
   return errors;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function handle422(e: any): Record<string, string> {
   if (e.response?.status === 422) {
     // axios status
@@ -39,6 +40,7 @@ function addServerErrors<TFieldValues extends FieldValues>(
 export type useZodFormProps<
   TZodSchema extends z.Schema,
   TFieldValues extends FieldValues = z.infer<TZodSchema>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   TContext = any,
 > = UseFormProps<TFieldValues, TContext> & {
   zodSchema: TZodSchema;
@@ -49,6 +51,7 @@ export type useZodFormProps<
 function useZodForm<
   TZodSchema extends z.Schema,
   TFieldValues extends FieldValues = z.infer<TZodSchema>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   TContext = any,
 >({ onSubmit, onError, zodSchema, ...props }: useZodFormProps<TZodSchema, TFieldValues, TContext>) {
   const { handleSubmit, setError, clearErrors, ...form } = useForm<TFieldValues, TContext>({
