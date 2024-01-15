@@ -1,3 +1,5 @@
+import { notFound } from 'next/navigation';
+
 export function fetchResponseHandler<TReturn = unknown>() {
   return async (response: Response): Promise<TReturn> => {
     if (response.ok) {
@@ -8,6 +10,9 @@ export function fetchResponseHandler<TReturn = unknown>() {
       data = await response.json();
     } catch (e) {
       // no response body
+    }
+    if (response.status === 404) {
+      notFound();
     }
     return Promise.reject({
       status: response.status,
