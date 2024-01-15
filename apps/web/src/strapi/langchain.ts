@@ -1,4 +1,4 @@
-import type { Document } from '@langchain/core/documents';
+import { Document } from '@langchain/core/documents';
 import type { BlocksContent } from '@strapi/blocks-react-renderer';
 import { htmlToText } from 'html-to-text';
 import { PostsResponse } from '@/strapi/posts';

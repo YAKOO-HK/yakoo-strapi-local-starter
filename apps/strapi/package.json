@@ -13,19 +13,19 @@
   },
   "dependencies": {
     "@ckeditor/strapi-plugin-ckeditor": "^0.0.10",
-    "@strapi/plugin-color-picker": "4.16.2",
-    "@strapi/plugin-i18n": "4.16.2",
+    "@strapi/plugin-color-picker": "4.17.0",
+    "@strapi/plugin-i18n": "4.17.0",
     "@strapi/plugin-seo": "^1.9.8",
-    "@strapi/plugin-users-permissions": "4.16.2",
-    "@strapi/provider-email-nodemailer": "4.16.2",
-    "@strapi/provider-upload-local": "4.16.2",
-    "@strapi/strapi": "4.16.2",
+    "@strapi/plugin-users-permissions": "4.17.0",
+    "@strapi/provider-email-nodemailer": "4.17.0",
+    "@strapi/provider-upload-local": "4.17.0",
+    "@strapi/strapi": "4.17.0",
     "axios": "^1.6.5",
     "mysql2": "^3.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "5.3.4",
-    "sharp": "^0.33.1",
+    "sharp": "^0.33.2",
     "strapi-plugin-config-sync": "^1.2.3",
     "strapi-plugin-ezforms": "^0.1.7",
     "strapi-plugin-local-image-sharp": "^1.7.0",
@@ -47,7 +47,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@strapi/typescript-utils": "^4.16.2",
-    "@types/node": "^20.10.8"
+    "@strapi/typescript-utils": "4.17.0",
+    "@types/node": "^20.11.2"
   }
 }
