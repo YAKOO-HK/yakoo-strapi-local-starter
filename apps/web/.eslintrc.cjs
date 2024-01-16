@@ -12,7 +12,7 @@ module.exports = {
     'tailwindcss/no-custom-classname': 'off',
     '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
   },
-  ignorePatterns: ['*.config.js', 'node_modules/'],
+  ignorePatterns: ['*.config.js', '*.cjs', 'node_modules/'],
   settings: {
     tailwindcss: {
       callees: ['cn', 'clsx'],

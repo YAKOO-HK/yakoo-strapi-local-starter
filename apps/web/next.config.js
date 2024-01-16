@@ -1,4 +1,9 @@
-const withNextIntl = require('next-intl/plugin')();
+import withNextIntl from 'next-intl/plugin';
 
-/** @type {import('next').NextConfig} */
-module.exports = withNextIntl({});
+export default withNextIntl()({
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
+});
