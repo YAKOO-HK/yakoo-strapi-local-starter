@@ -2,7 +2,7 @@ import { type Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { GoogleAnalytics } from '@next/third-parties/google';
-import { NextIntlClientProvider } from 'next-intl';
+import { NextIntlClientProvider, useMessages } from 'next-intl';
 import { unstable_setRequestLocale } from 'next-intl/server';
 import { AskAi } from '@/components/AskAi';
 import { BackToTopButton } from '@/components/layout/BackToTopButton';
@@ -47,6 +47,16 @@ export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
+function IntlProvider({ locale, children }: { locale: StrapiLocale; children: React.ReactNode }) {
+  unstable_setRequestLocale(locale);
+  const messages = useMessages();
+  return (
+    <NextIntlClientProvider key={locale} locale={locale} messages={messages}>
+      {children}
+    </NextIntlClientProvider>
+  );
+}
+
 export default async function LocaleLayout({
   children,
   params,
@@ -60,12 +70,10 @@ export default async function LocaleLayout({
   unstable_setRequestLocale(params.locale);
   const { logo, locale, seo } = await getSiteMetadata(params.locale);
   const navigationItems = await getMainNavigation(params.locale);
-
-  // console.log(data);
   return (
     <html lang={locale} dir="ltr">
       <body className={cn(inter.variable)}>
-        <NextIntlClientProvider locale={locale} messages={(await import(`@/../messages/${locale}.json`)).default}>
+        <IntlProvider locale={locale}>
           <LdJson structuredData={seo.structuredData} />
           {env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID ? (
             <GoogleAnalytics gaId={env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID} />
@@ -92,7 +100,7 @@ export default async function LocaleLayout({
               <span className="ml-1 hidden font-bold 2xl:inline-block">2xl</span>
             </div>
           )}
-        </NextIntlClientProvider>
+        </IntlProvider>
       </body>
     </html>
   );
