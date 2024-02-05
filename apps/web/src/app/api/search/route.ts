@@ -1,13 +1,17 @@
+import { unstable_noStore } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
-import { uniqBy } from 'lodash-es';
+import type { Document } from 'langchain/document';
+import { merge, uniqBy } from 'lodash-es';
+import { env } from '@/env';
 import { rateLimitByIp } from '@/lib/rate-limit';
-import { getVectorStoreWithTypesense } from '@/lib/typesense';
+import { getVectorStoreWithTypesense, typesenseClient } from '@/lib/typesense';
 
 const LIMIT = 1;
 const TTL = 1000; // 1 seconds
 const rateLimit = rateLimitByIp(LIMIT, TTL);
 
 export async function GET(req: NextRequest) {
+  unstable_noStore();
   const searchParams = req.nextUrl.searchParams;
   const query = searchParams.get('q');
   if (!query) {
@@ -27,11 +31,40 @@ export async function GET(req: NextRequest) {
   }
 
   const vectorStore = await getVectorStoreWithTypesense();
-  const documents = await vectorStore.similaritySearch(query, undefined, { per_page: 10 });
+  const documentsSimilar = await vectorStore.similaritySearch(query, undefined, { per_page: 10 });
+  const documentsText = await typesenseClient.multiSearch
+    .perform<{ text: string; slug: string; title: string; locale: string; type: string }[]>({
+      searches: [
+        {
+          collection: env.TYPESENSE_COLLECTION_NAME,
+          q: query,
+          query_by: ['text', 'title'],
+          per_page: 10,
+        },
+      ],
+    })
+    .then((response) =>
+      response.results.flatMap((result) =>
+        (result.hits ?? []).map(
+          ({ document }) =>
+            ({
+              pageContent: document.text,
+              metadata: {
+                slug: document.slug,
+                title: document.title,
+                locale: document.locale,
+                type: document.type,
+              },
+            }) as Document
+        )
+      )
+    );
+
+  // console.log({ query, documentsText, documentsSimilar });
   return NextResponse.json(
     {
       documents: uniqBy(
-        documents.map((document) => document.metadata),
+        merge(documentsText, documentsSimilar).map((document) => document.metadata),
         'slug'
       ),
     },
