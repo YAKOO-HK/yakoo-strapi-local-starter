@@ -1,7 +1,7 @@
 import { unstable_noStore } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 import type { Document } from 'langchain/document';
-import { merge, uniqBy } from 'lodash-es';
+import { uniqBy } from 'lodash-es';
 import { env } from '@/env';
 import { rateLimitByIp } from '@/lib/rate-limit';
 import { getVectorStoreWithTypesense, typesenseClient } from '@/lib/typesense';
@@ -64,7 +64,7 @@ export async function GET(req: NextRequest) {
   return NextResponse.json(
     {
       documents: uniqBy(
-        merge(documentsText, documentsSimilar).map((document) => document.metadata),
+        [...documentsText, ...documentsSimilar].map((document) => document.metadata),
         'slug'
       ),
     },
