@@ -16,11 +16,11 @@ export function getEmbedding() {
     return CacheBackedEmbeddings.fromBytesStore(
       new OpenAIEmbeddings({
         openAIApiKey: env.OPENAI_API_KEY,
-        modelName: 'text-embedding-ada-002',
+        modelName: 'text-embedding-3-small',
       }),
       new LocalFileStore({ rootPath: join(env.TYPESENSE_EMBEDDINGS_CACHE_PATH, 'openai') }),
       {
-        namespace: 'text-embedding-ada-002',
+        namespace: 'text-embedding-3-small',
       }
     );
   }
