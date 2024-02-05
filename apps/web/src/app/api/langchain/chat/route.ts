@@ -35,8 +35,8 @@ function getPrompt(messages: ChatMessage[]) {
   if (env.TYPESENSE_EMBEDDINGS_PROVIDER === 'openai') {
     return ChatPromptTemplate.fromMessages([
       SystemMessagePromptTemplate.fromTemplate(
-        'You are a helpful and honest assistant. Always answer in shortest possible way, skip all the unnecessary words. ' +
-          `Use the following pieces of context answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer.` +
+        'You are a helpful and honest assistant. Always answer in shortest possible way, skip all the unnecessary words.\n' +
+          `Use the following pieces of context answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer. \n` +
           `Context:\n{context}`
       ),
       ...(messages
