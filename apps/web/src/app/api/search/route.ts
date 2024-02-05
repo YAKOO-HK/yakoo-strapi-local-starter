@@ -38,7 +38,7 @@ export async function GET(req: NextRequest) {
         {
           collection: env.TYPESENSE_COLLECTION_NAME,
           q: query,
-          query_by: ['text', 'title'],
+          query_by: 'text,title',
           per_page: 10,
         },
       ],
