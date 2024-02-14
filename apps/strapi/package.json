@@ -29,7 +29,7 @@
     "strapi-plugin-config-sync": "^1.2.3",
     "strapi-plugin-ezforms": "^0.1.7",
     "strapi-plugin-local-image-sharp": "^1.7.0",
-    "strapi-plugin-navigation": "^2.3.2",
+    "strapi-plugin-navigation": "^2.4.0",
     "strapi-plugin-placeholder": "^4.4.0",
     "strapi-plugin-publisher": "^1.5.7",
     "strapi-plugin-rest-cache": "^4.2.8",
@@ -48,6 +48,6 @@
   "license": "MIT",
   "devDependencies": {
     "@strapi/typescript-utils": "4.19.1",
-    "@types/node": "^20.11.14"
+    "@types/node": "^20.11.17"
   }
 }
