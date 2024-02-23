@@ -118,6 +118,7 @@ pnpm dev --filter web
 | @strapi/provider-email-nodemailer | Official EmailProvider (NodeMailer)     | Use SMTP so no vendor lock-in                                     |
 | @strapi/provider-upload-local     | Official Local Upload Provider          | Use local storage for upload                                      |
 | @strapi/plugin-color-picker       | Official Color Picker                   |                                                                   |
+| strapi-plugin-publisher           | Scheduled Publish/Unpublish Content     |                                                                   |
 | strapi-plugin-local-image-sharp   | Image Optimization                      | For image optimization in NextJS Image and cache in local storage |
 | strapi-plugin-placeholder         | Generate image blurHash                 | Generate image placeholder for NextJS Image                       |
 | strapi-plugin-rest-cache          | Cache REST API response                 | (Optional) Deep populate can be costly.                           |
