@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { ComponentFeatureImage } from '@/strapi/components';
+import { ComponentFeatureImage, DynamicZoneSectionProps } from '@/strapi/components';
 import { StrapiImageLoader } from '@/strapi/image-loader';
 
-export function FeatureImageSection({ as, layout, image }: ComponentFeatureImage & { as: 'section' | 'div' }) {
+export function FeatureImageSection({ as, layout, image }: ComponentFeatureImage & DynamicZoneSectionProps) {
   const Component = as;
   return (
     <Component

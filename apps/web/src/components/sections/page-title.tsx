@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { ComponentPageTitle } from '@/strapi/components';
+import { ComponentPageTitle, DynamicZoneSectionProps } from '@/strapi/components';
 import { typographyVariants } from '../ui/typography';
 
 export function PageTitleSection({
@@ -7,7 +7,7 @@ export function PageTitleSection({
   layout,
   title,
   className,
-}: Omit<ComponentPageTitle, 'id' | '__component'> & { as?: 'section' | 'div'; className?: string }) {
+}: Omit<ComponentPageTitle, 'id' | '__component'> & DynamicZoneSectionProps & {className?:string}) {
   const Component = as;
   return (
     <Component

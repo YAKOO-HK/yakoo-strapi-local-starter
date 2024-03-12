@@ -21,7 +21,7 @@ export default async function Home({ params }: { params: { locale: StrapiLocale 
   const { attributes } = await getHomepage(params.locale);
   return (
     <Main>
-      <DynamicZone sections={attributes.sections} />
+      <DynamicZone sections={attributes.sections} locale={params.locale} />
     </Main>
   );
 }

@@ -59,8 +59,9 @@ function LinksToOtherLocale({
 }) {
   return localizations.map(({ id, attributes }) => (
     <Link
-      href={`/posts/${categoryLocalizations.find((category) => category.attributes.locale === attributes.locale)
-        ?.attributes.slug}/${attributes.slug}`} // TODO category
+      href={`/posts/${
+        categoryLocalizations.find((category) => category.attributes.locale === attributes.locale)?.attributes.slug
+      }/${attributes.slug}`} // TODO category
       hrefLang={attributes.locale}
       locale={attributes.locale}
       className={cn(buttonVariants({ variant: 'outline' }))}
@@ -137,7 +138,7 @@ export default async function SinglePostPage({
             </Link>
           </div>
         </div>
-        <DynamicZone sections={post.attributes.sections || []} />
+        <DynamicZone sections={post.attributes.sections || []} locale={params.locale} />
       </article>
     </Main>
   );

@@ -5,7 +5,7 @@ import { buttonVariants } from '@/components/ui/button';
 import { StrapiRichtext } from '@/components/ui/strapi-richtext';
 import { typographyVariants } from '@/components/ui/typography';
 import { cn } from '@/lib/utils';
-import { ComponentHeroSection } from '@/strapi/components';
+import { ComponentHeroSection, DynamicZoneSectionProps } from '@/strapi/components';
 import { StrapiImageLoader } from '@/strapi/image-loader';
 
 export function HeroSection({
@@ -19,9 +19,8 @@ export function HeroSection({
   buttonText,
   content,
   arrangement,
-}: ComponentHeroSection & { as: 'section' | 'div' }) {
+}: ComponentHeroSection & DynamicZoneSectionProps) {
   const Component = as;
-  // console.log({ arrangement });
   return (
     <Component
       className={cn('text-foreground flex flex-col items-center md:flex-row', {

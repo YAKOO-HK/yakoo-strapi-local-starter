@@ -1,5 +1,10 @@
 import { BlocksContent } from '@strapi/blocks-react-renderer';
-import { StrapiMedia } from './strapi';
+import { StrapiLocale, StrapiMedia } from './strapi';
+
+export interface DynamicZoneSectionProps {
+  as: 'div' | 'section';
+  locale: StrapiLocale;
+}
 
 export type ComponentLayout = 'full-width' | 'container' | 'prose';
 

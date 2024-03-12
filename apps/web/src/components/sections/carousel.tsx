@@ -8,7 +8,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { cn } from '@/lib/utils';
-import { ComponentCarousel, ComponentSlide } from '@/strapi/components';
+import { ComponentCarousel, ComponentSlide, DynamicZoneSectionProps } from '@/strapi/components';
 import { StrapiImageLoader } from '@/strapi/image-loader';
 import { typographyVariants } from '../ui/typography';
 
@@ -40,7 +40,7 @@ function Slide({ image, title, caption }: Omit<ComponentSlide, 'link' | 'id' | '
   );
 }
 
-export function CarouselSection({ as, slides, layout }: ComponentCarousel & { as: 'section' | 'div' }) {
+export function CarouselSection({ as, slides, layout }: ComponentCarousel & DynamicZoneSectionProps) {
   const Component = as;
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 5000, stopOnMouseEnter: true })]);
   const [label, setLabel] = useState('');

@@ -52,7 +52,7 @@ export default async function SinglePagePage({ params }: { params: { pageSlug: s
     <Main>
       <SingleBreadcrumbLdJson itemList={[{ name: page.attributes.title }]} />
       <LdJson structuredData={page.attributes.seo?.structuredData} />
-      <DynamicZone sections={page.attributes.sections || []} />
+      <DynamicZone sections={page.attributes.sections || []} locale={params.locale} />
     </Main>
   );
 }

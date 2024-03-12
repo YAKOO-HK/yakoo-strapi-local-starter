@@ -5,13 +5,13 @@ import Image from 'next/image';
 import PhotoAlbum from 'react-photo-album';
 import Lightbox from 'yet-another-react-lightbox';
 import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
-import { ComponentGallery } from '@/strapi/components';
+import { ComponentGallery, DynamicZoneSectionProps } from '@/strapi/components';
 import { StrapiImageLoader, StrapiRawImageLoader } from '@/strapi/image-loader';
+import { cn } from '@/lib/utils';
 import 'yet-another-react-lightbox/styles.css';
 import 'yet-another-react-lightbox/plugins/thumbnails.css';
-import { cn } from '@/lib/utils';
 
-export default function GallerySection({ as, layout, slides }: ComponentGallery & { as: 'section' | 'div' }) {
+export default function GallerySection({ as, layout, slides }: ComponentGallery & DynamicZoneSectionProps) {
   const Component = as;
   const [index, setIndex] = useState(-1);
   return (
@@ -24,12 +24,12 @@ export default function GallerySection({ as, layout, slides }: ComponentGallery 
       <PhotoAlbum
         layout="rows"
         targetRowHeight={150}
-        photos={slides.data.map(({ attributes }, index) => {
+        photos={slides.data.map(({ attributes }, i) => {
           return {
             src: attributes.url,
             width: (150 * attributes.width) / attributes.height,
             height: 150,
-            alt: attributes.alternativeText || `Photo ${index + 1}`,
+            alt: attributes.alternativeText || `Photo ${i + 1}`,
             placeholder: (attributes.placeholder as `data:image/${string}`) || 'empty',
           };
         })}
@@ -52,13 +52,13 @@ export default function GallerySection({ as, layout, slides }: ComponentGallery 
       <Lightbox
         index={index}
         plugins={[Thumbnails]}
-        slides={slides.data.map(({ attributes }, index) => {
+        slides={slides.data.map(({ attributes }, i) => {
           return {
             type: 'image',
             src: attributes.url,
             width: attributes.width,
             height: attributes.height,
-            alt: attributes.alternativeText || `Photo ${index + 1}`,
+            alt: attributes.alternativeText || `Photo ${i + 1}`,
             placeholder: (attributes.placeholder as `data:image/${string}`) || 'empty',
           };
         })}

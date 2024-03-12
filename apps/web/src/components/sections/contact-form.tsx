@@ -1,12 +1,12 @@
 import { cn } from '@/lib/utils';
-import { ComponentContactForm } from '@/strapi/components';
+import { ComponentContactForm, DynamicZoneSectionProps } from '@/strapi/components';
 import { getContactForm } from '@/strapi/contact-form';
 import { ContactForm } from './contact-form-client';
 
 export async function ContactFormSection({
   layout,
   as = 'div',
-}: Omit<ComponentContactForm, 'id' | '__component'> & { as?: 'div' | 'section' }) {
+}: Omit<ComponentContactForm, 'id' | '__component'> & DynamicZoneSectionProps) {
   const Component = as;
   const contactForm = await getContactForm();
   return (

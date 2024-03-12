@@ -1,8 +1,8 @@
 import { StrapiRichtext } from '@/components/ui/strapi-richtext';
 import { cn } from '@/lib/utils';
-import { ComponentRichText } from '@/strapi/components';
+import { ComponentRichText, DynamicZoneSectionProps } from '@/strapi/components';
 
-export function RichTextSection({ as, layout, content }: ComponentRichText & { as: 'section' | 'div' }) {
+export function RichTextSection({ as, layout, content }: ComponentRichText & DynamicZoneSectionProps) {
   const Component = as;
   return (
     <Component

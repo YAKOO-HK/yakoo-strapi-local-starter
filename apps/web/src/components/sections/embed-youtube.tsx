@@ -1,11 +1,11 @@
 import { cn } from '@/lib/utils';
-import { ComponentEmbedYoutube } from '@/strapi/components';
+import { ComponentEmbedYoutube, DynamicZoneSectionProps } from '@/strapi/components';
 
 export function EmbedYoutubeSection({
   as,
   layout,
   url,
-}: Omit<ComponentEmbedYoutube, 'id' | '__component'> & { as: 'section' | 'div' }) {
+}: Omit<ComponentEmbedYoutube, 'id' | '__component'> & DynamicZoneSectionProps) {
   const Component = as;
   return (
     <Component
