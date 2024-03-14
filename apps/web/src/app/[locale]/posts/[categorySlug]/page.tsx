@@ -13,7 +13,7 @@ import { env } from '@/env';
 import { cn } from '@/lib/utils';
 import { Link } from '@/navigation';
 import { getPostCategoryBySlug, getPostsByCategory } from '@/strapi/posts';
-import { StrapiLocale, StrapiLocaleNames, toMetadata } from '@/strapi/strapi';
+import { StrapiLocale, toMetadata } from '@/strapi/strapi';
 import { PostCard } from '../post-card';
 
 export async function generateMetadata({ params }: { params: { locale: StrapiLocale; categorySlug: string } }) {
@@ -38,23 +38,23 @@ export async function generateMetadata({ params }: { params: { locale: StrapiLoc
   } satisfies Metadata;
 }
 
-function LinksToOtherLocale({
-  localizations,
-}: {
-  localizations: Array<{ id: number; attributes: { locale: StrapiLocale; slug: string } }>;
-}) {
-  return localizations.map(({ id, attributes }) => (
-    <Link
-      locale={attributes.locale}
-      href={`/posts/${attributes.slug}`}
-      hrefLang={attributes.locale}
-      className={cn(buttonVariants({ variant: 'outline' }))}
-      key={id}
-    >
-      {StrapiLocaleNames[attributes.locale]}
-    </Link>
-  ));
-}
+// function LinksToOtherLocale({
+//   localizations,
+// }: {
+//   localizations: Array<{ id: number; attributes: { locale: StrapiLocale; slug: string } }>;
+// }) {
+//   return localizations.map(({ id, attributes }) => (
+//     <Link
+//       locale={attributes.locale}
+//       href={`/posts/${attributes.slug}`}
+//       hrefLang={attributes.locale}
+//       className={cn(buttonVariants({ variant: 'outline' }))}
+//       key={id}
+//     >
+//       {StrapiLocaleNames[attributes.locale]}
+//     </Link>
+//   ));
+// }
 
 const ParamsSchema = z.object({ page: z.coerce.number().int().min(1).default(1) });
 export default async function PostCategoryListPage({
@@ -92,11 +92,11 @@ export default async function PostCategoryListPage({
       />
       <LdJson structuredData={category.attributes.seo?.structuredData} />
       <div className="container py-8">
-        <div className="flex justify-end">
+        {/* <div className="flex justify-end">
           {category.attributes.localizations?.data && (
             <LinksToOtherLocale localizations={category.attributes.localizations?.data} />
           )}
-        </div>
+        </div> */}
         <div className="mb-8 flex items-end">
           <h1 className={cn(typographyVariants({ variant: 'h1' }))}>{category.attributes.title}</h1>
           <Link href="/posts" className={cn(buttonVariants({ variant: 'ghost', size: 'icon' }))}>

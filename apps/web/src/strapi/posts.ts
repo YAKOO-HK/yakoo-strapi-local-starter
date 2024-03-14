@@ -85,7 +85,7 @@ export type PostsResponse = {
             title: string;
             slug: string;
           };
-        };
+        } | null;
       };
       localizations?: {
         data: Array<{

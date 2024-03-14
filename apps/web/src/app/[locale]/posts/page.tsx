@@ -49,22 +49,6 @@ export default async function PostsPage({
     <Main>
       <SingleBreadcrumbLdJson itemList={[{ name: t('title') }]} />
       <div className="container py-8">
-        <div className="flex justify-end">
-          {locale == 'en' ? (
-            <Link
-              href="/posts"
-              locale="zh-Hant"
-              className={cn(buttonVariants({ variant: 'outline' }))}
-              hrefLang="zh-Hant"
-            >
-              繁體中文
-            </Link>
-          ) : (
-            <Link href="/posts" locale="en" className={cn(buttonVariants({ variant: 'outline' }))} hrefLang="en">
-              English
-            </Link>
-          )}
-        </div>
         <div className="mb-4 flex flex-wrap items-center gap-x-4 gap-y-2">
           {categories.map(({ id, attributes }) => (
             <Link
@@ -83,7 +67,7 @@ export default async function PostsPage({
               post={post}
               key={post.id}
               locale={locale}
-              categorySlug={post.attributes.category?.data.attributes.slug}
+              categorySlug={post.attributes.category?.data?.attributes.slug ?? '-'}
             />
           ))}
         </div>

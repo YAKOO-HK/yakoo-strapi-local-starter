@@ -13,7 +13,9 @@ export async function GET(req: NextRequest) {
     if (!post) {
       return new Response(null, { status: 404 });
     }
-    return NextResponse.json(`/posts/${post.attributes.category?.data.attributes.slug}/${post.attributes.slug}`);
+    return NextResponse.json(
+      `/posts/${post.attributes.category?.data?.attributes.slug ?? '-'}/${post.attributes.slug}`
+    );
   }
   return new Response(null, { status: 404 });
 }

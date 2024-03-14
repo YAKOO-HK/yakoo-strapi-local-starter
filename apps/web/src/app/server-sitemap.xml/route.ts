@@ -32,7 +32,7 @@ export async function GET() {
     })),
     // /posts/:category/:slug
     ...hundredPosts.map(({ attributes }) => ({
-      loc: `${env.NEXT_PUBLIC_SITE_URL}/${attributes.locale}/posts/${attributes.category?.data.attributes.slug}/${attributes.slug}`,
+      loc: `${env.NEXT_PUBLIC_SITE_URL}/${attributes.locale}/posts/${attributes.category?.data?.attributes.slug ?? '-'}/${attributes.slug}`,
       lastmod: attributes.updatedAt,
       changefreq: 'weekly' as const,
     })),
