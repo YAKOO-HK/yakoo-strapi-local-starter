@@ -26,5 +26,8 @@
   "posts": {
     "title": "文章",
     "readMore": "閱讀更多"
+  },
+  "sitemap": {
+    "title": "網站地圖"
   }
 }

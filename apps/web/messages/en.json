@@ -26,5 +26,8 @@
   "posts": {
     "title": "Posts",
     "readMore": "Read More"
+  },
+  "sitemap": {
+    "title": "Sitemap"
   }
 }
