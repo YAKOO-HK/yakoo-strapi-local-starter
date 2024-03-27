@@ -56,14 +56,13 @@ function getPrompt(messages: ChatMessage[]) {
     ...(messages
       .map((message) => {
         if (message.role === 'user') {
-          return new HumanMessage(message.content); //, '\n\nHuman'
+          return new HumanMessage(message.content);
         } else if (message.role === 'assistant') {
-          return new AIMessage(message.content); //, '\n\nAssistant'
+          return new AIMessage(message.content);
         }
         return null;
       })
       .filter(Boolean) as (HumanMessage | AIMessage)[]),
-    // ChatMessagePromptTemplate.fromTemplate('', '\n\nAssistant'),
   ]);
 }
 
@@ -82,7 +81,7 @@ function getStandaloneQuestionPrompt(messages: ChatMessage[]) {
         return null;
       })
       .filter(Boolean) as (HumanMessage | AIMessage)[]),
-    // AIMessagePromptTemplate.fromTemplate('Standalone question:'),
+    new AIMessage('Standalone question: '),
   ]);
 }
 
@@ -108,7 +107,7 @@ export async function POST(req: Request) {
   if (env.TYPESENSE_CONVERSATIONAL_RETRIEVAL_QA_ENABLED && messages.length > 1) {
     question = await RunnableSequence.from([
       getStandaloneQuestionPrompt(messages),
-      getChatModel({ streaming: false, maxTokens: 256 }) as BaseChatModel,
+      getChatModel({ streaming: false, maxTokens: 256, temperature: 0.5 }) as BaseChatModel,
       new StringOutputParser(),
     ]).invoke({});
   }

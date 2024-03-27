@@ -68,11 +68,11 @@ export function getLLM({ streaming = true }) {
   });
 }
 
-export function getChatModel({ streaming = true, maxTokens = 512 }) {
+export function getChatModel({ streaming = true, maxTokens = 512, temperature = 0.8 }) {
   if (env.TYPESENSE_LLM_PROVIDER === 'openai') {
     return new ChatOpenAI({
       modelName: 'gpt-3.5-turbo-0125',
-      temperature: 0.8,
+      temperature,
       maxTokens,
       streaming,
       openAIApiKey: env.OPENAI_API_KEY, // In Node.js defaults to process.env.OPENAI_API_KEY
@@ -82,8 +82,9 @@ export function getChatModel({ streaming = true, maxTokens = 512 }) {
   return new BedrockChat({
     // model: 'meta.llama2-13b-chat-v1',
     model: 'anthropic.claude-3-haiku-20240307-v1:0',
+    // model: 'mistral.mixtral-8x7b-instruct-v0:1',
     region: env.AWS_REGION,
-    temperature: 0.8,
+    temperature,
     maxTokens,
     streaming,
     credentials: {
