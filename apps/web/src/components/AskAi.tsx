@@ -68,7 +68,7 @@ function ChatUI({
             <div className={'col-span-1 py-2 pl-2 text-right'}>{m.role === 'user' ? null : 'AI'}</div>
             <div className={cn('col-span-9 rounded-md', m.role === 'user' ? 'text-right' : '')}>
               <div
-                className={cn('inline-block rounded-lg p-2', {
+                className={cn('inline-block whitespace-pre-wrap rounded-lg p-2', {
                   'bg-slate-100': m.role !== 'user',
                   'bg-blue-700 text-white': m.role === 'user',
                 })}

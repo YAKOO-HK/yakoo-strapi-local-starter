@@ -1,10 +1,11 @@
 import { mkdirSync } from 'node:fs';
 import { join } from 'node:path';
+import { BedrockChat } from '@langchain/community/chat_models/bedrock';
 import { BedrockEmbeddings } from '@langchain/community/embeddings/bedrock';
 import { Bedrock } from '@langchain/community/llms/bedrock';
 import { Typesense, TypesenseConfig } from '@langchain/community/vectorstores/typesense';
 import { Document } from '@langchain/core/documents';
-import { OpenAI, OpenAIEmbeddings } from '@langchain/openai';
+import { ChatOpenAI, OpenAI, OpenAIEmbeddings } from '@langchain/openai';
 import { CacheBackedEmbeddings } from 'langchain/embeddings/cache_backed';
 import { LocalFileStore } from 'langchain/storage/file_system';
 import { Client } from 'typesense';
@@ -43,7 +44,7 @@ export function getEmbedding() {
 }
 
 export function getLLM({ streaming = true }) {
-  if (env.TYPESENSE_EMBEDDINGS_PROVIDER === 'openai') {
+  if (env.TYPESENSE_LLM_PROVIDER === 'openai') {
     return new OpenAI({
       modelName: 'gpt-3.5-turbo-0125',
       temperature: 0.8,
@@ -54,7 +55,8 @@ export function getLLM({ streaming = true }) {
   }
   // defaults to bedrock
   return new Bedrock({
-    model: 'meta.llama2-13b-chat-v1',
+    // model: 'meta.llama2-13b-chat-v1',
+    model: 'anthropic.claude-3-haiku-20240307-v1:0',
     region: env.AWS_REGION,
     temperature: 0.8,
     maxTokens: 512,
@@ -66,8 +68,32 @@ export function getLLM({ streaming = true }) {
   });
 }
 
+export function getChatModel({ streaming = true, maxTokens = 512 }) {
+  if (env.TYPESENSE_LLM_PROVIDER === 'openai') {
+    return new ChatOpenAI({
+      modelName: 'gpt-3.5-turbo-0125',
+      temperature: 0.8,
+      maxTokens,
+      streaming,
+      openAIApiKey: env.OPENAI_API_KEY, // In Node.js defaults to process.env.OPENAI_API_KEY
+    });
+  }
+  // defaults to bedrock
+  return new BedrockChat({
+    // model: 'meta.llama2-13b-chat-v1',
+    model: 'anthropic.claude-3-haiku-20240307-v1:0',
+    region: env.AWS_REGION,
+    temperature: 0.8,
+    maxTokens,
+    streaming,
+    credentials: {
+      accessKeyId: env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
+    },
+  });
+}
+
 const embeddings = getEmbedding();
-const llm = getLLM({ streaming: true });
 
 const typesenseClient = new Client({
   nodes: [{ host: env.TYPESENSE_HOST, port: env.TYPESENSE_PORT, protocol: env.TYPESENSE_PROTOCOL }],
@@ -103,4 +129,4 @@ const createVectorStoreWithTypesense = async (documents: Document[] = []) =>
 
 const getVectorStoreWithTypesense = async () => new Typesense(embeddings, typesenseVectorStoreConfig);
 
-export { typesenseClient, llm, createVectorStoreWithTypesense, getVectorStoreWithTypesense };
+export { typesenseClient, createVectorStoreWithTypesense, getVectorStoreWithTypesense };

@@ -37,6 +37,6 @@ const schema = {
     },
   ],
 };
-// await typesenseClient.collections('langchain').delete();
+// await typesenseClient.collections(process.env.TYPESENSE_COLLECTION_NAME ?? 'langchain').delete();
 await typesenseClient.collections().create(schema);
-// typesenseClient.collections('langchain').update(schema);
+// typesenseClient.collections(process.env.TYPESENSE_COLLECTION_NAME ?? 'langchain').update(schema);

@@ -1,19 +1,15 @@
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
-import { env } from 'process';
+import { BaseChatModel } from '@langchain/core/language_models/chat_models';
+import { AIMessage, HumanMessage } from '@langchain/core/messages';
 import { StringOutputParser } from '@langchain/core/output_parsers';
-import {
-  ChatMessagePromptTemplate,
-  ChatPromptTemplate,
-  PromptTemplate,
-  SystemMessagePromptTemplate,
-} from '@langchain/core/prompts';
+import { ChatPromptTemplate, SystemMessagePromptTemplate } from '@langchain/core/prompts';
 import { RunnableSequence } from '@langchain/core/runnables';
 import { nanoid, StreamingTextResponse } from 'ai';
-import { experimental_buildLlama2Prompt as buildLlama2Prompt } from 'ai/prompts';
 import { formatDocumentsAsString } from 'langchain/util/document';
 import { z } from 'zod';
-import { getLLM, getVectorStoreWithTypesense, llm } from '@/lib/typesense';
+import { env } from '@/env';
+import { getChatModel, getVectorStoreWithTypesense } from '@/lib/typesense';
 import { getChatByUUID, updateChat } from '@/strapi/chat';
 import { UnwrapArray } from '@/types/helpers';
 
@@ -32,7 +28,7 @@ const MessagesSchema = z.object({
 type ChatMessage = UnwrapArray<z.infer<typeof MessagesSchema>['messages']>;
 
 function getPrompt(messages: ChatMessage[]) {
-  if (env.TYPESENSE_EMBEDDINGS_PROVIDER === 'openai') {
+  if (env.TYPESENSE_LLM_PROVIDER === 'openai') {
     return ChatPromptTemplate.fromMessages([
       SystemMessagePromptTemplate.fromTemplate(
         'You are a helpful and honest assistant. Always answer in shortest possible way, skip all the unnecessary words.\n' +
@@ -42,45 +38,51 @@ function getPrompt(messages: ChatMessage[]) {
       ...(messages
         .map((message) => {
           if (message.role === 'user') {
-            return ChatMessagePromptTemplate.fromTemplate(message.content, 'user');
+            return new HumanMessage(message.content);
           } else if (message.role === 'assistant') {
-            return ChatMessagePromptTemplate.fromTemplate(message.content, 'assistant');
+            return new AIMessage(message.content);
           }
           return null;
         })
-        .filter(Boolean) as ChatMessagePromptTemplate[]),
-      ChatMessagePromptTemplate.fromTemplate('', 'assistant'),
+        .filter(Boolean) as (HumanMessage | AIMessage)[]),
     ]);
   }
-  return PromptTemplate.fromTemplate(
-    buildLlama2Prompt([
-      {
-        role: 'system',
-        content:
-          'You are a helpful and honest assistant. You can only speak English and never answer in other language. Keep the answer short and precise, skip all the unnecessary words. ' +
-          `Use the following pieces of context to answer the question at the end but they may or may not relevant to the question. Only pick relevant information. If you don't know the answer, just say that you don't know, don't try to make up an answer.:\n{context}`,
-      },
-      ...messages,
-    ])
-  );
+  return ChatPromptTemplate.fromMessages([
+    SystemMessagePromptTemplate.fromTemplate(
+      'You are a helpful and honest assistant. Always answer in shortest possible way, skip all the unnecessary words.\n' +
+        `Use the following pieces of context answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer. \n` +
+        `Context:\n{context}`
+    ),
+    ...(messages
+      .map((message) => {
+        if (message.role === 'user') {
+          return new HumanMessage(message.content); //, '\n\nHuman'
+        } else if (message.role === 'assistant') {
+          return new AIMessage(message.content); //, '\n\nAssistant'
+        }
+        return null;
+      })
+      .filter(Boolean) as (HumanMessage | AIMessage)[]),
+    // ChatMessagePromptTemplate.fromTemplate('', '\n\nAssistant'),
+  ]);
 }
 
 function getStandaloneQuestionPrompt(messages: ChatMessage[]) {
   return ChatPromptTemplate.fromMessages([
     SystemMessagePromptTemplate.fromTemplate(
-      'Given the following conversation, rephrase the last question to be a standalone question with background information in the same language.'
+      'Given the following conversation, rephrase the last question to be a standalone question with background information in the same language. It should be a maximum of three sentences long.'
     ),
     ...(messages
       .map((message) => {
         if (message.role === 'user') {
-          return ChatMessagePromptTemplate.fromTemplate(message.content, 'user');
+          return new HumanMessage(message.content);
         } else if (message.role === 'assistant') {
-          return ChatMessagePromptTemplate.fromTemplate(message.content, 'assistant');
+          return new AIMessage(message.content);
         }
         return null;
       })
-      .filter(Boolean) as ChatMessagePromptTemplate[]),
-    ChatMessagePromptTemplate.fromTemplate('Standalone question:', 'assistant'),
+      .filter(Boolean) as (HumanMessage | AIMessage)[]),
+    // AIMessagePromptTemplate.fromTemplate('Standalone question:'),
   ]);
 }
 
@@ -104,7 +106,11 @@ export async function POST(req: Request) {
   const { messages } = data.data;
   let question = messages.slice(-1)[0]!.content;
   if (env.TYPESENSE_CONVERSATIONAL_RETRIEVAL_QA_ENABLED && messages.length > 1) {
-    question = await getLLM({ streaming: false }).invoke(await getStandaloneQuestionPrompt(messages).format({}));
+    question = await RunnableSequence.from([
+      getStandaloneQuestionPrompt(messages),
+      getChatModel({ streaming: false, maxTokens: 256 }) as BaseChatModel,
+      new StringOutputParser(),
+    ]).invoke({});
   }
   // console.log({ question });
   const vectorStore = await getVectorStoreWithTypesense();
@@ -121,7 +127,7 @@ export async function POST(req: Request) {
       },
     },
     prompt,
-    llm,
+    getChatModel({ streaming: true }) as BaseChatModel,
     new StringOutputParser(),
   ]);
   const stream = await chain.stream(
