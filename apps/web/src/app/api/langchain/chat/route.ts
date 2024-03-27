@@ -81,7 +81,7 @@ function getStandaloneQuestionPrompt(messages: ChatMessage[]) {
         return null;
       })
       .filter(Boolean) as (HumanMessage | AIMessage)[]),
-    new AIMessage('Standalone question: '),
+    new AIMessage('Standalone question:'),
   ]);
 }
 
