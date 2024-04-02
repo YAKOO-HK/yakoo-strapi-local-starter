@@ -1,6 +1,6 @@
 import { mkdirSync } from 'node:fs';
 import { join } from 'node:path';
-import { ChatCloudflareWorkersAI, CloudflareWorkersAI, CloudflareWorkersAIEmbeddings } from '@langchain/cloudflare';
+import { ChatCloudflareWorkersAI, CloudflareWorkersAI } from '@langchain/cloudflare';
 import { BedrockChat } from '@langchain/community/chat_models/bedrock';
 import { BedrockEmbeddings } from '@langchain/community/embeddings/bedrock';
 import { Bedrock } from '@langchain/community/llms/bedrock';
@@ -11,6 +11,7 @@ import { CacheBackedEmbeddings } from 'langchain/embeddings/cache_backed';
 import { LocalFileStore } from 'langchain/storage/file_system';
 import { Client } from 'typesense';
 import { env } from '@/env';
+import { CloudflareWorkersAIEmbeddings } from '@/lib/langchain/cloudflare/embeddings';
 
 export function getEmbedding() {
   if (env.TYPESENSE_EMBEDDINGS_PROVIDER === 'openai') {
@@ -23,6 +24,19 @@ export function getEmbedding() {
       new LocalFileStore({ rootPath: join(env.TYPESENSE_EMBEDDINGS_CACHE_PATH, 'openai') }),
       {
         namespace: 'text-embedding-3-small',
+      }
+    );
+  } else if (env.TYPESENSE_EMBEDDINGS_PROVIDER === 'cloudflare') {
+    mkdirSync(join(env.TYPESENSE_EMBEDDINGS_CACHE_PATH, 'cloudflare'), { recursive: true });
+    return CacheBackedEmbeddings.fromBytesStore(
+      new CloudflareWorkersAIEmbeddings({
+        cloudflareAccountId: env.CLOUDFLARE_ACCOUNT_ID,
+        cloudflareApiToken: env.CLOUDFLARE_API_TOKEN,
+        modelName: '@cf/baai/bge-large-en-v1.5',
+      }),
+      new LocalFileStore({ rootPath: join(env.TYPESENSE_EMBEDDINGS_CACHE_PATH, 'cloudflare') }),
+      {
+        namespace: 'bge-large-en-v1.5',
       }
     );
   }
