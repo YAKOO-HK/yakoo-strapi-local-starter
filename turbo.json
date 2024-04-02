@@ -14,7 +14,8 @@
         "TYPESENSE_*",
         "AWS_*",
         "HCAPTCHA_*",
-        "*_API_KEY"
+        "*_API_KEY",
+        "CLOUDFLARE_*"
       ]
     },
     "lint": {

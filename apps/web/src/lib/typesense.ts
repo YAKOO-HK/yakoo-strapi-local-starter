@@ -1,5 +1,6 @@
 import { mkdirSync } from 'node:fs';
 import { join } from 'node:path';
+import { ChatCloudflareWorkersAI, CloudflareWorkersAI, CloudflareWorkersAIEmbeddings } from '@langchain/cloudflare';
 import { BedrockChat } from '@langchain/community/chat_models/bedrock';
 import { BedrockEmbeddings } from '@langchain/community/embeddings/bedrock';
 import { Bedrock } from '@langchain/community/llms/bedrock';
@@ -52,6 +53,13 @@ export function getLLM({ streaming = true }) {
       streaming,
       openAIApiKey: env.OPENAI_API_KEY, // In Node.js defaults to process.env.OPENAI_API_KEY
     });
+  } else if (env.TYPESENSE_LLM_PROVIDER === 'cloudflare') {
+    return new CloudflareWorkersAI({
+      model: '@cf/qwen/qwen1.5-7b-chat-awq',
+      streaming,
+      cloudflareAccountId: env.CLOUDFLARE_ACCOUNT_ID,
+      cloudflareApiToken: env.CLOUDFLARE_API_TOKEN,
+    });
   }
   // defaults to bedrock
   return new Bedrock({
@@ -77,7 +85,15 @@ export function getChatModel({ streaming = true, maxTokens = 512, temperature = 
       streaming,
       openAIApiKey: env.OPENAI_API_KEY, // In Node.js defaults to process.env.OPENAI_API_KEY
     });
+  } else if (env.TYPESENSE_LLM_PROVIDER === 'cloudflare') {
+    return new ChatCloudflareWorkersAI({
+      model: '@cf/qwen/qwen1.5-7b-chat-awq',
+      streaming,
+      cloudflareAccountId: env.CLOUDFLARE_ACCOUNT_ID,
+      cloudflareApiToken: env.CLOUDFLARE_API_TOKEN,
+    });
   }
+
   // defaults to bedrock
   return new BedrockChat({
     // model: 'meta.llama2-13b-chat-v1',

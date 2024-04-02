@@ -8,7 +8,8 @@ const schema = {
       type: 'float[]' as const,
       index: true,
       facet: false,
-      num_dim: 1536, // 'amazon.titan-embed-text-v1' and 'text-embedding-ada-002' both have 1536 dimensions
+      // num_dim: 1536, // 'amazon.titan-embed-text-v1' and 'text-embedding-ada-002' both have 1536 dimensions
+      num_dim: 1024, // bge-large-en-v1.5 have 1024 dimensions
     },
     {
       name: 'text',
