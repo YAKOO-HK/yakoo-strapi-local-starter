@@ -13,13 +13,13 @@
   },
   "dependencies": {
     "@ckeditor/strapi-plugin-ckeditor": "^0.0.11",
-    "@strapi/plugin-color-picker": "4.21.1",
-    "@strapi/plugin-i18n": "4.21.1",
+    "@strapi/plugin-color-picker": "4.22.0",
+    "@strapi/plugin-i18n": "4.22.0",
     "@strapi/plugin-seo": "^1.9.8",
-    "@strapi/plugin-users-permissions": "4.21.1",
-    "@strapi/provider-email-nodemailer": "4.21.1",
-    "@strapi/provider-upload-local": "4.21.1",
-    "@strapi/strapi": "4.21.1",
+    "@strapi/plugin-users-permissions": "4.22.0",
+    "@strapi/provider-email-nodemailer": "4.22.0",
+    "@strapi/provider-upload-local": "4.22.0",
+    "@strapi/strapi": "4.22.0",
     "axios": "^1.6.8",
     "mysql2": "^3.9.3",
     "react": "^18.2.0",
@@ -47,7 +47,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@strapi/typescript-utils": "4.21.1",
-    "@types/node": "^20.12.2"
+    "@strapi/typescript-utils": "4.22.0",
+    "@types/node": "^20.12.4"
   }
 }
