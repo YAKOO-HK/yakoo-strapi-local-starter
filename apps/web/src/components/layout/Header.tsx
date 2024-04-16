@@ -3,13 +3,14 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { TypesenseSearch } from '@/components/TypesenseSearch';
 import { env } from '@/env';
-import { isExternalLink } from '@/lib/link';
+import { cn } from '@/lib/utils';
 import { Link, locales } from '@/navigation';
 import { StrapiImageLoader } from '@/strapi/image-loader';
 import { type NavigationItem } from '@/strapi/navigation';
 import { StrapiLocale, StrapiMedia } from '@/strapi/strapi';
+import { InlineSearchForm } from './InlineSearchForm';
 import { LanguageSwitcher } from './LanguageSwitcher';
-import { MainNavigation } from './MainNavigation';
+import { MainNavigation, MobileMainNavigation } from './MainNavigation';
 import { MobileMenu } from './MobileMenu';
 
 export function Header({
@@ -24,13 +25,14 @@ export function Header({
   const t = useTranslations('navigation');
   return (
     <>
-      <header className="border-b-border hidden border-b py-2 shadow-md md:block">
-        <div className="container flex items-center gap-4">
-          <div>
+      <header className={cn('hidden w-full bg-white shadow-md md:block')}>
+        <div className="flex h-full items-start gap-4 px-4 py-2">
+          <div className="md:pt-8 lg:pt-6 xl:pt-4">
             <Link href="/">
               <Image
                 loader={StrapiImageLoader}
                 src={logo.attributes.url}
+                className={cn('block h-[48px] w-auto lg:h-[64px]')}
                 width={(64 * logo.attributes.width) / logo.attributes.height}
                 height={64}
                 alt={logo.attributes.alternativeText || ''}
@@ -39,75 +41,62 @@ export function Header({
               <span className="sr-only">Home</span>
             </Link>
           </div>
-          <MainNavigation items={navigationItems} className="grow" />
-          {env.TYPESENSE_ENABLED ? <TypesenseSearch /> : null}
-          <Suspense>
-            <LanguageSwitcher
-              locales={locales.map((code) => ({
-                locale: code,
-                label: t(`locales.${code}`),
-                current: locale === code,
-              }))}
-            />
-          </Suspense>
+          <div className="flex flex-1 flex-col items-end gap-4">
+            <div className="flex flex-1 flex-row items-center gap-8 px-3">
+              {/* <Link className="text-primary dark:text-white" href="/text-size">
+                Text Size
+              </Link> */}
+              <Suspense>
+                <LanguageSwitcher
+                  locales={locales.map((code) => ({
+                    locale: code,
+                    label: t(`locales.${code}`),
+                    current: locale === code,
+                  }))}
+                  separator={<div className="bg-primary h-full w-px" />}
+                  className="h-6"
+                  linkClassName="text-primary font-medium"
+                />
+              </Suspense>
+              {env.TYPESENSE_ENABLED ? <TypesenseSearch /> : <InlineSearchForm locale={locale} />}
+            </div>
+            <MainNavigation items={navigationItems} className="grow" />
+          </div>
         </div>
       </header>
-      <header className="border-b-border flex gap-4 border-b py-2 shadow-md md:hidden">
+      <header className="border-b-border flex-no-wrap flex gap-4 border-b p-2 shadow-md md:hidden">
+        <div className="flex-1">
+          <Link href="/">
+            <Image
+              loader={StrapiImageLoader}
+              src={logo.attributes.url}
+              width={(48 * logo.attributes.width) / logo.attributes.height}
+              height={48}
+              alt={logo.attributes.alternativeText || ''}
+              priority
+            />
+          </Link>
+        </div>
         <MobileMenu>
-          <nav>
-            <ul className="space-y-4">
-              {navigationItems.map((parentItem) => {
-                const isExternal = isExternalLink(parentItem.path);
-                if (!parentItem.items?.length) {
-                  return (
-                    <li key={parentItem.id}>
-                      <Link
-                        href={parentItem.path}
-                        target={isExternal ? '_blank' : undefined}
-                        rel={isExternal ? 'noopener noreferrer' : undefined}
-                      >
-                        {parentItem.title}
-                      </Link>
-                    </li>
-                  );
-                }
-                return (
-                  <li key={parentItem.id}>
-                    <span className="text-foreground/50">{parentItem.title}</span>
-                    <ul className="space-y-4 pl-4 pt-4">
-                      {parentItem.items.map(({ id, path, title, external }) => {
-                        // console.log({ id, path, title, external, parent: parentItem.path });
-                        const isExternal = isExternalLink(path);
-                        return (
-                          <li key={id}>
-                            <Link
-                              href={external ? path : `${parentItem.path === '/' ? '' : parentItem}${path}`}
-                              target={isExternal ? '_blank' : undefined}
-                              rel={isExternal ? 'noopener noreferrer' : undefined}
-                              prefetch={false}
-                            >
-                              {title}
-                            </Link>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
+          <div className="py-6">
+            <Suspense>
+              <LanguageSwitcher
+                locales={locales.map((code) => ({
+                  locale: code,
+                  label: t(`locales.${code}`),
+                  current: locale === code,
+                }))}
+                separator={<div className="bg-primary h-full w-px" />}
+                className="h-6"
+                linkClassName="text-primary dark:text-primary"
+              />
+            </Suspense>
+            <div className="mt-3">
+              {env.TYPESENSE_ENABLED ? <TypesenseSearch /> : <InlineSearchForm locale={locale} variant="mobile" />}
+            </div>
+          </div>
+          <MobileMainNavigation items={navigationItems} />
         </MobileMenu>
-        <Link href="/">
-          <Image
-            loader={StrapiImageLoader}
-            src={logo.attributes.url}
-            width={(48 * logo.attributes.width) / logo.attributes.height}
-            height={48}
-            alt={logo.attributes.alternativeText || ''}
-            priority
-          />
-        </Link>
       </header>
     </>
   );

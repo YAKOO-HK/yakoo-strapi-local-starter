@@ -23,7 +23,7 @@ const TailwindConfig = {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)', 'Microsoft JhengHei', ...defaultTheme.fontFamily.sans],
+        sans: ['Basel Grotesk', 'Microsoft JhengHei', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         border: 'hsl(var(--border))',

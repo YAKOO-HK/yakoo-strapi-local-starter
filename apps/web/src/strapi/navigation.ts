@@ -10,6 +10,7 @@ export interface BaseNavigationItem {
   title: string;
   path: string;
   external: boolean;
+  menuAttached: boolean;
   items: Array<NavigationItem>;
 }
 export interface WrapperNavigationItem extends BaseNavigationItem {

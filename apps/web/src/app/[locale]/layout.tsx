@@ -1,5 +1,4 @@
 import { type Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { NextIntlClientProvider, useMessages } from 'next-intl';
@@ -12,14 +11,11 @@ import { SkipToMain } from '@/components/layout/SkipToMain';
 import { LdJson } from '@/components/ldjson/ldjson';
 import { Toaster } from '@/components/ui/toaster';
 import { env } from '@/env';
-import { cn } from '@/lib/utils';
 import { locales } from '@/navigation';
 import { getMainNavigation } from '@/strapi/navigation';
 import { getSiteMetadata } from '@/strapi/site-metadata';
 import { getOpenGraphImage, StrapiLocale } from '@/strapi/strapi';
 import '../global.css';
-
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export async function generateMetadata({ params }: { params: { locale: StrapiLocale } }) {
   const { seo } = await getSiteMetadata(params.locale);
@@ -72,7 +68,7 @@ export default async function LocaleLayout({
   const navigationItems = await getMainNavigation(params.locale);
   return (
     <html lang={locale} dir="ltr">
-      <body className={cn(inter.variable)}>
+      <body>
         <IntlProvider locale={locale}>
           <LdJson structuredData={seo.structuredData} />
           {env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID ? (

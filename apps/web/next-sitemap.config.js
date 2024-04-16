@@ -12,6 +12,8 @@ export default {
     '/icon',
     // exclude all api routes
     '/api/*',
+    // gcse search
+    '/search',
     // sitemap
     '/server-sitemap.xml',
   ],
