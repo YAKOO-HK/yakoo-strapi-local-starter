@@ -62,6 +62,48 @@
           "sortable": false
         }
       },
+      "logo2": {
+        "edit": {
+          "label": "logo2",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "logo2",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "logo_link": {
+        "edit": {
+          "label": "logo_link",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "logo_link",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "logo2_link": {
+        "edit": {
+          "label": "logo2_link",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "logo2_link",
+          "searchable": true,
+          "sortable": true
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -128,6 +170,22 @@
             "name": "logo",
             "size": 6
           },
+          {
+            "name": "logo_link",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "logo2",
+            "size": 6
+          },
+          {
+            "name": "logo2_link",
+            "size": 6
+          }
+        ],
+        [
           {
             "name": "favicon",
             "size": 6

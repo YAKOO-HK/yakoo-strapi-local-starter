@@ -1,0 +1,10 @@
+{
+  "key": "plugin_ee_metrics",
+  "value": {
+    "weeklySchedule": "44 34 17 * * 2",
+    "lastWeeklyUpdate": 1707212085607
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}

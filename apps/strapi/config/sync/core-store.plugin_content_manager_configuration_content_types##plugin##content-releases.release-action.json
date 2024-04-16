@@ -48,6 +48,20 @@
           "sortable": true
         }
       },
+      "locale": {
+        "edit": {
+          "label": "locale",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "locale",
+          "searchable": true,
+          "sortable": true
+        }
+      },
       "release": {
         "edit": {
           "label": "release",
@@ -59,6 +73,20 @@
         },
         "list": {
           "label": "release",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "isEntryValid": {
+        "edit": {
+          "label": "isEntryValid",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "isEntryValid",
           "searchable": true,
           "sortable": true
         }
@@ -144,6 +172,16 @@
           {
             "name": "release",
             "size": 6
+          },
+          {
+            "name": "locale",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "isEntryValid",
+            "size": 4
           }
         ]
       ]

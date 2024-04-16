@@ -1,0 +1,114 @@
+{
+  "key": "core_persisted_tables",
+  "value": [
+    {
+      "name": "strapi_audit_logs"
+    },
+    {
+      "name": "strapi_audit_logs_user_links"
+    },
+    {
+      "name": "strapi_workflows"
+    },
+    {
+      "name": "strapi_workflows_stages"
+    },
+    {
+      "name": "strapi_workflows_stages_permissions_links"
+    },
+    {
+      "name": "strapi_workflows_stages_workflow_links"
+    },
+    {
+      "name": "audience_strapi_stage_links",
+      "dependsOn": [
+        {
+          "name": "audience"
+        }
+      ]
+    },
+    {
+      "name": "ezforms_submission_strapi_stage_links",
+      "dependsOn": [
+        {
+          "name": "ezforms_submission"
+        }
+      ]
+    },
+    {
+      "name": "ezforms_recipient_strapi_stage_links",
+      "dependsOn": [
+        {
+          "name": "ezforms_recipient"
+        }
+      ]
+    },
+    {
+      "name": "up_users_strapi_stage_links",
+      "dependsOn": [
+        {
+          "name": "up_users"
+        }
+      ]
+    },
+    {
+      "name": "chats_strapi_stage_links",
+      "dependsOn": [
+        {
+          "name": "chats"
+        }
+      ]
+    },
+    {
+      "name": "contact_forms_strapi_stage_links",
+      "dependsOn": [
+        {
+          "name": "contact_forms"
+        }
+      ]
+    },
+    {
+      "name": "homepages_strapi_stage_links",
+      "dependsOn": [
+        {
+          "name": "homepages"
+        }
+      ]
+    },
+    {
+      "name": "pages_strapi_stage_links",
+      "dependsOn": [
+        {
+          "name": "pages"
+        }
+      ]
+    },
+    {
+      "name": "posts_strapi_stage_links",
+      "dependsOn": [
+        {
+          "name": "posts"
+        }
+      ]
+    },
+    {
+      "name": "post_categories_strapi_stage_links",
+      "dependsOn": [
+        {
+          "name": "post_categories"
+        }
+      ]
+    },
+    {
+      "name": "site_metadatas_strapi_stage_links",
+      "dependsOn": [
+        {
+          "name": "site_metadatas"
+        }
+      ]
+    }
+  ],
+  "type": "object",
+  "environment": null,
+  "tag": null
+}

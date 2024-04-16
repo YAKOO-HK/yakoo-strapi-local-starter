@@ -48,6 +48,48 @@
           "sortable": true
         }
       },
+      "scheduledAt": {
+        "edit": {
+          "label": "scheduledAt",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "scheduledAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "timezone": {
+        "edit": {
+          "label": "timezone",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "timezone",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "status": {
+        "edit": {
+          "label": "status",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "status",
+          "searchable": true,
+          "sortable": true
+        }
+      },
       "actions": {
         "edit": {
           "label": "actions",
@@ -143,6 +185,20 @@
         [
           {
             "name": "actions",
+            "size": 6
+          },
+          {
+            "name": "scheduledAt",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "timezone",
+            "size": 6
+          },
+          {
+            "name": "status",
             "size": 6
           }
         ]

@@ -13,7 +13,8 @@ export default {
     // exclude all api routes
     '/api/*',
     // gcse search
-    '/search',
+    '/en/search',
+    '/zh-Hant/search',
     // sitemap
     '/server-sitemap.xml',
   ],

@@ -41,6 +41,19 @@
       }
     },
     "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "logo2": {
       "allowedTypes": [
         "images"
       ],
@@ -50,8 +63,23 @@
         "i18n": {
           "localized": true
         }
+      }
+    },
+    "logo_link": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
       },
-      "required": true
+      "type": "string"
+    },
+    "logo2_link": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
     }
   }
 }

@@ -64,7 +64,7 @@ export default async function LocaleLayout({
     notFound();
   }
   unstable_setRequestLocale(params.locale);
-  const { logo, locale, seo } = await getSiteMetadata(params.locale);
+  const { logo, logo2, logo_link, logo2_link, locale, seo } = await getSiteMetadata(params.locale);
   const navigationItems = await getMainNavigation(params.locale);
   return (
     <html lang={locale} dir="ltr">
@@ -75,7 +75,14 @@ export default async function LocaleLayout({
             <GoogleAnalytics gaId={env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID} />
           ) : null}
           <SkipToMain />
-          <Header logo={logo.data} navigationItems={navigationItems} locale={locale} />
+          <Header
+            logo={logo.data}
+            logo2={logo2.data}
+            logo_link={logo_link}
+            logo2_link={logo2_link}
+            navigationItems={navigationItems}
+            locale={locale}
+          />
           {children}
           <Footer />
           {env.TYPESENSE_ENABLED ? (

@@ -10,6 +10,9 @@ type SiteMetadataResponse = {
       locale: StrapiLocale;
       favicon: { data: StrapiMedia };
       logo: { data: StrapiMedia };
+      logo2: { data: StrapiMedia | null };
+      logo_link: string | null;
+      logo2_link: string | null;
       seo: StrapiSEO;
     };
   };
@@ -17,7 +20,7 @@ type SiteMetadataResponse = {
 export async function getSiteMetadata(locale: StrapiLocale = 'en') {
   const querystring = qs.stringify(
     {
-      populate: ['seo', 'seo.metaImage', 'favicon', 'logo'],
+      populate: ['seo', 'seo.metaImage', 'favicon', 'logo', 'logo2'],
       locale,
     },
     { encodeValuesOnly: true }
