@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { type EmblaCarouselType } from 'embla-carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import useEmblaCarousel from 'embla-carousel-react';
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
@@ -40,9 +41,46 @@ function Slide({ image, title, caption }: Omit<ComponentSlide, 'link' | 'id' | '
   );
 }
 
+const useEmblaDotButton = (emblaApi?: EmblaCarouselType) => {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+  const onDotButtonClick = useCallback(
+    (index: number) => {
+      if (!emblaApi) return;
+      emblaApi.scrollTo(index);
+    },
+    [emblaApi]
+  );
+
+  const onInit = useCallback((emblaApi: EmblaCarouselType) => {
+    setScrollSnaps(emblaApi.scrollSnapList());
+  }, []);
+
+  const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, []);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    onInit(emblaApi);
+    onSelect(emblaApi);
+    emblaApi.on('reInit', onInit);
+    emblaApi.on('reInit', onSelect);
+    emblaApi.on('select', onSelect);
+  }, [emblaApi, onInit, onSelect]);
+
+  return {
+    selectedIndex,
+    scrollSnaps,
+    onDotButtonClick,
+  };
+};
+
 export function CarouselSection({ as, slides, layout }: ComponentCarousel & DynamicZoneSectionProps) {
   const Component = as;
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 5000, stopOnMouseEnter: true })]);
+  const { selectedIndex, scrollSnaps, onDotButtonClick } = useEmblaDotButton(emblaApi);
   const [label, setLabel] = useState('');
   useEffect(() => {
     if (emblaApi) {
@@ -107,6 +145,24 @@ export function CarouselSection({ as, slides, layout }: ComponentCarousel & Dyna
               </div>
             );
           })}
+        </div>
+      </div>
+      <div className="absolute bottom-4 grid w-full place-items-center lg:bottom-12">
+        <div className="flex flex-wrap justify-center gap-5">
+          {scrollSnaps.map((_, index) => (
+            <button
+              key={index}
+              type="button"
+              onClick={() => onDotButtonClick(index)}
+              aria-current={index === selectedIndex ? 'true' : undefined}
+              className={cn(
+                'm-0 size-3 cursor-pointer touch-manipulation appearance-none rounded-full border-0 bg-white p-0',
+                'aria-[current=true]:bg-primary'
+              )}
+            >
+              <span className="sr-only">{`Go to Slide ${index + 1}`}</span>
+            </button>
+          ))}
         </div>
       </div>
     </Component>

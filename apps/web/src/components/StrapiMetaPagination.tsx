@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef } from 'react';
+import { type ComponentPropsWithoutRef } from 'react';
 import { type StrapiPagination } from '@/strapi/strapi';
 import {
   Pagination,

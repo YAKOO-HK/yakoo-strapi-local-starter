@@ -5,13 +5,13 @@ import Image from 'next/image';
 import PhotoAlbum from 'react-photo-album';
 import Lightbox from 'yet-another-react-lightbox';
 import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
+import { cn } from '@/lib/utils';
 import { ComponentGallery, DynamicZoneSectionProps } from '@/strapi/components';
 import { StrapiImageLoader, StrapiRawImageLoader } from '@/strapi/image-loader';
-import { cn } from '@/lib/utils';
 import 'yet-another-react-lightbox/styles.css';
 import 'yet-another-react-lightbox/plugins/thumbnails.css';
 
-export default function GallerySection({ as, layout, slides }: ComponentGallery & DynamicZoneSectionProps) {
+export function GallerySection({ as, layout, slides }: ComponentGallery & DynamicZoneSectionProps) {
   const Component = as;
   const [index, setIndex] = useState(-1);
   return (

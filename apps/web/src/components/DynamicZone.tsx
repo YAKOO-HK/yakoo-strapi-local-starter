@@ -4,7 +4,7 @@ import { CarouselSection } from './sections/carousel';
 import { ContactFormSection } from './sections/contact-form';
 import { EmbedYoutubeSection } from './sections/embed-youtube';
 import { FeatureImageSection } from './sections/feature-image';
-import GallerySection from './sections/gallery';
+import { GallerySection } from './sections/gallery';
 import { HeroSection } from './sections/hero-section';
 import { PageTitleSection } from './sections/page-title';
 import { RichTextSection } from './sections/rich-text';
