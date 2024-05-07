@@ -48,7 +48,7 @@ export async function generateMetadata({
     alternates: {
       canonical:
         metadata.alternates?.canonical ||
-        `${env.NEXT_PUBLIC_SITE_URL}/${params.locale}/${params.categorySlug}/${params.postSlug}`,
+        `${env.NEXT_PUBLIC_SITE_URL}/${params.locale}/posts/${params.categorySlug}/${params.postSlug}`,
       languages,
     },
   } satisfies Metadata;

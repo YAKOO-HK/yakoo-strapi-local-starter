@@ -35,7 +35,7 @@ export async function getPostCategoryBySlug(slug: string) {
   const querystring = qs.stringify(
     {
       filters: { slug: { $eq: slug } },
-      populate: ['seo', 'localizations'],
+      populate: ['seo', 'seo.metaImage', 'localizations'],
       pagination: { pageSize: 1 },
       locale: 'all',
     },
@@ -109,6 +109,7 @@ export async function getPostBySlug(slug: string) {
       filters: { slug: { $eq: slug } },
       populate: [
         'seo',
+        'seo.metaImage',
         'category',
         'image',
         'localizations',

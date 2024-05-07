@@ -47,6 +47,7 @@ export async function getPageBySlug(slug: string) {
       filters: { slug: { $eq: slug } },
       populate: [
         'seo',
+        'seo.metaImage',
         'category',
         'image',
         'localizations',
