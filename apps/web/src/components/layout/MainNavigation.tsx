@@ -16,7 +16,7 @@ function getHref(item: NavigationItem, parentItem: NavigationItem) {
     // do nothing
   } else if (item.type === 'INTERNAL') {
     // TODO: handle different type
-    href = item.related.slug;
+    href = `/${item.related.slug}`;
   } else if (item.path.startsWith(parentItem.path)) {
     // do not inherit parent path
     href = item.path.substring(parentItem.path.length);
