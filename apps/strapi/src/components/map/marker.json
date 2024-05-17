@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_map_markers",
+  "info": {
+    "displayName": "Marker",
+    "icon": "pinMap",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "lat": {
+      "type": "float",
+      "required": true
+    },
+    "lng": {
+      "type": "float",
+      "required": true
+    },
+    "popupContent": {
+      "type": "blocks",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

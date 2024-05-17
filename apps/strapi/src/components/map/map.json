@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_map_maps",
+  "info": {
+    "displayName": "Map",
+    "icon": "globe",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "lat": {
+      "type": "float",
+      "required": true
+    },
+    "lng": {
+      "type": "float",
+      "required": true
+    },
+    "zoom": {
+      "type": "float",
+      "max": 20,
+      "min": 0,
+      "required": true,
+      "default": 16
+    },
+    "markers": {
+      "type": "component",
+      "repeatable": true,
+      "component": "map.marker"
+    }
+  }
+}

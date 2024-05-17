@@ -34,6 +34,17 @@
         "page-components.html"
       ],
       "required": true
+    },
+    "map": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "map.map",
+      "required": false
     }
   }
 }

@@ -44,7 +44,6 @@ export function generateStaticParams() {
 }
 
 function IntlProvider({ locale, children }: { locale: StrapiLocale; children: React.ReactNode }) {
-  unstable_setRequestLocale(locale);
   const messages = useMessages();
   return (
     <NextIntlClientProvider key={locale} locale={locale} messages={messages}>
