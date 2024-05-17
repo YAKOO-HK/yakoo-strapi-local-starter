@@ -25,7 +25,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "5.3.4",
-    "sharp": "^0.33.3",
+    "sharp": "^0.33.4",
     "strapi-plugin-config-sync": "^1.2.5",
     "strapi-plugin-ezforms": "^0.1.7",
     "strapi-plugin-local-image-sharp": "^1.7.0",
@@ -48,6 +48,6 @@
   "license": "MIT",
   "devDependencies": {
     "@strapi/typescript-utils": "4.24.2",
-    "@types/node": "^20.12.11"
+    "@types/node": "^20.12.12"
   }
 }
