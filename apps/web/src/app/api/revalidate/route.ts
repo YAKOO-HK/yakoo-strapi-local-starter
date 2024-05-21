@@ -1,6 +1,6 @@
 import { revalidateTag } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
-import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
+import { RecursiveCharacterTextSplitter } from '@langchain/textsplitters';
 import { env } from '@/env';
 import { getVectorStoreWithTypesense, typesenseClient } from '@/lib/typesense';
 import { pageToDocument, postToDocument } from '@/strapi/langchain';

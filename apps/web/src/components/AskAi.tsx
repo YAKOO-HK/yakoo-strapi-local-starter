@@ -59,6 +59,7 @@ function ChatUI({
     api: '/api/langchain/chat',
     initialMessages,
     sendExtraMessageFields: true,
+    streamMode: 'text',
   });
   return (
     <>

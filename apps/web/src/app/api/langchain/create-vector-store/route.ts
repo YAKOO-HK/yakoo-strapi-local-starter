@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server';
-import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
+import { RecursiveCharacterTextSplitter } from '@langchain/textsplitters';
 import { env } from '@/env';
 import { createVectorStoreWithTypesense } from '@/lib/typesense';
 import { pageToDocument, postToDocument } from '@/strapi/langchain';

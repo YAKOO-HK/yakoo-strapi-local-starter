@@ -114,7 +114,7 @@ export async function POST(req: Request) {
   // console.log({ question });
   const vectorStore = await getVectorStoreWithTypesense();
   const retriever = vectorStore.asRetriever(5); // pick 5 top relevant documents
-  const relevantDocs = await retriever.getRelevantDocuments(question);
+  const relevantDocs = await retriever.invoke(question);
   const prompt = getPrompt(messages);
   const chain = RunnableSequence.from([
     {
