@@ -124,8 +124,6 @@ export function getChatModel({ streaming = true, maxTokens = 512, temperature = 
   });
 }
 
-const embeddings = getEmbedding();
-
 const typesenseClient = new Client({
   nodes: [{ host: env.TYPESENSE_HOST, port: env.TYPESENSE_PORT, protocol: env.TYPESENSE_PROTOCOL }],
   apiKey: env.TYPESENSE_API_KEY,
@@ -155,9 +153,14 @@ const typesenseVectorStoreConfig = {
   },
 } satisfies TypesenseConfig;
 
-const createVectorStoreWithTypesense = async (documents: Document[] = []) =>
-  Typesense.fromDocuments(documents, embeddings, typesenseVectorStoreConfig);
+const createVectorStoreWithTypesense = async (documents: Document[] = []) => {
+  const embeddings = getEmbedding();
+  return Typesense.fromDocuments(documents, embeddings, typesenseVectorStoreConfig);
+};
 
-const getVectorStoreWithTypesense = async () => new Typesense(embeddings, typesenseVectorStoreConfig);
+const getVectorStoreWithTypesense = async () => {
+  const embeddings = getEmbedding();
+  return new Typesense(embeddings, typesenseVectorStoreConfig);
+};
 
 export { typesenseClient, createVectorStoreWithTypesense, getVectorStoreWithTypesense };
