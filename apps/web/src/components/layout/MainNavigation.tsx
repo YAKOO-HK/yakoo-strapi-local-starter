@@ -69,15 +69,18 @@ export function MainNavigation({ items, className }: { items: NavigationItem[]; 
                       .map((item) => {
                         const { isExternal, href } = getHref(item, parentItem);
                         return (
-                          <DropdownMenuItem key={item.id} asChild>
+                          <DropdownMenuItem
+                            key={item.id}
+                            asChild
+                            className={cn(
+                              buttonVariants({ variant: 'none' }),
+                              'text-primary justify-start text-base dark:text-white dark:hover:text-neutral-300'
+                            )}
+                          >
                             <Link
                               href={href}
                               target={isExternal ? '_blank' : undefined}
                               rel={isExternal ? 'noopener noreferrer' : undefined}
-                              className={cn(
-                                buttonVariants({ variant: 'none' }),
-                                'text-primary justify-start dark:text-white dark:hover:text-neutral-300'
-                              )}
                             >
                               {item.title}
                             </Link>
