@@ -36,10 +36,10 @@ export function StrapiMetaPagination({
     <Pagination className={className}>
       <PaginationContent>
         {active !== previous ? <PaginationPrevious href={getHref(previous)} /> : null}
-        {range.map((page) => {
+        {range.map((page, i) => {
           if (page === 'dots') {
             return (
-              <PaginationItem>
+              <PaginationItem key={`dots-${i}`}>
                 <PaginationEllipsis />
               </PaginationItem>
             );
@@ -51,23 +51,6 @@ export function StrapiMetaPagination({
           );
         })}
         {active !== next ? <PaginationNext href={getHref(next)} /> : null}
-        {/* {pagination.page > 1 ? <PaginationPrevious href={getHref(pagination.page - 1)} /> : null}
-        {lower > 1 ? (
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-        ) : null}
-        {Array.from({ length: upper - lower + 1 }, (_, i) => i + lower).map((page) => (
-          <PaginationLink key={page} isActive={page === pagination.page} href={getHref(page)}>
-            {page}
-          </PaginationLink>
-        ))}
-        {upper < pagination.pageCount ? (
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-        ) : null}
-        {pagination.page < pagination.pageCount ? <PaginationNext href={getHref(pagination.page + 1)} /> : null} */}
       </PaginationContent>
     </Pagination>
   );
