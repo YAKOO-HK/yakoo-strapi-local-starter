@@ -154,7 +154,7 @@ export async function getPosts(locale: StrapiLocale, page: number = 1) {
   const querystring = qs.stringify(
     {
       populate: ['image', 'category'],
-      pagination: { pageSize: 1, page },
+      pagination: { pageSize: 12, page },
       sort: 'publishedAt:desc',
       locale,
     },
