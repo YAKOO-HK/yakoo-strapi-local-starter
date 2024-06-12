@@ -112,7 +112,14 @@
       "subject": "api::homepage.homepage",
       "properties": {
         "fields": [
-          "sections"
+          "sections",
+          "map.lat",
+          "map.lng",
+          "map.zoom",
+          "map.markers.lat",
+          "map.markers.lng",
+          "map.markers.popupContent",
+          "map.markers.name"
         ],
         "locales": [
           "en",
@@ -139,7 +146,14 @@
       "subject": "api::homepage.homepage",
       "properties": {
         "fields": [
-          "sections"
+          "sections",
+          "map.lat",
+          "map.lng",
+          "map.zoom",
+          "map.markers.lat",
+          "map.markers.lng",
+          "map.markers.popupContent",
+          "map.markers.name"
         ],
         "locales": [
           "en",
@@ -154,7 +168,14 @@
       "subject": "api::homepage.homepage",
       "properties": {
         "fields": [
-          "sections"
+          "sections",
+          "map.lat",
+          "map.lng",
+          "map.zoom",
+          "map.markers.lat",
+          "map.markers.lng",
+          "map.markers.popupContent",
+          "map.markers.name"
         ],
         "locales": [
           "en",

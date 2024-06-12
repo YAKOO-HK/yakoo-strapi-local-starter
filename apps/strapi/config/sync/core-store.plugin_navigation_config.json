@@ -3,7 +3,9 @@
   "value": {
     "additionalFields": [],
     "contentTypes": [
-      "api::page.page"
+      "api::page.page",
+      "api::post-category.post-category",
+      "api::post.post"
     ],
     "contentTypesNameFields": {
       "default": [
@@ -13,13 +15,21 @@
       ],
       "api::page.page": [
         "slug"
+      ],
+      "api::post-category.post-category": [
+        "slug"
+      ],
+      "api::post.post": [
+        "slug"
       ]
     },
     "contentTypesPopulate": {},
     "allowedLevels": 2,
     "gql": {
       "navigationItemRelated": [
-        "Page"
+        "Page",
+        "PostCategory",
+        "Post"
       ]
     },
     "i18nEnabled": true,
@@ -28,9 +38,18 @@
       "api::page.page": [
         "slug",
         "title"
+      ],
+      "api::post-category.post-category": [
+        "slug",
+        "title"
+      ],
+      "api::post.post": [
+        "slug",
+        "title"
       ]
     },
-    "cascadeMenuAttached": true
+    "cascadeMenuAttached": true,
+    "isCacheEnabled": false
   },
   "type": "object",
   "environment": null,

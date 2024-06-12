@@ -34,6 +34,20 @@
           "sortable": false
         }
       },
+      "map": {
+        "edit": {
+          "label": "map",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "map",
+          "searchable": false,
+          "sortable": false
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -104,6 +118,12 @@
         [
           {
             "name": "sections",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "map",
             "size": 12
           }
         ]

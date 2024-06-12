@@ -1,0 +1,117 @@
+{
+  "key": "plugin_content_manager_configuration_components::map.marker",
+  "value": {
+    "settings": {
+      "bulkable": true,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 10,
+      "mainField": "name",
+      "defaultSortBy": "name",
+      "defaultSortOrder": "ASC"
+    },
+    "metadatas": {
+      "id": {
+        "edit": {},
+        "list": {
+          "label": "id",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "lat": {
+        "edit": {
+          "label": "lat",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "lat",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "lng": {
+        "edit": {
+          "label": "lng",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "lng",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "popupContent": {
+        "edit": {
+          "label": "popupContent",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "popupContent",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "name": {
+        "edit": {
+          "label": "name",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "name",
+          "searchable": true,
+          "sortable": true
+        }
+      }
+    },
+    "layouts": {
+      "list": [
+        "id",
+        "lat",
+        "lng",
+        "name"
+      ],
+      "edit": [
+        [
+          {
+            "name": "name",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "lat",
+            "size": 4
+          },
+          {
+            "name": "lng",
+            "size": 4
+          }
+        ],
+        [
+          {
+            "name": "popupContent",
+            "size": 12
+          }
+        ]
+      ]
+    },
+    "uid": "map.marker",
+    "isComponent": true
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}
