@@ -1,4 +1,5 @@
 import { type ComponentPropsWithoutRef } from 'react';
+import { getPagination } from '@/lib/pagination';
 import { type StrapiPagination } from '@/strapi/strapi';
 import {
   Pagination,
@@ -24,14 +25,33 @@ export function StrapiMetaPagination({
   if (!pagination.pageCount) {
     return null;
   }
-  const lower = Math.max(1, pagination.page - offset);
-  const upper = Math.min(pagination.pageCount, pagination.page + offset);
-  // console.log('StrapiMetaPagination', pagination);
-  // console.log('StrapiMetaPagination', { lower, upper });
+  const { range, active, previous, next } = getPagination({
+    page: pagination.page,
+    total: pagination.pageCount,
+    siblings: offset,
+    boundaries: 1,
+  });
+  // console.log(pagination, range);
   return (
     <Pagination className={className}>
       <PaginationContent>
-        {pagination.page > 1 ? <PaginationPrevious href={getHref(pagination.page - 1)} /> : null}
+        {active !== previous ? <PaginationPrevious href={getHref(previous)} /> : null}
+        {range.map((page) => {
+          if (page === 'dots') {
+            return (
+              <PaginationItem>
+                <PaginationEllipsis />
+              </PaginationItem>
+            );
+          }
+          return (
+            <PaginationLink key={page} isActive={page === active} href={getHref(page)}>
+              {page}
+            </PaginationLink>
+          );
+        })}
+        {active !== next ? <PaginationNext href={getHref(next)} /> : null}
+        {/* {pagination.page > 1 ? <PaginationPrevious href={getHref(pagination.page - 1)} /> : null}
         {lower > 1 ? (
           <PaginationItem>
             <PaginationEllipsis />
@@ -47,7 +67,7 @@ export function StrapiMetaPagination({
             <PaginationEllipsis />
           </PaginationItem>
         ) : null}
-        {pagination.page < pagination.pageCount ? <PaginationNext href={getHref(pagination.page + 1)} /> : null}
+        {pagination.page < pagination.pageCount ? <PaginationNext href={getHref(pagination.page + 1)} /> : null} */}
       </PaginationContent>
     </Pagination>
   );
