@@ -16,15 +16,6 @@ export type PagesResponse = {
       image: { data: StrapiMedia };
       seo?: StrapiSEO;
       sections?: Array<PageComponent>;
-      category?: {
-        data: {
-          id: number;
-          attributes: {
-            title: string;
-            slug: string;
-          };
-        };
-      };
       localizations?: {
         data: Array<{
           id: number;
@@ -48,7 +39,6 @@ export async function getPageBySlug(slug: string) {
       populate: [
         'seo',
         'seo.metaImage',
-        'category',
         'image',
         'localizations',
         'sections',

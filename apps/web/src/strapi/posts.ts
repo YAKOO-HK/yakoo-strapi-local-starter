@@ -125,7 +125,7 @@ export async function getPostBySlug(slug: string) {
   );
   const response = await fetch(`${env.NEXT_PUBLIC_STRAPI_URL}/api/posts?${querystring}`, {
     headers: { Authorization: `Bearer ${env.STRAPI_ADMIN_API_TOKEN}` },
-    next: { revalidate: env.STRAPI_CACHE_PERIOD, tags: ['post'] },
+    next: { revalidate: env.STRAPI_CACHE_PERIOD, tags: ['post', 'post-category'] },
   }).then(fetchResponseHandler<PostsResponse>());
 
   if (!response.data?.[0]) return null;
@@ -162,7 +162,7 @@ export async function getPosts(locale: StrapiLocale, page: number = 1) {
   );
   const response = await fetch(`${env.NEXT_PUBLIC_STRAPI_URL}/api/posts?${querystring}`, {
     headers: { Authorization: `Bearer ${env.STRAPI_ADMIN_API_TOKEN}` },
-    next: { revalidate: env.STRAPI_CACHE_PERIOD, tags: ['post'] },
+    next: { revalidate: env.STRAPI_CACHE_PERIOD, tags: ['post', 'post-category'] },
   }).then(fetchResponseHandler<PostsResponse>());
   return response;
 }
@@ -179,7 +179,7 @@ export async function getAllPosts(populate: string[] = ['category']) {
   );
   const response = await fetch(`${env.NEXT_PUBLIC_STRAPI_URL}/api/posts?${querystring}`, {
     headers: { Authorization: `Bearer ${env.STRAPI_ADMIN_API_TOKEN}` },
-    next: { revalidate: env.STRAPI_CACHE_PERIOD, tags: ['post'] },
+    next: { revalidate: env.STRAPI_CACHE_PERIOD, tags: ['post', 'post-category'] },
   }).then(fetchResponseHandler<PostsResponse>());
   return response.data;
 }
