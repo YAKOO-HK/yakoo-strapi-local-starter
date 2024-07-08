@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
+import Image, { ImageProps } from 'next/image';
 import PhotoAlbum from 'react-photo-album';
-import Lightbox from 'yet-another-react-lightbox';
+import Lightbox, { type SlideImage } from 'yet-another-react-lightbox';
 import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
 import { cn } from '@/lib/utils';
 import { ComponentGallery, DynamicZoneSectionProps } from '@/strapi/components';
@@ -18,7 +18,7 @@ export function GallerySection({ as, layout, slides }: ComponentGallery & Dynami
     <Component
       className={cn({
         container: layout === 'container',
-        'prose prose-neutral dark:prose-invert mx-auto': layout === 'prose',
+        'mx-auto max-w-prose': layout === 'prose',
       })}
     >
       <PhotoAlbum
@@ -30,13 +30,13 @@ export function GallerySection({ as, layout, slides }: ComponentGallery & Dynami
             width: (150 * attributes.width) / attributes.height,
             height: 150,
             alt: attributes.alternativeText || `Photo ${i + 1}`,
-            placeholder: (attributes.placeholder as `data:image/${string}`) || 'empty',
-          };
+            placeholder: attributes.placeholder || 'empty',
+          } satisfies ImageProps;
         })}
         renderPhoto={({ photo, imageProps }) => (
           <Image
             {...imageProps}
-            loader={StrapiRawImageLoader}
+            loader={StrapiImageLoader}
             src={photo.src}
             alt={photo.alt}
             width={photo.width}
@@ -45,7 +45,6 @@ export function GallerySection({ as, layout, slides }: ComponentGallery & Dynami
           />
         )}
         onClick={({ index: current }) => {
-          // console.log('onClick');
           setIndex(current);
         }}
       />
@@ -59,17 +58,16 @@ export function GallerySection({ as, layout, slides }: ComponentGallery & Dynami
             width: attributes.width,
             height: attributes.height,
             alt: attributes.alternativeText || `Photo ${i + 1}`,
-            placeholder: (attributes.placeholder as `data:image/${string}`) || 'empty',
-          };
+          } satisfies SlideImage;
         })}
         render={{
-          slide: ({ slide }) => (
+          slide: ({ slide, rect }) => (
             <Image
-              loader={StrapiImageLoader}
-              src={slide.src}
+              unoptimized
+              src={StrapiRawImageLoader({ src: slide.src })}
               alt={slide.alt || ''}
-              width={slide.width}
-              height={slide.height}
+              width={(rect.height * slide.width!) / slide.height!}
+              height={rect.height}
             />
           ),
           thumbnail: ({ slide, rect }) => (
