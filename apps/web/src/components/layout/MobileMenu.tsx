@@ -17,7 +17,7 @@ export function MobileMenu({ children }: { children?: React.ReactNode }) {
         </Button>
       </SheetTrigger>
       <SheetContent
-        className="bg-accent w-80"
+        className="bg-accent w-80 overflow-y-auto"
         side="right"
         onClick={(e) => {
           e.target instanceof HTMLAnchorElement && setOpen(false);

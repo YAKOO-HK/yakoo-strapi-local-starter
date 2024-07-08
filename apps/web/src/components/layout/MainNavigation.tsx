@@ -109,7 +109,7 @@ export function MobileMainNavigation({ items, className }: { items: NavigationIt
               return (
                 <li
                   key={parentItem.id}
-                  className="hover:bg-primary focus-within:bg-primary active:bg-primary group touch-none px-3 py-2 font-light"
+                  className="hover:bg-primary focus-within:bg-primary active:bg-primary group px-3 py-2 font-light"
                 >
                   <Link
                     href={parentItem.path}
@@ -125,7 +125,7 @@ export function MobileMainNavigation({ items, className }: { items: NavigationIt
             return (
               <li key={parentItem.id}>
                 <Collapsible>
-                  <CollapsibleTrigger className="aria-expanded:bg-primary text-primary hover:bg-primary focus-visible:bg-primary group flex w-full touch-none justify-between px-3 py-2 font-light hover:text-white focus-visible:text-white aria-expanded:border-b aria-expanded:border-white aria-expanded:text-white">
+                  <CollapsibleTrigger className="aria-expanded:bg-primary text-primary hover:bg-primary focus-visible:bg-primary group flex w-full justify-between px-3 py-2 font-light hover:text-white focus-visible:text-white aria-expanded:border-b aria-expanded:border-white aria-expanded:text-white">
                     <span>{parentItem.title}</span>
                     <ChevronDownIcon className="size-5 group-aria-expanded:rotate-180" aria-hidden />
                   </CollapsibleTrigger>
@@ -138,7 +138,7 @@ export function MobileMainNavigation({ items, className }: { items: NavigationIt
                           return (
                             <li
                               key={item.id}
-                              className="bg-primary/80 hover:bg-primary focus-within:bg-primary active:bg-primary group touch-none px-3 py-2 font-light"
+                              className="bg-primary/80 hover:bg-primary focus-within:bg-primary active:bg-primary group px-3 py-2 font-light"
                             >
                               <Link
                                 href={href}
