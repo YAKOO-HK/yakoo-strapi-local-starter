@@ -12,16 +12,16 @@
     "strapi": "strapi"
   },
   "dependencies": {
-    "@ckeditor/strapi-plugin-ckeditor": "^0.0.11",
-    "@strapi/plugin-color-picker": "4.24.5",
-    "@strapi/plugin-i18n": "4.24.5",
+    "@ckeditor/strapi-plugin-ckeditor": "^0.0.12",
+    "@strapi/plugin-color-picker": "4.25.2",
+    "@strapi/plugin-i18n": "4.25.2",
     "@strapi/plugin-seo": "^1.9.8",
-    "@strapi/plugin-users-permissions": "4.24.5",
-    "@strapi/provider-email-nodemailer": "4.24.5",
-    "@strapi/provider-upload-local": "4.24.5",
-    "@strapi/strapi": "4.24.5",
+    "@strapi/plugin-users-permissions": "4.25.2",
+    "@strapi/provider-email-nodemailer": "4.25.2",
+    "@strapi/provider-upload-local": "4.25.2",
+    "@strapi/strapi": "4.25.2",
     "axios": "^1.7.2",
-    "mysql2": "^3.10.0",
+    "mysql2": "^3.10.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "5.3.4",
@@ -47,7 +47,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@strapi/typescript-utils": "4.24.5",
-    "@types/node": "^20.14.2"
+    "@strapi/typescript-utils": "4.25.2",
+    "@types/node": "^20.14.10"
   }
 }
