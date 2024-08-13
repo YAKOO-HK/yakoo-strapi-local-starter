@@ -10,6 +10,8 @@ const LIMIT = 1;
 const TTL = 1000; // 1 seconds
 const rateLimit = rateLimitByIp(LIMIT, TTL);
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(req: NextRequest) {
   unstable_noStore();
   const searchParams = req.nextUrl.searchParams;
