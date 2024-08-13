@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image, { ImageProps } from 'next/image';
-import PhotoAlbum from 'react-photo-album';
+import { RowsPhotoAlbum } from 'react-photo-album';
 import Lightbox, { type SlideImage } from 'yet-another-react-lightbox';
 import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
 import { cn } from '@/lib/utils';
@@ -10,6 +10,7 @@ import { ComponentGallery, DynamicZoneSectionProps } from '@/strapi/components';
 import { StrapiImageLoader, StrapiRawImageLoader } from '@/strapi/image-loader';
 import 'yet-another-react-lightbox/styles.css';
 import 'yet-another-react-lightbox/plugins/thumbnails.css';
+import 'react-photo-album/rows.css';
 
 export function GallerySection({ as, layout, slides }: ComponentGallery & DynamicZoneSectionProps) {
   const Component = as;
@@ -21,8 +22,7 @@ export function GallerySection({ as, layout, slides }: ComponentGallery & Dynami
         'mx-auto max-w-prose': layout === 'prose',
       })}
     >
-      <PhotoAlbum
-        layout="rows"
+      <RowsPhotoAlbum
         targetRowHeight={150}
         photos={slides.data.map(({ attributes }, i) => {
           return {
@@ -33,17 +33,19 @@ export function GallerySection({ as, layout, slides }: ComponentGallery & Dynami
             placeholder: attributes.placeholder || 'empty',
           } satisfies ImageProps;
         })}
-        renderPhoto={({ photo, imageProps }) => (
-          <Image
-            {...imageProps}
-            loader={StrapiImageLoader}
-            src={photo.src}
-            alt={photo.alt}
-            width={photo.width}
-            height={photo.height}
-            placeholder={photo.placeholder}
-          />
-        )}
+        render={{
+          image: ({ onClick }, { photo, width, height }) => (
+            <Image
+              width={width}
+              height={height}
+              onClick={onClick}
+              loader={StrapiImageLoader}
+              src={photo.src}
+              alt={photo.alt}
+              placeholder={photo.placeholder}
+            />
+          ),
+        }}
         onClick={({ index: current }) => {
           setIndex(current);
         }}
