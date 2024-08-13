@@ -9,14 +9,14 @@
     "format": "prettier --write \"apps/web/**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
-    "@ianvs/prettier-plugin-sort-imports": "^4.2.1",
+    "@ianvs/prettier-plugin-sort-imports": "^4.3.1",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "prettier": "^3.3.2",
-    "prettier-plugin-tailwindcss": "^0.6.3",
-    "turbo": "^2.0.3"
+    "prettier": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.6",
+    "turbo": "^2.0.12"
   },
-  "packageManager": "pnpm@9.5.0",
+  "packageManager": "pnpm@9.7.0",
   "engines": {
     "node": ">=18"
   },
