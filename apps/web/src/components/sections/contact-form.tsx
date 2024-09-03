@@ -13,7 +13,7 @@ export async function ContactFormSection({
     <Component
       className={cn('@container py-8', {
         container: layout === 'container',
-        'mx-auto max-w-[65ch]': layout === 'prose',
+        'mx-auto max-w-prose': layout === 'prose',
       })}
     >
       <ContactForm sections={contactForm.attributes.sections} />

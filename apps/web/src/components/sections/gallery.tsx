@@ -27,8 +27,8 @@ export function GallerySection({ as, layout, slides }: ComponentGallery & Dynami
         photos={slides.data.map(({ attributes }, i) => {
           return {
             src: attributes.url,
-            width: (150 * attributes.width) / attributes.height,
-            height: 150,
+            width: attributes.width,
+            height: attributes.height,
             alt: attributes.alternativeText || `Photo ${i + 1}`,
             placeholder: attributes.placeholder || 'empty',
           } satisfies ImageProps;

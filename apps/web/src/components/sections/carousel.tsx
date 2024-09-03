@@ -100,7 +100,7 @@ export function CarouselSection({ as, slides, layout }: ComponentCarousel & Dyna
     <Component
       className={cn('relative', {
         'container px-0': layout === 'container',
-        'mx-auto max-w-[65ch]': layout === 'prose',
+        'mx-auto max-w-prose': layout === 'prose',
       })}
     >
       <span className="sr-only" aria-live="polite">
@@ -116,7 +116,7 @@ export function CarouselSection({ as, slides, layout }: ComponentCarousel & Dyna
       </button>
       <button
         role="button"
-        className="ring-offset-background focus-visible:ring-ring absolute  inset-y-2 right-2 z-10 w-8 rounded-md hover:bg-neutral-100/75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+        className="ring-offset-background focus-visible:ring-ring absolute inset-y-2 right-2 z-10 w-8 rounded-md hover:bg-neutral-100/75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
         onClick={scrollNext}
       >
         <ArrowRightIcon className="h-8 w-8" />
