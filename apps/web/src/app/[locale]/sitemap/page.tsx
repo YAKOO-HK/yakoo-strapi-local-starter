@@ -61,7 +61,7 @@ export default async function SiteMapPage({ params }: { params: { locale: Strapi
     <Main>
       <div className="container py-8">
         <h1 className={cn(typographyVariants({ variant: 'h1' }), 'mb-4')}>{t('title')}</h1>
-        <ul className="prose dark:prose-invert max-w-full">{nav.map(renderNavItem)}</ul>
+        <ul className="prose max-w-full dark:prose-invert">{nav.map(renderNavItem)}</ul>
       </div>
     </Main>
   );

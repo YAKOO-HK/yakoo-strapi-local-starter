@@ -7,7 +7,7 @@ export function PageTitleSection({
   layout,
   title,
   className,
-}: Omit<ComponentPageTitle, 'id' | '__component'> & DynamicZoneSectionProps & {className?:string}) {
+}: Omit<ComponentPageTitle, 'id' | '__component'> & DynamicZoneSectionProps & { className?: string }) {
   const Component = as;
   return (
     <Component

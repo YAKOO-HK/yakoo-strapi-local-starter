@@ -12,12 +12,12 @@ export function MobileMenu({ children }: { children?: React.ReactNode }) {
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button variant="ghost" size="icon">
-          <MenuIcon className={cn('text-primary h-6 w-6 dark:text-white')} />
+          <MenuIcon className={cn('size-6 text-primary dark:text-white')} />
           <span className="sr-only">Open Mobile Menu</span>
         </Button>
       </SheetTrigger>
       <SheetContent
-        className="bg-accent w-80 overflow-y-auto"
+        className="w-80 overflow-y-auto bg-accent"
         side="right"
         onClick={(e) => {
           e.target instanceof HTMLAnchorElement && setOpen(false);

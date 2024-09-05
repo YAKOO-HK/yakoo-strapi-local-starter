@@ -8,6 +8,7 @@
     "react-internal.js"
   ],
   "devDependencies": {
+    "@tanstack/eslint-plugin-query": "^5.53.0",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "eslint-config-next": "^14.2.8",
@@ -16,5 +17,8 @@
     "eslint-plugin-only-warn": "^1.1.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "eslint-plugin-tailwindcss": "^3.17.4"
   }
 }

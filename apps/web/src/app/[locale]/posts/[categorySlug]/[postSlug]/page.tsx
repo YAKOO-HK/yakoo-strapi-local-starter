@@ -109,7 +109,7 @@ export default async function SinglePostPage({
           <h1 className={cn(typographyVariants({ variant: 'h1' }), 'mb-8 text-center')}>{post.attributes.title}</h1>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <time dateTime={post.attributes.publishedAt} className="inline-flex items-center gap-2">
-              <CalendarIcon className="h-4 w-4" aria-label="Published on" />
+              <CalendarIcon className="size-4" aria-label="Published on" />
               {parseISO(post.attributes.publishedAt).toLocaleDateString(post.attributes.locale, {
                 dateStyle: 'long',
               })}
@@ -119,7 +119,7 @@ export default async function SinglePostPage({
                 className="inline-flex items-center gap-2 font-medium hover:underline"
                 href={`/posts/${category.attributes.slug}`}
               >
-                <TagIcon className="h-4 w-4" aria-label="Category" />
+                <TagIcon className="size-4" aria-label="Category" />
                 {category.attributes.title}
               </Link>
             )}

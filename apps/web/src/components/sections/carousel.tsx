@@ -23,7 +23,7 @@ function Slide({ image, title, caption }: Omit<ComponentSlide, 'link' | 'id' | '
         width={1920}
         height={(1920 * image.data.attributes.height) / image.data.attributes.width}
         placeholder={image.data.attributes.placeholder || 'empty'}
-        className="h-full w-full object-cover object-center"
+        className="size-full object-cover object-center"
         sizes="100vw"
       />
 
@@ -108,18 +108,18 @@ export function CarouselSection({ as, slides, layout }: ComponentCarousel & Dyna
       </span>
       <button
         role="button"
-        className="ring-offset-background focus-visible:ring-ring absolute inset-y-2 left-2 z-10 w-8 rounded-md hover:bg-neutral-100/75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+        className="absolute inset-y-2 left-2 z-10 w-8 rounded-md ring-offset-background hover:bg-neutral-100/75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
         onClick={scrollPrev}
       >
-        <ArrowLeftIcon className="h-8 w-8" />
+        <ArrowLeftIcon className="size-8" />
         <span className="sr-only">Previous Slide</span>
       </button>
       <button
         role="button"
-        className="ring-offset-background focus-visible:ring-ring absolute inset-y-2 right-2 z-10 w-8 rounded-md hover:bg-neutral-100/75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+        className="absolute inset-y-2 right-2 z-10 w-8 rounded-md ring-offset-background hover:bg-neutral-100/75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
         onClick={scrollNext}
       >
-        <ArrowRightIcon className="h-8 w-8" />
+        <ArrowRightIcon className="size-8" />
         <span className="sr-only">Next Slide</span>
       </button>
       <div className="embla__viewport overflow-hidden" ref={emblaRef}>
@@ -131,7 +131,7 @@ export function CarouselSection({ as, slides, layout }: ComponentCarousel & Dyna
                   href={link}
                   prefetch={false}
                   key={id}
-                  className="embla__slide h-auto w-full min-w-0 shrink-0 grow-0 basis-[100%]"
+                  className="embla__slide h-auto w-full min-w-0 shrink-0 grow-0 basis-full"
                   target={link.includes('://') ? '_blank' : undefined}
                   rel={link.includes('://') ? 'noopener noreferrer' : undefined}
                 >
@@ -140,7 +140,7 @@ export function CarouselSection({ as, slides, layout }: ComponentCarousel & Dyna
               );
             }
             return (
-              <div key={id} className="embla__slide h-auto w-full min-w-0 shrink-0 grow-0 basis-[100%]">
+              <div key={id} className="embla__slide h-auto w-full min-w-0 shrink-0 grow-0 basis-full">
                 <Slide image={image} title={title} caption={caption} />
               </div>
             );

@@ -31,7 +31,7 @@ export async function PostCard({
           </Link>
           <CardDescription>
             <time dateTime={attributes.publishedAt} className="inline-flex items-center gap-2">
-              <CalendarIcon className="h-4 w-4" aria-label="Published on" />
+              <CalendarIcon className="size-4" aria-label="Published on" />
               {parseISO(attributes.publishedAt).toLocaleDateString(locale, { dateStyle: 'long' })}
             </time>
           </CardDescription>

@@ -63,7 +63,7 @@ function ChatUI({
   });
   return (
     <>
-      <ScrollArea className="h-64 max-h-full min-h-[12rem]">
+      <ScrollArea className="h-64 max-h-full min-h-48">
         {messages.map((m) => (
           <div key={m.id} className="my-2 grid grid-cols-12 gap-2">
             <div className={'col-span-1 py-2 pl-2 text-right'}>{m.role === 'user' ? null : 'AI'}</div>
@@ -121,7 +121,7 @@ function EndChatButton() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="secondary" size="icon">
-          <MoreVerticalIcon className="h-4 w-4" aria-hidden />
+          <MoreVerticalIcon className="size-4" aria-hidden />
           <span className="sr-only">{t('moreActions')}</span>
         </Button>
       </DropdownMenuTrigger>

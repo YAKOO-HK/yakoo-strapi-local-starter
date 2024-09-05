@@ -81,7 +81,7 @@ export function Header({
                     label: t(`locales.${code}`),
                     current: locale === code,
                   }))}
-                  separator={<div className="bg-primary h-full w-px" />}
+                  separator={<div className="h-full w-px bg-primary" />}
                   className="h-6"
                   linkClassName="text-primary font-medium"
                 />
@@ -92,7 +92,7 @@ export function Header({
           </div>
         </div>
       </header>
-      <header className="border-b-border flex-no-wrap sticky top-0 z-30 flex gap-4 border-b bg-white p-2 shadow-md md:hidden">
+      <header className="flex-no-wrap sticky top-0 z-30 flex gap-4 border-b border-b-border bg-white p-2 shadow-md md:hidden">
         <div className="flex-no-wrap flex flex-1 items-center gap-2 self-stretch">
           <Link
             href={logo_link || '/'}
@@ -137,7 +137,7 @@ export function Header({
                   label: t(`locales.${code}`),
                   current: locale === code,
                 }))}
-                separator={<div className="bg-primary h-full w-px" />}
+                separator={<div className="h-full w-px bg-primary" />}
                 className="h-6"
                 linkClassName="text-primary dark:text-primary"
               />

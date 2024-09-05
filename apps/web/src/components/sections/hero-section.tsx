@@ -23,7 +23,7 @@ export function HeroSection({
   const Component = as;
   return (
     <Component
-      className={cn('text-foreground flex flex-col items-center md:flex-row', {
+      className={cn('flex flex-col items-center text-foreground md:flex-row', {
         dark: bgColor && tinycolor(bgColor).isDark(),
         'container px-0': layout === 'container',
         'md:flex-row-reverse': arrangement === 'image-last',

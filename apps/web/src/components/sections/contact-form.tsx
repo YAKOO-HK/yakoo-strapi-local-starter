@@ -11,7 +11,7 @@ export async function ContactFormSection({
   const contactForm = await getContactForm();
   return (
     <Component
-      className={cn('@container py-8', {
+      className={cn('py-8 @container', {
         container: layout === 'container',
         'mx-auto max-w-prose': layout === 'prose',
       })}

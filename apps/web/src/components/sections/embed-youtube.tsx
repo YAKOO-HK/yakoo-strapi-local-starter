@@ -16,7 +16,7 @@ export function EmbedYoutubeSection({
     >
       <div className="aspect-video">
         <iframe
-          className="h-full w-full"
+          className="size-full"
           loading="lazy"
           width={1920}
           height={1080}

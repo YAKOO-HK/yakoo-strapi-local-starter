@@ -37,7 +37,7 @@ export function BackToTopButton() {
   return (
     <button
       className={cn(
-        'bg-background shadow-foreground ring-offset-background focus-visible:ring-ring fixed bottom-4 right-4 z-50 rounded-full p-2 shadow-sm transition-opacity duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
+        'fixed bottom-4 right-4 z-50 rounded-full bg-background p-2 shadow-sm shadow-foreground ring-offset-background transition-opacity duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
         { 'opacity-100': showButton, 'pointer-events-none opacity-0': !showButton }
       )}
       // eslint-disable-next-line no-undef
@@ -45,7 +45,7 @@ export function BackToTopButton() {
       title="Back to top"
     >
       <span className="sr-only">Back to top</span>
-      <ChevronUpIcon className="h-6 w-6" aria-hidden />
+      <ChevronUpIcon className="size-6" aria-hidden />
     </button>
   );
 }

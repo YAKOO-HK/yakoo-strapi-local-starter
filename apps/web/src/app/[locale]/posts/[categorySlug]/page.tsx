@@ -101,7 +101,7 @@ export default async function PostCategoryListPage({
           <h1 className={cn(typographyVariants({ variant: 'h1' }))}>{category.attributes.title}</h1>
           <Link href="/posts" className={cn(buttonVariants({ variant: 'ghost', size: 'icon' }))}>
             <span className="sr-only">Back to All Posts</span>
-            <CloseIcon className="h-4 w-4" aria-hidden="true" />
+            <CloseIcon className="size-4" aria-hidden="true" />
           </Link>
         </div>
         <div className="grid grid-cols-1 items-stretch gap-8 md:grid-cols-2">
