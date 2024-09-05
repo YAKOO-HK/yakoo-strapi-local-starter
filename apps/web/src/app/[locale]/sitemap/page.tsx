@@ -53,7 +53,8 @@ function renderNavItem(item: NavigationItem) {
     </li>
   );
 }
-export default async function ({ params }: { params: { locale: StrapiLocale } }) {
+
+export default async function SiteMapPage({ params }: { params: { locale: StrapiLocale } }) {
   const t = await getTranslations({ locale: params.locale, namespace: 'sitemap' });
   const nav = await getMainNavigation(params.locale);
   return (
