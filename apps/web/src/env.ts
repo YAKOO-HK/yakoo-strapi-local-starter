@@ -40,6 +40,11 @@ export const env = createEnv({
     AWS_SECRET_ACCESS_KEY: z.string().trim().default(''),
     CLOUDFLARE_ACCOUNT_ID: z.string().trim().default(''),
     CLOUDFLARE_API_TOKEN: z.string().trim().default(''),
+    CLOUDFLARE_TURNSTILE_SECRET: z.string().trim().min(1).default('1x00000000000000000000AA'),
+    CLOUDFLARE_TURNSTILE_VERIFY_URL: z
+      .string()
+      .url()
+      .default('https://challenges.cloudflare.com/turnstile/v0/siteverify'),
     HCAPTCHA_SECRET: z.string().min(1).default('0x0000000000000000000000000000000000000000'),
     HCAPTCHA_VERIFY_URL: z.string().url().default('https://hcaptcha.com/siteverify'),
     HCAPTCHA_SCORE_THRESHOLD: z.coerce.number().min(0).max(1).default(0.5),
@@ -55,7 +60,9 @@ export const env = createEnv({
     NEXT_PUBLIC_SITE_URL: z.string().url().default('http://localhost:3000'),
     NEXT_PUBLIC_STRAPI_URL: z.string().url().default('http://localhost:1337'),
     NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID: z.string().trim().nullish(),
-    NEXT_PUBLIC_HCAPTCHA_SITEKEY: z.string().trim(),
+    NEXT_PUBLIC_CAPTCHA_PROVIDER: z.enum(['hcaptcha', 'turnstile']).default('hcaptcha'),
+    NEXT_PUBLIC_HCAPTCHA_SITEKEY: z.string().trim().default('10000000-ffff-ffff-ffff-000000000001'),
+    NEXT_PUBLIC_TURNSTILE_SITEKEY: z.string().trim().default('1x00000000000000000000AA'),
     NEXT_PUBLIC_GSCE_API: z.string().trim().default(''),
   },
   /*
@@ -84,6 +91,8 @@ export const env = createEnv({
     AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
     CLOUDFLARE_ACCOUNT_ID: process.env.CLOUDFLARE_ACCOUNT_ID,
     CLOUDFLARE_API_TOKEN: process.env.CLOUDFLARE_API_TOKEN,
+    CLOUDFLARE_TURNSTILE_SECRET: process.env.CLOUDFLARE_TURNSTILE_SECRET,
+    CLOUDFLARE_TURNSTILE_VERIFY_URL: process.env.CLOUDFLARE_TURNSTILE_VERIFY_URL,
     HCAPTCHA_SECRET: process.env.HCAPTCHA_SECRET,
     HCAPTCHA_VERIFY_URL: process.env.HCAPTCHA_VERIFY_URL,
     HCAPTCHA_SCORE_THRESHOLD: process.env.HCAPTCHA_SCORE_THRESHOLD,
@@ -91,7 +100,9 @@ export const env = createEnv({
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
     NEXT_PUBLIC_STRAPI_URL: process.env.NEXT_PUBLIC_STRAPI_URL,
     NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID,
+    NEXT_PUBLIC_CAPTCHA_PROVIDER: process.env.NEXT_PUBLIC_CAPTCHA_PROVIDER,
     NEXT_PUBLIC_HCAPTCHA_SITEKEY: process.env.NEXT_PUBLIC_HCAPTCHA_SITEKEY,
+    NEXT_PUBLIC_TURNSTILE_SITEKEY: process.env.NEXT_PUBLIC_TURNSTILE_SITEKEY,
     NEXT_PUBLIC_GSCE_API: process.env.NEXT_PUBLIC_GSCE_API,
   },
   emptyStringAsUndefined: true,

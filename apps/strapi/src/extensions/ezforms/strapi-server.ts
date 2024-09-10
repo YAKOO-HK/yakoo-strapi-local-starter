@@ -1,4 +1,5 @@
 import '@strapi/strapi';
+import type { Strapi } from '@strapi/strapi';
 import axios from 'axios';
 
 type HCaptchaVerifyError = string | string[];
@@ -62,7 +63,7 @@ export default (plugin: any) => {
 
       if (!hCaptcha_verify.data.success) {
         strapi.log.error('hCaptcha_verify');
-        strapi.log.error(hCaptcha_verify);
+        strapi.log.error(JSON.stringify(hCaptcha_verify.data));
         return {
           valid: false,
           message: 'Unable to verify captcha',
@@ -84,7 +85,7 @@ export default (plugin: any) => {
       };
     },
   });
-  plugin.services.turnstile = ({ strapi }: { strapi: any }) => ({
+  plugin.services.turnstile = ({ strapi }: { strapi: Strapi }) => ({
     async validate(token) {
       if (!token) {
         strapi.log.error('Missing turnstile Token');
@@ -97,18 +98,16 @@ export default (plugin: any) => {
       const secret = strapi.config.get('plugin.ezforms.captchaProvider.config.secret');
       // const sitekey = strapi.config.get('plugin.ezforms.captchaProvider.config.sitekey');
       const url = `https://challenges.cloudflare.com/turnstile/v0/siteverify`;
+      const requestContext = strapi.requestContext.get();
+      const remoteip = requestContext?.request.ip;
 
-      let turnstile_verify: TurnstileVerifyResponse | undefined;
+      let turnstile_verify: { data: TurnstileVerifyResponse } | undefined;
       try {
-        turnstile_verify = await axios.post(
-          url,
-          new URLSearchParams({
-            secret,
-            response: token,
-            // remoteip?
-          }),
-          { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
-        );
+        turnstile_verify = await axios.post(url, {
+          secret,
+          response: token,
+          remoteip,
+        });
         // console.log(turnstile_verify);
       } catch (e) {
         strapi.log.error(e);
@@ -119,9 +118,10 @@ export default (plugin: any) => {
         };
       }
 
-      if (!turnstile_verify.success) {
-        strapi.log.error('turnstile_verify');
-        strapi.log.error(turnstile_verify);
+      // console.log(turnstile_verify.data);
+      if (!turnstile_verify.data.success) {
+        strapi.log.warn('turnstile_verify failed');
+        strapi.log.warn(JSON.stringify(turnstile_verify.data));
         return {
           valid: false,
           message: 'Unable to verify captcha',
