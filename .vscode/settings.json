@@ -12,5 +12,8 @@
     "lightbox",
     "STRAPI",
     "TYPESENSE"
+  ],
+  "typescript.preferences.autoImportFileExcludePatterns": [
+    "@radix-ui"
   ]
 }
