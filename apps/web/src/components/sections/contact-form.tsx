@@ -5,6 +5,7 @@ import { ContactForm } from './contact-form-client';
 
 export async function ContactFormSection({
   layout,
+  locale,
   as = 'div',
 }: Omit<ComponentContactForm, 'id' | '__component'> & DynamicZoneSectionProps) {
   const Component = as;
@@ -16,7 +17,7 @@ export async function ContactFormSection({
         'mx-auto max-w-prose': layout === 'prose',
       })}
     >
-      <ContactForm sections={contactForm.attributes.sections} />
+      <ContactForm sections={contactForm.attributes.sections} locale={locale} />
     </Component>
   );
 }

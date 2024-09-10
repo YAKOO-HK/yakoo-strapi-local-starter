@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import HCaptcha from '@hcaptcha/react-hcaptcha';
+import type HCaptcha from '@hcaptcha/react-hcaptcha';
 import type { TurnstileInstance } from '@marsidev/react-turnstile';
 import { Loader2Icon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
@@ -15,6 +15,7 @@ import { Form } from '@/components/ui/form';
 import { toast } from '@/components/ui/use-toast';
 import { env } from '@/env';
 import type { FormComponent } from '@/strapi/components';
+import { StrapiLocale } from '@/strapi/strapi';
 
 function getDefaultValues({ sections }: { sections: Array<FormComponent> }) {
   const defaultValues: { [key: string]: unknown } = {
@@ -31,7 +32,7 @@ function getDefaultValues({ sections }: { sections: Array<FormComponent> }) {
   }, defaultValues);
 }
 
-export function ContactForm({ sections }: { sections: Array<FormComponent> }) {
+export function ContactForm({ sections, locale }: { sections: Array<FormComponent>; locale: StrapiLocale }) {
   const hCaptchaRef = useRef<HCaptcha>(null);
   const turnstileRef = useRef<TurnstileInstance>(null);
   const methods = useForm({
@@ -114,6 +115,7 @@ export function ContactForm({ sections }: { sections: Array<FormComponent> }) {
               name="token"
               captchaRef={turnstileRef}
               rules={{ required: 'Required.' }}
+              options={{ language: locale }}
             />
           ) : (
             <ControlledHCaptcha

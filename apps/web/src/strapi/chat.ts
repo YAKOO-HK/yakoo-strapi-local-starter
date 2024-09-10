@@ -5,7 +5,7 @@ import { env } from '@/env';
 import { fetchResponseHandler } from '@/lib/fetch-utils';
 
 export const StartChatSchema = z.object({
-  hCaptcha: z.string().trim().min(1, 'Required.'),
+  token: z.string().trim().min(1, 'Required.'),
   name: z.string().trim().min(1, 'Required.').max(191, 'Too Long.'),
 });
 export type StartChatBody = z.infer<typeof StartChatSchema>;

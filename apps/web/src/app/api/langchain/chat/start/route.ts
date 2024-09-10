@@ -2,7 +2,7 @@ import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { randomUUID } from 'crypto';
 import { ZodError } from 'zod';
-import { verifyCaptcha } from '@/lib/hCaptcha';
+import { verifyCaptcha } from '@/lib/captcha';
 import { withBodyValidation } from '@/lib/middleware/zod-validation';
 import { createChat, getChatByUUID, StartChatSchema } from '@/strapi/chat';
 
@@ -21,9 +21,9 @@ export const GET = async () => {
 };
 
 export const POST = withBodyValidation(StartChatSchema, async (_req, body) => {
-  const { hCaptcha, name } = body;
-  if (!verifyCaptcha(hCaptcha)) {
-    throw new ZodError([{ path: ['hCaptcha'], message: 'hCaptcha is invalid', code: 'custom' }]);
+  const { token, name } = body;
+  if (!verifyCaptcha(token)) {
+    throw new ZodError([{ path: ['token'], message: 'Captcha is invalid', code: 'custom' }]);
   }
   const uuid = randomUUID();
   await createChat(name, uuid);

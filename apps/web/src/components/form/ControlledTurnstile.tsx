@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
+import { Turnstile, type TurnstileInstance, type TurnstileProps } from '@marsidev/react-turnstile';
 import type { ControllerProps, FieldPath, FieldValues } from 'react-hook-form';
 import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { env } from '@/env';
@@ -9,6 +9,7 @@ export interface ControlledTurnstileProps<
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 > extends Omit<React.HTMLAttributes<HTMLDivElement>, 'defaultValue'>,
     Omit<ControllerProps<TFieldValues, TName>, 'render'> {
+  options?: TurnstileProps['options'];
   captchaRef?: React.RefObject<TurnstileInstance>;
 }
 
@@ -21,6 +22,7 @@ function ControlledTurnstile<
   defaultValue,
   rules,
   shouldUnregister,
+  options,
   captchaRef,
   ...props
 }: ControlledTurnstileProps<TFieldValues, TName>) {
@@ -36,6 +38,7 @@ function ControlledTurnstile<
           <FormControl>
             <Turnstile
               siteKey={env.NEXT_PUBLIC_TURNSTILE_SITEKEY}
+              options={options}
               onSuccess={(token) => {
                 onChange(token);
                 onBlur();

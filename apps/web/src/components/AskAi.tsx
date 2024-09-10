@@ -1,12 +1,14 @@
 'use client';
 
 import React, { startTransition, useEffect, useRef } from 'react';
-import HCaptcha from '@hcaptcha/react-hcaptcha';
+import type HCaptcha from '@hcaptcha/react-hcaptcha';
+import type { TurnstileInstance } from '@marsidev/react-turnstile';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Message, useChat } from 'ai/react';
 import { MoreVerticalIcon } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useInView } from 'react-intersection-observer';
+import { env } from '@/env';
 import { useMediaQuery } from '@/hooks/use-media-query';
 import { useZodForm } from '@/hooks/useZodForm';
 import { fetchResponseHandler } from '@/lib/fetch-utils';
@@ -14,6 +16,7 @@ import { cn } from '@/lib/utils';
 import { ChatData, StartChatSchema } from '@/strapi/chat';
 import { ControlledHCaptcha } from './form/ControlledHCaptcha';
 import { ControlledTextField } from './form/ControlledTextField';
+import { ControlledTurnstile } from './form/ControlledTurnstile';
 import { Button } from './ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from './ui/drawer';
@@ -134,11 +137,13 @@ function EndChatButton() {
 
 function StatChatUI() {
   const t = useTranslations('layout.chatbot');
+  const language = useLocale();
   const queryClient = useQueryClient();
   const hCaptchaRef = useRef<HCaptcha>(null);
+  const turnstileRef = useRef<TurnstileInstance>(null);
   const methods = useZodForm({
     zodSchema: StartChatSchema,
-    defaultValues: { hCaptcha: '', name: '' },
+    defaultValues: { token: '', name: '' },
     onSubmit: async (data) => {
       await fetch('/api/langchain/chat/start', { method: 'POST', body: JSON.stringify(data) }).then(
         fetchResponseHandler()
@@ -149,16 +154,27 @@ function StatChatUI() {
       });
     },
     onError: () => {
+      turnstileRef.current?.reset();
       hCaptchaRef.current?.resetCaptcha();
     },
   });
-  const { control, onFormSubmit } = methods;
+  const {
+    control,
+    onFormSubmit,
+    formState: { isSubmitting },
+  } = methods;
   return (
     <Form {...methods}>
       <form onSubmit={onFormSubmit} className="grid grid-cols-1 gap-2">
         <ControlledTextField control={control} name="name" label={t('userNameLabel')} className="w-full" />
-        <ControlledHCaptcha control={control} name="hCaptcha" hCaptchaRef={hCaptchaRef} />
-        <Button type="submit">{t('startChat')}</Button>
+        {env.NEXT_PUBLIC_CAPTCHA_PROVIDER === 'turnstile' ? (
+          <ControlledTurnstile control={control} name="token" captchaRef={turnstileRef} options={{ language }} />
+        ) : (
+          <ControlledHCaptcha control={control} name="token" hCaptchaRef={hCaptchaRef} />
+        )}
+        <Button type="submit" disabled={isSubmitting}>
+          {t('startChat')}
+        </Button>
       </form>
     </Form>
   );
