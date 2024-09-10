@@ -89,6 +89,11 @@ export default ({ env }) => ({
           sitekey: env('HCAPTCHA_SITEKEY'),
           score: 0.3,
         },
+        // name :'turnstile',
+        // config: {
+        //   secret: env('TURNSTILE_SECRET'),
+        //   sitekey: env('TURNSTILE_SITEKEY'),
+        // },
       },
       notificationProviders: [
         {
