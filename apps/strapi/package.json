@@ -12,16 +12,16 @@
     "strapi": "strapi"
   },
   "dependencies": {
-    "@ckeditor/strapi-plugin-ckeditor": "^0.0.13",
-    "@strapi/plugin-color-picker": "4.25.10",
-    "@strapi/plugin-i18n": "4.25.10",
+    "@ckeditor/strapi-plugin-ckeditor": "^0.1.0",
+    "@strapi/plugin-color-picker": "4.25.13",
+    "@strapi/plugin-i18n": "4.25.13",
     "@strapi/plugin-seo": "^1.9.9",
-    "@strapi/plugin-users-permissions": "4.25.10",
-    "@strapi/provider-email-nodemailer": "4.25.10",
-    "@strapi/provider-upload-local": "4.25.10",
-    "@strapi/strapi": "4.25.10",
+    "@strapi/plugin-users-permissions": "4.25.13",
+    "@strapi/provider-email-nodemailer": "4.25.13",
+    "@strapi/provider-upload-local": "4.25.13",
+    "@strapi/strapi": "4.25.13",
     "axios": "^1.7.7",
-    "mysql2": "^3.11.0",
+    "mysql2": "^3.11.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "5.3.4",
@@ -29,7 +29,7 @@
     "strapi-plugin-config-sync": "^1.2.6",
     "strapi-plugin-ezforms": "^0.1.7",
     "strapi-plugin-local-image-sharp": "^1.7.0",
-    "strapi-plugin-navigation": "^2.5.3",
+    "strapi-plugin-navigation": "^2.5.4",
     "strapi-plugin-placeholder": "^4.4.0",
     "strapi-plugin-publisher": "^1.5.7",
     "strapi-plugin-rest-cache": "^4.2.9",
@@ -47,7 +47,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@strapi/typescript-utils": "4.25.10",
-    "@types/node": "^20.16.5"
+    "@strapi/typescript-utils": "4.25.13",
+    "@types/node": "^20.16.11"
   }
 }
