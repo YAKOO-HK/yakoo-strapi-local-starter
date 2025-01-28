@@ -6,6 +6,13 @@ export default ({ env }) => ({
   app: {
     keys: env.array('APP_KEYS'),
   },
+  logger: {
+    update: { enabled: false },
+    startup: { enabled: true },
+  },
+  transfer: {
+    remote: { enabled: false }, // disable remote transfer by default
+  },
   webhooks: {
     populateRelations: env.bool('WEBHOOKS_POPULATE_RELATIONS', false),
   },

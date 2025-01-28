@@ -24,7 +24,7 @@ export function GallerySection({ as, layout, slides }: ComponentGallery & Dynami
     >
       <RowsPhotoAlbum
         targetRowHeight={150}
-        photos={slides.data.map(({ attributes }, i) => {
+        photos={slides.map((attributes, i) => {
           return {
             src: attributes.url,
             width: attributes.width,
@@ -53,7 +53,7 @@ export function GallerySection({ as, layout, slides }: ComponentGallery & Dynami
       <Lightbox
         index={index}
         plugins={[Thumbnails]}
-        slides={slides.data.map(({ attributes }, i) => {
+        slides={slides.map((attributes, i) => {
           return {
             type: 'image',
             src: attributes.url,

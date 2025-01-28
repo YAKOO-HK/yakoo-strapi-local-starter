@@ -1,8 +1,9 @@
 import { type Metadata } from 'next';
+import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { GoogleAnalytics } from '@next/third-parties/google';
-import { NextIntlClientProvider, useMessages } from 'next-intl';
-import { unstable_setRequestLocale } from 'next-intl/server';
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages, setRequestLocale } from 'next-intl/server';
 import { AskAi } from '@/components/AskAi';
 import { BackToTopButton } from '@/components/layout/BackToTopButton';
 import { Footer } from '@/components/layout/Footer';
@@ -11,13 +12,19 @@ import { SkipToMain } from '@/components/layout/SkipToMain';
 import { LdJson } from '@/components/ldjson/ldjson';
 import { Toaster } from '@/components/ui/toaster';
 import { env } from '@/env';
-import { locales } from '@/navigation';
+import { locales } from '@/i18n/routing';
 import { getMainNavigation } from '@/strapi/navigation';
 import { getSiteMetadata } from '@/strapi/site-metadata';
 import { getOpenGraphImage, StrapiLocale } from '@/strapi/strapi';
 import '../global.css';
 
-export async function generateMetadata({ params }: { params: { locale: StrapiLocale } }) {
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+
+export async function generateMetadata(props: { params: Promise<{ locale: StrapiLocale }> }) {
+  const params = await props.params;
+  if (!locales.includes(params.locale)) {
+    notFound();
+  }
   const { seo } = await getSiteMetadata(params.locale);
   return {
     metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),
@@ -43,40 +50,32 @@ export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
-function IntlProvider({ locale, children }: { locale: StrapiLocale; children: React.ReactNode }) {
-  const messages = useMessages();
-  return (
-    <NextIntlClientProvider key={locale} locale={locale} messages={messages}>
-      {children}
-    </NextIntlClientProvider>
-  );
-}
-
-export default async function LocaleLayout({
-  children,
-  params,
-}: {
+export default async function LocaleLayout(props: {
   children: React.ReactNode;
-  params: { locale: StrapiLocale }; // TODO: use zod to check?
+  params: Promise<{ locale: StrapiLocale }>;
 }) {
+  const params = await props.params;
+  const { children } = props;
   if (!locales.includes(params.locale)) {
     notFound();
   }
-  unstable_setRequestLocale(params.locale);
+  setRequestLocale(params.locale);
+  const messages = await getMessages();
   const { logo, logo2, logo_link, logo2_link, locale, seo } = await getSiteMetadata(params.locale);
   const navigationItems = await getMainNavigation(params.locale);
+  // console.dir(navigationItems, { depth: 10 });
   return (
     <html lang={locale} dir="ltr">
-      <body>
-        <IntlProvider locale={locale}>
+      <body className={inter.variable}>
+        <NextIntlClientProvider key={locale} locale={locale} messages={messages}>
           <LdJson structuredData={seo.structuredData} />
           {env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID ? (
             <GoogleAnalytics gaId={env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID} />
           ) : null}
           <SkipToMain />
           <Header
-            logo={logo.data}
-            logo2={logo2.data}
+            logo={logo}
+            logo2={logo2}
             logo_link={logo_link}
             logo2_link={logo2_link}
             navigationItems={navigationItems}
@@ -102,7 +101,7 @@ export default async function LocaleLayout({
               <span className="ml-1 hidden font-bold 2xl:inline-block">2xl</span>
             </div>
           )}
-        </IntlProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

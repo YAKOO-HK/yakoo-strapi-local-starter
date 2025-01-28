@@ -3,9 +3,9 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { TypesenseSearch } from '@/components/TypesenseSearch';
 import { env } from '@/env';
+import { Link, locales } from '@/i18n/routing';
 import { isExternalLink } from '@/lib/link';
 import { cn } from '@/lib/utils';
-import { Link, locales } from '@/navigation';
 import { StrapiImageLoader } from '@/strapi/image-loader';
 import { type NavigationItem } from '@/strapi/navigation';
 import { StrapiLocale, StrapiMedia } from '@/strapi/strapi';
@@ -42,11 +42,11 @@ export function Header({
             >
               <Image
                 loader={StrapiImageLoader}
-                src={logo.attributes.url}
+                src={logo.url}
                 className={cn('block h-[48px] w-auto lg:h-[64px]')}
-                width={(64 * logo.attributes.width) / logo.attributes.height}
+                width={(64 * logo.width) / logo.height}
                 height={64}
-                alt={logo.attributes.alternativeText || ''}
+                alt={logo.alternativeText || ''}
                 priority
               />
               <span className="sr-only">Home</span>
@@ -59,11 +59,11 @@ export function Header({
               >
                 <Image
                   loader={StrapiImageLoader}
-                  src={logo2.attributes.url}
+                  src={logo2.url}
                   className={cn('block h-[48px] w-auto lg:h-[64px]')}
-                  width={(64 * logo2.attributes.width) / logo2.attributes.height}
+                  width={(64 * logo2.width) / logo2.height}
                   height={64}
-                  alt={logo2.attributes.alternativeText || ''}
+                  alt={logo2.alternativeText || ''}
                   priority
                 />
               </Link>
@@ -101,11 +101,11 @@ export function Header({
           >
             <Image
               loader={StrapiImageLoader}
-              src={logo.attributes.url}
+              src={logo.url}
               className={cn('block h-[48px] w-auto')}
-              width={(48 * logo.attributes.width) / logo.attributes.height}
+              width={(48 * logo.width) / logo.height}
               height={48}
-              alt={logo.attributes.alternativeText || ''}
+              alt={logo.alternativeText || ''}
               priority
             />
             <span className="sr-only">Home</span>
@@ -118,11 +118,11 @@ export function Header({
             >
               <Image
                 loader={StrapiImageLoader}
-                src={logo2.attributes.url}
+                src={logo2.url}
                 className={cn('block h-[48px] w-auto')}
-                width={(48 * logo2.attributes.width) / logo2.attributes.height}
+                width={(48 * logo2.width) / logo2.height}
                 height={48}
-                alt={logo2.attributes.alternativeText || ''}
+                alt={logo2.alternativeText || ''}
                 priority
               />
             </Link>

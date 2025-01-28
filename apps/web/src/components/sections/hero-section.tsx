@@ -33,12 +33,12 @@ export function HeroSection({
       <div className="md:basis-1/2">
         <Image
           loader={StrapiImageLoader}
-          src={image.data.attributes.url}
-          alt={image.data.attributes.alternativeText || ''}
-          height={(960 * image.data.attributes.height) / image.data.attributes.width}
+          src={image.url}
+          alt={image.alternativeText || ''}
+          height={(960 * image.height) / image.width}
           width={960}
           sizes="50vw"
-          placeholder={image.data.attributes.placeholder || 'empty'}
+          placeholder={image.placeholder || 'empty'}
         />
       </div>
       <div

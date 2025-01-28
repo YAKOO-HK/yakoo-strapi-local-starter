@@ -1,0 +1,58 @@
+{
+  "version": "0.0.0",
+  "name": "@repo/plugin-ezforms",
+  "description": "Reimplement excl-networks/strapi-plugin-ezforms for strapi v5",
+  "license": "MIT",
+  "keywords": [],
+  "type": "commonjs",
+  "exports": {
+    "./package.json": "./package.json",
+    "./strapi-server": {
+      "types": "./dist/server/src/index.d.ts",
+      "source": "./server/src/index.ts",
+      "import": "./dist/server/index.mjs",
+      "require": "./dist/server/index.js",
+      "default": "./dist/server/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "strapi-plugin build",
+    "watch": "strapi-plugin watch",
+    "watch:link": "strapi-plugin watch:link",
+    "verify": "strapi-plugin verify",
+    "test:ts:back": "run -T tsc -p server/tsconfig.json"
+  },
+  "dependencies": {
+    "axios": "^1.7.9"
+  },
+  "devDependencies": {
+    "@strapi/sdk-plugin": "^5.2.8",
+    "@strapi/strapi": "^5.6.0",
+    "@strapi/typescript-utils": "^5.6.0",
+    "@types/koa": "^2.15.0",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.2"
+  },
+  "peerDependencies": {
+    "@strapi/sdk-plugin": "^5.2.7",
+    "@strapi/strapi": "^5.1.1"
+  },
+  "strapi": {
+    "kind": "plugin",
+    "name": "ezforms",
+    "displayName": "EZ Forms (Custom)",
+    "description": "Reimplement excl-networks/strapi-plugin-ezforms for strapi v5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/yakoo-hk/yakoo-strapi-local-starter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yakoo-hk/yakoo-strapi-local-starter/issues"
+  },
+  "homepage": "https://github.com/yakoo-hk/yakoo-strapi-local-starter#readme",
+  "author": "Yakoo Technology Limited <hmku@yakoo.com.hk>"
+}

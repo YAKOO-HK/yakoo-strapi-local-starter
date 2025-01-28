@@ -2,15 +2,28 @@
   "name": "Authenticated",
   "description": "Default role given to authenticated user.",
   "type": "authenticated",
+  "documentId": "ol1yf43x6m76mgdeesdffq9v",
+  "locale": null,
   "permissions": [
     {
-      "action": "plugin::users-permissions.auth.changePassword"
+      "action": "plugin::ezforms.submitController.index",
+      "documentId": "lzjfvqd7mtpcxgv22fochjo4",
+      "locale": null
     },
     {
-      "action": "plugin::users-permissions.role.find"
+      "action": "plugin::users-permissions.auth.changePassword",
+      "documentId": "ma341s7da3ipct7pfrw57onk",
+      "locale": null
     },
     {
-      "action": "plugin::users-permissions.user.me"
+      "action": "plugin::users-permissions.role.find",
+      "documentId": "wa7h43pfm4180p3r8bn5jl21",
+      "locale": null
+    },
+    {
+      "action": "plugin::users-permissions.user.me",
+      "documentId": "y8igaongp3ewm5balhoh2i8i",
+      "locale": null
     }
   ]
 }

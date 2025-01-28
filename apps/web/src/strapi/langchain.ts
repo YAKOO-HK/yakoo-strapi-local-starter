@@ -1,10 +1,10 @@
 import { Document } from '@langchain/core/documents';
 import type { BlocksContent } from '@strapi/blocks-react-renderer';
 import { htmlToText } from 'html-to-text';
-import { PostsResponse } from '@/strapi/posts';
-import { UnwrapArray } from '@/types/helpers';
-import { PageComponent } from './components';
-import { PagesResponse } from './pages';
+import type { PostsResponse } from '@/strapi/posts';
+import type { UnwrapArray } from '@/types/helpers';
+import type { PageComponent } from './components';
+import type { PagesResponse } from './pages';
 
 function rootNodeToText(node: UnwrapArray<BlocksContent>): string | null {
   switch (node.type) {
@@ -102,7 +102,7 @@ export function pageComponentToText(sections?: PageComponent[]) {
 }
 
 export function postToDocument(
-  post: Pick<UnwrapArray<PostsResponse['data']>['attributes'], 'title' | 'abstract' | 'sections' | 'slug' | 'locale'>
+  post: Pick<UnwrapArray<PostsResponse['data']>, 'title' | 'abstract' | 'sections' | 'slug' | 'locale'>
 ) {
   const text = `# ${post.title}\n${post.abstract}\n${pageComponentToText(post.sections)}`;
   // console.log(text);
@@ -118,7 +118,7 @@ export function postToDocument(
 }
 
 export function pageToDocument(
-  page: Pick<UnwrapArray<PagesResponse['data']>['attributes'], 'title' | 'sections' | 'slug' | 'locale'>
+  page: Pick<UnwrapArray<PagesResponse['data']>, 'title' | 'sections' | 'slug' | 'locale'>
 ) {
   const text = `# ${page.title}\n${pageComponentToText(page.sections)}`;
   // console.log(text);

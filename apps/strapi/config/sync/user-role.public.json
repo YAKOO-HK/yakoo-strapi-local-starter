@@ -2,30 +2,48 @@
   "name": "Public",
   "description": "Default role given to unauthenticated user.",
   "type": "public",
+  "documentId": "ac58xou6pkk25tgqgxu4i918",
+  "locale": null,
   "permissions": [
     {
-      "action": "plugin::ezforms.submitController.index"
+      "action": "plugin::ezforms.submitController.index",
+      "documentId": "g85jj5ws7f5mz0ycxgiumi7s",
+      "locale": null
     },
     {
-      "action": "plugin::users-permissions.auth.callback"
+      "action": "plugin::users-permissions.auth.callback",
+      "documentId": "i3ftegl6zzphmnk0x6h1ad9y",
+      "locale": null
     },
     {
-      "action": "plugin::users-permissions.auth.connect"
+      "action": "plugin::users-permissions.auth.connect",
+      "documentId": "l09k3lyverya7n4sriyi4b0f",
+      "locale": null
     },
     {
-      "action": "plugin::users-permissions.auth.emailConfirmation"
+      "action": "plugin::users-permissions.auth.emailConfirmation",
+      "documentId": "fmcvq7fztaa7xduvsi7dpw5q",
+      "locale": null
     },
     {
-      "action": "plugin::users-permissions.auth.forgotPassword"
+      "action": "plugin::users-permissions.auth.forgotPassword",
+      "documentId": "er4u3fitqtomdimx9pf9n5gl",
+      "locale": null
     },
     {
-      "action": "plugin::users-permissions.auth.register"
+      "action": "plugin::users-permissions.auth.register",
+      "documentId": "oizhtznjhc372ja9lvctwh1f",
+      "locale": null
     },
     {
-      "action": "plugin::users-permissions.auth.resetPassword"
+      "action": "plugin::users-permissions.auth.resetPassword",
+      "documentId": "hwtbh6g4kcwajf7j2lp4ucrp",
+      "locale": null
     },
     {
-      "action": "plugin::users-permissions.auth.sendEmailConfirmation"
+      "action": "plugin::users-permissions.auth.sendEmailConfirmation",
+      "documentId": "u9mwr75vfj7ggttuwik19t0f",
+      "locale": null
     }
   ]
 }

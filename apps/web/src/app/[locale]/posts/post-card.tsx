@@ -4,8 +4,8 @@ import { CalendarIcon } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import { buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Link } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
-import { Link } from '@/navigation';
 import { StrapiImageLoader } from '@/strapi/image-loader';
 import { PostsResponse } from '@/strapi/posts';
 import { StrapiLocale } from '@/strapi/strapi';
@@ -21,7 +21,7 @@ export async function PostCard({
   categorySlug?: string;
 }) {
   const t = await getTranslations({ locale, namespace: 'posts' });
-  const { id, attributes } = post;
+  const { id, ...attributes } = post;
   return (
     <article data-post-id={id}>
       <Card>
@@ -43,11 +43,11 @@ export async function PostCard({
         >
           <Image
             loader={StrapiImageLoader}
-            src={attributes.image.data.attributes.url}
-            alt={attributes.image.data.attributes.alternativeText || ''}
-            width={attributes.image.data.attributes.width}
-            height={attributes.image.data.attributes.height}
-            placeholder={attributes.image.data.attributes.placeholder || 'empty'}
+            src={attributes.image.url}
+            alt={attributes.image.alternativeText || ''}
+            width={attributes.image.width}
+            height={attributes.image.height}
+            placeholder={attributes.image.placeholder || 'empty'}
           />
         </Link>
         <CardContent className="p-6">

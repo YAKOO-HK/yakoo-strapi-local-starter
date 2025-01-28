@@ -13,10 +13,7 @@ const Command = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <CommandPrimitive
     ref={ref}
-    className={cn(
-      'flex size-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground',
-      className
-    )}
+    className={cn('flex size-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground', className)}
     {...props}
   />
 ));
@@ -29,7 +26,7 @@ interface CommandDialogProps extends DialogProps {
 const CommandDialog = ({ children, commandProps, ...props }: CommandDialogProps) => {
   return (
     <Dialog {...props}>
-      <DialogContent className="overflow-hidden p-0 shadow-lg">
+      <DialogContent className="overflow-hidden p-0 shadow-lg" aria-describedby={undefined}>
         <Command
           {...commandProps}
           className={cn(

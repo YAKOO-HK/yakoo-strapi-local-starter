@@ -17,7 +17,7 @@ export async function ContactFormSection({
         'mx-auto max-w-prose': layout === 'prose',
       })}
     >
-      <ContactForm sections={contactForm.attributes.sections} locale={locale} />
+      <ContactForm sections={contactForm.sections} locale={locale} />
     </Component>
   );
 }

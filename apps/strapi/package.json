@@ -12,42 +12,40 @@
     "strapi": "strapi"
   },
   "dependencies": {
-    "@ckeditor/strapi-plugin-ckeditor": "^0.1.0",
-    "@strapi/plugin-color-picker": "4.25.13",
-    "@strapi/plugin-i18n": "4.25.13",
-    "@strapi/plugin-seo": "^1.9.9",
-    "@strapi/plugin-users-permissions": "4.25.13",
-    "@strapi/provider-email-nodemailer": "4.25.13",
-    "@strapi/provider-upload-local": "4.25.13",
-    "@strapi/strapi": "4.25.13",
-    "axios": "^1.7.7",
-    "mysql2": "^3.11.3",
+    "@ckeditor/strapi-plugin-ckeditor": "^1.1.0",
+    "@repo/plugin-ezforms": "workspace:*",
+    "@repo/plugin-local-image-sharp": "workspace:*",
+    "@strapi/plugin-color-picker": "5.6.0",
+    "@strapi/plugin-seo": "^2.0.4",
+    "@strapi/plugin-users-permissions": "5.6.0",
+    "@strapi/provider-email-nodemailer": "5.6.0",
+    "@strapi/provider-upload-local": "5.6.0",
+    "@strapi/strapi": "5.6.0",
+    "axios": "^1.7.9",
+    "mysql2": "^3.12.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "5.3.4",
+    "react-router-dom": "^6.28.1",
     "sharp": "^0.33.5",
-    "strapi-plugin-config-sync": "^1.2.6",
-    "strapi-plugin-ezforms": "^0.1.7",
-    "strapi-plugin-local-image-sharp": "^1.7.0",
-    "strapi-plugin-navigation": "^2.5.4",
-    "strapi-plugin-placeholder": "^4.4.0",
-    "strapi-plugin-publisher": "^1.5.7",
-    "strapi-plugin-rest-cache": "^4.2.9",
-    "styled-components": "5.3.11"
+    "strapi-plugin-config-sync": "^3.1.1",
+    "strapi-plugin-navigation": "3.0.3",
+    "strapi-plugin-placeholder": "github:Gaylord-Julien/strapi-plugin-placeholder#v5",
+    "styled-components": "^6.1.13"
   },
   "author": {
-    "name": "A Strapi developer"
+    "name": "YAKOO Technology Limited"
   },
   "strapi": {
     "uuid": "db859789-82bd-459a-8d53-6aa76ab92ec9"
   },
   "engines": {
-    "node": ">=18.0.0 <=20.x.x",
+    "node": ">=18.0.0 <=22.x.x",
     "npm": ">=6.0.0"
   },
   "license": "MIT",
   "devDependencies": {
-    "@strapi/typescript-utils": "4.25.13",
-    "@types/node": "^20.16.11"
+    "@strapi/typescript-utils": "5.6.0",
+    "@types/node": "^20.17.10",
+    "vite": "^5.4.11"
   }
 }

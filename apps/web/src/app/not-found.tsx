@@ -1,9 +1,7 @@
 'use client';
 
 import { redirect, usePathname } from 'next/navigation';
-
-// Can be imported from a shared config
-const defaultLocale = 'en';
+import { defaultLocale } from '@/i18n/routing';
 
 export default function NotFound() {
   const pathname = usePathname();

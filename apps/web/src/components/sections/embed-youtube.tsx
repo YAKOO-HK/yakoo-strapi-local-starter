@@ -11,7 +11,7 @@ export function EmbedYoutubeSection({
     <Component
       className={cn({
         container: layout === 'container',
-        'prose mx-auto': layout === 'prose',
+        'mx-auto max-w-prose': layout === 'prose',
       })}
     >
       <div className="aspect-video">

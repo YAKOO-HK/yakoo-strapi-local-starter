@@ -37,7 +37,6 @@ function ControlledHCaptcha<
             {React.createElement(HCaptcha, {
               // temp solution after ts5.0 breaks HCaptcha
               sitekey: env.NEXT_PUBLIC_HCAPTCHA_SITEKEY,
-              // eslint-disable-next-line no-unused-vars
               onVerify: (token, _ekey) => {
                 // console.log(token, _ekey);
                 onChange(token);

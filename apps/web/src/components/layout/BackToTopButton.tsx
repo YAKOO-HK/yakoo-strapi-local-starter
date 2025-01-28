@@ -14,17 +14,15 @@ function useShowBackToTop() {
       //   innerHeight: window.innerHeight,
       //   show: window.scrollY > window.innerHeight / 3,
       // });
-      // eslint-disable-next-line no-undef
       if (window.scrollY > window.innerHeight / 3) {
         setShow(true);
       } else {
         setShow(false);
       }
     };
-    // eslint-disable-next-line no-undef
+
     window.addEventListener('scroll', handleScroll);
     return () => {
-      // eslint-disable-next-line no-undef
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
@@ -40,7 +38,6 @@ export function BackToTopButton() {
         'fixed bottom-4 right-4 z-50 rounded-full bg-background p-2 shadow-sm shadow-foreground ring-offset-background transition-opacity duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
         { 'opacity-100': showButton, 'pointer-events-none opacity-0': !showButton }
       )}
-      // eslint-disable-next-line no-undef
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       title="Back to top"
     >

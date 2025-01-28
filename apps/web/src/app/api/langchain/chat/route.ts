@@ -86,12 +86,12 @@ function getStandaloneQuestionPrompt(messages: ChatMessage[]) {
 }
 
 export async function POST(req: Request) {
-  const uuid = cookies().get('langchain-chat-id')?.value ?? '';
+  const uuid = (await cookies()).get('langchain-chat-id')?.value ?? '';
   const chatHistory = await getChatByUUID(uuid);
   if (!chatHistory) {
     return new NextResponse('Chat History Not Found', { status: 400 });
   }
-  if (chatHistory.attributes.history.length >= 40) {
+  if (chatHistory.history.length >= 40) {
     // (user + assistant) x 20 = 40
     return new NextResponse('Limit Exceeded', { status: 400 });
   }
@@ -118,7 +118,7 @@ export async function POST(req: Request) {
   const prompt = getPrompt(messages);
   const chain = RunnableSequence.from([
     {
-      userName: () => chatHistory.attributes.name,
+      userName: () => chatHistory.name,
       context: async () => {
         const serialized = formatDocumentsAsString(relevantDocs);
         // console.log('context', serialized);
@@ -139,10 +139,14 @@ export async function POST(req: Request) {
             // check that main chain (without parent) is finished:
             if (parentRunId == null) {
               // console.log(JSON.stringify(outputs));
-              await updateChat(chatHistory.id, [
-                ...messages.map((message) => ({ ...message, id: message.id || nanoid() })),
-                { id: nanoid(), role: 'assistant', content: outputs.output, createdAt: new Date() },
-              ]);
+              try {
+                await updateChat(chatHistory.documentId, [
+                  ...messages.map((message) => ({ ...message, id: message.id || nanoid() })),
+                  { id: nanoid(), role: 'assistant', content: outputs.output, createdAt: new Date() },
+                ]);
+              } catch (e) {
+                console.warn(e);
+              }
             }
           },
         },

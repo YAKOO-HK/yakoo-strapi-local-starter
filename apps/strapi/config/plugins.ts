@@ -6,6 +6,9 @@ export default ({ env }) => ({
       maxAge: 31536000, // which corresponds to 1 year: 60 seconds × 60 minutes × 24 hours × 365 days = 31536000 seconds.
     },
   },
+  seo: {
+    enabled: true,
+  },
   upload: {
     config: {
       provider: 'local',
@@ -31,33 +34,33 @@ export default ({ env }) => ({
       },
     },
   },
-  'rest-cache': {
-    config: {
-      provider: {
-        name: 'memory',
-        getTimeout: 500,
-        options: {
-          // The maximum size of the cache
-          max: 32767,
-          // Update to the current time whenever it is retrieved from cache, causing it to not expire
-          updateAgeOnGet: false,
-          // ...
-        },
-      },
-      strategy: {
-        // resetOnStartup: true,
-        contentTypes: [
-          // List of content types to cache
-          'api::post.post',
-          'api::post-category.post-category',
-          'api::page.page',
-          // 'api::navigations.navigation',
-          'api::site-metadata.site-metadata',
-          'api::homepage.homepage',
-        ],
-      },
-    },
-  },
+  // 'rest-cache': {
+  //   config: {
+  //     provider: {
+  //       name: 'memory',
+  //       getTimeout: 500,
+  //       options: {
+  //         // The maximum size of the cache
+  //         max: 32767,
+  //         // Update to the current time whenever it is retrieved from cache, causing it to not expire
+  //         updateAgeOnGet: false,
+  //         // ...
+  //       },
+  //     },
+  //     strategy: {
+  //       // resetOnStartup: true,
+  //       contentTypes: [
+  //         // List of content types to cache
+  //         'api::post.post',
+  //         'api::post-category.post-category',
+  //         'api::page.page',
+  //         // 'api::navigations.navigation',
+  //         'api::site-metadata.site-metadata',
+  //         'api::homepage.homepage',
+  //       ],
+  //     },
+  //   },
+  // },
   navigation: {
     enabled: true,
     config: {
@@ -67,18 +70,19 @@ export default ({ env }) => ({
   ckeditor: {
     enabled: true,
   },
-  publisher: {
-    enabled: true,
-    config: {
-      components: {
-        dateTimePicker: {
-          step: 15,
-        },
-      },
-      contentTypes: ['api::post.post'],
-    },
-  },
+  // publisher: {
+  //   enabled: true,
+  //   config: {
+  //     components: {
+  //       dateTimePicker: {
+  //         step: 15,
+  //       },
+  //     },
+  //     contentTypes: ['api::post.post'],
+  //   },
+  // },
   ezforms: {
+    enabled: true,
     config: {
       enableFormName: true,
       captchaProvider: {
@@ -105,5 +109,9 @@ export default ({ env }) => ({
         },
       ],
     },
+  },
+  'strapi-plugin-placeholder': {
+    enabled: true,
+    resolve: './node_modules/strapi-plugin-placeholder',
   },
 });

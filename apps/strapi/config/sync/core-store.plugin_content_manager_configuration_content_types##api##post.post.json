@@ -220,10 +220,9 @@
         ]
       ],
       "list": [
-        "id",
         "title",
         "category",
-        "abstract"
+        "slug"
       ]
     }
   },

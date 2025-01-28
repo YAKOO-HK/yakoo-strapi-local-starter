@@ -10,19 +10,19 @@ export function FeatureImageSection({ as, layout, image }: ComponentFeatureImage
       className={cn(
         {
           container: layout === 'container',
-          'prose mx-auto': layout === 'prose',
+          'mx-auto max-w-prose': layout === 'prose',
         },
         'px-0'
       )}
     >
       <Image
         loader={StrapiImageLoader}
-        src={image.data.attributes.url}
-        alt={image.data.attributes.alternativeText || ''}
-        height={(1920 * image.data.attributes.height) / image.data.attributes.width}
+        src={image.url}
+        alt={image.alternativeText || ''}
+        height={(1920 * image.height) / image.width}
         width={1920}
         sizes="100vw"
-        placeholder={image.data.attributes.placeholder || 'empty'}
+        placeholder={image.placeholder || 'empty'}
       />
     </Component>
   );

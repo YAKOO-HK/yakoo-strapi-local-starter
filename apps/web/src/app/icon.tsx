@@ -7,7 +7,7 @@ export default async function Icon() {
     return new Response(null, {
       status: 302, // redirect
       headers: {
-        Location: `${env.NEXT_PUBLIC_STRAPI_URL}${favicon.data.attributes.url}`,
+        Location: `${env.NEXT_PUBLIC_STRAPI_URL}${favicon.url}`,
       },
     });
   } catch (e) {

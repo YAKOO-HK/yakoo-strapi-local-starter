@@ -5,13 +5,14 @@ import { Main } from '@/components/layout/Main';
 import { SingleBreadcrumbLdJson } from '@/components/ldjson/breadcrumb';
 import { StrapiMetaPagination } from '@/components/StrapiMetaPagination';
 import { buttonVariants } from '@/components/ui/button';
+import { Link } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
-import { Link } from '@/navigation';
 import { getAllCategories, getPosts } from '@/strapi/posts';
 import { StrapiLocale } from '@/strapi/strapi';
 import { PostCard } from './post-card';
 
-export async function generateMetadata({ params }: { params: { locale: StrapiLocale } }) {
+export async function generateMetadata(props: { params: Promise<{ locale: StrapiLocale }> }) {
+  const params = await props.params;
   const t = await getTranslations({ locale: params.locale, namespace: 'posts' });
   return {
     title: t('title'),
@@ -29,18 +30,13 @@ export async function generateMetadata({ params }: { params: { locale: StrapiLoc
 }
 
 const ParamsSchema = z.object({ page: z.coerce.number().int().min(1).default(1) });
-export default async function PostsPage({
-  searchParams,
-  params: { locale },
-}: {
-  searchParams: unknown;
-  params: { locale: StrapiLocale };
+export default async function PostsPage(props: {
+  searchParams: Promise<unknown>;
+  params: Promise<{ locale: StrapiLocale }>;
 }) {
-  const params = ParamsSchema.safeParse(searchParams);
-  let page = 1;
-  if (params.success) {
-    page = params.data.page;
-  }
+  const { locale } = await props.params;
+  const searchParams = ParamsSchema.safeParse(await props.searchParams);
+  const page = searchParams.success ? searchParams.data.page : 1;
   const posts = await getPosts(locale, page);
   const categories = await getAllCategories(locale);
   const t = await getTranslations({ locale, namespace: 'posts' });
@@ -50,25 +46,20 @@ export default async function PostsPage({
       <SingleBreadcrumbLdJson itemList={[{ name: t('title') }]} />
       <div className="container py-8">
         <div className="mb-4 flex flex-wrap items-center gap-x-4 gap-y-2">
-          {categories.map(({ id, attributes }) => (
+          {categories.map((category) => (
             <Link
-              href={`/posts/${attributes.slug}`}
+              href={`/posts/${category.slug}`}
               prefetch={false}
-              key={id}
+              key={category.documentId}
               className={cn(buttonVariants({ variant: 'outline' }), 'rounded-full')}
             >
-              {attributes.title}
+              {category.title}
             </Link>
           ))}
         </div>
         <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-2">
           {posts.data.map((post) => (
-            <PostCard
-              post={post}
-              key={post.id}
-              locale={locale}
-              categorySlug={post.attributes.category?.data?.attributes.slug ?? '-'}
-            />
+            <PostCard post={post} key={post.id} locale={locale} categorySlug={post.category?.slug ?? '-'} />
           ))}
         </div>
         <StrapiMetaPagination
