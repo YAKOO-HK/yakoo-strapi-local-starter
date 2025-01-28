@@ -23,7 +23,6 @@ const SkipToMain = ({ target = '#main' }: { target?: `#${string}` }) => {
   const handleSkipToMain = React.useCallback(
     (e: React.UIEvent<unknown>) => {
       e.preventDefault();
-      // eslint-disable-next-line no-undef
       const ele = document.querySelector<HTMLElement>(target);
       ele?.scrollIntoView();
       ele?.focus();

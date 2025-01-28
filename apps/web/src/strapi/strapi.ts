@@ -16,21 +16,21 @@ export type StrapiImageFormat = {
 };
 export type StrapiMedia = {
   id: number;
-  attributes: {
-    name: string;
-    alternativeText: string | null;
-    height: number;
-    width: number;
-    url: string;
-    placeholder: `data:image/${string}` | null;
-    mime: string;
-    ext: string;
-    formats: {
-      large?: StrapiImageFormat;
-      medium?: StrapiImageFormat;
-      small?: StrapiImageFormat;
-      thumbnail?: StrapiImageFormat;
-    };
+  documentId: string;
+  name: string;
+  alternativeText: string | null;
+  response: string | null;
+  height: number;
+  width: number;
+  url: string;
+  placeholder: `data:image/${string}` | null;
+  mime: string;
+  ext: string;
+  formats: {
+    large?: StrapiImageFormat;
+    medium?: StrapiImageFormat;
+    small?: StrapiImageFormat;
+    thumbnail?: StrapiImageFormat;
   };
 };
 
@@ -46,25 +46,25 @@ export type StrapiSEO = {
   metaDescription: string | null;
   metaRobots: string | null;
   keywords: string | null;
-  metaImage?: { data: StrapiMedia | null };
+  metaImage: StrapiMedia | null;
   structuredData: unknown | null;
   canonicalURL: string | null;
 };
 
 export function getOpenGraphImage(seo: StrapiSEO) {
-  if (seo.metaImage?.data) {
+  if (seo.metaImage) {
     return {
       // TODO: image optimization
-      url: `${env.NEXT_PUBLIC_STRAPI_URL}${seo.metaImage.data.attributes.url}`,
-      width: seo.metaImage.data.attributes.width,
-      height: seo.metaImage.data.attributes.height,
-      alt: seo.metaImage.data.attributes.alternativeText || '',
+      url: `${env.NEXT_PUBLIC_STRAPI_URL}${seo.metaImage.url}`,
+      width: seo.metaImage.width,
+      height: seo.metaImage.height,
+      alt: seo.metaImage.alternativeText || '',
     };
   }
   return undefined;
 }
 
-export function toMetadata(seo?: StrapiSEO) {
+export function toMetadata(seo?: StrapiSEO | null) {
   if (!seo) {
     return {} satisfies Metadata;
   }

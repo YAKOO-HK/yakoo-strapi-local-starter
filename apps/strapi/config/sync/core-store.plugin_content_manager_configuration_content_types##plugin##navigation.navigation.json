@@ -7,8 +7,8 @@
       "filterable": true,
       "searchable": true,
       "pageSize": 10,
-      "mainField": "localeCode",
-      "defaultSortBy": "localeCode",
+      "mainField": "id",
+      "defaultSortBy": "id",
       "defaultSortOrder": "ASC"
     },
     "metadatas": {
@@ -75,35 +75,6 @@
           "label": "items",
           "searchable": false,
           "sortable": false
-        }
-      },
-      "localizations": {
-        "edit": {
-          "label": "localizations",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true,
-          "mainField": "localeCode"
-        },
-        "list": {
-          "label": "localizations",
-          "searchable": false,
-          "sortable": false
-        }
-      },
-      "localeCode": {
-        "edit": {
-          "label": "localeCode",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "localeCode",
-          "searchable": true,
-          "sortable": true
         }
       },
       "createdAt": {
@@ -190,16 +161,6 @@
           },
           {
             "name": "items",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "localizations",
-            "size": 6
-          },
-          {
-            "name": "localeCode",
             "size": 6
           }
         ]

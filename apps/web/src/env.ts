@@ -7,6 +7,7 @@ export const env = createEnv({
    * Will throw if you access these variables on the client.
    */
   server: {
+    NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
     STRAPI_ADMIN_API_TOKEN: z.string().trim().min(1, 'STRAPI_ADMIN_API_TOKEN must be set'),
     STRAPI_CACHE_PERIOD: z.coerce
       .number()
@@ -72,6 +73,7 @@ export const env = createEnv({
    * 💡 You'll get type errors if not all variables from `server` & `client` are included here.
    */
   runtimeEnv: {
+    NODE_ENV: process.env.NODE_ENV,
     STRAPI_ADMIN_API_TOKEN: process.env.STRAPI_ADMIN_API_TOKEN,
     STRAPI_CACHE_PERIOD: process.env.STRAPI_CACHE_PERIOD,
     STRAPI_CACHE_PERIOD_LONG: process.env.STRAPI_CACHE_PERIOD_LONG,

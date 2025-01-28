@@ -18,11 +18,11 @@ function Slide({ image, title, caption }: Omit<ComponentSlide, 'link' | 'id' | '
     <AspectRatio ratio={16 / 9}>
       <Image
         loader={StrapiImageLoader}
-        src={image.data.attributes.url}
-        alt={image.data.attributes.alternativeText || ''}
+        src={image.url}
+        alt={image.alternativeText || ''}
         width={1920}
-        height={(1920 * image.data.attributes.height) / image.data.attributes.width}
-        placeholder={image.data.attributes.placeholder || 'empty'}
+        height={(1920 * image.height) / image.width}
+        placeholder={image.placeholder || 'empty'}
         className="size-full object-cover object-center"
         sizes="100vw"
       />

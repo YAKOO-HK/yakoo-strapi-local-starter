@@ -1,0 +1,68 @@
+{
+  "version": "0.0.0",
+  "name": "@repo/plugin-local-image-sharp",
+  "description": "Reimplement strapi-community/strapi-plugin-local-image-sharp for Strapi v5",
+  "license": "MIT",
+  "keywords": [],
+  "type": "commonjs",
+  "exports": {
+    "./package.json": "./package.json",
+    "./strapi-server": {
+      "types": "./dist/server/src/index.d.ts",
+      "source": "./server/src/index.ts",
+      "import": "./dist/server/index.mjs",
+      "require": "./dist/server/index.js",
+      "default": "./dist/server/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "strapi-plugin build",
+    "watch": "strapi-plugin watch",
+    "watch:link": "strapi-plugin watch:link",
+    "verify": "strapi-plugin verify",
+    "test:ts:back": "run -T tsc -p server/tsconfig.json"
+  },
+  "dependencies": {
+    "etag": "^1.8.1",
+    "ipx": "^3.0.1",
+    "ohash": "^1.1.4",
+    "qs": "^6.13.1",
+    "ufo": "^1.5.4",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@koa/router": "^12.0.2",
+    "@strapi/sdk-plugin": "^5.2.8",
+    "@strapi/strapi": "^5.6.0",
+    "@strapi/typescript-utils": "^5.6.0",
+    "@types/etag": "^1.8.3",
+    "@types/koa": "^2.15.0",
+    "@types/koa__router": "^12",
+    "@types/node": "^20",
+    "@types/qs": "^6.9.17",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.2"
+  },
+  "peerDependencies": {
+    "@strapi/sdk-plugin": "^5.2.7",
+    "@strapi/strapi": "^5.1.1"
+  },
+  "strapi": {
+    "kind": "plugin",
+    "name": "local-image-sharp",
+    "displayName": "Local Image Sharp (Custom)",
+    "description": "Reimplement strapi-community/strapi-plugin-local-image-sharp for Strapi v5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/YAKOO-HK/yakoo-strapi-local-starter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/YAKOO-HK/yakoo-strapi-local-starter/issues"
+  },
+  "homepage": "https://github.com/YAKOO-HK/yakoo-strapi-local-starter#readme",
+  "author": "Yakoo Technology Limited <hmku@yakoo.com.hk>"
+}

@@ -2,13 +2,14 @@ import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { randomUUID } from 'crypto';
 import { ZodError } from 'zod';
+import { env } from '@/env';
 import { verifyCaptcha } from '@/lib/captcha';
 import { withBodyValidation } from '@/lib/middleware/zod-validation';
 import { createChat, getChatByUUID, StartChatSchema } from '@/strapi/chat';
 
 export const revalidate = 0;
 export const GET = async () => {
-  const entry = cookies().get('langchain-chat-id');
+  const entry = (await cookies()).get('langchain-chat-id');
   if (!entry?.value) {
     return NextResponse.json({ uuid: null, history: [], name: '' });
   }
@@ -17,7 +18,7 @@ export const GET = async () => {
     return NextResponse.json({ uuid: null, history: [], name: '' });
   }
   // console.log({ uuid: entry?.value, chat: chat.attributes });
-  return NextResponse.json(chat.attributes);
+  return NextResponse.json(chat);
 };
 
 export const POST = withBodyValidation(StartChatSchema, async (_req, body) => {
@@ -27,11 +28,12 @@ export const POST = withBodyValidation(StartChatSchema, async (_req, body) => {
   }
   const uuid = randomUUID();
   await createChat(name, uuid);
-  cookies().set('langchain-chat-id', uuid, {
+  (await cookies()).set('langchain-chat-id', uuid, {
     maxAge: 60 * 60 * 24 * 30, // 30 days
     path: '/',
     sameSite: 'strict',
-    secure: true,
+    secure: env.NODE_ENV === 'production',
+    httpOnly: true,
   });
   return NextResponse.json({ uuid });
 });

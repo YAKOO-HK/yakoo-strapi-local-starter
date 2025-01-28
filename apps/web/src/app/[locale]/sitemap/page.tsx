@@ -3,13 +3,14 @@ import { getTranslations } from 'next-intl/server';
 import { Main } from '@/components/layout/Main';
 import { typographyVariants } from '@/components/ui/typography';
 import { env } from '@/env';
+import { Link } from '@/i18n/routing';
 import { isExternalLink } from '@/lib/link';
 import { cn } from '@/lib/utils';
-import { Link } from '@/navigation';
 import { getMainNavigation, NavigationItem } from '@/strapi/navigation';
 import { StrapiLocale } from '@/strapi/strapi';
 
-export async function generateMetadata({ params }: { params: { locale: StrapiLocale } }) {
+export async function generateMetadata(props: { params: Promise<{ locale: StrapiLocale }> }) {
+  const params = await props.params;
   const t = await getTranslations({ locale: params.locale, namespace: 'sitemap' });
   return {
     title: t('title'),
@@ -54,7 +55,8 @@ function renderNavItem(item: NavigationItem) {
   );
 }
 
-export default async function SiteMapPage({ params }: { params: { locale: StrapiLocale } }) {
+export default async function SiteMapPage(props: { params: Promise<{ locale: StrapiLocale }> }) {
+  const params = await props.params;
   const t = await getTranslations({ locale: params.locale, namespace: 'sitemap' });
   const nav = await getMainNavigation(params.locale);
   return (

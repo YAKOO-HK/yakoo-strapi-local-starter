@@ -1,44 +1,13 @@
-import { getServerSideSitemap } from 'next-sitemap';
+import { getServerSideSitemapIndex } from 'next-sitemap';
 import { env } from '@/env';
-import { locales } from '@/navigation';
-import { getAllPages } from '@/strapi/pages';
-import { getAllCategories, getAllPosts } from '@/strapi/posts';
+import { locales } from '@/i18n/routing';
 
-export const dynamic = 'force-dynamic';
+export const dynamic = 'force-static';
 export async function GET() {
-  const hundredPages = await getAllPages();
-  const hundredPosts = await getAllPosts();
-  const categories = await getAllCategories('all');
-
-  const now = new Date().toISOString();
-  return getServerSideSitemap([
-    // pages: /:slug
-    ...hundredPages.map(({ attributes }) => ({
-      loc: `${env.NEXT_PUBLIC_SITE_URL}/${attributes.locale}/${attributes.slug}`,
-      lastmod: attributes.updatedAt,
-      changefreq: 'weekly' as const,
-      priority: 0.7,
-    })),
-    // /posts
-    ...locales.map((locale) => ({
-      loc: `${env.NEXT_PUBLIC_SITE_URL}/${locale}/posts`,
-      lastmod: now, // TODO: should be the latest post updatedAt/publishedAt?
-      changefreq: 'daily' as const,
-      priority: 0.5,
-    })),
-    // /posts/:category
-    ...categories.map(({ attributes }) => ({
-      loc: `${env.NEXT_PUBLIC_SITE_URL}/${attributes.locale}/posts/${attributes.slug}`,
-      lastmod: now, // TODO: should be the latest post updatedAt/publishedAt?
-      changefreq: 'weekly' as const,
-      priority: 0.5,
-    })),
-    // /posts/:category/:slug
-    ...hundredPosts.map(({ attributes }) => ({
-      loc: `${env.NEXT_PUBLIC_SITE_URL}/${attributes.locale}/posts/${attributes.category?.data?.attributes.slug ?? '-'}/${attributes.slug}`,
-      lastmod: attributes.updatedAt,
-      changefreq: 'weekly' as const,
-      priority: 0.5,
-    })),
-  ]);
+  return getServerSideSitemapIndex(
+    locales.map((locale) => {
+      const url = new URL(`${locale}/sitemap.xml`, env.NEXT_PUBLIC_SITE_URL);
+      return url.toString();
+    })
+  );
 }

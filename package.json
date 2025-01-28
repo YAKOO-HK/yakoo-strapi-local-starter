@@ -6,29 +6,20 @@
     "build": "turbo build --no-daemon",
     "dev": "turbo dev --no-daemon",
     "lint": "turbo lint --no-daemon",
+    "build:plugins": "turbo build --filter=@repo/plugin-*",
     "format": "prettier --write \"apps/web/**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
-    "@ianvs/prettier-plugin-sort-imports": "^4.3.1",
+    "@ianvs/prettier-plugin-sort-imports": "^4.4.0",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "prettier": "^3.3.3",
-    "prettier-plugin-tailwindcss": "^0.6.8",
-    "turbo": "^2.1.3"
+    "prettier": "^3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.9",
+    "turbo": "^2.3.3"
   },
-  "packageManager": "pnpm@9.12.1",
+  "packageManager": "pnpm@9.15.0",
   "engines": {
     "node": ">=18"
   },
-  "pnpm": {
-    "overrides": {
-      "micromatch@<4.0.8": ">=4.0.8",
-      "svelte@<4.2.19": ">=4.2.19",
-      "sharp@<0.32.6": ">=0.32.6",
-      "nodemailer@<=6.9.8": ">=6.9.9",
-      "tar@<6.2.1": ">=6.2.1",
-      "axios@>=0.8.1 <0.28.0": ">=0.28.0",
-      "ws@>=8.0.0 <8.17.1": ">=8.17.1"
-    }
-  }
+  "pnpm": {}
 }

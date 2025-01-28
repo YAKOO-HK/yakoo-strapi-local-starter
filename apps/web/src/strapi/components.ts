@@ -16,9 +16,7 @@ export type ComponentHeroSection = {
   tagline: string | null;
   content: BlocksContent | null;
   bgColor: string | null;
-  image: {
-    data: StrapiMedia;
-  };
+  image: StrapiMedia;
   buttonLink: string | null;
   buttonText: string | null;
   arrangement: 'image-first' | 'image-last';
@@ -42,9 +40,7 @@ export type ComponentFeatureImage = {
   id: number;
   __component: 'page-components.feature-image';
   layout: ComponentLayout;
-  image: {
-    data: StrapiMedia;
-  };
+  image: StrapiMedia;
 };
 
 export type ComponentSlide = {
@@ -53,10 +49,9 @@ export type ComponentSlide = {
   title: string | null;
   caption: string | null;
   link: string | null;
-  image: {
-    data: StrapiMedia;
-  };
+  image: StrapiMedia;
 };
+
 export type ComponentCarousel = {
   id: number;
   __component: 'page-components.carousel';
@@ -68,7 +63,7 @@ export type ComponentGallery = {
   id: number;
   __component: 'page-components.gallery';
   layout: ComponentLayout;
-  slides: { data: Array<StrapiMedia> };
+  slides: Array<StrapiMedia>;
 };
 
 export type ComponentEmbedYoutube = {

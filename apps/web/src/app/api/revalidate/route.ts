@@ -1,6 +1,7 @@
 import { revalidateTag } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 import { RecursiveCharacterTextSplitter } from '@langchain/textsplitters';
+import { formatISO } from 'date-fns/formatISO';
 import { env } from '@/env';
 import { getVectorStoreWithTypesense, typesenseClient } from '@/lib/typesense';
 import { pageToDocument, postToDocument } from '@/strapi/langchain';
@@ -14,7 +15,10 @@ import { pageToDocument, postToDocument } from '@/strapi/langchain';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function indexTypesense(body: any) {
   const vectorStore = await getVectorStoreWithTypesense();
-  if (['entry.create', 'entry.update', 'entry.delete', 'entry.publish', 'entry.unpublish'].includes(body.event)) {
+  // as of Strapi v5, user cannot directly update a published entry. So we can just handle publish event
+  // 'entry.create', 'entry.update'
+  if (['entry.delete', 'entry.publish', 'entry.unpublish'].includes(body.event)) {
+    // console.dir(body.entry, { depth: 10 });
     const splitter = new RecursiveCharacterTextSplitter({
       chunkSize: 500,
       chunkOverlap: 100,
@@ -52,7 +56,7 @@ async function indexTypesense(body: any) {
 
 export const POST = async (req: NextRequest) => {
   const body = await req.json();
-  console.log('revalidateTag', body.model, body.event);
+  console.log(formatISO(Date.now()), 'revalidateTag', body.model, body.event);
   if (typeof body.model === 'string' && body.model) {
     revalidateTag(body.model);
     // console.log('webhook body', body);

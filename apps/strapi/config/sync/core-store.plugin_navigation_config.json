@@ -32,8 +32,6 @@
         "Post"
       ]
     },
-    "i18nEnabled": true,
-    "pruneObsoleteI18nNavigations": false,
     "pathDefaultFields": {
       "api::page.page": [
         "slug",
@@ -49,6 +47,7 @@
       ]
     },
     "cascadeMenuAttached": true,
+    "preferCustomContentTypes": true,
     "isCacheEnabled": false
   },
   "type": "object",

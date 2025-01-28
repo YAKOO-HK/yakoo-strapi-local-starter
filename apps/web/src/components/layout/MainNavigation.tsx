@@ -3,9 +3,9 @@
 import { ChevronDownIcon } from 'lucide-react';
 import { buttonVariants } from '@/components/ui/button';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { Link } from '@/i18n/routing';
 import { isExternalLink } from '@/lib/link';
 import { cn } from '@/lib/utils';
-import { Link } from '@/navigation';
 import { NavigationItem } from '@/strapi/navigation';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu';
 
@@ -15,8 +15,12 @@ function getHref(item: NavigationItem, parentItem: NavigationItem) {
   if (isExternal) {
     // do nothing
   } else if (item.type === 'INTERNAL') {
-    // TODO: handle different type
-    href = `/${item.related.slug}`;
+    // TODO: handle different type in a registry?
+    if (item.related?.__type === 'api::post-category.post-category') {
+      href = `/posts/${item.related.slug}`;
+    } else {
+      href = `/${item.related?.slug ?? item.slug}`;
+    }
   } else if (item.path.startsWith(parentItem.path)) {
     // do not inherit parent path
     href = item.path.substring(parentItem.path.length);
@@ -28,6 +32,7 @@ function getHref(item: NavigationItem, parentItem: NavigationItem) {
 }
 
 export function MainNavigation({ items, className }: { items: NavigationItem[]; className?: string }) {
+  // console.dir(items, { depth: 10 });
   return (
     <nav className={className}>
       <ul className="flex flex-wrap items-center">

@@ -13,7 +13,7 @@ import { useMediaQuery } from '@/hooks/use-media-query';
 import { useZodForm } from '@/hooks/useZodForm';
 import { fetchResponseHandler } from '@/lib/fetch-utils';
 import { cn } from '@/lib/utils';
-import { ChatData, StartChatSchema } from '@/strapi/chat';
+import { ChatHistory, StartChatSchema } from '@/strapi/chat';
 import { ControlledHCaptcha } from './form/ControlledHCaptcha';
 import { ControlledTextField } from './form/ControlledTextField';
 import { ControlledTurnstile } from './form/ControlledTurnstile';
@@ -186,7 +186,7 @@ export function AskAi({ className }: { className?: string }) {
   const isDesktop = useMediaQuery('(min-width: 768px)');
   const { data } = useQuery({
     queryKey: ['langchain-chat-id'],
-    queryFn: () => fetch('/api/langchain/chat/start').then(fetchResponseHandler<ChatData>()),
+    queryFn: () => fetch('/api/langchain/chat/start').then(fetchResponseHandler<ChatHistory>()),
   });
 
   if (isDesktop) {
@@ -201,6 +201,7 @@ export function AskAi({ className }: { className?: string }) {
           onEscapeKeyDown={(e) => e.preventDefault()}
           onPointerDownOutside={(e) => e.preventDefault()}
           onInteractOutside={(e) => e.preventDefault()}
+          aria-describedby={undefined}
           className="px-3 sm:p-6"
         >
           <DialogHeader>

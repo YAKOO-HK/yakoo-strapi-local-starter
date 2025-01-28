@@ -15,7 +15,7 @@ export function PageTitleSection({
         'py-8',
         {
           container: layout === 'container',
-          'prose prose-neutral dark:prose-invert': layout === 'prose',
+          'mx-auto max-w-prose': layout === 'prose',
         },
         className
       )}

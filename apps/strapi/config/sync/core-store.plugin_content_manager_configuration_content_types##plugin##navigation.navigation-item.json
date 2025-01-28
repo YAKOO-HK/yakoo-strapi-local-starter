@@ -132,14 +132,27 @@
           "sortable": true
         }
       },
+      "autoSync": {
+        "edit": {
+          "label": "autoSync",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "autoSync",
+          "searchable": true,
+          "sortable": true
+        }
+      },
       "related": {
         "edit": {
           "label": "related",
           "description": "",
           "placeholder": "",
           "visible": true,
-          "editable": true,
-          "mainField": "related_id"
+          "editable": true
         },
         "list": {
           "label": "related",
@@ -169,7 +182,7 @@
           "placeholder": "",
           "visible": true,
           "editable": true,
-          "mainField": "localeCode"
+          "mainField": "id"
         },
         "list": {
           "label": "master",
@@ -337,6 +350,12 @@
           {
             "name": "additionalFields",
             "size": 12
+          }
+        ],
+        [
+          {
+            "name": "autoSync",
+            "size": 4
           }
         ]
       ]

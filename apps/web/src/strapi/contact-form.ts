@@ -5,10 +5,9 @@ import { FormComponent } from './components';
 
 export type StrapiContactForm = {
   id: number;
-  attributes: {
-    sections: Array<FormComponent>;
-  };
+  sections: Array<FormComponent>;
 };
+
 export async function getContactForm() {
   const querystring = qs.stringify(
     {
@@ -20,6 +19,6 @@ export async function getContactForm() {
     headers: { Authorization: `Bearer ${env.STRAPI_ADMIN_API_TOKEN}` },
     next: { revalidate: env.STRAPI_CACHE_PERIOD_LONG, tags: ['contact-form'] },
   }).then(fetchResponseHandler<{ data: StrapiContactForm }>());
-  // console.log(resp.data.attributes.sections);
+  // console.log(resp.data);
   return resp.data;
 }

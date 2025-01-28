@@ -6,7 +6,7 @@ import { Command } from 'cmdk';
 import { Loader2Icon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useDebounce } from '@/hooks/use-debounce';
-import { Link } from '@/navigation';
+import { Link } from '@/i18n/routing';
 import { StrapiLocale } from '@/strapi/strapi';
 import { Button } from './ui/button';
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from './ui/command';
@@ -19,20 +19,20 @@ type DocumentMetadata = {
 };
 function ItemLink({ item }: { item: DocumentMetadata }) {
   const { data } = useQuery({
-    queryKey: ['/api/search/get-url', item.slug, item.type],
+    queryKey: ['/api/search/get-url', item.slug, item.type, item.locale],
     queryFn: async () => {
       if (item.type === 'page') {
-        return `/${item.slug}`;
+        return { url: `/${item.slug}` };
       }
-      const response = await fetch(`/api/search/get-url?slug=${item.slug}&type=${item.type}`);
+      const response = await fetch(`/api/search/get-url?slug=${item.slug}&type=${item.type}&locale=${item.locale}`);
       if (!response.ok) {
         throw new Error('Failed to fetch url');
       }
-      return response.json() as Promise<string>;
+      return response.json() as Promise<{ url: string }>;
     },
   });
   return (
-    <Link href={data || '#'} locale={item.locale} className="block w-full" prefetch={false}>
+    <Link href={data?.url || '#'} locale={item.locale} className="block w-full" prefetch={false}>
       {item.title}
     </Link>
   );

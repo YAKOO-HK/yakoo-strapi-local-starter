@@ -12,13 +12,11 @@ export type StartChatBody = z.infer<typeof StartChatSchema>;
 
 export type ChatHistory = {
   id: number;
-  attributes: {
-    uuid: string;
-    name: string;
-    history: Array<Message>;
-  };
+  documentId: string;
+  uuid: string;
+  name: string;
+  history: Array<Message>;
 };
-export type ChatData = ChatHistory['attributes'];
 
 export type ChatsResponse = {
   data: Array<ChatHistory>;
@@ -40,13 +38,14 @@ export const getChatByUUID = async (uuid: string) => {
   return response.data?.[0] || null;
 };
 
-export const updateChat = async (id: number, history: Message[] = []) => {
-  await fetch(`${env.NEXT_PUBLIC_STRAPI_URL}/api/chats/${id}`, {
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${env.STRAPI_ADMIN_API_TOKEN}` },
+export const updateChat = async (documentId: string, history: Message[] = []) => {
+  await fetch(`${env.NEXT_PUBLIC_STRAPI_URL}/api/chats/${documentId}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${env.STRAPI_ADMIN_API_TOKEN}`,
+    },
     method: 'PUT',
-    body: JSON.stringify({
-      data: { history },
-    }),
+    body: JSON.stringify({ data: { history } }),
     next: { revalidate: 0 },
   }).then(fetchResponseHandler());
 };
@@ -54,7 +53,10 @@ export const updateChat = async (id: number, history: Message[] = []) => {
 export const createChat = async (name: string, uuid: string) => {
   await fetch(`${env.NEXT_PUBLIC_STRAPI_URL}/api/chats`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${env.STRAPI_ADMIN_API_TOKEN}` },
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${env.STRAPI_ADMIN_API_TOKEN}`,
+    },
     body: JSON.stringify({
       data: {
         name,

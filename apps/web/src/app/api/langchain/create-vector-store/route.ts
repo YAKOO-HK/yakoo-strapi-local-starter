@@ -1,6 +1,8 @@
 import { NextRequest } from 'next/server';
 import { RecursiveCharacterTextSplitter } from '@langchain/textsplitters';
+import { Document } from 'langchain/document';
 import { env } from '@/env';
+import { locales } from '@/i18n/routing';
 import { createVectorStoreWithTypesense } from '@/lib/typesense';
 import { pageToDocument, postToDocument } from '@/strapi/langchain';
 import { getAllPages } from '@/strapi/pages';
@@ -14,15 +16,16 @@ export async function POST(req: NextRequest) {
     return new Response(null, { status: 501 });
   }
 
-  // TODO: Implement secret key
-  const posts = await getAllPosts(['sections']);
-  const pages = await getAllPages('all', ['sections']);
+  const documents: Document[] = [];
+  for (const locale of locales) {
+    const posts = await getAllPosts(locale, ['sections']);
+    const pages = await getAllPages(locale, ['sections']);
 
-  // compress posts dynamic zones to string
-  const documents = [
-    ...posts.map(({ attributes }) => postToDocument(attributes)),
-    ...pages.map(({ attributes }) => pageToDocument(attributes)),
-  ];
+    documents.push(
+      ...posts.map((attributes) => postToDocument(attributes)), // compress posts dynamic zones to string
+      ...pages.map((attributes) => pageToDocument(attributes))
+    );
+  }
   const splitter = new RecursiveCharacterTextSplitter({
     chunkSize: 500,
     chunkOverlap: 100,

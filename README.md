@@ -66,7 +66,7 @@ pnpm dev
 8. Copy the generated token and save it to `apps/web/.env.local` file as `STRAPI_API_TOKEN`
 
 ```env
-STRAPI_API_TOKEN=<generated token>
+STRAPI_ADMIN_API_TOKEN=<generated token>
 ```
 
 ### Import default Strapi Configuration
@@ -93,6 +93,12 @@ Under Header: "x-internal-api-secret: <your secret>"
 
 5. Click "Save"
 
+### Build Custom Strapi Plugins
+
+```bash
+pnpm build:plugins
+```
+
 ### Start DEV server
 
 ```bash
@@ -110,21 +116,21 @@ pnpm dev --filter web
 
 ## Strapi Plugins used
 
-| Plugin                            | Description                             | Why?                                                              |
-| --------------------------------- | --------------------------------------- | ----------------------------------------------------------------- |
-| @strapi/plugin-i18n               | Official Internationalization           |                                                                   |
-| @strapi/plugin-seo                | Official SEO Components                 |                                                                   |
-| @strapi/plugin-users-permissions  | Official Access Control                 |                                                                   |
-| @strapi/provider-email-nodemailer | Official EmailProvider (NodeMailer)     | Use SMTP so no vendor lock-in                                     |
-| @strapi/provider-upload-local     | Official Local Upload Provider          | Use local storage for upload                                      |
-| @strapi/plugin-color-picker       | Official Color Picker                   |                                                                   |
-| strapi-plugin-publisher           | Scheduled Publish/Unpublish Content     |                                                                   |
-| strapi-plugin-local-image-sharp   | Image Optimization                      | For image optimization in NextJS Image and cache in local storage |
-| strapi-plugin-placeholder         | Generate image blurHash                 | Generate image placeholder for NextJS Image                       |
-| strapi-plugin-rest-cache          | Cache REST API response                 | (Optional) Deep populate can be costly.                           |
-| strapi-plugin-config-sync         | Sync Strapi config to database          | (Optional) Sync config between Databases                          |
-| strapi-plugin-navigation          | Navigation Menu                         |                                                                   |
-| strapi-plugin-ezforms             | Simple Form submission and notification |                                                                   |
+| Plugin                            | Description                             | Why?                                                                                                               |
+| --------------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| @strapi/plugin-i18n               | Official Internationalization           |                                                                                                                    |
+| @strapi/plugin-seo                | Official SEO Components                 |                                                                                                                    |
+| @strapi/plugin-users-permissions  | Official Access Control                 |                                                                                                                    |
+| @strapi/provider-email-nodemailer | Official EmailProvider (NodeMailer)     | Use SMTP so no vendor lock-in                                                                                      |
+| @strapi/provider-upload-local     | Official Local Upload Provider          | Use local storage for upload                                                                                       |
+| @strapi/plugin-color-picker       | Official Color Picker                   |                                                                                                                    |
+| strapi-plugin-publisher           | Scheduled Publish/Unpublish Content     |                                                                                                                    |
+| strapi-plugin-placeholder         | Generate image blurHash                 | Generate image placeholder for NextJS Image                                                                        |
+| strapi-plugin-rest-cache          | Cache REST API response                 | (Optional) Deep populate can be costly.                                                                            |
+| strapi-plugin-config-sync         | Sync Strapi config to database          | (Optional) Sync config between Databases                                                                           |
+| strapi-plugin-navigation          | Navigation Menu                         |                                                                                                                    |
+| @repo/plugin-local-image-sharp    | Image Optimization                      | Forked from [strapi-plugin-local-image-sharp](https://github.com/strapi-community/strapi-plugin-local-image-sharp) |
+| strapi-plugin-ezforms             | Simple Form submission and notification | Forked from [strapi-plugin-ezforms](https://github.com/excl-networks/strapi-plugin-ezforms)                        |
 
 ## NextJS Dependencies
 

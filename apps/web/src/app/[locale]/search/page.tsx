@@ -2,7 +2,8 @@ import { notFound } from 'next/navigation';
 import Script from 'next/script';
 import { env } from '@/env';
 
-export default function SearchPage({ searchParams }: { searchParams: { q?: string } }) {
+export default async function SearchPage(props: { searchParams: Promise<{ q?: string }> }) {
+  const searchParams = await props.searchParams;
   if (!env.NEXT_PUBLIC_GSCE_API) {
     notFound();
   }

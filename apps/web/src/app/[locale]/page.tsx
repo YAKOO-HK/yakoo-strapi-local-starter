@@ -1,13 +1,17 @@
 import { type Metadata } from 'next';
-import { BlocksRenderer } from '@strapi/blocks-react-renderer';
+import { notFound } from 'next/navigation';
 import { DynamicZone } from '@/components/DynamicZone';
 import { Main } from '@/components/layout/Main';
-import { LeafletMap } from '@/components/leaflet';
 import { env } from '@/env';
+import { locales } from '@/i18n/routing';
 import { getHomepage } from '@/strapi/homepage';
 import { StrapiLocale } from '@/strapi/strapi';
 
-export async function generateMetadata({ params }: { params: { locale: StrapiLocale } }) {
+export async function generateMetadata(props: { params: Promise<{ locale: StrapiLocale }> }) {
+  const params = await props.params;
+  if (!locales.includes(params.locale)) {
+    notFound();
+  }
   return {
     alternates: {
       canonical: `${env.NEXT_PUBLIC_SITE_URL}/${params.locale}`,
@@ -19,22 +23,15 @@ export async function generateMetadata({ params }: { params: { locale: StrapiLoc
   } satisfies Metadata;
 }
 
-export default async function Home({ params }: { params: { locale: StrapiLocale } }) {
-  const { attributes } = await getHomepage(params.locale);
-  const { map } = attributes;
+export default async function Home(props: { params: Promise<{ locale: StrapiLocale }> }) {
+  const params = await props.params;
+  if (!locales.includes(params.locale)) {
+    notFound();
+  }
+  const { sections } = await getHomepage(params.locale);
   return (
     <Main>
-      <DynamicZone sections={attributes.sections} locale={params.locale} />
-      {map ? (
-        <LeafletMap
-          center={{ lat: map.lat, lng: map.lng }}
-          zoom={map.zoom}
-          markers={map.markers?.map((marker) => ({
-            position: { lat: marker.lat, lng: marker.lng },
-            popupProps: { children: <BlocksRenderer content={marker.popupContent} /> },
-          }))}
-        />
-      ) : null}
+      <DynamicZone sections={sections} locale={params.locale} />
     </Main>
   );
 }

@@ -20,9 +20,12 @@ export function MobileMenu({ children }: { children?: React.ReactNode }) {
         className="w-80 overflow-y-auto bg-accent"
         side="right"
         onClick={(e) => {
-          e.target instanceof HTMLAnchorElement && setOpen(false);
+          if (e.target instanceof HTMLAnchorElement) {
+            setOpen(false);
+          }
         }}
         onOpenAutoFocus={(e) => e.preventDefault()}
+        aria-describedby={undefined}
       >
         <SheetHeader className="sr-only">
           <SheetTitle>Mobile Menu</SheetTitle>
