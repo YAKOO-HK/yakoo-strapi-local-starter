@@ -15,22 +15,22 @@
     "@ckeditor/strapi-plugin-ckeditor": "^1.1.0",
     "@repo/plugin-ezforms": "workspace:*",
     "@repo/plugin-local-image-sharp": "workspace:*",
-    "@strapi/plugin-color-picker": "5.6.0",
+    "@strapi/plugin-color-picker": "5.8.1",
     "@strapi/plugin-seo": "^2.0.4",
-    "@strapi/plugin-users-permissions": "5.6.0",
-    "@strapi/provider-email-nodemailer": "5.6.0",
-    "@strapi/provider-upload-local": "5.6.0",
-    "@strapi/strapi": "5.6.0",
+    "@strapi/plugin-users-permissions": "5.8.1",
+    "@strapi/provider-email-nodemailer": "5.8.1",
+    "@strapi/provider-upload-local": "5.8.1",
+    "@strapi/strapi": "5.8.1",
     "axios": "^1.7.9",
     "mysql2": "^3.12.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.28.1",
+    "react-router-dom": "^6.28.2",
     "sharp": "^0.33.5",
     "strapi-plugin-config-sync": "^3.1.1",
-    "strapi-plugin-navigation": "3.0.3",
+    "strapi-plugin-navigation": "3.0.6",
     "strapi-plugin-placeholder": "github:Gaylord-Julien/strapi-plugin-placeholder#v5",
-    "styled-components": "^6.1.13"
+    "styled-components": "^6.1.14"
   },
   "author": {
     "name": "YAKOO Technology Limited"
@@ -44,8 +44,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@strapi/typescript-utils": "5.6.0",
-    "@types/node": "^20.17.10",
-    "vite": "^5.4.11"
+    "@strapi/typescript-utils": "5.8.1",
+    "@types/node": "^20.17.16",
+    "vite": "^5.4.14"
   }
 }
