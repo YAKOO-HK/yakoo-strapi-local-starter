@@ -36,8 +36,8 @@
   "devDependencies": {
     "@koa/router": "^12.0.2",
     "@strapi/sdk-plugin": "^5.3.0",
-    "@strapi/strapi": "^5.8.1",
-    "@strapi/typescript-utils": "^5.8.1",
+    "@strapi/strapi": "^5.9.0",
+    "@strapi/typescript-utils": "^5.9.0",
     "@types/etag": "^1.8.3",
     "@types/koa": "^2.15.0",
     "@types/koa__router": "^12",

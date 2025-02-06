@@ -10,18 +10,18 @@
   "devDependencies": {
     "@eslint/js": "^9.19.0",
     "@next/eslint-plugin-next": "^15.1.6",
-    "@tanstack/eslint-plugin-query": "^5.65.0",
+    "@tanstack/eslint-plugin-query": "^5.66.0",
     "@types/eslint__js": "^8.42.3",
-    "@typescript-eslint/eslint-plugin": "^8.22.0",
-    "@typescript-eslint/parser": "^8.22.0",
+    "@typescript-eslint/eslint-plugin": "^8.23.0",
+    "@typescript-eslint/parser": "^8.23.0",
     "eslint": "9.19.0",
     "eslint-config-next": "^15.1.6",
-    "eslint-config-turbo": "^2.3.4",
+    "eslint-config-turbo": "^2.4.0",
     "eslint-plugin-only-warn": "^1.1.0",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-tailwindcss": "^3.18.0",
     "globals": "^15.14.0",
     "typescript": "^5.7.3",
-    "typescript-eslint": "^8.22.0"
+    "typescript-eslint": "^8.23.0"
   }
 }
