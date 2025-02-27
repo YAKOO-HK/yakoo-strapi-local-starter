@@ -26,14 +26,14 @@
     "test:ts:back": "run -T tsc -p server/tsconfig.json"
   },
   "dependencies": {
-    "axios": "^1.7.9"
+    "axios": "^1.8.1"
   },
   "devDependencies": {
-    "@strapi/sdk-plugin": "^5.3.0",
-    "@strapi/strapi": "^5.9.0",
-    "@strapi/typescript-utils": "^5.9.0",
+    "@strapi/sdk-plugin": "^5.3.2",
+    "@strapi/strapi": "^5.10.4",
+    "@strapi/typescript-utils": "^5.10.4",
     "@types/koa": "^2.15.0",
-    "prettier": "^3.4.2",
+    "prettier": "^3.5.2",
     "typescript": "^5.7.3"
   },
   "peerDependencies": {
