@@ -10,8 +10,8 @@ export default async function Icon() {
         Location: `${env.NEXT_PUBLIC_STRAPI_URL}${favicon.url}`,
       },
     });
-  } catch (e) {
-    console.error(e);
+  } catch (_e) {
+    // console.error(e);
     return new Response(null, { status: 404 });
   }
 }
