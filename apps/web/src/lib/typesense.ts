@@ -1,10 +1,9 @@
 import { mkdirSync } from 'node:fs';
 import { join } from 'node:path';
-import { createOpenAI, openai } from '@ai-sdk/openai';
-import { ChatCloudflareWorkersAI, CloudflareWorkersAI } from '@langchain/cloudflare';
+import { createOpenAI } from '@ai-sdk/openai';
 import { Typesense, TypesenseConfig } from '@langchain/community/vectorstores/typesense';
 import { Document } from '@langchain/core/documents';
-import { ChatOpenAI, OpenAIEmbeddings } from '@langchain/openai';
+import { OpenAIEmbeddings } from '@langchain/openai';
 import { CacheBackedEmbeddings } from 'langchain/embeddings/cache_backed';
 import { LocalFileStore } from 'langchain/storage/file_system';
 import { Client } from 'typesense';
@@ -27,66 +26,21 @@ export function getEmbedding() {
   );
 }
 
-// export function getLLM({ streaming = true }) {
-//   if (env.TYPESENSE_LLM_PROVIDER === 'cloudflare') {
-//     return new CloudflareWorkersAI({
-//       model: '@cf/qwen/qwen1.5-7b-chat-awq',
-//       streaming,
-//       cloudflareAccountId: env.CLOUDFLARE_ACCOUNT_ID,
-//       cloudflareApiToken: env.CLOUDFLARE_API_TOKEN,
-//     });
-//   }
-//   // defaults to openai
-//   return new OpenAI({
-//     modelName: 'gpt-4o-mini',
-//     temperature: 0.8,
-//     maxTokens: 512,
-//     streaming,
-//     openAIApiKey: env.OPENAI_API_KEY,
-//     configuration: {
-//       baseURL: env.OPENAI_BASE_URL,
-//     },
-//   });
-// }
-
-// export function getChatModel({ streaming = true, maxTokens = 512, temperature = 0.8 }) {
-//   if (env.TYPESENSE_LLM_PROVIDER === 'cloudflare') {
-//     return new ChatCloudflareWorkersAI({
-//       model: '@cf/qwen/qwen1.5-7b-chat-awq',
-//       streaming,
-//       cloudflareAccountId: env.CLOUDFLARE_ACCOUNT_ID,
-//       cloudflareApiToken: env.CLOUDFLARE_API_TOKEN,
-//     });
-//   }
-//   return new ChatOpenAI({
-//     modelName: 'gpt-4o-mini',
-//     temperature,
-//     maxTokens,
-//     streaming,
-//     openAIApiKey: env.OPENAI_API_KEY,
-//     configuration: {
-//       baseURL: env.OPENAI_BASE_URL,
-//     },
-//   });
-// }
-
-export function getLanguageModel(options?: { user?: string }) {
-  const openai = createOpenAI({
-    // custom settings, e.g.
+function getOpenAi() {
+  return createOpenAI({
     compatibility: 'strict', // strict mode, enable when using the OpenAI API
     baseURL: env.OPENAI_BASE_URL,
     apiKey: env.OPENAI_API_KEY,
   });
+}
+
+export function getLanguageModel(options?: { user?: string }) {
+  const openai = getOpenAi();
   return openai.languageModel('gpt-4o-mini', options);
 }
 
 export function getChatModel(options?: { user?: string }) {
-  const openai = createOpenAI({
-    // custom settings, e.g.
-    compatibility: 'strict', // strict mode, enable when using the OpenAI API
-    baseURL: env.OPENAI_BASE_URL,
-    apiKey: env.OPENAI_API_KEY,
-  });
+  const openai = getOpenAi();
   return openai.chat('gpt-4o-mini', options);
 }
 

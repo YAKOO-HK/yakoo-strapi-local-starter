@@ -28,8 +28,8 @@ export const env = createEnv({
     TYPESENSE_PROTOCOL: z.string().trim().default('http'),
     TYPESENSE_API_KEY: z.string().trim().default(''),
     TYPESENSE_COLLECTION_NAME: z.string().trim().default('langchain'),
-    TYPESENSE_LLM_PROVIDER: z.enum(['openai', 'cloudflare']).default('openai'),
-    TYPESENSE_EMBEDDINGS_PROVIDER: z.enum(['openai', 'cloudflare']).default('openai'),
+    TYPESENSE_LLM_PROVIDER: z.enum(['openai']).default('openai'),
+    TYPESENSE_EMBEDDINGS_PROVIDER: z.enum(['openai']).default('openai'),
     TYPESENSE_EMBEDDINGS_CACHE_PATH: z.string().trim().default('.cache/embeddings'),
     TYPESENSE_CONVERSATIONAL_RETRIEVAL_QA_ENABLED: z
       .enum(['true', 'false'])

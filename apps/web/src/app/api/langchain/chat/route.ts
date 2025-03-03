@@ -44,7 +44,7 @@ export async function POST(req: Request) {
       model: getLanguageModel({ user: uuid }),
       messages: [
         {
-          role: 'user',
+          role: 'system',
           content:
             'Given the following conversation, rephrase the last question to be a standalone question with background information in the same language. It should be a maximum of three sentences long.',
         },

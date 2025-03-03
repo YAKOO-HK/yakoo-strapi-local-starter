@@ -16,7 +16,6 @@
     "@ai-sdk/react": "^1.1.20",
     "@hcaptcha/react-hcaptcha": "^1.12.0",
     "@hookform/resolvers": "^3.10.0",
-    "@langchain/cloudflare": "^0.1.0",
     "@langchain/community": "^0.3.33",
     "@langchain/core": "^0.3.42",
     "@langchain/openai": "^0.4.4",
