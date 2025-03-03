@@ -1,10 +1,10 @@
 'use client';
 
 import React, { startTransition, useEffect, useRef } from 'react';
+import { Message, useChat } from '@ai-sdk/react';
 import type HCaptcha from '@hcaptcha/react-hcaptcha';
 import type { TurnstileInstance } from '@marsidev/react-turnstile';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Message, useChat } from 'ai/react';
 import { MoreVerticalIcon } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useInView } from 'react-intersection-observer';
@@ -57,13 +57,13 @@ function ChatUI({
   name?: string;
 }) {
   const t = useTranslations('layout.chatbot');
-  const { messages, input, handleInputChange, handleSubmit, stop, isLoading, error } = useChat({
+  const { messages, input, setInput, handleSubmit, error, status } = useChat({
     id: uuid,
     api: '/api/langchain/chat',
     initialMessages,
     sendExtraMessageFields: true,
-    streamMode: 'text',
   });
+  const isLoading = status === 'submitted' || status === 'streaming';
   return (
     <>
       <ScrollArea className="h-64 max-h-full min-h-48">
@@ -91,8 +91,8 @@ function ChatUI({
       <form onSubmit={handleSubmit} className="flex items-center gap-2">
         <Input
           value={input}
-          onChange={handleInputChange}
           placeholder={t('userInputPlaceholder')}
+          onChange={(e) => setInput(e.target.value)}
           className="flex-1"
           disabled={isLoading}
         />
