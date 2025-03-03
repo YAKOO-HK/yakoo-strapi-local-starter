@@ -1,8 +1,7 @@
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
-import { generateText, streamText } from 'ai';
+import { appendResponseMessages, generateText, streamText } from 'ai';
 import { formatDocumentsAsString } from 'langchain/util/document';
-import { nanoid } from 'nanoid';
 import { z } from 'zod';
 import { env } from '@/env';
 import { getChatModel, getLanguageModel, getVectorStoreWithTypesense } from '@/lib/typesense';
@@ -12,7 +11,7 @@ const MessagesSchema = z.object({
   messages: z
     .array(
       z.object({
-        id: z.string().trim().optional(),
+        id: z.string().trim(),
         content: z.string().trim(),
         role: z.enum(['user', 'system', 'assistant']),
         createdAt: z.coerce.date().optional(),
@@ -74,11 +73,14 @@ export async function POST(req: Request) {
         content: question,
       },
     ],
-    onFinish: async ({ text }) => {
-      await updateChat(chatHistory.documentId, [
-        ...messages.map((message) => ({ ...message, id: message.id || nanoid() })),
-        { id: nanoid(), role: 'assistant', content: text, createdAt: new Date() },
-      ]);
+    onFinish: async ({ response }) => {
+      await updateChat(
+        chatHistory.documentId,
+        appendResponseMessages({
+          messages,
+          responseMessages: response.messages,
+        })
+      );
     },
     providerOptions: {
       openai: { maxTokens: 512, temperature: 0.8 },

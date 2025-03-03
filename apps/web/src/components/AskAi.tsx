@@ -57,7 +57,7 @@ function ChatUI({
   name?: string;
 }) {
   const t = useTranslations('layout.chatbot');
-  const { messages, input, setInput, handleSubmit, error, status } = useChat({
+  const { messages, input, handleInputChange, handleSubmit, error, status } = useChat({
     id: uuid,
     api: '/api/langchain/chat',
     initialMessages,
@@ -92,7 +92,7 @@ function ChatUI({
         <Input
           value={input}
           placeholder={t('userInputPlaceholder')}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={handleInputChange}
           className="flex-1"
           disabled={isLoading}
         />
