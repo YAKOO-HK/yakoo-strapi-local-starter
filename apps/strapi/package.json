@@ -25,7 +25,7 @@
     "mysql2": "^3.12.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.29.0",
+    "react-router-dom": "^6.30.0",
     "sharp": "^0.33.5",
     "strapi-plugin-config-sync": "^3.1.1",
     "strapi-plugin-navigation": "3.0.8",
@@ -45,7 +45,7 @@
   "license": "MIT",
   "devDependencies": {
     "@strapi/typescript-utils": "5.10.4",
-    "@types/node": "^20.17.19",
+    "@types/node": "^20.17.22",
     "vite": "^5.4.14"
   }
 }
