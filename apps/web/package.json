@@ -12,7 +12,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@aws-sdk/client-bedrock-runtime": "^3.758.0",
     "@hcaptcha/react-hcaptcha": "^1.12.0",
     "@hookform/resolvers": "^3.10.0",
     "@langchain/cloudflare": "^0.1.0",
@@ -73,7 +72,7 @@
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "tinycolor2": "^1.6.0",
-    "typesense": "^1.8.2",
+    "typesense": "^2.0.3",
     "vaul": "^1.1.2",
     "yet-another-react-lightbox": "^3.21.7",
     "zod": "^3.24.2"
