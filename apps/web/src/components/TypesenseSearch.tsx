@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Command } from 'cmdk';
 import { Loader2Icon } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useDebounce } from '@/hooks/use-debounce';
-import { Link } from '@/i18n/routing';
+import { Link, useRouter } from '@/i18n/routing';
 import { StrapiLocale } from '@/strapi/strapi';
 import { Button } from './ui/button';
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from './ui/command';
@@ -16,37 +16,46 @@ type DocumentMetadata = {
   title: string;
   type: string;
   locale: StrapiLocale;
+  url: string;
 };
-function ItemLink({ item }: { item: DocumentMetadata }) {
-  const { data } = useQuery({
-    queryKey: ['/api/search/get-url', item.slug, item.type, item.locale],
-    queryFn: async () => {
-      if (item.type === 'page') {
-        return { url: `/${item.slug}` };
-      }
-      const response = await fetch(`/api/search/get-url?slug=${item.slug}&type=${item.type}&locale=${item.locale}`);
-      if (!response.ok) {
-        throw new Error('Failed to fetch url');
-      }
-      return response.json() as Promise<{ url: string }>;
-    },
-  });
+function ItemLink({ item, onSelect }: { item: DocumentMetadata; onSelect: () => void }) {
+  const router = useRouter();
   return (
-    <Link href={data?.url || '#'} locale={item.locale} className="block w-full" prefetch={false}>
-      {item.title}
-    </Link>
+    <CommandItem
+      value={item.url}
+      onSelect={() => {
+        if (item.url) {
+          router.push(item.url, { locale: item.locale });
+          onSelect();
+        }
+      }}
+      className="w-full cursor-pointer"
+      asChild
+    >
+      <Link
+        href={item.url || '#'}
+        locale={item.locale}
+        prefetch={false}
+        onClick={() => {
+          onSelect();
+        }}
+      >
+        {item.title}
+      </Link>
+    </CommandItem>
   );
 }
 
 export function TypesenseSearch() {
   const t = useTranslations('layout');
+  const locale = useLocale();
   const [open, setOpen] = useState(false);
   const [searchInput, setSearchInput] = useState<string>('');
   const debouncedValue = useDebounce(searchInput, 500);
   const { data, isFetching } = useQuery({
-    queryKey: ['/api/search', debouncedValue.trim()],
+    queryKey: ['/api/search', locale, debouncedValue.trim()],
     queryFn: async () => {
-      const response = await fetch(`/api/search?q=${debouncedValue.trim()}`);
+      const response = await fetch(`/api/search?q=${debouncedValue.trim()}&locale=${locale}`);
       if (!response.ok) {
         throw new Error('Failed to fetch search results');
       }
@@ -77,7 +86,11 @@ export function TypesenseSearch() {
           ),
         })}
       </Button>
-      <CommandDialog open={open} onOpenChange={setOpen} commandProps={{ shouldFilter: false }}>
+      <CommandDialog
+        open={open}
+        onOpenChange={setOpen}
+        commandProps={{ shouldFilter: false, onValueChange: console.log }}
+      >
         <CommandInput placeholder={t('quickSearchPlaceholder')} value={searchInput} onValueChange={setSearchInput} />
         <CommandList>
           {isFetching && (
@@ -90,9 +103,13 @@ export function TypesenseSearch() {
           )}
           <CommandGroup heading={t('quickSearchHeading')}>
             {data?.documents.map((item) => (
-              <CommandItem key={item.slug} value={item.slug} onSelect={() => setOpen(false)}>
-                <ItemLink item={item} />
-              </CommandItem>
+              <ItemLink
+                key={item.slug}
+                item={item}
+                onSelect={() => {
+                  setOpen(false);
+                }}
+              />
             ))}
           </CommandGroup>
           <CommandEmpty>{t('emptyResults')}</CommandEmpty>

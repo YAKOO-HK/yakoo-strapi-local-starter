@@ -12,10 +12,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@aws-sdk/client-bedrock-runtime": "^3.758.0",
+    "@ai-sdk/openai": "^1.1.15",
+    "@ai-sdk/react": "^1.1.20",
     "@hcaptcha/react-hcaptcha": "^1.12.0",
     "@hookform/resolvers": "^3.10.0",
-    "@langchain/cloudflare": "^0.1.0",
     "@langchain/community": "^0.3.33",
     "@langchain/core": "^0.3.42",
     "@langchain/openai": "^0.4.4",
@@ -41,7 +41,7 @@
     "@t3-oss/env-nextjs": "^0.12.0",
     "@tanstack/react-query": "^5.66.11",
     "@types/lodash-es": "^4.17.12",
-    "ai": "^3.4.33",
+    "ai": "^4.1.50",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.4",
@@ -57,6 +57,7 @@
     "lodash-es": "^4.17.21",
     "lru-cache": "^11.0.2",
     "lucide-react": "^0.477.0",
+    "nanoid": "^5.1.2",
     "next": "15.2.0",
     "next-intl": "^3.26.5",
     "next-sitemap": "^4.2.3",
@@ -73,7 +74,7 @@
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "tinycolor2": "^1.6.0",
-    "typesense": "^1.8.2",
+    "typesense": "^2.0.3",
     "vaul": "^1.1.2",
     "yet-another-react-lightbox": "^3.21.7",
     "zod": "^3.24.2"
