@@ -27,6 +27,7 @@ const ZodForm = <TFieldValues extends FieldValues, TContext = any>({
   control,
   register,
   setFocus,
+  subscribe,
   ...props
 }: ZodFormProps<TFieldValues, TContext>) => {
   return (
@@ -46,6 +47,7 @@ const ZodForm = <TFieldValues extends FieldValues, TContext = any>({
       control={control}
       register={register}
       setFocus={setFocus}
+      subscribe={subscribe}
     >
       <form onSubmit={onFormSubmit} {...props}>
         {children}

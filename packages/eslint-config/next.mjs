@@ -20,7 +20,6 @@ const compat = new FlatCompat({
 
 export default tseslint.config(
   eslint.configs.recommended,
-  ...tseslint.configs.recommended,
   ...compat.extends('next/core-web-vitals', 'next/typescript'),
   ...tailwind.configs['flat/recommended'],
   ...pluginQuery.configs['flat/recommended'],
