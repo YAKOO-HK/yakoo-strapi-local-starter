@@ -59,7 +59,7 @@
     "lucide-react": "^0.488.0",
     "nanoid": "^5.1.5",
     "next": "15.3.0",
-    "next-intl": "^3.26.5",
+    "next-intl": "^4.0.2",
     "next-sitemap": "^4.2.3",
     "qs": "^6.14.0",
     "react": "^18.3.1",

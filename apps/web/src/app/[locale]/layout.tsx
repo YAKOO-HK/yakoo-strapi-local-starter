@@ -2,7 +2,7 @@ import { type Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { GoogleAnalytics } from '@next/third-parties/google';
-import { NextIntlClientProvider } from 'next-intl';
+import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { AskAi } from '@/components/AskAi';
 import { BackToTopButton } from '@/components/layout/BackToTopButton';
@@ -12,7 +12,7 @@ import { SkipToMain } from '@/components/layout/SkipToMain';
 import { LdJson } from '@/components/ldjson/ldjson';
 import { Toaster } from '@/components/ui/toaster';
 import { env } from '@/env';
-import { locales } from '@/i18n/routing';
+import { locales, routing } from '@/i18n/routing';
 import { getMainNavigation } from '@/strapi/navigation';
 import { getSiteMetadata } from '@/strapi/site-metadata';
 import { getOpenGraphImage, StrapiLocale } from '@/strapi/strapi';
@@ -55,13 +55,14 @@ export default async function LocaleLayout(props: {
   params: Promise<{ locale: StrapiLocale }>;
 }) {
   const params = await props.params;
+  const { locale } = params;
   const { children } = props;
-  if (!locales.includes(params.locale)) {
+  if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
   setRequestLocale(params.locale);
   const messages = await getMessages();
-  const { logo, logo2, logo_link, logo2_link, locale, seo } = await getSiteMetadata(params.locale);
+  const { logo, logo2, logo_link, logo2_link, seo } = await getSiteMetadata(params.locale);
   const navigationItems = await getMainNavigation(params.locale);
   // console.dir(navigationItems, { depth: 10 });
   return (
