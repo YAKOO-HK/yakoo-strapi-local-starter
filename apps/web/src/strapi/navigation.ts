@@ -44,7 +44,7 @@ export async function getMainNavigation(locale: StrapiLocale = 'en') {
     `${env.NEXT_PUBLIC_STRAPI_URL}/api/navigation/render/nav-main-navigation?${querystring}`,
     {
       headers: { Authorization: `Bearer ${env.STRAPI_ADMIN_API_TOKEN}` },
-      next: { revalidate: env.STRAPI_CACHE_PERIOD_LONG, tags: ['navigation'] },
+      next: { revalidate: env.STRAPI_CACHE_PERIOD_LONG, tags: ['navigation', 'navigation-item'] },
     }
   ).then(fetchResponseHandler<NavigationItem[]>());
   // console.log(response);
