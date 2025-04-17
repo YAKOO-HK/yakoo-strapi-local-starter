@@ -83,6 +83,9 @@ importers:
       strapi-plugin-placeholder:
         specifier: github:Gaylord-Julien/strapi-plugin-placeholder#v5
         version: https://codeload.github.com/Gaylord-Julien/strapi-plugin-placeholder/tar.gz/56e86a0dc63ae6dae654de0a87af1636287ef4a4(@babel/runtime@7.25.9)(@codemirror/autocomplete@6.18.1(@codemirror/language@6.10.3)(@codemirror/state@6.4.1)(@codemirror/view@6.34.1)(@lezer/common@1.2.3))(@codemirror/language@6.10.3)(@codemirror/lint@6.8.2)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.34.1)(@strapi/data-transfer@5.12.5(@types/node@20.17.30)(mysql2@3.14.0)(typescript@5.3.2))(@types/hoist-non-react-statics@3.3.5)(@types/node@20.17.30)(@types/react-dom@18.3.6(@types/react@19.1.2))(@types/react@19.1.2)(codemirror@5.65.19)(encoding@0.1.13)(mime-types@2.1.35)(mysql2@3.14.0)(plaiceholder@2.5.0(sharp@0.34.1))(react-dom@18.3.1(react@18.3.1))(react-router-dom@6.30.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(redux@4.2.1)(sharp@0.34.1)(styled-components@6.1.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+      strapi-plugin-publisher:
+        specifier: 2.0.0-beta.7
+        version: 2.0.0-beta.7(d6329494be8750c2773f26daa2a5f927)
       styled-components:
         specifier: ^6.1.17
         version: 6.1.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -10201,6 +10204,18 @@ packages:
       mime-types: 2.1.35
       plaiceholder: ^2.3.0
       sharp: ^0.30.1
+
+  strapi-plugin-publisher@2.0.0-beta.7:
+    resolution: {integrity: sha512-a7YueODKopmE/YF1c1U7Uh3pB3mtADltgKi5UsnxrpGDidwAqd3QqaNGEI47LCadXSKxbXSpD4P5+c1AlEC+1g==}
+    engines: {node: '>=18.0.0 <=20.x.x', npm: '>=6.0.0'}
+    peerDependencies:
+      '@strapi/design-system': ^2.0.0-rc.11
+      '@strapi/icons': ^2.0.0-rc.11
+      '@strapi/strapi': ^5.2.0
+      '@strapi/utils': ^5.2.0
+      react: ^17.0.0 || ^18.0.0
+      react-router-dom: ^6.0.0
+      styled-components: ^6.0.0
 
   stream-chain@2.2.5:
     resolution: {integrity: sha512-1TJmBx6aSWqZ4tx7aTpBDXK0/e2hhcNSTV8+CbFJtDjbb+I1mZ8lHit0Grw9GRT+6JbIrrDd8esncgBi8aBXGA==}
@@ -23161,7 +23176,7 @@ snapshots:
       isstream: 0.1.2
       jsonwebtoken: 9.0.2
       mime-types: 2.1.35
-      retry-axios: 2.6.0(axios@1.7.4)
+      retry-axios: 2.6.0(axios@1.7.4(debug@4.4.0))
       tough-cookie: 4.1.4
     transitivePeerDependencies:
       - supports-color
@@ -25392,7 +25407,7 @@ snapshots:
     dependencies:
       '@formatjs/ecma402-abstract': 1.18.2
       '@formatjs/icu-messageformat-parser': 2.7.6
-      '@formatjs/intl': 2.10.0(typescript@5.4.4)
+      '@formatjs/intl': 2.10.0(typescript@5.3.2)
       '@formatjs/intl-displaynames': 6.6.6
       '@formatjs/intl-listformat': 7.5.5
       '@types/hoist-non-react-statics': 3.3.5
@@ -25913,7 +25928,7 @@ snapshots:
       onetime: 7.0.0
       signal-exit: 4.1.0
 
-  retry-axios@2.6.0(axios@1.7.4):
+  retry-axios@2.6.0(axios@1.7.4(debug@4.4.0)):
     dependencies:
       axios: 1.7.4(debug@4.4.0)
 
@@ -26461,6 +26476,24 @@ snapshots:
       - styled-components
       - supports-color
       - tedious
+
+  strapi-plugin-publisher@2.0.0-beta.7(d6329494be8750c2773f26daa2a5f927):
+    dependencies:
+      '@strapi/design-system': 2.0.0-rc.21(@babel/runtime@7.25.9)(@codemirror/autocomplete@6.18.1(@codemirror/language@6.10.3)(@codemirror/state@6.4.1)(@codemirror/view@6.34.1)(@lezer/common@1.2.3))(@codemirror/language@6.10.3)(@codemirror/lint@6.8.2)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.34.1)(@strapi/icons@2.0.0-rc.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@types/react-dom@18.3.6(@types/react@19.1.2))(@types/react@19.1.2)(codemirror@5.65.19)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+      '@strapi/icons': 2.0.0-rc.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+      '@strapi/strapi': 5.12.5(@babel/runtime@7.25.9)(@codemirror/autocomplete@6.18.1(@codemirror/language@6.10.3)(@codemirror/state@6.4.1)(@codemirror/view@6.34.1)(@lezer/common@1.2.3))(@codemirror/language@6.10.3)(@codemirror/lint@6.8.2)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.34.1)(@swc/helpers@0.5.15)(@types/hoist-non-react-statics@3.3.5)(@types/node@20.17.30)(@types/react-dom@18.3.6(@types/react@19.1.2))(@types/react@19.1.2)(codemirror@5.65.19)(esbuild@0.25.2)(koa@2.15.4)(mysql2@3.14.0)(react-dom@18.3.1(react@18.3.1))(react-router-dom@6.30.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(redux@4.2.1)(styled-components@6.1.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.36.0)(type-fest@4.26.1)
+      '@strapi/utils': 5.12.5
+      lodash: 4.17.21
+      prop-types: 15.8.1
+      react: 18.3.1
+      react-intl: 6.8.1(react@18.3.1)(typescript@5.3.2)
+      react-query: 3.39.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react-router-dom: 6.30.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      styled-components: 6.1.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+    transitivePeerDependencies:
+      - react-dom
+      - react-native
+      - typescript
 
   stream-chain@2.2.5: {}
 

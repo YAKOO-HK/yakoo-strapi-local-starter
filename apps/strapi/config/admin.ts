@@ -44,7 +44,7 @@ export default ({ env }) => {
       promoteEE: env.bool('FLAG_PROMOTE_EE', false),
     },
     cron: {
-      // enabled: true, // enable cron jobs for publisher plugin
+      enabled: true, // enable cron jobs for publisher plugin
     },
     watchIgnoreFiles: ['**/config/sync/**'],
   };

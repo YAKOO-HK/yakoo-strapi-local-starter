@@ -70,17 +70,17 @@ export default ({ env }) => ({
   ckeditor: {
     enabled: true,
   },
-  // publisher: {
-  //   enabled: true,
-  //   config: {
-  //     components: {
-  //       dateTimePicker: {
-  //         step: 15,
-  //       },
-  //     },
-  //     contentTypes: ['api::post.post'],
-  //   },
-  // },
+  publisher: {
+    enabled: true,
+    config: {
+      components: {
+        dateTimePicker: {
+          step: 15,
+        },
+      },
+      contentTypes: ['api::post.post'],
+    },
+  },
   ezforms: {
     enabled: true,
     config: {
