@@ -146,20 +146,6 @@
           "sortable": true
         }
       },
-      "related": {
-        "edit": {
-          "label": "related",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "related",
-          "searchable": true,
-          "sortable": true
-        }
-      },
       "parent": {
         "edit": {
           "label": "parent",
@@ -327,10 +313,6 @@
           }
         ],
         [
-          {
-            "name": "related",
-            "size": 6
-          },
           {
             "name": "parent",
             "size": 6
