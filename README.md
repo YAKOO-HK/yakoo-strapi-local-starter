@@ -134,20 +134,20 @@ pnpm dev --filter web
 
 ## NextJS Dependencies
 
-| Category         | Library                    | URL                                                   |
-| ---------------- | -------------------------- | ----------------------------------------------------- |
-| Web              | NextJS (app-router)        | [https://nextjs.org/docs]()                           |
-| UI               | shadcn/ui                  | [https://ui.shadcn.com]()                             |
-| UI               | Tailwindcss                | [https://tailwindcss.com]()                           |
-| UI               | Framer Motion.             | [https://www.framer.com/motion/]()                    |
-| UI/Accessibility | Radix-UI                   | [https://radix-ui.com]()                              |
-| Icons            | Lucide Icons               | [https://lucide.dev/icons/]()                         |
-| Form             | React Hook Foorm           | [https://react-hook-form.com]()                       |
-| Validation       | Zod                        | [https://zod.dev]()                                   |
-| Env Control      | @t3-oss/env-nextjs         | [https://github.com/t3-oss/t3-env]()                  |
-| SEO              | Next-Sitemap               | [https://github.com/iamvishnusankar/next-sitemap]()   |
-| CAPTCHA          | react-hcaptcha             | [https://docs.hcaptcha.com/]()                        |
-| Components       | yet-another-react-lightbox | [https://yet-another-react-lightbox.com/]()           |
-| Components       | react-photo-album          | [https://react-photo-album.com/]()                    |
-| Components       | embla-carousel-react       | [https://www.embla-carousel.com/get-started/react/]() |
-| Client State     | TanStack Query             | [https://tanstack.com/query/latest/]()                |
+| Category         | Library                    | URL                                                                                                    |
+| ---------------- | -------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Web              | NextJS (app-router)        | [https://nextjs.org/docs](https://nextjs.org/docs)                                                     |
+| UI               | shadcn/ui                  | [https://ui.shadcn.com](https://ui.shadcn.com)                                                         |
+| UI               | Tailwindcss                | [https://tailwindcss.com](https://tailwindcss.com)                                                     |
+| UI               | Motion                     | [https://motion.dev/](https://motion.dev/)                                                             |
+| UI/Accessibility | Radix-UI                   | [https://radix-ui.com](https://radix-ui.com)                                                           |
+| Icons            | Lucide Icons               | [https://lucide.dev/icons/](https://lucide.dev/icons/)                                                 |
+| Form             | React Hook Foorm           | [https://react-hook-form.com](https://react-hook-form.com)                                             |
+| Validation       | Zod                        | [https://zod.dev](https://zod.dev)                                                                     |
+| Env Control      | @t3-oss/env-nextjs         | [https://github.com/t3-oss/t3-env](https://github.com/t3-oss/t3-env)                                   |
+| SEO              | Next-Sitemap               | [https://github.com/iamvishnusankar/next-sitemap](https://github.com/iamvishnusankar/next-sitemap)     |
+| CAPTCHA          | react-hcaptcha             | [https://docs.hcaptcha.com/](https://docs.hcaptcha.com/)                                               |
+| Components       | yet-another-react-lightbox | [https://yet-another-react-lightbox.com/](https://yet-another-react-lightbox.com/])                    |
+| Components       | react-photo-album          | [https://react-photo-album.com/](https://react-photo-album.com/)                                       |
+| Components       | embla-carousel-react       | [https://www.embla-carousel.com/get-started/react/](https://www.embla-carousel.com/get-started/react/) |
+| Client State     | TanStack Query             | [https://tanstack.com/query/latest/](https://tanstack.com/query/latest/)                               |
