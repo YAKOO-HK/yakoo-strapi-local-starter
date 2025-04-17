@@ -9,7 +9,7 @@ export interface ControlledHCaptchaProps<
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 > extends Omit<React.HTMLAttributes<HTMLDivElement>, 'defaultValue'>,
     Omit<ControllerProps<TFieldValues, TName>, 'render'> {
-  hCaptchaRef?: React.RefObject<HCaptcha>;
+  hCaptchaRef?: React.RefObject<HCaptcha | null>;
 }
 
 function ControlledHCaptcha<

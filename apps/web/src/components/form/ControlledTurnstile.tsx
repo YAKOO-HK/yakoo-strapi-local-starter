@@ -10,7 +10,7 @@ export interface ControlledTurnstileProps<
 > extends Omit<React.HTMLAttributes<HTMLDivElement>, 'defaultValue'>,
     Omit<ControllerProps<TFieldValues, TName>, 'render'> {
   options?: TurnstileProps['options'];
-  captchaRef?: React.RefObject<TurnstileInstance>;
+  captchaRef?: React.RefObject<TurnstileInstance | null>;
 }
 
 function ControlledTurnstile<

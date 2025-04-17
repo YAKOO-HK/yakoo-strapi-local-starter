@@ -17,6 +17,7 @@ import { getMainNavigation } from '@/strapi/navigation';
 import { getSiteMetadata } from '@/strapi/site-metadata';
 import { getOpenGraphImage, StrapiLocale } from '@/strapi/strapi';
 import '../global.css';
+import { PreviewListener } from './preview-listener';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -102,6 +103,7 @@ export default async function LocaleLayout(props: {
               <span className="ml-1 hidden font-bold 2xl:inline-block">2xl</span>
             </div>
           )}
+          <PreviewListener />
         </NextIntlClientProvider>
       </body>
     </html>

@@ -30,9 +30,9 @@ export async function PostCard({
             <CardTitle>{attributes.title}</CardTitle>
           </Link>
           <CardDescription>
-            <time dateTime={attributes.publishedAt} className="inline-flex items-center gap-2">
+            <time dateTime={attributes.publishedAt!} className="inline-flex items-center gap-2">
               <CalendarIcon className="size-4" aria-label="Published on" />
-              {parseISO(attributes.publishedAt).toLocaleDateString(locale, { dateStyle: 'long' })}
+              {parseISO(attributes.publishedAt!).toLocaleDateString(locale, { dateStyle: 'long' })}
             </time>
           </CardDescription>
         </CardHeader>

@@ -48,6 +48,7 @@ export const env = createEnv({
     HCAPTCHA_VERIFY_URL: z.string().url().default('https://hcaptcha.com/siteverify'),
     HCAPTCHA_SCORE_THRESHOLD: z.coerce.number().min(0).max(1).default(0.5),
     INTERNAL_API_SECRET: z.string().trim(),
+    PREVIEW_SECRET: z.string().trim().default(''),
   },
   /*
    * Environment variables available on the client (and server).
@@ -95,6 +96,7 @@ export const env = createEnv({
     HCAPTCHA_VERIFY_URL: process.env.HCAPTCHA_VERIFY_URL,
     HCAPTCHA_SCORE_THRESHOLD: process.env.HCAPTCHA_SCORE_THRESHOLD,
     INTERNAL_API_SECRET: process.env.INTERNAL_API_SECRET,
+    PREVIEW_SECRET: process.env.PREVIEW_SECRET,
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
     NEXT_PUBLIC_STRAPI_URL: process.env.NEXT_PUBLIC_STRAPI_URL,
     NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID,

@@ -19,6 +19,7 @@
         "NEXT_PUBLIC_*",
         "!NEXT_PUBLIC_GIT_*",
         "INTERNAL_*",
+        "PREVIEW_SECRET",
         "STRAPI_*",
         "TYPESENSE_*",
         "AWS_*",

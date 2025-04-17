@@ -1,3 +1,4 @@
+import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 import qs from 'qs';
 import { env } from '@/env';
@@ -95,7 +96,7 @@ export type PostsResponse = {
     slug: string;
     abstract: string;
     updatedAt: string;
-    publishedAt: string;
+    publishedAt: string | null;
     locale: StrapiLocale;
     image: StrapiMedia;
     seo?: StrapiSEO;
@@ -120,6 +121,8 @@ export type PostsResponse = {
 };
 
 async function fetchPost(slug: string, locale: StrapiLocale) {
+  const { isEnabled } = await draftMode();
+  // console.log({ slug, locale, isEnabled });
   const querystring = qs.stringify(
     {
       filters: { slug: { $eq: slug } },
@@ -136,14 +139,18 @@ async function fetchPost(slug: string, locale: StrapiLocale) {
       ],
       pagination: { pageSize: 1 },
       locale,
+      status: isEnabled ? 'draft' : 'published',
     },
     { encodeValuesOnly: true }
   );
   const response = await fetch(`${env.NEXT_PUBLIC_STRAPI_URL}/api/posts?${querystring}`, {
     headers: { Authorization: `Bearer ${env.STRAPI_ADMIN_API_TOKEN}` },
-    next: { revalidate: env.STRAPI_CACHE_PERIOD, tags: ['post', 'post-category'] },
+    next: {
+      revalidate: isEnabled ? 0 : env.STRAPI_CACHE_PERIOD,
+      tags: ['post', 'post-category'],
+    },
   }).then(fetchResponseHandler<PostsResponse>());
-
+  // console.dir(response.data, { depth: 3 });
   if (!response.data?.[0]) return null;
   return response.data[0];
 }

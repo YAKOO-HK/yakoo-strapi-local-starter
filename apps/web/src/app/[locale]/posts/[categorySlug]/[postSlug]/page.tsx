@@ -15,11 +15,9 @@ import { cn } from '@/lib/utils';
 import { getPostBySlug, getPostCategoryBySlug } from '@/strapi/posts';
 import { StrapiLocale, toMetadata } from '@/strapi/strapi';
 
-export async function generateMetadata(
-  props: {
-    params: Promise<{ locale: StrapiLocale; categorySlug: string; postSlug: string }>;
-  }
-) {
+export async function generateMetadata(props: {
+  params: Promise<{ locale: StrapiLocale; categorySlug: string; postSlug: string }>;
+}) {
   const params = await props.params;
   const post = await getPostBySlug(params.postSlug, params.locale);
   const category = await getPostCategoryBySlug(params.categorySlug, params.locale);
@@ -54,11 +52,9 @@ export async function generateMetadata(
   } satisfies Metadata;
 }
 
-export default async function SinglePostPage(
-  props: {
-    params: Promise<{ categorySlug: string; postSlug: string; locale: StrapiLocale }>;
-  }
-) {
+export default async function SinglePostPage(props: {
+  params: Promise<{ categorySlug: string; postSlug: string; locale: StrapiLocale }>;
+}) {
   const params = await props.params;
   const post = await getPostBySlug(params.postSlug, params.locale);
   const category = await getPostCategoryBySlug(params.categorySlug, params.locale);
@@ -102,9 +98,9 @@ export default async function SinglePostPage(
         <div className="container py-8">
           <h1 className={cn(typographyVariants({ variant: 'h1' }), 'mb-8 text-center')}>{post.title}</h1>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <time dateTime={post.publishedAt} className="inline-flex items-center gap-2">
+            <time dateTime={post.publishedAt || post.updatedAt} className="inline-flex items-center gap-2">
               <CalendarIcon className="size-4" aria-label="Published on" />
-              {parseISO(post.publishedAt).toLocaleDateString(post.locale, {
+              {parseISO(post.publishedAt || post.updatedAt).toLocaleDateString(post.locale, {
                 dateStyle: 'long',
               })}
             </time>
