@@ -84,8 +84,8 @@ importers:
         specifier: github:Gaylord-Julien/strapi-plugin-placeholder#v5
         version: https://codeload.github.com/Gaylord-Julien/strapi-plugin-placeholder/tar.gz/56e86a0dc63ae6dae654de0a87af1636287ef4a4(@babel/runtime@7.25.9)(@codemirror/autocomplete@6.18.1(@codemirror/language@6.10.3)(@codemirror/state@6.4.1)(@codemirror/view@6.34.1)(@lezer/common@1.2.3))(@codemirror/language@6.10.3)(@codemirror/lint@6.8.2)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.34.1)(@strapi/data-transfer@5.12.5(@types/node@20.17.30)(mysql2@3.14.0)(typescript@5.3.2))(@types/hoist-non-react-statics@3.3.5)(@types/node@20.17.30)(@types/react-dom@18.3.6(@types/react@19.1.2))(@types/react@19.1.2)(codemirror@5.65.19)(encoding@0.1.13)(mime-types@2.1.35)(mysql2@3.14.0)(plaiceholder@2.5.0(sharp@0.34.1))(react-dom@18.3.1(react@18.3.1))(react-router-dom@6.30.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(redux@4.2.1)(sharp@0.34.1)(styled-components@6.1.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       strapi-plugin-publisher:
-        specifier: 2.0.0-beta.7
-        version: 2.0.0-beta.7(d6329494be8750c2773f26daa2a5f927)
+        specifier: 2.0.0-beta.9
+        version: 2.0.0-beta.9(d6329494be8750c2773f26daa2a5f927)
       styled-components:
         specifier: ^6.1.17
         version: 6.1.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -409,7 +409,7 @@ importers:
         version: 5.3.2(@swc/helpers@0.5.15)(@types/node@20.17.30)(terser@5.36.0)
       '@strapi/strapi':
         specifier: ^5.12.5
-        version: 5.12.5(@swc/helpers@0.5.15)(@types/hoist-non-react-statics@3.3.5)(@types/node@20.17.30)(@types/react-dom@18.3.6(@types/react@19.1.2))(@types/react@19.1.2)(esbuild@0.20.2)(koa@2.15.4)(react-dom@19.1.0(react@19.1.0))(react-router-dom@6.30.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(redux@4.2.1)(styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(terser@5.36.0)(type-fest@4.26.1)
+        version: 5.12.5(@swc/helpers@0.5.15)(@types/hoist-non-react-statics@3.3.5)(@types/node@20.17.30)(@types/react-dom@18.3.6(@types/react@19.1.2))(@types/react@19.1.2)(esbuild@0.25.2)(koa@2.15.4)(react-dom@19.1.0(react@19.1.0))(react-router-dom@6.30.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(redux@4.2.1)(styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(terser@5.36.0)(type-fest@4.26.1)
       '@strapi/typescript-utils':
         specifier: ^5.12.5
         version: 5.12.5
@@ -452,7 +452,7 @@ importers:
         version: 5.3.2(@swc/helpers@0.5.15)(@types/node@20.17.0)(terser@5.36.0)
       '@strapi/strapi':
         specifier: ^5.12.5
-        version: 5.12.5(@swc/helpers@0.5.15)(@types/hoist-non-react-statics@3.3.5)(@types/node@20.17.0)(@types/react-dom@18.3.6(@types/react@19.1.2))(@types/react@19.1.2)(esbuild@0.25.2)(koa@2.15.4)(react-dom@19.1.0(react@19.1.0))(react-router-dom@6.30.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(redux@4.2.1)(styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(terser@5.36.0)(type-fest@4.26.1)
+        version: 5.12.5(@swc/helpers@0.5.15)(@types/hoist-non-react-statics@3.3.5)(@types/node@20.17.0)(@types/react-dom@18.3.6(@types/react@19.1.2))(@types/react@19.1.2)(esbuild@0.20.2)(koa@2.15.4)(react-dom@19.1.0(react@19.1.0))(react-router-dom@6.30.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(redux@4.2.1)(styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(terser@5.36.0)(type-fest@4.26.1)
       '@strapi/typescript-utils':
         specifier: ^5.12.5
         version: 5.12.5
@@ -10191,8 +10191,8 @@ packages:
       plaiceholder: ^2.3.0
       sharp: ^0.30.1
 
-  strapi-plugin-publisher@2.0.0-beta.7:
-    resolution: {integrity: sha512-a7YueODKopmE/YF1c1U7Uh3pB3mtADltgKi5UsnxrpGDidwAqd3QqaNGEI47LCadXSKxbXSpD4P5+c1AlEC+1g==}
+  strapi-plugin-publisher@2.0.0-beta.9:
+    resolution: {integrity: sha512-UG9670kjTn2PX8cZd6cokECp2CacIYb7mlNbr5LP/eVmY60p2bgVWXwy0K8WGaBydJBPcwv595/HrLoZb21R5A==}
     engines: {node: '>=18.0.0 <=20.x.x', npm: '>=6.0.0'}
     peerDependencies:
       '@strapi/design-system': ^2.0.0-rc.11
@@ -16604,7 +16604,7 @@ snapshots:
       '@strapi/design-system': 2.0.0-rc.21(@babel/runtime@7.25.9)(@codemirror/autocomplete@6.18.1(@codemirror/language@6.10.3)(@codemirror/state@6.4.1)(@codemirror/view@6.34.1)(@lezer/common@1.2.3))(@codemirror/language@6.10.3)(@codemirror/lint@6.8.2)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.34.1)(@strapi/icons@2.0.0-rc.21(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@types/react-dom@18.3.6(@types/react@19.1.2))(@types/react@19.1.2)(codemirror@5.65.19)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@strapi/icons': 2.0.0-rc.21(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@strapi/permissions': 5.12.5
-      '@strapi/types': 5.12.5(@types/node@20.17.30)(mysql2@3.14.0)(typescript@5.4.4)
+      '@strapi/types': 5.12.5(@types/node@20.17.30)(mysql2@3.14.0)(typescript@5.3.2)
       '@strapi/typescript-utils': 5.12.5
       '@strapi/utils': 5.12.5
       '@testing-library/dom': 10.1.0
@@ -16702,7 +16702,7 @@ snapshots:
       '@strapi/design-system': 2.0.0-rc.21(@babel/runtime@7.25.9)(@codemirror/autocomplete@6.18.1(@codemirror/language@6.10.3)(@codemirror/state@6.4.1)(@codemirror/view@6.34.1)(@lezer/common@1.2.3))(@codemirror/language@6.10.3)(@codemirror/lint@6.8.2)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.34.1)(@strapi/icons@2.0.0-rc.21(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@types/react-dom@18.3.6(@types/react@19.1.2))(@types/react@19.1.2)(codemirror@5.65.19)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@strapi/icons': 2.0.0-rc.21(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@strapi/permissions': 5.12.5
-      '@strapi/types': 5.12.5(@types/node@20.17.30)(mysql2@3.14.0)(typescript@5.4.4)
+      '@strapi/types': 5.12.5(@types/node@20.17.30)(mysql2@3.14.0)(typescript@5.3.2)
       '@strapi/typescript-utils': 5.12.5
       '@strapi/utils': 5.12.5
       '@testing-library/dom': 10.1.0
@@ -17532,7 +17532,7 @@ snapshots:
       '@strapi/database': 5.12.5(@types/node@20.17.30)(mysql2@3.14.0)
       '@strapi/design-system': 2.0.0-rc.21(@babel/runtime@7.25.9)(@codemirror/autocomplete@6.18.1(@codemirror/language@6.10.3)(@codemirror/state@6.4.1)(@codemirror/view@6.34.1)(@lezer/common@1.2.3))(@codemirror/language@6.10.3)(@codemirror/lint@6.8.2)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.34.1)(@strapi/icons@2.0.0-rc.21(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@types/react-dom@18.3.6(@types/react@19.1.2))(@types/react@19.1.2)(codemirror@5.65.19)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@strapi/icons': 2.0.0-rc.21(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
-      '@strapi/types': 5.12.5(@types/node@20.17.30)(mysql2@3.14.0)(typescript@5.4.4)
+      '@strapi/types': 5.12.5(@types/node@20.17.30)(mysql2@3.14.0)(typescript@5.3.2)
       '@strapi/utils': 5.12.5
       date-fns: 2.30.0
       date-fns-tz: 2.0.1(date-fns@2.30.0)
@@ -17696,7 +17696,7 @@ snapshots:
       '@strapi/generators': 5.12.5
       '@strapi/logger': 5.12.5
       '@strapi/permissions': 5.12.5
-      '@strapi/types': 5.12.5(@types/node@20.17.30)(mysql2@3.14.0)(typescript@5.4.4)
+      '@strapi/types': 5.12.5(@types/node@20.17.30)(mysql2@3.14.0)(typescript@5.3.2)
       '@strapi/typescript-utils': 5.12.5
       '@strapi/utils': 5.12.5
       bcryptjs: 2.4.3
@@ -18971,7 +18971,7 @@ snapshots:
       '@strapi/logger': 5.12.5
       '@strapi/permissions': 5.12.5
       '@strapi/review-workflows': 5.12.5(6cef0e97cb599d5527f0fb230d92d7a2)
-      '@strapi/types': 5.12.5(@types/node@20.17.30)(mysql2@3.14.0)(typescript@5.4.4)
+      '@strapi/types': 5.12.5(@types/node@20.17.30)(mysql2@3.14.0)(typescript@5.3.2)
       '@strapi/typescript-utils': 5.12.5
       '@strapi/upload': 5.12.5(05dd6997a2809625124074cbeb345921)
       '@strapi/utils': 5.12.5
@@ -19073,9 +19073,9 @@ snapshots:
       - webpack-dev-server
       - webpack-plugin-serve
 
-  '@strapi/strapi@5.12.5(@swc/helpers@0.5.15)(@types/hoist-non-react-statics@3.3.5)(@types/node@20.17.0)(@types/react-dom@18.3.6(@types/react@19.1.2))(@types/react@19.1.2)(esbuild@0.25.2)(koa@2.15.4)(react-dom@19.1.0(react@19.1.0))(react-router-dom@6.30.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(redux@4.2.1)(styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(terser@5.36.0)(type-fest@4.26.1)':
+  '@strapi/strapi@5.12.5(@swc/helpers@0.5.15)(@types/hoist-non-react-statics@3.3.5)(@types/node@20.17.0)(@types/react-dom@18.3.6(@types/react@19.1.2))(@types/react@19.1.2)(esbuild@0.20.2)(koa@2.15.4)(react-dom@19.1.0(react@19.1.0))(react-router-dom@6.30.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(redux@4.2.1)(styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(terser@5.36.0)(type-fest@4.26.1)':
     dependencies:
-      '@pmmmwh/react-refresh-webpack-plugin': 0.5.15(react-refresh@0.14.0)(type-fest@4.26.1)(webpack-hot-middleware@2.26.1)(webpack@5.95.0(esbuild@0.25.2))
+      '@pmmmwh/react-refresh-webpack-plugin': 0.5.15(react-refresh@0.14.0)(type-fest@4.26.1)(webpack-hot-middleware@2.26.1)(webpack@5.95.0(esbuild@0.20.2))
       '@strapi/admin': 5.12.5(@strapi/data-transfer@5.12.5(@types/node@20.17.0)(typescript@5.4.4))(@types/hoist-non-react-statics@3.3.5)(@types/node@20.17.0)(@types/react-dom@18.3.6(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react-router-dom@6.30.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(redux@4.2.1)(styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
       '@strapi/cloud-cli': 5.12.5
       '@strapi/content-manager': 5.12.5(@strapi/admin@5.12.5(@strapi/data-transfer@5.12.5(@types/node@20.17.0)(typescript@5.4.4))(@types/hoist-non-react-statics@3.3.5)(@types/node@20.17.0)(@types/react-dom@18.3.6(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react-router-dom@6.30.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(redux@4.2.1)(styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0)))(@types/hoist-non-react-statics@3.3.5)(@types/node@20.17.0)(@types/react-dom@18.3.6(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react-router-dom@6.30.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(redux@4.2.1)(styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.4.4)
@@ -19107,19 +19107,19 @@ snapshots:
       commander: 8.3.0
       concurrently: 8.2.2
       copyfiles: 2.4.1
-      css-loader: 6.11.0(webpack@5.95.0(esbuild@0.25.2))
+      css-loader: 6.11.0(webpack@5.95.0(esbuild@0.20.2))
       dotenv: 16.4.5
-      esbuild-loader: 4.3.0(webpack@5.95.0(esbuild@0.25.2))
-      esbuild-register: 3.5.0(esbuild@0.25.2)
+      esbuild-loader: 4.3.0(webpack@5.95.0(esbuild@0.20.2))
+      esbuild-register: 3.5.0(esbuild@0.20.2)
       execa: 5.1.1
-      fork-ts-checker-webpack-plugin: 8.0.0(typescript@5.4.4)(webpack@5.95.0(esbuild@0.25.2))
+      fork-ts-checker-webpack-plugin: 8.0.0(typescript@5.4.4)(webpack@5.95.0(esbuild@0.20.2))
       fs-extra: 11.2.0
       get-latest-version: 5.1.0
       git-url-parse: 14.0.0
-      html-webpack-plugin: 5.6.0(webpack@5.95.0(esbuild@0.25.2))
+      html-webpack-plugin: 5.6.0(webpack@5.95.0(esbuild@0.20.2))
       inquirer: 8.2.5
       lodash: 4.17.21
-      mini-css-extract-plugin: 2.7.7(webpack@5.95.0(esbuild@0.25.2))
+      mini-css-extract-plugin: 2.7.7(webpack@5.95.0(esbuild@0.20.2))
       nodemon: 3.0.2
       ora: 5.4.1
       outdent: 0.8.0
@@ -19132,13 +19132,13 @@ snapshots:
       read-pkg-up: 7.0.1
       resolve-from: 5.0.0
       semver: 7.5.4
-      style-loader: 3.3.4(webpack@5.95.0(esbuild@0.25.2))
+      style-loader: 3.3.4(webpack@5.95.0(esbuild@0.20.2))
       styled-components: 6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       typescript: 5.4.4
       vite: 5.4.17(@types/node@20.17.0)(terser@5.36.0)
-      webpack: 5.95.0(esbuild@0.25.2)
+      webpack: 5.95.0(esbuild@0.20.2)
       webpack-bundle-analyzer: 4.10.2
-      webpack-dev-middleware: 6.1.2(webpack@5.95.0(esbuild@0.25.2))
+      webpack-dev-middleware: 6.1.2(webpack@5.95.0(esbuild@0.20.2))
       webpack-hot-middleware: 2.26.1
       yalc: 1.0.0-pre.53
       yup: 0.32.9
@@ -19192,9 +19192,9 @@ snapshots:
       - webpack-dev-server
       - webpack-plugin-serve
 
-  '@strapi/strapi@5.12.5(@swc/helpers@0.5.15)(@types/hoist-non-react-statics@3.3.5)(@types/node@20.17.30)(@types/react-dom@18.3.6(@types/react@19.1.2))(@types/react@19.1.2)(esbuild@0.20.2)(koa@2.15.4)(react-dom@19.1.0(react@19.1.0))(react-router-dom@6.30.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(redux@4.2.1)(styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(terser@5.36.0)(type-fest@4.26.1)':
+  '@strapi/strapi@5.12.5(@swc/helpers@0.5.15)(@types/hoist-non-react-statics@3.3.5)(@types/node@20.17.30)(@types/react-dom@18.3.6(@types/react@19.1.2))(@types/react@19.1.2)(esbuild@0.25.2)(koa@2.15.4)(react-dom@19.1.0(react@19.1.0))(react-router-dom@6.30.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(redux@4.2.1)(styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(terser@5.36.0)(type-fest@4.26.1)':
     dependencies:
-      '@pmmmwh/react-refresh-webpack-plugin': 0.5.15(react-refresh@0.14.0)(type-fest@4.26.1)(webpack-hot-middleware@2.26.1)(webpack@5.95.0(esbuild@0.20.2))
+      '@pmmmwh/react-refresh-webpack-plugin': 0.5.15(react-refresh@0.14.0)(type-fest@4.26.1)(webpack-hot-middleware@2.26.1)(webpack@5.95.0(esbuild@0.25.2))
       '@strapi/admin': 5.12.5(@strapi/data-transfer@5.12.5(@types/node@20.17.30)(typescript@5.4.4))(@types/hoist-non-react-statics@3.3.5)(@types/node@20.17.30)(@types/react-dom@18.3.6(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react-router-dom@6.30.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(redux@4.2.1)(styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
       '@strapi/cloud-cli': 5.12.5
       '@strapi/content-manager': 5.12.5(@strapi/admin@5.12.5(@strapi/data-transfer@5.12.5(@types/node@20.17.30)(typescript@5.4.4))(@types/hoist-non-react-statics@3.3.5)(@types/node@20.17.30)(@types/react-dom@18.3.6(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react-router-dom@6.30.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(redux@4.2.1)(styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0)))(@types/hoist-non-react-statics@3.3.5)(@types/node@20.17.30)(@types/react-dom@18.3.6(@types/react@19.1.2))(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react-router-dom@6.30.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(redux@4.2.1)(styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.4.4)
@@ -19226,19 +19226,19 @@ snapshots:
       commander: 8.3.0
       concurrently: 8.2.2
       copyfiles: 2.4.1
-      css-loader: 6.11.0(webpack@5.95.0(esbuild@0.20.2))
+      css-loader: 6.11.0(webpack@5.95.0(esbuild@0.25.2))
       dotenv: 16.4.5
-      esbuild-loader: 4.3.0(webpack@5.95.0(esbuild@0.20.2))
-      esbuild-register: 3.5.0(esbuild@0.20.2)
+      esbuild-loader: 4.3.0(webpack@5.95.0(esbuild@0.25.2))
+      esbuild-register: 3.5.0(esbuild@0.25.2)
       execa: 5.1.1
-      fork-ts-checker-webpack-plugin: 8.0.0(typescript@5.4.4)(webpack@5.95.0(esbuild@0.20.2))
+      fork-ts-checker-webpack-plugin: 8.0.0(typescript@5.4.4)(webpack@5.95.0(esbuild@0.25.2))
       fs-extra: 11.2.0
       get-latest-version: 5.1.0
       git-url-parse: 14.0.0
-      html-webpack-plugin: 5.6.0(webpack@5.95.0(esbuild@0.20.2))
+      html-webpack-plugin: 5.6.0(webpack@5.95.0(esbuild@0.25.2))
       inquirer: 8.2.5
       lodash: 4.17.21
-      mini-css-extract-plugin: 2.7.7(webpack@5.95.0(esbuild@0.20.2))
+      mini-css-extract-plugin: 2.7.7(webpack@5.95.0(esbuild@0.25.2))
       nodemon: 3.0.2
       ora: 5.4.1
       outdent: 0.8.0
@@ -19251,13 +19251,13 @@ snapshots:
       read-pkg-up: 7.0.1
       resolve-from: 5.0.0
       semver: 7.5.4
-      style-loader: 3.3.4(webpack@5.95.0(esbuild@0.20.2))
+      style-loader: 3.3.4(webpack@5.95.0(esbuild@0.25.2))
       styled-components: 6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       typescript: 5.4.4
       vite: 5.4.17(@types/node@20.17.30)(terser@5.36.0)
-      webpack: 5.95.0(esbuild@0.20.2)
+      webpack: 5.95.0(esbuild@0.25.2)
       webpack-bundle-analyzer: 4.10.2
-      webpack-dev-middleware: 6.1.2(webpack@5.95.0(esbuild@0.20.2))
+      webpack-dev-middleware: 6.1.2(webpack@5.95.0(esbuild@0.25.2))
       webpack-hot-middleware: 2.26.1
       yalc: 1.0.0-pre.53
       yup: 0.32.9
@@ -19381,34 +19381,6 @@ snapshots:
       koa-body: 6.0.1
       node-schedule: 2.1.1
       typedoc: 0.25.10(typescript@5.3.2)
-      typedoc-github-wiki-theme: 1.1.0(typedoc-plugin-markdown@3.17.1(typedoc@0.25.10(typescript@5.3.2)))(typedoc@0.25.10(typescript@5.3.2))
-      typedoc-plugin-markdown: 3.17.1(typedoc@0.25.10(typescript@5.3.2))
-    transitivePeerDependencies:
-      - '@types/node'
-      - better-sqlite3
-      - mysql
-      - mysql2
-      - pg
-      - pg-native
-      - sqlite3
-      - supports-color
-      - tedious
-      - typescript
-
-  '@strapi/types@5.12.5(@types/node@20.17.30)(mysql2@3.14.0)(typescript@5.4.4)':
-    dependencies:
-      '@casl/ability': 6.5.0
-      '@koa/cors': 5.0.0
-      '@koa/router': 12.0.2
-      '@strapi/database': 5.12.5(@types/node@20.17.30)(mysql2@3.14.0)
-      '@strapi/logger': 5.12.5
-      '@strapi/permissions': 5.12.5
-      '@strapi/utils': 5.12.5
-      commander: 8.3.0
-      koa: 2.15.4
-      koa-body: 6.0.1
-      node-schedule: 2.1.1
-      typedoc: 0.25.10(typescript@5.4.4)
       typedoc-github-wiki-theme: 1.1.0(typedoc-plugin-markdown@3.17.1(typedoc@0.25.10(typescript@5.3.2)))(typedoc@0.25.10(typescript@5.3.2))
       typedoc-plugin-markdown: 3.17.1(typedoc@0.25.10(typescript@5.3.2))
     transitivePeerDependencies:
@@ -23128,7 +23100,7 @@ snapshots:
       isstream: 0.1.2
       jsonwebtoken: 9.0.2
       mime-types: 2.1.35
-      retry-axios: 2.6.0(axios@1.7.4(debug@4.4.0))
+      retry-axios: 2.6.0(axios@1.7.4)
       tough-cookie: 4.1.4
     transitivePeerDependencies:
       - supports-color
@@ -25880,7 +25852,7 @@ snapshots:
       onetime: 7.0.0
       signal-exit: 4.1.0
 
-  retry-axios@2.6.0(axios@1.7.4(debug@4.4.0)):
+  retry-axios@2.6.0(axios@1.7.4):
     dependencies:
       axios: 1.7.4(debug@4.4.0)
 
@@ -26429,7 +26401,7 @@ snapshots:
       - supports-color
       - tedious
 
-  strapi-plugin-publisher@2.0.0-beta.7(d6329494be8750c2773f26daa2a5f927):
+  strapi-plugin-publisher@2.0.0-beta.9(d6329494be8750c2773f26daa2a5f927):
     dependencies:
       '@strapi/design-system': 2.0.0-rc.21(@babel/runtime@7.25.9)(@codemirror/autocomplete@6.18.1(@codemirror/language@6.10.3)(@codemirror/state@6.4.1)(@codemirror/view@6.34.1)(@lezer/common@1.2.3))(@codemirror/language@6.10.3)(@codemirror/lint@6.8.2)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.34.1)(@strapi/icons@2.0.0-rc.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@types/react-dom@18.3.6(@types/react@19.1.2))(@types/react@19.1.2)(codemirror@5.65.19)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@strapi/icons': 2.0.0-rc.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
