@@ -21,5 +21,14 @@
   "engines": {
     "node": ">=18"
   },
-  "pnpm": {}
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@swc/core",
+      "aws-sdk",
+      "core-js-pure",
+      "esbuild",
+      "msw",
+      "sharp"
+    ]
+  }
 }
