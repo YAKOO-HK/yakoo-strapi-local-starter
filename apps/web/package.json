@@ -86,7 +86,7 @@
     "@tailwindcss/typography": "^0.5.16",
     "@types/html-to-text": "^9.0.4",
     "@types/leaflet": "^1.9.17",
-    "@types/node": "^20.17.47",
+    "@types/node": "^20.19.1",
     "@types/qs": "^6.9.18",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5",
