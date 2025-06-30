@@ -37,8 +37,14 @@ function addServerErrors<TFieldValues extends FieldValues>(
   });
 }
 
+type Zod3Type = z.Schema & {
+  _def: {
+    typeName: string;
+  };
+};
+
 export type useZodFormProps<
-  TZodSchema extends z.Schema,
+  TZodSchema extends Zod3Type,
   TFieldValues extends FieldValues = z.infer<TZodSchema>,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   TContext = any,
@@ -49,7 +55,7 @@ export type useZodFormProps<
 };
 
 function useZodForm<
-  TZodSchema extends z.Schema,
+  TZodSchema extends Zod3Type,
   TFieldValues extends FieldValues = z.infer<TZodSchema>,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   TContext = any,

@@ -15,12 +15,12 @@
     "@ckeditor/strapi-plugin-ckeditor": "^1.1.1",
     "@repo/plugin-ezforms": "workspace:*",
     "@repo/plugin-local-image-sharp": "workspace:*",
-    "@strapi/plugin-color-picker": "5.16.0",
+    "@strapi/plugin-color-picker": "5.16.1",
     "@strapi/plugin-seo": "^2.0.8",
-    "@strapi/plugin-users-permissions": "5.16.0",
-    "@strapi/provider-email-nodemailer": "5.16.0",
-    "@strapi/provider-upload-local": "5.16.0",
-    "@strapi/strapi": "5.16.0",
+    "@strapi/plugin-users-permissions": "5.16.1",
+    "@strapi/provider-email-nodemailer": "5.16.1",
+    "@strapi/provider-upload-local": "5.16.1",
+    "@strapi/strapi": "5.16.1",
     "axios": "^1.10.0",
     "mysql2": "^3.14.1",
     "react": "^18.3.1",
@@ -45,8 +45,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@strapi/typescript-utils": "5.16.0",
-    "@types/node": "^20.19.1",
+    "@strapi/typescript-utils": "5.16.1",
+    "@types/node": "^20.19.2",
     "vite": "^5.4.19"
   }
 }
