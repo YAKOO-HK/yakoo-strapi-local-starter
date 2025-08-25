@@ -65,6 +65,7 @@ export function GallerySection({ as, layout, slides }: ComponentGallery & Dynami
         render={{
           slide: ({ slide, rect }) => (
             <Image
+              draggable={false}
               unoptimized
               src={StrapiRawImageLoader({ src: slide.src })}
               alt={slide.alt || ''}
