@@ -47,7 +47,7 @@ export function ContactForm({ sections, locale }: { sections: Array<FormComponen
   return (
     <Form {...methods}>
       <form
-        className="rounded-lg border border-border"
+        className="border-border rounded-lg border"
         onSubmit={handleSubmit(async ({ token, ...formData }) => {
           const response = await fetch(`${env.NEXT_PUBLIC_STRAPI_URL}/api/ezforms/submit`, {
             method: 'POST',
@@ -64,7 +64,7 @@ export function ContactForm({ sections, locale }: { sections: Array<FormComponen
           }
         })}
       >
-        <div className="grid grid-cols-1 gap-y-6 px-2 py-6 @lg:grid-cols-2 @lg:gap-x-8 @lg:px-8">
+        <div className="@lg:grid-cols-2 @lg:gap-x-8 @lg:px-8 grid grid-cols-1 gap-y-6 px-2 py-6">
           {sections.map((section) => {
             switch (section.__component) {
               case 'form-components.text-input':
@@ -126,7 +126,7 @@ export function ContactForm({ sections, locale }: { sections: Array<FormComponen
             />
           )}
         </div>
-        <div className="px-2 pb-6 @lg:px-8">
+        <div className="@lg:px-8 px-2 pb-6">
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting && <Loader2Icon className="mr-2 size-4 animate-spin" />}
             <span>Submit</span>

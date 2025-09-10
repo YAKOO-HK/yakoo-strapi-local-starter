@@ -46,7 +46,7 @@ export function MainNavigation({ items, className }: { items: NavigationItem[]; 
                   <Link
                     className={cn(
                       buttonVariants({ variant: 'none' }),
-                      'text-base text-primary dark:text-white dark:hover:text-neutral-300'
+                      'text-primary text-base dark:text-white dark:hover:text-neutral-300'
                     )}
                     href={parentItem.path}
                     target={isExternal ? '_blank' : undefined}
@@ -63,7 +63,7 @@ export function MainNavigation({ items, className }: { items: NavigationItem[]; 
                   <DropdownMenuTrigger
                     className={cn(
                       buttonVariants({ variant: 'none' }),
-                      'text-base text-primary hover:bg-transparent dark:text-white dark:hover:text-neutral-300'
+                      'text-primary text-base hover:bg-transparent dark:text-white dark:hover:text-neutral-300'
                     )}
                   >
                     {parentItem.title}
@@ -79,7 +79,7 @@ export function MainNavigation({ items, className }: { items: NavigationItem[]; 
                             asChild
                             className={cn(
                               buttonVariants({ variant: 'none' }),
-                              'justify-start text-base text-primary dark:text-white dark:hover:text-neutral-300'
+                              'text-primary justify-start text-base dark:text-white dark:hover:text-neutral-300'
                             )}
                           >
                             <Link
@@ -114,13 +114,13 @@ export function MobileMainNavigation({ items, className }: { items: NavigationIt
               return (
                 <li
                   key={parentItem.id}
-                  className="group px-3 py-2 font-light focus-within:bg-primary hover:bg-primary active:bg-primary"
+                  className="focus-within:bg-primary hover:bg-primary active:bg-primary group px-3 py-2 font-light"
                 >
                   <Link
                     href={parentItem.path}
                     target={isExternal ? '_blank' : undefined}
                     rel={isExternal ? 'noopener noreferrer' : undefined}
-                    className="block text-primary focus-visible:text-white group-hover:text-white"
+                    className="text-primary block focus-visible:text-white group-hover:text-white"
                   >
                     {parentItem.title}
                   </Link>
@@ -130,7 +130,7 @@ export function MobileMainNavigation({ items, className }: { items: NavigationIt
             return (
               <li key={parentItem.id}>
                 <Collapsible>
-                  <CollapsibleTrigger className="group flex w-full justify-between px-3 py-2 font-light text-primary hover:bg-primary hover:text-white focus-visible:bg-primary focus-visible:text-white aria-expanded:border-b aria-expanded:border-white aria-expanded:bg-primary aria-expanded:text-white">
+                  <CollapsibleTrigger className="text-primary hover:bg-primary focus-visible:bg-primary aria-expanded:bg-primary group flex w-full justify-between px-3 py-2 font-light hover:text-white focus-visible:text-white aria-expanded:border-b aria-expanded:border-white aria-expanded:text-white">
                     <span>{parentItem.title}</span>
                     <ChevronDownIcon className="size-5 group-aria-expanded:rotate-180" aria-hidden />
                   </CollapsibleTrigger>
@@ -143,7 +143,7 @@ export function MobileMainNavigation({ items, className }: { items: NavigationIt
                           return (
                             <li
                               key={item.id}
-                              className="group bg-primary/80 px-3 py-2 font-light focus-within:bg-primary hover:bg-primary active:bg-primary"
+                              className="bg-primary/80 focus-within:bg-primary hover:bg-primary active:bg-primary group px-3 py-2 font-light"
                             >
                               <Link
                                 href={href}

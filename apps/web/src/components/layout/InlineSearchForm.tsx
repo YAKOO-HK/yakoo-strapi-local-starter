@@ -18,7 +18,7 @@ export function InlineSearchForm({
       action={`/${locale}/search`}
       method="GET"
       className={cn(
-        'inline-flex items-center gap-2 border-b border-b-primary bg-white px-1 py-2 text-primary',
+        'border-b-primary text-primary inline-flex items-center gap-2 border-b bg-white px-1 py-2',
         'dark:border-b-white dark:bg-transparent dark:text-white',
         variant === 'mobile' && 'border-b-white bg-transparent',
         className
@@ -32,9 +32,9 @@ export function InlineSearchForm({
         name="q"
         autoFocus={false}
         className={cn(
-          'w-40 bg-transparent font-light text-black placeholder:text-primary focus-visible:outline-none',
+          'placeholder:text-primary focus-visible:outline-hidden w-40 bg-transparent font-light text-black',
           'dark:text-white dark:placeholder:text-white/80',
-          variant === 'mobile' && 'w-full text-primary placeholder:text-primary/80'
+          variant === 'mobile' && 'text-primary placeholder:text-primary/80 w-full'
         )}
         placeholder={t('quickSearchPlaceholder')}
       />

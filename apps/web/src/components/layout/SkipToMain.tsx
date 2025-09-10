@@ -35,7 +35,7 @@ const SkipToMain = ({ target = '#main' }: { target?: `#${string}` }) => {
       href={target}
       onClick={handleSkipToMain}
       onKeyDown={handleKeydown}
-      className="absolute left-1/2 z-[9999] block w-52 -translate-x-1/2 -translate-y-full rounded-lg border bg-background p-2 text-center text-foreground transition-transform duration-300 focus:top-2 focus-visible:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      className="z-9999 bg-background text-foreground focus-visible:outline-hidden focus-visible:ring-ring absolute left-1/2 block w-52 -translate-x-1/2 -translate-y-full rounded-lg border p-2 text-center transition-transform duration-300 focus:top-2 focus-visible:translate-y-0 focus-visible:ring-2 focus-visible:ring-offset-2"
     >
       Skip to main content
     </Link>

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 export default function NotFound() {
   return (
-    <Main className="container prose prose-neutral py-8">
+    <Main className="prose prose-neutral container py-8">
       <h1 className={cn(typographyVariants({ variant: 'h1' }))}>Page Not Found (404)</h1>
       <p>Could not find requested resource.</p>
     </Main>

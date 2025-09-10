@@ -6,10 +6,9 @@ import nextPlugin from '@next/eslint-plugin-next';
 import pluginQuery from '@tanstack/eslint-plugin-query';
 import onlyWarn from 'eslint-plugin-only-warn';
 import reactHooks from 'eslint-plugin-react-hooks';
-import tailwind from 'eslint-plugin-tailwindcss';
 import turbo from 'eslint-plugin-turbo';
+import { defineConfig } from 'eslint/config';
 import globals from 'globals';
-import tseslint from 'typescript-eslint';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -18,10 +17,9 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-export default tseslint.config(
+export default defineConfig(
   eslint.configs.recommended,
   ...compat.extends('next/core-web-vitals', 'next/typescript'),
-  ...tailwind.configs['flat/recommended'],
   ...pluginQuery.configs['flat/recommended'],
   {
     plugins: {
@@ -60,7 +58,6 @@ export default tseslint.config(
           ignoreRestSiblings: true,
         },
       ],
-      'tailwindcss/no-custom-classname': 'off',
     },
     files: ['**/*.js?(x)', '**/*.ts?(x)'],
     ignores: ['.next/*'],

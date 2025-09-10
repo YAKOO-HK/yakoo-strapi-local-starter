@@ -108,7 +108,7 @@ export function CarouselSection({ as, slides, layout }: ComponentCarousel & Dyna
       </span>
       <button
         role="button"
-        className="absolute inset-y-2 left-2 z-10 w-8 rounded-md ring-offset-background hover:bg-neutral-100/75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        className="ring-offset-background focus-visible:outline-hidden focus-visible:ring-ring absolute inset-y-2 left-2 z-10 w-8 rounded-md hover:bg-neutral-100/75 focus-visible:ring-2 focus-visible:ring-offset-2"
         onClick={scrollPrev}
       >
         <ArrowLeftIcon className="size-8" />
@@ -116,7 +116,7 @@ export function CarouselSection({ as, slides, layout }: ComponentCarousel & Dyna
       </button>
       <button
         role="button"
-        className="absolute inset-y-2 right-2 z-10 w-8 rounded-md ring-offset-background hover:bg-neutral-100/75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        className="ring-offset-background focus-visible:outline-hidden focus-visible:ring-ring absolute inset-y-2 right-2 z-10 w-8 rounded-md hover:bg-neutral-100/75 focus-visible:ring-2 focus-visible:ring-offset-2"
         onClick={scrollNext}
       >
         <ArrowRightIcon className="size-8" />
@@ -157,7 +157,7 @@ export function CarouselSection({ as, slides, layout }: ComponentCarousel & Dyna
               aria-current={index === selectedIndex ? 'true' : undefined}
               className={cn(
                 'm-0 size-3 cursor-pointer touch-manipulation appearance-none rounded-full border-0 bg-white p-0',
-                'aria-[current=true]:bg-primary'
+                'aria-current:bg-primary'
               )}
             >
               <span className="sr-only">{`Go to Slide ${index + 1}`}</span>

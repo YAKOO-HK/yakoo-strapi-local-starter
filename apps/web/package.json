@@ -72,7 +72,7 @@
     "react-leaflet": "^4.2.1",
     "react-photo-album": "^3.1.0",
     "schema-dts": "^1.1.5",
-    "tailwind-merge": "^2.6.0",
+    "tailwind-merge": "^3.3.1",
     "tailwindcss-animate": "^1.0.7",
     "tinycolor2": "^1.6.0",
     "typesense": "^2.1.0",
@@ -83,7 +83,7 @@
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "@tailwindcss/container-queries": "^0.1.1",
+    "@tailwindcss/postcss": "^4.1.13",
     "@tailwindcss/typography": "^0.5.16",
     "@types/html-to-text": "^9.0.4",
     "@types/leaflet": "^1.9.20",
@@ -92,11 +92,10 @@
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.9",
     "@types/tinycolor2": "^1.4.6",
-    "autoprefixer": "^10.4.21",
     "eslint": "9.35.0",
     "postcss": "^8.5.6",
     "sharp": "^0.34.3",
-    "tailwindcss": "^3.4.17",
+    "tailwindcss": "^4.1.13",
     "typescript": "^5.9.2"
   }
 }
