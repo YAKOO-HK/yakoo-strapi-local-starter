@@ -1,7 +1,6 @@
 {
   "key": "plugin_content_manager_configuration_content_types::plugin::ezforms.recipient",
   "value": {
-    "uid": "plugin::ezforms.recipient",
     "settings": {
       "bulkable": true,
       "filterable": true,
@@ -119,6 +118,14 @@
           "searchable": true,
           "sortable": true
         }
+      },
+      "documentId": {
+        "edit": {},
+        "list": {
+          "label": "documentId",
+          "searchable": true,
+          "sortable": true
+        }
       }
     },
     "layouts": {
@@ -146,7 +153,8 @@
           }
         ]
       ]
-    }
+    },
+    "uid": "plugin::ezforms.recipient"
   },
   "type": "object",
   "environment": null,

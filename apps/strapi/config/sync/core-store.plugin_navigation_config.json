@@ -24,6 +24,7 @@
       ]
     },
     "contentTypesPopulate": {},
+    "defaultContentType": "",
     "allowedLevels": 2,
     "gql": {
       "navigationItemRelated": [

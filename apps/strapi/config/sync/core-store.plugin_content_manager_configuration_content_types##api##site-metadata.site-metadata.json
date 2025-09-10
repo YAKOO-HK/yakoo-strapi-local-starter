@@ -161,9 +161,23 @@
           "searchable": true,
           "sortable": true
         }
+      },
+      "documentId": {
+        "edit": {},
+        "list": {
+          "label": "documentId",
+          "searchable": true,
+          "sortable": true
+        }
       }
     },
     "layouts": {
+      "list": [
+        "id",
+        "seo",
+        "createdAt",
+        "updatedAt"
+      ],
       "edit": [
         [
           {
@@ -197,12 +211,6 @@
             "size": 12
           }
         ]
-      ],
-      "list": [
-        "id",
-        "seo",
-        "createdAt",
-        "updatedAt"
       ]
     }
   },
