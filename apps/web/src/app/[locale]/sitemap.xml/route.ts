@@ -3,19 +3,19 @@ import { env } from '@/env';
 import { locales } from '@/i18n/routing';
 import { getAllPages } from '@/strapi/pages';
 import { getAllCategories, getAllPosts } from '@/strapi/posts';
-import type { StrapiLocale } from '@/strapi/strapi';
+import { StrapiLocale } from '@/strapi/strapi';
 
 export const dynamic = 'force-dynamic';
 
-export async function GET(_req: Request, props: { params: Promise<{ locale: StrapiLocale }> }) {
+export async function GET(_req: Request, props: RouteContext<'/[locale]/sitemap.xml'>) {
   const params = await props.params;
-  if (!locales.includes(params.locale)) {
+  if (!locales.includes(params.locale as StrapiLocale)) {
     return new Response(null, { status: 404 });
   }
-
-  const hundredPages = await getAllPages(params.locale);
-  const hundredPosts = await getAllPosts(params.locale);
-  const categories = await getAllCategories(params.locale);
+  const locale = params.locale as StrapiLocale;
+  const hundredPages = await getAllPages(locale);
+  const hundredPosts = await getAllPosts(locale);
+  const categories = await getAllCategories(locale);
 
   const now = new Date().toISOString();
   return getServerSideSitemap([

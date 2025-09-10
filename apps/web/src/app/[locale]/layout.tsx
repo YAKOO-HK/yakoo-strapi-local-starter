@@ -21,12 +21,12 @@ import { PreviewListener } from './preview-listener';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
-export async function generateMetadata(props: { params: Promise<{ locale: StrapiLocale }> }) {
+export async function generateMetadata(props: LayoutProps<'/[locale]'>) {
   const params = await props.params;
-  if (!locales.includes(params.locale)) {
+  if (!locales.includes(params.locale as StrapiLocale)) {
     notFound();
   }
-  const { seo } = await getSiteMetadata(params.locale);
+  const { seo } = await getSiteMetadata(params.locale as StrapiLocale);
   return {
     metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),
     title: {
@@ -51,20 +51,17 @@ export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
-export default async function LocaleLayout(props: {
-  children: React.ReactNode;
-  params: Promise<{ locale: StrapiLocale }>;
-}) {
+export default async function LocaleLayout(props: LayoutProps<'/[locale]'>) {
   const params = await props.params;
-  const { locale } = params;
+  const locale = params.locale as StrapiLocale;
   const { children } = props;
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
-  setRequestLocale(params.locale);
+  setRequestLocale(locale);
   const messages = await getMessages();
-  const { logo, logo2, logo_link, logo2_link, seo } = await getSiteMetadata(params.locale);
-  const navigationItems = await getMainNavigation(params.locale);
+  const { logo, logo2, logo_link, logo2_link, seo } = await getSiteMetadata(locale);
+  const navigationItems = await getMainNavigation(locale);
   // console.dir(navigationItems, { depth: 10 });
   return (
     <html lang={locale} dir="ltr">
