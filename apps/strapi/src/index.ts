@@ -7,7 +7,16 @@ export default {
    *
    * This gives you an opportunity to extend code.
    */
-  register(/*{ strapi }*/) {},
+  register({ strapi }: { strapi: Core.Strapi }) {
+    // https://github.com/strapi/strapi/issues/24535#issuecomment-3381729112
+    // Force the socket to be treated as encrypted for proxy setups
+    strapi.server.use(async (ctx, next) => {
+      if (ctx.req?.socket) {
+        (ctx.req.socket as any).encrypted = true;
+      }
+      await next();
+    });
+  },
 
   /**
    * An asynchronous bootstrap function that runs before

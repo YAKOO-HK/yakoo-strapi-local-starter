@@ -15,15 +15,16 @@
     "@repo/typescript-config": "workspace:*",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.14",
-    "turbo": "^2.5.6"
+    "turbo": "^2.5.8"
   },
-  "packageManager": "pnpm@10.15.1",
+  "packageManager": "pnpm@10.18.2",
   "engines": {
     "node": ">=18"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
       "@swc/core",
+      "@tailwindcss/oxide",
       "aws-sdk",
       "core-js-pure",
       "esbuild",

@@ -15,5 +15,8 @@
   ],
   "typescript.preferences.autoImportFileExcludePatterns": [
     "@radix-ui"
+  ],
+  "i18n-ally.localesPaths": [
+    "apps/web/messages"
   ]
 }
