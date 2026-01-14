@@ -4,34 +4,37 @@
   "version": "0.1.0",
   "description": "A Strapi application",
   "scripts": {
+    "build": "NODE_ENV=production strapi build",
+    "console": "strapi console",
     "cs": "config-sync",
     "dev": "strapi dev",
     "develop": "strapi develop",
     "start": "NODE_ENV=production strapi start",
-    "build": "NODE_ENV=production strapi build",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "upgrade": "npx @strapi/upgrade latest",
+    "upgrade:dry": "npx @strapi/upgrade latest --dry"
   },
   "dependencies": {
     "@ckeditor/strapi-plugin-ckeditor": "^1.1.1",
     "@repo/plugin-ezforms": "workspace:*",
     "@repo/plugin-local-image-sharp": "workspace:*",
-    "@strapi/plugin-color-picker": "5.32.0",
-    "@strapi/plugin-seo": "^2.0.9",
-    "@strapi/plugin-users-permissions": "5.32.0",
-    "@strapi/provider-email-nodemailer": "5.32.0",
-    "@strapi/provider-upload-local": "5.32.0",
-    "@strapi/strapi": "5.32.0",
+    "@strapi-community/plugin-seo": "^2.1.1",
+    "@strapi/plugin-color-picker": "5.33.2",
+    "@strapi/plugin-users-permissions": "5.33.2",
+    "@strapi/provider-email-nodemailer": "5.33.2",
+    "@strapi/provider-upload-local": "5.33.2",
+    "@strapi/strapi": "5.33.2",
     "axios": "^1.13.2",
-    "mysql2": "^3.15.3",
+    "mysql2": "^3.16.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.30.1",
+    "react-router-dom": "^6.30.3",
     "sharp": "^0.34.5",
     "strapi-plugin-config-sync": "^3.1.2",
     "strapi-plugin-navigation": "3.2.6",
     "strapi-plugin-placeholder": "github:Gaylord-Julien/strapi-plugin-placeholder#v5",
     "strapi-plugin-publisher": "2.0.5",
-    "styled-components": "^6.1.19"
+    "styled-components": "^6.3.6"
   },
   "author": {
     "name": "YAKOO Technology Limited"
@@ -40,13 +43,16 @@
     "uuid": "db859789-82bd-459a-8d53-6aa76ab92ec9"
   },
   "engines": {
-    "node": ">=18.0.0 <=22.x.x",
+    "node": ">=20.0.0 <=24.x.x",
     "npm": ">=6.0.0"
   },
   "license": "MIT",
   "devDependencies": {
-    "@strapi/typescript-utils": "5.32.0",
-    "@types/node": "^24.10.1",
-    "vite": "^5.4.20"
+    "@strapi/typescript-utils": "5.33.2",
+    "@types/node": "^24.10.8",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "vite": "^5.4.21",
+    "typescript": "^5"
   }
 }
