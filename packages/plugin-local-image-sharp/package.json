@@ -30,20 +30,20 @@
     "ipx": "^3.1.1",
     "ohash": "^1.1.6",
     "qs": "^6.14.1",
-    "ufo": "^1.6.2",
+    "ufo": "^1.6.3",
     "zod": "^3.25.76"
   },
   "devDependencies": {
     "@koa/router": "^12.0.2",
     "@strapi/sdk-plugin": "^5.4.0",
-    "@strapi/strapi": "^5.33.2",
-    "@strapi/typescript-utils": "^5.33.2",
+    "@strapi/strapi": "^5.33.4",
+    "@strapi/typescript-utils": "^5.33.4",
     "@types/etag": "^1.8.4",
     "@types/koa": "^2.15.0",
     "@types/koa__router": "^12",
     "@types/node": "^20",
     "@types/qs": "^6.14.0",
-    "prettier": "^3.7.4",
+    "prettier": "^3.8.1",
     "typescript": "^5.9.3"
   },
   "peerDependencies": {

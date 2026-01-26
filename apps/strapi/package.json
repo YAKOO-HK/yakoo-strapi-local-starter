@@ -15,26 +15,26 @@
     "upgrade:dry": "npx @strapi/upgrade latest --dry"
   },
   "dependencies": {
-    "@ckeditor/strapi-plugin-ckeditor": "^1.1.1",
+    "@ckeditor/strapi-plugin-ckeditor": "1.1.1",
     "@repo/plugin-ezforms": "workspace:*",
     "@repo/plugin-local-image-sharp": "workspace:*",
-    "@strapi-community/plugin-seo": "^2.1.1",
-    "@strapi/plugin-color-picker": "5.33.2",
-    "@strapi/plugin-users-permissions": "5.33.2",
-    "@strapi/provider-email-nodemailer": "5.33.2",
-    "@strapi/provider-upload-local": "5.33.2",
-    "@strapi/strapi": "5.33.2",
-    "axios": "^1.13.2",
-    "mysql2": "^3.16.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.30.3",
-    "sharp": "^0.34.5",
-    "strapi-plugin-config-sync": "^3.1.2",
-    "strapi-plugin-navigation": "3.2.6",
+    "@strapi-community/plugin-seo": "2.1.1",
+    "@strapi/plugin-color-picker": "5.33.4",
+    "@strapi/plugin-users-permissions": "5.33.4",
+    "@strapi/provider-email-nodemailer": "5.33.4",
+    "@strapi/provider-upload-local": "5.33.4",
+    "@strapi/strapi": "5.33.4",
+    "axios": "1.13.3",
+    "mysql2": "3.16.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-router-dom": "6.30.3",
+    "sharp": "0.34.5",
+    "strapi-plugin-config-sync": "3.1.2",
+    "strapi-plugin-navigation": "3.3.0",
     "strapi-plugin-placeholder": "github:Gaylord-Julien/strapi-plugin-placeholder#v5",
     "strapi-plugin-publisher": "2.0.5",
-    "styled-components": "^6.3.6"
+    "styled-components": "6.3.8"
   },
   "author": {
     "name": "YAKOO Technology Limited"
@@ -48,11 +48,11 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@strapi/typescript-utils": "5.33.2",
-    "@types/node": "^24.10.8",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "vite": "^5.4.21",
-    "typescript": "^5"
+    "@strapi/typescript-utils": "5.33.4",
+    "@types/node": "24.10.9",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.0",
+    "vite": "5.4.21",
+    "typescript": "5.9.3"
   }
 }
