@@ -51,7 +51,7 @@ export async function PostCard({
           />
         </Link>
         <CardContent className="p-6">
-          <p className="whitespace-pre-wrap text-justify">{attributes.abstract}</p>
+          <p className="text-justify whitespace-pre-wrap">{attributes.abstract}</p>
         </CardContent>
         <CardFooter>
           <Link

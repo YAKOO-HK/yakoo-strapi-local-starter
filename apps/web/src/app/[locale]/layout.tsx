@@ -10,14 +10,14 @@ import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
 import { SkipToMain } from '@/components/layout/SkipToMain';
 import { LdJson } from '@/components/ldjson/ldjson';
-import { Toaster } from '@/components/ui/toaster';
+import { Toaster } from '@/components/ui/sonner';
 import { env } from '@/env';
 import { locales, routing } from '@/i18n/routing';
 import { getMainNavigation } from '@/strapi/navigation';
 import { getSiteMetadata } from '@/strapi/site-metadata';
 import { getOpenGraphImage, StrapiLocale } from '@/strapi/strapi';
-import '../global.css';
 import { PreviewListener } from './preview-listener';
+import '../global.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -90,7 +90,7 @@ export default async function LocaleLayout(props: LayoutProps<'/[locale]'>) {
           <BackToTopButton />
           <Toaster />
           {process.env.NODE_ENV === 'development' && (
-            <div className="fixed bottom-0 right-0 z-[99999] bg-teal-200 px-2 py-1 text-sm text-teal-900">
+            <div className="fixed right-0 bottom-0 z-99999 bg-teal-200 px-2 py-1 text-sm text-teal-900">
               Breakpoint:
               <span className="ml-1 font-bold sm:hidden">xs</span>
               <span className="ml-1 hidden font-bold sm:inline-block md:hidden">sm</span>

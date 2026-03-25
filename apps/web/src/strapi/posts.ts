@@ -53,7 +53,17 @@ async function fetchPostCategory(slug: string, locale: StrapiLocale) {
 
 export async function getPostCategoryBySlug(slug: string, preferredLocale: StrapiLocale) {
   if (slug === '-') {
-    return { slug: '-', title: '', id: 0, documentId: '', locale: preferredLocale, localizations: [], seo: null }; // special case for uncategorized
+    return {
+      slug: '-',
+      title: '',
+      id: 0,
+      documentId: '',
+      locale: preferredLocale,
+      localizations: [],
+      postDate: '',
+      updatedAt: '',
+      publishedAt: '',
+    } as PostCategoriesResponse['data'][0]; // special case for un-categorized
   }
   let category = await fetchPostCategory(slug, preferredLocale);
   if (category) {

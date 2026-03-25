@@ -8,19 +8,19 @@
     "react-internal.mjs"
   ],
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.3",
-    "@eslint/js": "^9.39.2",
-    "@next/eslint-plugin-next": "^15.5.9",
-    "@tanstack/eslint-plugin-query": "^5.91.3",
-    "@typescript-eslint/eslint-plugin": "^8.53.1",
-    "@typescript-eslint/parser": "^8.53.1",
-    "eslint": "9.39.2",
-    "eslint-config-next": "^15.5.9",
-    "eslint-plugin-only-warn": "^1.1.0",
+    "@eslint/eslintrc": "^3.3.5",
+    "@eslint/js": "^9.39.4",
+    "@next/eslint-plugin-next": "^15.5.14",
+    "@tanstack/eslint-plugin-query": "^5.95.2",
+    "@typescript-eslint/eslint-plugin": "^8.57.2",
+    "@typescript-eslint/parser": "^8.57.2",
+    "eslint": "9.39.4",
+    "eslint-config-next": "^15.5.14",
+    "eslint-plugin-only-warn": "^1.2.1",
     "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-turbo": "^2.7.6",
+    "eslint-plugin-turbo": "^2.8.20",
     "globals": "^16.5.0",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.53.1"
+    "typescript-eslint": "^8.57.2"
   }
 }
