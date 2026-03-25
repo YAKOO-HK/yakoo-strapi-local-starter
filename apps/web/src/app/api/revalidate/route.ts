@@ -58,7 +58,7 @@ export const POST = async (req: NextRequest) => {
   const body = await req.json();
   console.log(formatISO(Date.now()), 'revalidateTag', body.model, body.event);
   if (typeof body.model === 'string' && body.model) {
-    revalidateTag(body.model);
+    revalidateTag(body.model, 'max');
     // console.log('webhook body', body);
     if (env.TYPESENSE_ENABLED) {
       await indexTypesense(body);

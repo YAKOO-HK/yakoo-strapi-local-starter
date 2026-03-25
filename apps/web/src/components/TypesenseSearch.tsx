@@ -80,40 +80,38 @@ export function TypesenseSearch() {
       <Button variant="ghost" onClick={() => setOpen(true)}>
         {t.rich('quickSearch', {
           kbd: (chunks) => (
-            <kbd className="bg-muted text-muted-foreground pointer-events-none mx-1 inline-flex h-5 select-none items-center gap-1 rounded border px-1.5 font-mono font-medium opacity-100">
+            <kbd className="pointer-events-none mx-1 inline-flex h-5 items-center gap-1 rounded border bg-muted px-1.5 font-mono font-medium text-muted-foreground opacity-100 select-none">
               {chunks}
             </kbd>
           ),
         })}
       </Button>
-      <CommandDialog
-        open={open}
-        onOpenChange={setOpen}
-        commandProps={{ shouldFilter: false, onValueChange: console.log }}
-      >
-        <CommandInput placeholder={t('quickSearchPlaceholder')} value={searchInput} onValueChange={setSearchInput} />
-        <CommandList>
-          {isFetching && (
-            <Command.Loading>
-              <div className="text-muted-foreground inline-flex px-4 py-6 text-center text-sm">
-                <Loader2Icon className="mr-2 size-4 animate-spin" />
-                <span>{t('loading')}</span>
-              </div>
-            </Command.Loading>
-          )}
-          <CommandGroup heading={t('quickSearchHeading')}>
-            {data?.documents.map((item) => (
-              <ItemLink
-                key={item.slug}
-                item={item}
-                onSelect={() => {
-                  setOpen(false);
-                }}
-              />
-            ))}
-          </CommandGroup>
-          <CommandEmpty>{t('emptyResults')}</CommandEmpty>
-        </CommandList>
+      <CommandDialog open={open} onOpenChange={setOpen}>
+        <Command shouldFilter={false}>
+          <CommandInput placeholder={t('quickSearchPlaceholder')} value={searchInput} onValueChange={setSearchInput} />
+          <CommandList>
+            {isFetching && (
+              <Command.Loading>
+                <div className="inline-flex px-4 py-6 text-center text-sm text-muted-foreground">
+                  <Loader2Icon className="mr-2 size-4 animate-spin" />
+                  <span>{t('loading')}</span>
+                </div>
+              </Command.Loading>
+            )}
+            <CommandGroup heading={t('quickSearchHeading')}>
+              {data?.documents.map((item) => (
+                <ItemLink
+                  key={item.slug}
+                  item={item}
+                  onSelect={() => {
+                    setOpen(false);
+                  }}
+                />
+              ))}
+            </CommandGroup>
+            <CommandEmpty>{t('emptyResults')}</CommandEmpty>
+          </CommandList>
+        </Command>
       </CommandDialog>
     </>
   );
