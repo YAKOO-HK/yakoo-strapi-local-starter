@@ -29,21 +29,21 @@
     "etag": "^1.8.1",
     "ipx": "^3.1.1",
     "ohash": "^1.1.6",
-    "qs": "^6.15.0",
-    "ufo": "^1.6.3",
+    "qs": "^6.16.0",
+    "ufo": "^1.6.4",
     "zod": "^3.25.76"
   },
   "devDependencies": {
     "@koa/router": "^12.0.2",
     "@strapi/sdk-plugin": "^5.4.0",
-    "@strapi/strapi": "^5.40.0",
-    "@strapi/typescript-utils": "^5.40.0",
+    "@strapi/strapi": "^5.55.1",
+    "@strapi/typescript-utils": "^5.55.1",
     "@types/etag": "^1.8.4",
-    "@types/koa": "^2.15.0",
+    "@types/koa": "^2.15.2",
     "@types/koa__router": "^12",
     "@types/node": "^20",
-    "@types/qs": "^6.15.0",
-    "prettier": "^3.8.1",
+    "@types/qs": "^6.15.1",
+    "prettier": "^3.9.9",
     "typescript": "^5.9.3"
   },
   "peerDependencies": {
