@@ -9,12 +9,13 @@
   "attributes": {
     "content": {
       "type": "customField",
+      "customField": "plugin::ckeditor.CKEditor",
       "options": {
         "output": "HTML",
-        "preset": "rich"
+        "preset": "rich",
+        "licenseKey": "GPL"
       },
-      "required": true,
-      "customField": "plugin::ckeditor.CKEditor"
+      "required": true
     }
   }
 }
