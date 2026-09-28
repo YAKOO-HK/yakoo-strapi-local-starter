@@ -9,13 +9,16 @@
   "attributes": {
     "content": {
       "type": "customField",
-      "customField": "plugin::ckeditor.CKEditor",
+      "customField": "plugin::jodit-editor.jodit",
       "options": {
-        "output": "HTML",
-        "preset": "rich",
-        "licenseKey": "GPL"
-      },
-      "required": true
+        "height": 400,
+        "readonly": false,
+        "buttons": "source, bold, italic, underline, strikethrough, superscript, subscript, eraser, font, fontsize, brush, paragraph, classSpan, |, ul, ol, indent, outdent, left, center, right, justify, |, link, unlink, strapiMedia, image, file, video, table, hr, symbols, lineHeight, |, copy, cut, paste, copyformat, selectall, undo, redo, fullsize, preview, find, spellcheck, about",
+        "toolbar": true,
+        "fonts": "",
+        "webp": "",
+        "removeButtons": ""
+      }
     }
   }
 }

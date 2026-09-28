@@ -15,7 +15,6 @@
     "upgrade:dry": "npx @strapi/upgrade latest --dry"
   },
   "dependencies": {
-    "@ckeditor/strapi-plugin-ckeditor": "1.1.2",
     "@repo/plugin-ezforms": "workspace:*",
     "@repo/plugin-local-image-sharp": "workspace:*",
     "@strapi-community/plugin-seo": "2.1.1",
@@ -31,6 +30,7 @@
     "react-router-dom": "6.30.6",
     "sharp": "0.35.4",
     "strapi-plugin-config-sync": "3.2.0",
+    "strapi-plugin-jodit-editor": "^1.1.5",
     "strapi-plugin-navigation": "3.3.7",
     "strapi-plugin-placeholder": "github:Gaylord-Julien/strapi-plugin-placeholder#v5",
     "strapi-plugin-publisher": "2.0.9",
@@ -52,7 +52,7 @@
     "@types/node": "24.13.6",
     "@types/react": "18.3.31",
     "@types/react-dom": "18.3.7",
-    "vite": "5.4.21",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "vite": "5.4.21"
   }
 }

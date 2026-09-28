@@ -67,7 +67,7 @@ export default ({ env }) => ({
       allowedLevels: 2,
     },
   },
-  ckeditor: {
+  'jodit-editor': {
     enabled: true,
   },
   publisher: {

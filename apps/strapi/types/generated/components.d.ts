@@ -191,12 +191,16 @@ export interface PageComponentsHtml extends Struct.ComponentSchema {
   };
   attributes: {
     content: Schema.Attribute.RichText &
-      Schema.Attribute.Required &
       Schema.Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        'plugin::jodit-editor.jodit',
         {
-          output: 'HTML';
-          preset: 'rich';
+          buttons: 'source, bold, italic, underline, strikethrough, superscript, subscript, eraser, font, fontsize, brush, paragraph, classSpan, |, ul, ol, indent, outdent, left, center, right, justify, |, link, unlink, strapiMedia, image, file, video, table, hr, symbols, lineHeight, |, copy, cut, paste, copyformat, selectall, undo, redo, fullsize, preview, find, spellcheck, about';
+          fonts: '';
+          height: 400;
+          readonly: false;
+          removeButtons: '';
+          toolbar: true;
+          webp: '';
         }
       >;
   };
@@ -297,7 +301,7 @@ export interface SharedSeo extends Struct.ComponentSchema {
 }
 
 declare module '@strapi/strapi' {
-  export module Public {
+  export namespace Public {
     export interface ComponentSchemas {
       'form-components.select': FormComponentsSelect;
       'form-components.text-input': FormComponentsTextInput;
