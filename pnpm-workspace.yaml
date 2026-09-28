@@ -1,7 +1,13 @@
 packages:
   - "apps/*"
   - "packages/*"
+publicHoistPattern:
+  - "sharp"
+  - "@types/*"
+  - "!@types/react"
+  - "!@types/react-dom"
 allowBuilds:
+  '@parcel/watcher': true
   '@swc/core': true
   aws-sdk: true
   core-js-pure: true
@@ -10,41 +16,3 @@ allowBuilds:
   protobufjs: true
   sharp: true
   unrs-resolver: true
-minimumReleaseAgeExclude:
-  - '@turbo/darwin-64@2.11.4'
-  - '@turbo/darwin-arm64@2.11.4'
-  - '@turbo/linux-64@2.11.4'
-  - '@turbo/linux-arm64@2.11.4'
-  - '@turbo/windows-64@2.11.4'
-  - '@turbo/windows-arm64@2.11.4'
-  - turbo@2.11.4
-  - '@strapi/admin@5.55.1'
-  - '@strapi/cloud-cli@5.55.1'
-  - '@strapi/content-manager@5.55.1'
-  - '@strapi/content-releases@5.55.1'
-  - '@strapi/content-type-builder@5.55.1'
-  - '@strapi/core@5.55.1'
-  - '@strapi/data-transfer@5.55.1'
-  - '@strapi/database@5.55.1'
-  - '@strapi/email@5.55.1'
-  - '@strapi/generators@5.55.1'
-  - '@strapi/i18n@5.55.1'
-  - '@strapi/logger@5.55.1'
-  - '@strapi/openapi@5.55.1'
-  - '@strapi/permissions@5.55.1'
-  - '@strapi/plugin-color-picker@5.55.1'
-  - '@strapi/plugin-users-permissions@5.55.1'
-  - '@strapi/provider-email-nodemailer@5.55.1'
-  - '@strapi/provider-email-sendmail@5.55.1'
-  - '@strapi/provider-upload-local@5.55.1'
-  - '@strapi/review-workflows@5.55.1'
-  - '@strapi/strapi@5.55.1'
-  - '@strapi/types@5.55.1'
-  - '@strapi/typescript-utils@5.55.1'
-  - '@strapi/upload@5.55.1'
-  - '@strapi/utils@5.55.1'
-  - eslint-plugin-turbo@2.11.4
-  - icu-minify@4.14.7
-  - next-intl-swc-plugin-extractor@4.14.7
-  - next-intl@4.14.7
-  - use-intl@4.14.7
