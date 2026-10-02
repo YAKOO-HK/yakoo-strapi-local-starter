@@ -1,0 +1,202 @@
+{
+  "key": "plugin_content_manager_configuration_content_types::plugin::strapi-identity.email-otp",
+  "value": {
+    "settings": {
+      "bulkable": true,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 10,
+      "relationOpenMode": "modal",
+      "mainField": "code_hash",
+      "defaultSortBy": "code_hash",
+      "defaultSortOrder": "ASC"
+    },
+    "metadatas": {
+      "id": {
+        "edit": {},
+        "list": {
+          "label": "id",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "admin_user": {
+        "edit": {
+          "label": "admin_user",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "admin_user",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "code_hash": {
+        "edit": {
+          "label": "code_hash",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "code_hash",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "expires_at": {
+        "edit": {
+          "label": "expires_at",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "expires_at",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "attempts": {
+        "edit": {
+          "label": "attempts",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "attempts",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "purpose": {
+        "edit": {
+          "label": "purpose",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "purpose",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "createdAt": {
+        "edit": {
+          "label": "createdAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "createdAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedAt": {
+        "edit": {
+          "label": "updatedAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "updatedAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "createdBy": {
+        "edit": {
+          "label": "createdBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "createdBy",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedBy": {
+        "edit": {
+          "label": "updatedBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "updatedBy",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "documentId": {
+        "edit": {},
+        "list": {
+          "label": "documentId",
+          "searchable": true,
+          "sortable": true
+        }
+      }
+    },
+    "layouts": {
+      "list": [
+        "id",
+        "admin_user",
+        "code_hash",
+        "expires_at"
+      ],
+      "edit": [
+        [
+          {
+            "name": "admin_user",
+            "size": 6
+          },
+          {
+            "name": "code_hash",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "expires_at",
+            "size": 6
+          },
+          {
+            "name": "attempts",
+            "size": 4
+          }
+        ],
+        [
+          {
+            "name": "purpose",
+            "size": 6
+          }
+        ]
+      ]
+    },
+    "uid": "plugin::strapi-identity.email-otp"
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}

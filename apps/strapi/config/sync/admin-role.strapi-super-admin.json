@@ -1560,6 +1560,78 @@
       "locale": null
     },
     {
+      "documentId": "na1nkgd9t5rej0vmxh3zuvb1",
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "plugin::strapi-identity.email-otp",
+      "properties": {
+        "fields": [
+          "admin_user",
+          "code_hash",
+          "expires_at",
+          "attempts",
+          "purpose"
+        ]
+      },
+      "conditions": [],
+      "locale": null
+    },
+    {
+      "documentId": "ire7gvj7qbddu3oml4huwd65",
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "plugin::strapi-identity.mfa-temp",
+      "properties": {
+        "fields": [
+          "admin_user",
+          "secret"
+        ]
+      },
+      "conditions": [],
+      "locale": null
+    },
+    {
+      "documentId": "toqeue74496tz65795w41ol3",
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "plugin::strapi-identity.mfa-token",
+      "properties": {
+        "fields": [
+          "admin_user",
+          "enabled",
+          "type",
+          "secret",
+          "counter",
+          "digits",
+          "recovery_codes"
+        ]
+      },
+      "conditions": [],
+      "locale": null
+    },
+    {
+      "documentId": "ph6dc1c1nxsjb7jtg7ebhbcr",
+      "action": "plugin::content-manager.explorer.read",
+      "actionParameters": {},
+      "subject": "plugin::strapi-identity.strapi-identity-config",
+      "properties": {
+        "fields": [
+          "enabled",
+          "enforce",
+          "issuer",
+          "email_enabled",
+          "from_email",
+          "from_name",
+          "response_email",
+          "subject",
+          "text",
+          "message"
+        ]
+      },
+      "conditions": [],
+      "locale": null
+    },
+    {
       "documentId": "i5p60ctifkbnfncwhlgbafyk",
       "action": "plugin::content-manager.explorer.read",
       "actionParameters": {},
@@ -1813,6 +1885,24 @@
     {
       "documentId": "ot4pdfv1nex7xk0lefta39cz",
       "action": "plugin::seo.read",
+      "actionParameters": {},
+      "subject": null,
+      "properties": {},
+      "conditions": [],
+      "locale": null
+    },
+    {
+      "documentId": "bg3gabh0k9euwjipq9pruv16",
+      "action": "plugin::strapi-identity.settings.read",
+      "actionParameters": {},
+      "subject": null,
+      "properties": {},
+      "conditions": [],
+      "locale": null
+    },
+    {
+      "documentId": "iicz6cqi6xgq8anhpkz52ffc",
+      "action": "plugin::strapi-identity.settings.update",
       "actionParameters": {},
       "subject": null,
       "properties": {},

@@ -1,0 +1,295 @@
+{
+  "key": "plugin_content_manager_configuration_content_types::plugin::strapi-identity.strapi-identity-config",
+  "value": {
+    "settings": {
+      "bulkable": true,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 10,
+      "relationOpenMode": "modal",
+      "mainField": "issuer",
+      "defaultSortBy": "issuer",
+      "defaultSortOrder": "ASC"
+    },
+    "metadatas": {
+      "id": {
+        "edit": {},
+        "list": {
+          "label": "id",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "enabled": {
+        "edit": {
+          "label": "enabled",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "enabled",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "enforce": {
+        "edit": {
+          "label": "enforce",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "enforce",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "issuer": {
+        "edit": {
+          "label": "issuer",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "issuer",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "email_enabled": {
+        "edit": {
+          "label": "email_enabled",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "email_enabled",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "from_email": {
+        "edit": {
+          "label": "from_email",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "from_email",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "from_name": {
+        "edit": {
+          "label": "from_name",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "from_name",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "response_email": {
+        "edit": {
+          "label": "response_email",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "response_email",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "subject": {
+        "edit": {
+          "label": "subject",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "subject",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "text": {
+        "edit": {
+          "label": "text",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "text",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "message": {
+        "edit": {
+          "label": "message",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "message",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "createdAt": {
+        "edit": {
+          "label": "createdAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "createdAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedAt": {
+        "edit": {
+          "label": "updatedAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "updatedAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "createdBy": {
+        "edit": {
+          "label": "createdBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "createdBy",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedBy": {
+        "edit": {
+          "label": "updatedBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "updatedBy",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "documentId": {
+        "edit": {},
+        "list": {
+          "label": "documentId",
+          "searchable": true,
+          "sortable": true
+        }
+      }
+    },
+    "layouts": {
+      "list": [
+        "id",
+        "enabled",
+        "enforce",
+        "issuer"
+      ],
+      "edit": [
+        [
+          {
+            "name": "enabled",
+            "size": 4
+          },
+          {
+            "name": "enforce",
+            "size": 4
+          }
+        ],
+        [
+          {
+            "name": "issuer",
+            "size": 6
+          },
+          {
+            "name": "email_enabled",
+            "size": 4
+          }
+        ],
+        [
+          {
+            "name": "from_email",
+            "size": 6
+          },
+          {
+            "name": "from_name",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "response_email",
+            "size": 6
+          },
+          {
+            "name": "subject",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "text",
+            "size": 6
+          },
+          {
+            "name": "message",
+            "size": 6
+          }
+        ]
+      ]
+    },
+    "uid": "plugin::strapi-identity.strapi-identity-config"
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}

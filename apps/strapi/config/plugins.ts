@@ -114,4 +114,7 @@ export default ({ env }) => ({
     enabled: true,
     resolve: './node_modules/strapi-plugin-placeholder',
   },
+  'strapi-identity': {
+    enabled: true,
+  },
 });

@@ -4,6 +4,9 @@ export default ({ env }) => {
     url: '/dashboard',
     auth: {
       secret: env('ADMIN_JWT_SECRET'),
+      cookie: {
+        path: '/dashboard', // must match url
+      },
     },
     apiToken: {
       salt: env('API_TOKEN_SALT'),
