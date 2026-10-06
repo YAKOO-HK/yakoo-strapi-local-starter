@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { Main } from '@/components/layout/Main';
 import { typographyVariants } from '@/components/ui/typography';
 import { env } from '@/env';
-import { Link } from '@/i18n/routing';
+import { Link } from '@/i18n/navigation';
 import { isExternalLink } from '@/lib/link';
 import { cn } from '@/lib/utils';
 import { getMainNavigation, NavigationItem } from '@/strapi/navigation';

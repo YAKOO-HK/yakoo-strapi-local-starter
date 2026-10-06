@@ -4,7 +4,7 @@ import { CalendarIcon } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import { buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Link } from '@/i18n/routing';
+import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 import { StrapiImageLoader } from '@/strapi/image-loader';
 import { PostsResponse } from '@/strapi/posts';

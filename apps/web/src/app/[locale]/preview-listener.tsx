@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { env } from '@/env';
-import { useRouter } from '@/i18n/routing';
+import { useRouter } from '@/i18n/navigation';
 
 const strapiUpdateOrigin = new URL(env.NEXT_PUBLIC_STRAPI_URL).origin;
 

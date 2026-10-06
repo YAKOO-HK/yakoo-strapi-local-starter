@@ -5,7 +5,7 @@ import { Main } from '@/components/layout/Main';
 import { SingleBreadcrumbLdJson } from '@/components/ldjson/breadcrumb';
 import { StrapiMetaPagination } from '@/components/StrapiMetaPagination';
 import { buttonVariants } from '@/components/ui/button';
-import { Link } from '@/i18n/routing';
+import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 import { getAllCategories, getPosts } from '@/strapi/posts';
 import { StrapiLocale } from '@/strapi/strapi';

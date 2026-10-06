@@ -3,7 +3,7 @@
 import { ChevronDownIcon } from 'lucide-react';
 import { buttonVariants } from '@/components/ui/button';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { Link } from '@/i18n/routing';
+import { Link } from '@/i18n/navigation';
 import { isExternalLink } from '@/lib/link';
 import { cn } from '@/lib/utils';
 import { NavigationItem } from '@/strapi/navigation';

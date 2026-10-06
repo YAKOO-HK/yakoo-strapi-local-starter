@@ -1,7 +1,8 @@
 import { Suspense } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { Link, locales } from '@/i18n/routing';
+import { Link } from '@/i18n/navigation';
+import { locales } from '@/i18n/routing';
 import { isExternalLink } from '@/lib/link';
 import { cn } from '@/lib/utils';
 import { StrapiImageLoader } from '@/strapi/image-loader';

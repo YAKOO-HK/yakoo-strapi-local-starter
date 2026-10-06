@@ -10,7 +10,7 @@ import { StrapiMetaPagination } from '@/components/StrapiMetaPagination';
 import { buttonVariants } from '@/components/ui/button';
 import { typographyVariants } from '@/components/ui/typography';
 import { env } from '@/env';
-import { Link } from '@/i18n/routing';
+import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 import { getPostCategoryBySlug, getPostsByCategory } from '@/strapi/posts';
 import { StrapiLocale, toMetadata } from '@/strapi/strapi';

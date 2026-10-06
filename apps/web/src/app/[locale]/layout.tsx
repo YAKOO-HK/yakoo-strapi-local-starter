@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
-import { getMessages, setRequestLocale } from 'next-intl/server';
+import { getMessages } from 'next-intl/server';
 import { BackToTopButton } from '@/components/layout/BackToTopButton';
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
@@ -15,6 +15,7 @@ import { locales, routing } from '@/i18n/routing';
 import { getMainNavigation } from '@/strapi/navigation';
 import { getSiteMetadata } from '@/strapi/site-metadata';
 import { getOpenGraphImage, StrapiLocale } from '@/strapi/strapi';
+import { Providers } from './client';
 import { PreviewListener } from './preview-listener';
 import '../global.css';
 
@@ -57,7 +58,7 @@ export default async function LocaleLayout(props: LayoutProps<'/[locale]'>) {
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
-  setRequestLocale(locale);
+
   const messages = await getMessages();
   const { logo, logo2, logo_link, logo2_link, seo } = await getSiteMetadata(locale);
   const navigationItems = await getMainNavigation(locale);
@@ -65,37 +66,39 @@ export default async function LocaleLayout(props: LayoutProps<'/[locale]'>) {
   return (
     <html lang={locale} dir="ltr">
       <body className={inter.variable}>
-        <NextIntlClientProvider key={locale} locale={locale} messages={messages}>
-          <LdJson structuredData={seo.structuredData} />
-          {env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID ? (
-            <GoogleAnalytics gaId={env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID} />
-          ) : null}
-          <SkipToMain />
-          <Header
-            logo={logo}
-            logo2={logo2}
-            logo_link={logo_link}
-            logo2_link={logo2_link}
-            navigationItems={navigationItems}
-            locale={locale}
-          />
-          {children}
-          <Footer />
-          <BackToTopButton />
-          <Toaster />
-          {process.env.NODE_ENV === 'development' && (
-            <div className="fixed right-0 bottom-0 z-99999 bg-teal-200 px-2 py-1 text-sm text-teal-900">
-              Breakpoint:
-              <span className="ml-1 font-bold sm:hidden">xs</span>
-              <span className="ml-1 hidden font-bold sm:inline-block md:hidden">sm</span>
-              <span className="ml-1 hidden font-bold md:inline-block lg:hidden">md</span>
-              <span className="ml-1 hidden font-bold lg:inline-block xl:hidden">lg</span>
-              <span className="ml-1 hidden font-bold xl:inline-block 2xl:hidden">xl</span>
-              <span className="ml-1 hidden font-bold 2xl:inline-block">2xl</span>
-            </div>
-          )}
-          <PreviewListener />
-        </NextIntlClientProvider>
+        <Providers>
+          <NextIntlClientProvider key={locale} locale={locale} messages={messages}>
+            <LdJson structuredData={seo.structuredData} />
+            {env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID ? (
+              <GoogleAnalytics gaId={env.NEXT_PUBLIC_GOOGLE_ANALYTICS_MEASUREMENT_ID} />
+            ) : null}
+            <SkipToMain />
+            <Header
+              logo={logo}
+              logo2={logo2}
+              logo_link={logo_link}
+              logo2_link={logo2_link}
+              navigationItems={navigationItems}
+              locale={locale}
+            />
+            {children}
+            <Footer />
+            <BackToTopButton />
+            <Toaster />
+            {process.env.NODE_ENV === 'development' && (
+              <div className="fixed right-0 bottom-0 z-99999 bg-teal-200 px-2 py-1 text-sm text-teal-900">
+                Breakpoint:
+                <span className="ml-1 font-bold sm:hidden">xs</span>
+                <span className="ml-1 hidden font-bold sm:inline-block md:hidden">sm</span>
+                <span className="ml-1 hidden font-bold md:inline-block lg:hidden">md</span>
+                <span className="ml-1 hidden font-bold lg:inline-block xl:hidden">lg</span>
+                <span className="ml-1 hidden font-bold xl:inline-block 2xl:hidden">xl</span>
+                <span className="ml-1 hidden font-bold 2xl:inline-block">2xl</span>
+              </div>
+            )}
+            <PreviewListener />
+          </NextIntlClientProvider>
+        </Providers>
       </body>
     </html>
   );

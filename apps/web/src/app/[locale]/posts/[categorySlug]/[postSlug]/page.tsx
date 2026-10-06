@@ -10,7 +10,7 @@ import { SingleBreadcrumbLdJson } from '@/components/ldjson/breadcrumb';
 import { LdJson } from '@/components/ldjson/ldjson';
 import { typographyVariants } from '@/components/ui/typography';
 import { env } from '@/env';
-import { Link } from '@/i18n/routing';
+import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 import { getPostBySlug, getPostCategoryBySlug } from '@/strapi/posts';
 import { StrapiLocale, toMetadata } from '@/strapi/strapi';
