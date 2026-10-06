@@ -11,6 +11,7 @@ export function PageTitleSection({
   const Component = as;
   return (
     <Component
+      data-section="page-title"
       className={cn(
         'py-8',
         {

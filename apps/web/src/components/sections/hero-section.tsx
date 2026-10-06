@@ -23,7 +23,8 @@ export function HeroSection({
   const Component = as;
   return (
     <Component
-      className={cn('text-foreground flex flex-col items-center md:flex-row', {
+      data-section="hero"
+      className={cn('flex flex-col items-center text-foreground md:flex-row', {
         dark: bgColor && tinycolor(bgColor).isDark(),
         'container px-0': layout === 'container',
         'md:flex-row-reverse': arrangement === 'image-last',
@@ -32,12 +33,14 @@ export function HeroSection({
     >
       <div className="md:basis-1/2">
         <Image
+          // we expect hero section in a higher place, so we do not lazy load the image
           loader={StrapiImageLoader}
           src={image.url}
           alt={image.alternativeText || ''}
           height={(960 * image.height) / image.width}
           width={960}
           sizes="50vw"
+          loading="eager"
           placeholder={image.placeholder || 'empty'}
         />
       </div>

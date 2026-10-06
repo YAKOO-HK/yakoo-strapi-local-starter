@@ -31,6 +31,8 @@ export function GallerySection({ as, layout, slides }: ComponentGallery & Dynami
             height: attributes.height,
             alt: attributes.alternativeText || `Photo ${i + 1}`,
             placeholder: attributes.placeholder || 'empty',
+            loading: 'lazy',
+            sizes: 'auto',
           } satisfies ImageProps;
         })}
         render={{
@@ -43,6 +45,8 @@ export function GallerySection({ as, layout, slides }: ComponentGallery & Dynami
               src={photo.src}
               alt={photo.alt}
               placeholder={photo.placeholder}
+              loading="lazy"
+              sizes="auto"
             />
           ),
         }}
@@ -71,6 +75,7 @@ export function GallerySection({ as, layout, slides }: ComponentGallery & Dynami
               alt={slide.alt || ''}
               width={(rect.height * slide.width!) / slide.height!}
               height={rect.height}
+              loading="lazy"
             />
           ),
           thumbnail: ({ slide, rect }) => (
@@ -80,6 +85,8 @@ export function GallerySection({ as, layout, slides }: ComponentGallery & Dynami
               alt={slide.alt || ''}
               width={(rect.height * slide.width!) / slide.height!}
               height={rect.height}
+              loading="lazy"
+              sizes="auto"
             />
           ),
         }}

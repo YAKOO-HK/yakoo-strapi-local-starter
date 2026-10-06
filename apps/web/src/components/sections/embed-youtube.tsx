@@ -9,6 +9,7 @@ export function EmbedYoutubeSection({
   const Component = as;
   return (
     <Component
+      data-section="embed-youtube"
       className={cn({
         container: layout === 'container',
         'mx-auto max-w-prose': layout === 'prose',

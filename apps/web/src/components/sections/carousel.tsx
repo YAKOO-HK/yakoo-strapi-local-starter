@@ -17,6 +17,7 @@ function Slide({ image, title, caption }: Omit<ComponentSlide, 'link' | 'id' | '
   return (
     <AspectRatio ratio={16 / 9}>
       <Image
+        // we expect hero section in a higher place, so we do not lazy load the image
         loader={StrapiImageLoader}
         src={image.url}
         alt={image.alternativeText || ''}
@@ -25,6 +26,7 @@ function Slide({ image, title, caption }: Omit<ComponentSlide, 'link' | 'id' | '
         placeholder={image.placeholder || 'empty'}
         className="size-full object-cover object-center"
         sizes="100vw"
+        loading="eager"
       />
 
       {(title || caption) && (
@@ -98,6 +100,7 @@ export function CarouselSection({ as, slides, layout }: ComponentCarousel & Dyna
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
   return (
     <Component
+      data-section="carousel"
       className={cn('relative', {
         'container px-0': layout === 'container',
         'mx-auto max-w-prose': layout === 'prose',
@@ -108,7 +111,7 @@ export function CarouselSection({ as, slides, layout }: ComponentCarousel & Dyna
       </span>
       <button
         role="button"
-        className="ring-offset-background focus-visible:outline-hidden focus-visible:ring-ring absolute inset-y-2 left-2 z-10 w-8 rounded-md hover:bg-neutral-100/75 focus-visible:ring-2 focus-visible:ring-offset-2"
+        className="absolute inset-y-2 left-2 z-10 w-8 rounded-md ring-offset-background hover:bg-neutral-100/75 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden"
         onClick={scrollPrev}
       >
         <ArrowLeftIcon className="size-8" />
@@ -116,7 +119,7 @@ export function CarouselSection({ as, slides, layout }: ComponentCarousel & Dyna
       </button>
       <button
         role="button"
-        className="ring-offset-background focus-visible:outline-hidden focus-visible:ring-ring absolute inset-y-2 right-2 z-10 w-8 rounded-md hover:bg-neutral-100/75 focus-visible:ring-2 focus-visible:ring-offset-2"
+        className="absolute inset-y-2 right-2 z-10 w-8 rounded-md ring-offset-background hover:bg-neutral-100/75 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-hidden"
         onClick={scrollNext}
       >
         <ArrowRightIcon className="size-8" />

@@ -37,7 +37,23 @@ export async function DynamicZone({
       case 'page-components.contact-form':
         return <ContactFormSection key={`contact-form-${section.id}`} {...section} as={as} locale={locale} />;
       case 'page-components.html':
-        return <div key={`html-${section.id}`} dangerouslySetInnerHTML={{ __html: section.content }} />;
+        if (!section.content) return null;
+        if (as === 'section') {
+          return (
+            <section
+              key={`html-${section.id}`}
+              dangerouslySetInnerHTML={{ __html: section.content }}
+              data-section-id={`${section.id}`}
+            />
+          );
+        }
+        return (
+          <div
+            key={`html-${section.id}`}
+            dangerouslySetInnerHTML={{ __html: section.content }}
+            data-section-id={`${section.id}`}
+          />
+        );
       default:
         console.warn('Unknown component:', section);
         return null;

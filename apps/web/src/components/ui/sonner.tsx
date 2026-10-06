@@ -6,7 +6,8 @@ import { Toaster as Sonner, type ToasterProps } from 'sonner';
 const Toaster = ({ ...props }: ToasterProps) => {
   return (
     <Sonner
-      theme="system" // TODO: make this dynamic based on app theme
+      theme="light" // TODO: make this dynamic based on app theme
+      richColors
       className="toaster group"
       icons={{
         success: <CircleCheckIcon className="size-4" />,

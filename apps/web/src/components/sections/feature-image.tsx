@@ -7,6 +7,7 @@ export function FeatureImageSection({ as, layout, image }: ComponentFeatureImage
   const Component = as;
   return (
     <Component
+      data-section="feature-image"
       className={cn(
         {
           container: layout === 'container',
@@ -23,6 +24,7 @@ export function FeatureImageSection({ as, layout, image }: ComponentFeatureImage
         width={1920}
         sizes="100vw"
         placeholder={image.placeholder || 'empty'}
+        loading="eager"
       />
     </Component>
   );

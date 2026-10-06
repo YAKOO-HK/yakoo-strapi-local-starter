@@ -43,6 +43,8 @@ export async function PostCard({
         >
           <Image
             loader={StrapiImageLoader}
+            loading="lazy"
+            sizes="auto"
             src={attributes.image.url}
             alt={attributes.image.alternativeText || ''}
             width={attributes.image.width}

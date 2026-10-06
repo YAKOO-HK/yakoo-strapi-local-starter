@@ -46,6 +46,8 @@ export function StrapiRichtext({ className, prose = true, ...props }: StrapiRich
                 height={image.height}
                 width={image.width}
                 srcSet={srcSet.join(', ')}
+                sizes="auto"
+                loading="lazy"
                 {...props}
               />
             );

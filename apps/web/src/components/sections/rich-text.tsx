@@ -6,6 +6,7 @@ export function RichTextSection({ as, layout, content }: ComponentRichText & Dyn
   const Component = as;
   return (
     <Component
+      data-section="rich-text"
       className={cn('py-8', {
         container: layout === 'container' || layout === 'prose',
       })}
