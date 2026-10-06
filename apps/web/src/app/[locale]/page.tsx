@@ -7,6 +7,8 @@ import { locales } from '@/i18n/routing';
 import { getHomepage } from '@/strapi/homepage';
 import { StrapiLocale } from '@/strapi/strapi';
 
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata(props: { params: Promise<{ locale: StrapiLocale }> }) {
   const params = await props.params;
   if (!locales.includes(params.locale)) {
