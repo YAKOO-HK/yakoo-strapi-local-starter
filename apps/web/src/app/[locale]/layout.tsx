@@ -4,7 +4,6 @@ import { notFound } from 'next/navigation';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
-import { AskAi } from '@/components/AskAi';
 import { BackToTopButton } from '@/components/layout/BackToTopButton';
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
@@ -82,11 +81,6 @@ export default async function LocaleLayout(props: LayoutProps<'/[locale]'>) {
           />
           {children}
           <Footer />
-          {env.TYPESENSE_ENABLED ? (
-            <div className="fixed bottom-2 left-2 z-10">
-              <AskAi />
-            </div>
-          ) : null}
           <BackToTopButton />
           <Toaster />
           {process.env.NODE_ENV === 'development' && (

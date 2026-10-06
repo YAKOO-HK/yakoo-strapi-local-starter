@@ -1,4 +1,4 @@
-import type { Message } from 'ai/react';
+// import type { Message } from 'ai/react';
 import * as qs from 'qs';
 import { z } from 'zod';
 import { env } from '@/env';
@@ -15,7 +15,7 @@ export type ChatHistory = {
   documentId: string;
   uuid: string;
   name: string;
-  history: Array<Message>;
+  history: Array<unknown>;
 };
 
 export type ChatsResponse = {
@@ -38,7 +38,7 @@ export const getChatByUUID = async (uuid: string) => {
   return response.data?.[0] || null;
 };
 
-export const updateChat = async (documentId: string, history: Message[] = []) => {
+export const updateChat = async (documentId: string, history: unknown[] = []) => {
   await fetch(`${env.NEXT_PUBLIC_STRAPI_URL}/api/chats/${documentId}`, {
     headers: {
       'Content-Type': 'application/json',

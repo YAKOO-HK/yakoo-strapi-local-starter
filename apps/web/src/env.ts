@@ -19,26 +19,6 @@ export const env = createEnv({
       .int()
       .nonnegative()
       .default(60 * 60 * 24),
-    TYPESENSE_ENABLED: z
-      .enum(['true', 'false'])
-      .default('false')
-      .transform((val) => val === 'true'),
-    TYPESENSE_HOST: z.string().trim().default('localhost'),
-    TYPESENSE_PORT: z.coerce.number().int().nonnegative().default(8108),
-    TYPESENSE_PROTOCOL: z.string().trim().default('http'),
-    TYPESENSE_API_KEY: z.string().trim().default(''),
-    TYPESENSE_COLLECTION_NAME: z.string().trim().default('langchain'),
-    TYPESENSE_LLM_PROVIDER: z.enum(['openai']).default('openai'),
-    TYPESENSE_EMBEDDINGS_PROVIDER: z.enum(['openai']).default('openai'),
-    TYPESENSE_EMBEDDINGS_CACHE_PATH: z.string().trim().default('.cache/embeddings'),
-    TYPESENSE_CONVERSATIONAL_RETRIEVAL_QA_ENABLED: z
-      .enum(['true', 'false'])
-      .default('false')
-      .transform((val) => val === 'true'),
-    OPENAI_API_KEY: z.string().trim().default(''),
-    OPENAI_BASE_URL: z.string().url().optional(),
-    CLOUDFLARE_ACCOUNT_ID: z.string().trim().default(''),
-    CLOUDFLARE_API_TOKEN: z.string().trim().default(''),
     CLOUDFLARE_TURNSTILE_SECRET: z.string().trim().min(1).default('1x00000000000000000000AA'),
     CLOUDFLARE_TURNSTILE_VERIFY_URL: z
       .string()
@@ -50,6 +30,7 @@ export const env = createEnv({
     INTERNAL_API_SECRET: z.string().trim(),
     PREVIEW_SECRET: z.string().trim().default(''),
   },
+
   /*
    * Environment variables available on the client (and server).
    *
@@ -65,6 +46,7 @@ export const env = createEnv({
     NEXT_PUBLIC_TURNSTILE_SITEKEY: z.string().trim().default('1x00000000000000000000AA'),
     NEXT_PUBLIC_GSCE_API: z.string().trim().default(''),
   },
+
   /*
    * Due to how Next.js bundles environment variables on Edge and Client,
    * we need to manually destructure them to make sure all are included in bundle.
@@ -76,20 +58,6 @@ export const env = createEnv({
     STRAPI_ADMIN_API_TOKEN: process.env.STRAPI_ADMIN_API_TOKEN,
     STRAPI_CACHE_PERIOD: process.env.STRAPI_CACHE_PERIOD,
     STRAPI_CACHE_PERIOD_LONG: process.env.STRAPI_CACHE_PERIOD_LONG,
-    TYPESENSE_ENABLED: process.env.TYPESENSE_ENABLED,
-    TYPESENSE_HOST: process.env.TYPESENSE_HOST,
-    TYPESENSE_PORT: process.env.TYPESENSE_PORT,
-    TYPESENSE_PROTOCOL: process.env.TYPESENSE_PROTOCOL,
-    TYPESENSE_API_KEY: process.env.TYPESENSE_API_KEY,
-    TYPESENSE_COLLECTION_NAME: process.env.TYPESENSE_COLLECTION_NAME,
-    TYPESENSE_LLM_PROVIDER: process.env.TYPESENSE_LLM_PROVIDER,
-    TYPESENSE_EMBEDDINGS_PROVIDER: process.env.TYPESENSE_EMBEDDINGS_PROVIDER,
-    TYPESENSE_EMBEDDINGS_CACHE_PATH: process.env.TYPESENSE_EMBEDDINGS_CACHE_PATH,
-    TYPESENSE_CONVERSATIONAL_RETRIEVAL_QA_ENABLED: process.env.TYPESENSE_CONVERSATIONAL_RETRIEVAL_QA_ENABLED,
-    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
-    OPENAI_BASE_URL: process.env.OPENAI_BASE_URL,
-    CLOUDFLARE_ACCOUNT_ID: process.env.CLOUDFLARE_ACCOUNT_ID,
-    CLOUDFLARE_API_TOKEN: process.env.CLOUDFLARE_API_TOKEN,
     CLOUDFLARE_TURNSTILE_SECRET: process.env.CLOUDFLARE_TURNSTILE_SECRET,
     CLOUDFLARE_TURNSTILE_VERIFY_URL: process.env.CLOUDFLARE_TURNSTILE_VERIFY_URL,
     HCAPTCHA_SECRET: process.env.HCAPTCHA_SECRET,
