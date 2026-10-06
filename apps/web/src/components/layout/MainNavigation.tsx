@@ -105,7 +105,7 @@ export function MainNavigation({ items, className }: { items: NavigationItem[]; 
 export function MobileMainNavigation({ items, className }: { items: NavigationItem[]; className?: string }) {
   return (
     <nav className={className}>
-      <ul className="-mx-6 divide-y divide-white">
+      <ul className="divide-y divide-white">
         {items
           .filter((item) => item.menuAttached)
           .map((parentItem) => {

@@ -2,6 +2,11 @@ import { notFound } from 'next/navigation';
 import Script from 'next/script';
 import { env } from '@/env';
 
+export const metadata = {
+  title: 'Search',
+  robots: 'noindex nofollow',
+};
+
 export default async function SearchPage(props: { searchParams: Promise<{ q?: string }> }) {
   const searchParams = await props.searchParams;
   if (!env.NEXT_PUBLIC_GSCE_API) {

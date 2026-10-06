@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import { env } from '@/env';
 import { Link } from '@/i18n/navigation';
 import { locales } from '@/i18n/routing';
 import { isExternalLink } from '@/lib/link';
@@ -85,7 +86,7 @@ export function Header({
                   linkClassName="text-primary font-medium"
                 />
               </Suspense>
-              <InlineSearchForm locale={locale} />
+              {env.NEXT_PUBLIC_GSCE_API ? <InlineSearchForm locale={locale} /> : null}
             </div>
             <MainNavigation items={navigationItems} className="grow" />
           </div>
@@ -128,7 +129,7 @@ export function Header({
           )}
         </div>
         <MobileMenu>
-          <div className="py-6">
+          <div className="px-2 py-6">
             <Suspense>
               <LanguageSwitcher
                 locales={locales.map((code) => ({
@@ -141,9 +142,11 @@ export function Header({
                 linkClassName="text-primary dark:text-primary"
               />
             </Suspense>
-            <div className="mt-3">
-              <InlineSearchForm locale={locale} variant="mobile" />
-            </div>
+            {env.NEXT_PUBLIC_GSCE_API ? (
+              <div className="mt-3">
+                <InlineSearchForm locale={locale} variant="mobile" />
+              </div>
+            ) : null}
           </div>
           <MobileMainNavigation items={navigationItems} />
         </MobileMenu>
