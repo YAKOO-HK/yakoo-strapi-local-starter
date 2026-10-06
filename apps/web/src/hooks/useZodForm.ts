@@ -1,9 +1,9 @@
-import React, { FormEvent } from 'react';
+import * as React from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { FieldPath, useForm, UseFormSetError, type FieldValues, type UseFormProps } from 'react-hook-form';
+import { useForm, type FieldPath, type FieldValues, type UseFormProps, type UseFormSetError } from 'react-hook-form';
 import * as z from 'zod';
 
-function convertError(zodErrors?: z.ZodIssue[]) {
+function convertError(zodErrors?: z.core.$ZodIssue[]) {
   const errors: Record<string, string> = {};
   // console.log(zodErrors);
   zodErrors?.forEach((r) => {
@@ -37,37 +37,33 @@ function addServerErrors<TFieldValues extends FieldValues>(
   });
 }
 
-type Zod3Type = z.Schema & {
-  _def: {
-    typeName: string;
-  };
-};
-
 export type useZodFormProps<
-  TZodSchema extends Zod3Type,
-  TFieldValues extends FieldValues = z.infer<TZodSchema>,
+  T extends z.core.$ZodType<Output, Input>,
+  Input extends FieldValues = FieldValues,
+  Output = z.infer<T>,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  TContext = any,
-> = UseFormProps<TFieldValues, TContext> & {
-  zodSchema: TZodSchema;
-  onSubmit?: (data: TFieldValues) => unknown | Promise<unknown>;
+  Context = any,
+> = UseFormProps<Input, Context, Output> & {
+  zodSchema: Parameters<typeof zodResolver<Input, Context, Output, T>>[0];
+  onSubmit?: (data: Output) => unknown | Promise<unknown>;
   onError?: (errors: Record<string, string>, e: unknown) => unknown;
 };
 
 function useZodForm<
-  TZodSchema extends Zod3Type,
-  TFieldValues extends FieldValues = z.infer<TZodSchema>,
+  T extends z.core.$ZodType<Output, Input>,
+  Input extends FieldValues = FieldValues,
+  Output = z.infer<T>,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  TContext = any,
->({ onSubmit, onError, zodSchema, ...props }: useZodFormProps<TZodSchema, TFieldValues, TContext>) {
-  const { handleSubmit, setError, clearErrors, ...form } = useForm<TFieldValues, TContext>({
-    resolver: zodResolver(zodSchema),
+  Context = any,
+>({ onSubmit, onError, zodSchema, ...props }: useZodFormProps<T, Input, Output, Context>) {
+  const { handleSubmit, setError, clearErrors, ...form } = useForm({
+    resolver: zodResolver<Input, Context, Output>(zodSchema),
     ...props,
   });
 
   const wrapOnSubmit = handleSubmit(
     React.useCallback(
-      async (values: TFieldValues) => {
+      async (values: Output) => {
         try {
           return await onSubmit?.(values);
         } catch (e) {
@@ -86,7 +82,7 @@ function useZodForm<
     handleSubmit,
     setError,
     clearErrors,
-    onFormSubmit: (e?: FormEvent) => {
+    onFormSubmit: (e?: React.SubmitEvent) => {
       e?.stopPropagation();
       clearErrors();
       return wrapOnSubmit(e);

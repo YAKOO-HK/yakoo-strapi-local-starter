@@ -1,6 +1,6 @@
 // import type { Message } from 'ai/react';
 import * as qs from 'qs';
-import { z } from 'zod';
+import * as z from 'zod';
 import { env } from '@/env';
 import { fetchResponseHandler } from '@/lib/fetch-utils';
 

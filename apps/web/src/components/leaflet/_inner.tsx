@@ -1,20 +1,20 @@
 'use client';
 
-import React, { ComponentPropsWithoutRef } from 'react';
+import * as React from 'react';
 import Leaflet from 'leaflet';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
 import markerPng from './marker-icon.png';
+import 'leaflet/dist/leaflet.css';
 
 const markerIcon = new Leaflet.Icon({
   iconUrl: markerPng.src,
   iconAnchor: [markerPng.width / 2, markerPng.height],
 });
 
-export interface MarkerProps extends Omit<ComponentPropsWithoutRef<typeof Marker>, 'children'> {
-  popupProps: ComponentPropsWithoutRef<typeof Popup>;
+export interface MarkerProps extends Omit<React.ComponentPropsWithoutRef<typeof Marker>, 'children'> {
+  popupProps: React.ComponentPropsWithoutRef<typeof Popup>;
 }
-export interface LeafletMapProps extends ComponentPropsWithoutRef<typeof MapContainer> {
+export interface LeafletMapProps extends React.ComponentPropsWithoutRef<typeof MapContainer> {
   markers?: Array<MarkerProps>;
 }
 

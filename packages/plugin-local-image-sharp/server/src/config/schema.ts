@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 
 const pluginConfigSchema = z.object({
   cacheDir: z.string(),

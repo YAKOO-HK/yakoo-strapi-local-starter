@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { CloseIcon } from 'yet-another-react-lightbox';
-import { z } from 'zod';
+import * as z from 'zod';
 import { SetUrlMap } from '@/components/layout/LanguageSwitcher';
 import { Main } from '@/components/layout/Main';
 import { SingleBreadcrumbLdJson } from '@/components/ldjson/breadcrumb';
