@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "postbuild": "next-sitemap",
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "lint": "eslint",
@@ -37,7 +36,6 @@
     "motion": "12.43.0",
     "next": "16.3.8",
     "next-intl": "4.14.8",
-    "next-sitemap": "4.2.3",
     "qs": "6.16.0",
     "radix-ui": "1.6.7",
     "react": "19.3.0",

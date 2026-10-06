@@ -5,7 +5,7 @@ export default async function Icon() {
   try {
     const { favicon } = await getSiteMetadata();
     return new Response(null, {
-      status: 302, // redirect
+      status: 307, // redirect
       headers: {
         Location: `${env.NEXT_PUBLIC_STRAPI_URL}${favicon.url}`,
       },
