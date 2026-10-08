@@ -6,13 +6,14 @@ import { cn } from '@/lib/utils';
 export interface ControlledDropdownProps<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
-> extends Omit<ControllerProps<TFieldValues, TName>, 'render'>,
+>
+  extends
+    Omit<ControllerProps<TFieldValues, TName>, 'render'>,
     Omit<React.ComponentProps<typeof Select>, 'name' | 'defaultValue'> {
   allowEmpty?: boolean;
   emptyValue?: string;
   disabled?: boolean;
   loading?: boolean;
-  init?: boolean;
   options?: { value: string; label: string }[];
   placeholder?: string;
   className?: string;
@@ -46,7 +47,6 @@ export const ControlledDropdown = <
   labelProps,
   helperText,
   description,
-  init,
   ...props
 }: ControlledDropdownProps<TFieldValues, TName>) => {
   return (

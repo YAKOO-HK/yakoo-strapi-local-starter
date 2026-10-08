@@ -19,6 +19,7 @@ function LeafletMap(props: LeafletMapProps) {
       }),
     []
   );
+  // eslint-disable-next-line react-hooks/static-components
   return <LeafletMapWithNoSSR {...props} />;
 }
 

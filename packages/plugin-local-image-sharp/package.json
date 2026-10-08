@@ -45,7 +45,7 @@
     "@types/node": "^20",
     "@types/qs": "^6.15.1",
     "prettier": "^3.9.9",
-    "typescript": "^5.9.3"
+    "typescript": "^6.0.3"
   },
   "peerDependencies": {
     "@strapi/sdk-plugin": "^5.2.7",

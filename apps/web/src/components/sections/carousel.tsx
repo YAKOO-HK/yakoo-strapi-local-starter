@@ -65,8 +65,8 @@ const useEmblaDotButton = (emblaApi?: EmblaCarouselType) => {
   useEffect(() => {
     if (!emblaApi) return;
 
-    onInit(emblaApi);
-    onSelect(emblaApi);
+    emblaApi.on('init', onInit);
+    emblaApi.on('init', onSelect);
     emblaApi.on('reInit', onInit);
     emblaApi.on('reInit', onSelect);
     emblaApi.on('select', onSelect);

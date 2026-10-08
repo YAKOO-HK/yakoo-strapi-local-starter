@@ -1,41 +1,19 @@
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-import { FlatCompat } from '@eslint/eslintrc';
-import eslint from '@eslint/js';
-import nextPlugin from '@next/eslint-plugin-next';
 import pluginQuery from '@tanstack/eslint-plugin-query';
+import nextVitals from 'eslint-config-next/core-web-vitals';
+import nextTs from 'eslint-config-next/typescript';
 import onlyWarn from 'eslint-plugin-only-warn';
-import reactHooks from 'eslint-plugin-react-hooks';
-import turbo from 'eslint-plugin-turbo';
-import { defineConfig } from 'eslint/config';
-import globals from 'globals';
+import { defineConfig, globalIgnores } from 'eslint/config';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
-export default defineConfig(
-  eslint.configs.recommended,
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
-  ...pluginQuery.configs['flat/recommended'],
+const eslintConfig = defineConfig([
+  ...nextVitals,
+  ...nextTs,
+  pluginQuery.configs['flat/recommended'],
   {
     plugins: {
-      turbo: turbo,
-      'react-hooks': reactHooks,
       'only-warn': onlyWarn,
-      '@next/next': nextPlugin,
     },
-    languageOptions: {
-      globals: {
-        ...globals.node,
-        ...globals.browser,
-        React: true,
-        JSX: true,
-      },
-      sourceType: 'module',
+    settings: {
+      react: { version: '19' }, // Avoids auto-detection crash
     },
     settings: {
       tailwindcss: {
@@ -43,23 +21,31 @@ export default defineConfig(
       },
     },
     rules: {
-      ...turbo.configs.recommended.rules,
-      ...reactHooks.configs.recommended.rules,
-      ...nextPlugin.configs.recommended.rules,
-      '@next/next/no-html-link-for-pages': 'off',
-      '@typescript-eslint/no-empty-object-type': 'off',
+      '@typescript-eslint/ban-ts-comment': 'warn',
+      '@typescript-eslint/no-empty-object-type': 'warn',
+      '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-unused-vars': [
         'warn',
         {
+          vars: 'all',
+          args: 'after-used',
+          ignoreRestSiblings: false,
           argsIgnorePattern: '^_',
-          caughtErrorsIgnorePattern: '^_',
-          destructuredArrayIgnorePattern: '^_',
           varsIgnorePattern: '^_',
-          ignoreRestSiblings: true,
+          destructuredArrayIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^(_|ignore)',
         },
       ],
     },
-    files: ['**/*.js?(x)', '**/*.ts?(x)'],
-    ignores: ['.next/*'],
-  }
-);
+  },
+  // Override default ignores of eslint-config-next.
+  globalIgnores([
+    // Default ignores of eslint-config-next:
+    '.next/**',
+    'out/**',
+    'build/**',
+    'next-env.d.ts',
+  ]),
+]);
+
+export default eslintConfig;

@@ -44,26 +44,25 @@ export function ContactForm({ sections, locale }: { sections: Array<FormComponen
     reset,
     formState: { isSubmitting },
   } = methods;
+  // eslint-disable-next-line react-hooks/refs
+  const onSubmit = handleSubmit(async ({ token, ...formData }) => {
+    const response = await fetch(`${env.NEXT_PUBLIC_STRAPI_URL}/api/ezforms/submit`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ formName: 'contact-form', formData, token }),
+    });
+    turnstileRef.current?.reset();
+    hCaptchaRef.current?.resetCaptcha();
+    if (response.ok) {
+      toast.success('Thank you for your submission! We will be in touch soon.');
+      reset(getDefaultValues({ sections }));
+    } else {
+      toast.error('Something went wrong. Please try again later.');
+    }
+  });
   return (
     <Form {...methods}>
-      <form
-        className="rounded-lg border border-border"
-        onSubmit={handleSubmit(async ({ token, ...formData }) => {
-          const response = await fetch(`${env.NEXT_PUBLIC_STRAPI_URL}/api/ezforms/submit`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ formName: 'contact-form', formData, token }),
-          });
-          turnstileRef.current?.reset();
-          hCaptchaRef.current?.resetCaptcha();
-          if (response.ok) {
-            toast.success('Thank you for your submission! We will be in touch soon.');
-            reset(getDefaultValues({ sections }));
-          } else {
-            toast.error('Something went wrong. Please try again later.');
-          }
-        })}
-      >
+      <form className="rounded-lg border border-border" onSubmit={onSubmit}>
         <div className="grid grid-cols-1 gap-y-6 px-2 py-6 @lg:grid-cols-2 @lg:gap-x-8 @lg:px-8">
           {sections.map((section) => {
             switch (section.__component) {
