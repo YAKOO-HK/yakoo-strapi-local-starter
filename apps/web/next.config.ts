@@ -5,6 +5,8 @@ const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  cacheComponents: false,
+  partialPrefetching: false,
   images: {
     qualities: [75, 100],
     minimumCacheTTL: 60 * 60 * 24 * 7, // 7 days
