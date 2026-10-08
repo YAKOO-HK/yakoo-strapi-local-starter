@@ -29,8 +29,6 @@ export async function generateMetadata(props: { params: Promise<{ locale: Strapi
   } satisfies Metadata;
 }
 
-export const revalidate = 0;
-
 function renderNavItem(item: NavigationItem) {
   const isExternal = isExternalLink(item.path);
   if (!item.items?.length) {

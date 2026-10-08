@@ -1,8 +1,6 @@
 import { env } from '@/env';
 import { getSiteMetadata } from '@/strapi/site-metadata';
 
-export const dynamic = 'force-dynamic';
-
 export default async function Icon() {
   try {
     const { favicon } = await getSiteMetadata();

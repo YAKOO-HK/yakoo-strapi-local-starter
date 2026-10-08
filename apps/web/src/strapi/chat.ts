@@ -33,7 +33,6 @@ export const getChatByUUID = async (uuid: string) => {
   );
   const response = await fetch(`${env.NEXT_PUBLIC_STRAPI_URL}/api/chats?${query}`, {
     headers: { Authorization: `Bearer ${env.STRAPI_ADMIN_API_TOKEN}` },
-    next: { revalidate: 0 },
   }).then(fetchResponseHandler<ChatsResponse>());
   return response.data?.[0] || null;
 };
@@ -46,7 +45,6 @@ export const updateChat = async (documentId: string, history: unknown[] = []) =>
     },
     method: 'PUT',
     body: JSON.stringify({ data: { history } }),
-    next: { revalidate: 0 },
   }).then(fetchResponseHandler());
 };
 
@@ -64,6 +62,5 @@ export const createChat = async (name: string, uuid: string) => {
         history: [],
       },
     }),
-    next: { revalidate: 0 },
   }).then(fetchResponseHandler());
 };

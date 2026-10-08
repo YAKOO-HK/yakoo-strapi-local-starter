@@ -8,8 +8,6 @@ import { env } from '@/env';
 import { getPageBySlug } from '@/strapi/pages';
 import { StrapiLocale, toMetadata } from '@/strapi/strapi';
 
-export const dynamic = 'force-dynamic';
-
 export async function generateMetadata(props: { params: Promise<{ locale: StrapiLocale; pageSlug: string }> }) {
   const params = await props.params;
   const page = await getPageBySlug(params.pageSlug, params.locale);

@@ -1,4 +1,5 @@
 import { draftMode } from 'next/headers';
+import { cacheLife, cacheTag } from 'next/cache';
 import { notFound } from 'next/navigation';
 import qs from 'qs';
 import { env } from '@/env';
@@ -34,6 +35,9 @@ export type PostCategoriesResponse = {
 };
 
 async function fetchPostCategory(slug: string, locale: StrapiLocale) {
+  'use cache';
+  cacheLife('strapiLong');
+  cacheTag('post-category');
   const querystring = qs.stringify(
     {
       filters: { slug: { $eq: slug } },
@@ -45,7 +49,6 @@ async function fetchPostCategory(slug: string, locale: StrapiLocale) {
   );
   const response = await fetch(`${env.NEXT_PUBLIC_STRAPI_URL}/api/post-categories?${querystring}`, {
     headers: { Authorization: `Bearer ${env.STRAPI_ADMIN_API_TOKEN}` },
-    next: { revalidate: env.STRAPI_CACHE_PERIOD_LONG, tags: ['post-category'] },
   }).then(fetchResponseHandler<PostCategoriesResponse>());
   // console.dir(response.data, { depth: 3 });
   if (!response.data?.[0]) return null;
@@ -86,6 +89,9 @@ export async function getPostCategoryBySlug(slug: string, preferredLocale: Strap
   notFound();
 }
 export async function getAllCategories(locale: StrapiLocale) {
+  'use cache';
+  cacheLife('strapiLong');
+  cacheTag('post-category');
   const querystring = qs.stringify(
     {
       pagination: { pageSize: 250 }, // assume won't have so many categories
@@ -95,7 +101,6 @@ export async function getAllCategories(locale: StrapiLocale) {
   );
   const response = await fetch(`${env.NEXT_PUBLIC_STRAPI_URL}/api/post-categories?${querystring}`, {
     headers: { Authorization: `Bearer ${env.STRAPI_ADMIN_API_TOKEN}` },
-    next: { revalidate: env.STRAPI_CACHE_PERIOD_LONG, tags: ['post-category'] },
   }).then(fetchResponseHandler<PostCategoriesResponse>());
   return response.data;
 }
@@ -131,9 +136,7 @@ export type PostsResponse = {
   };
 };
 
-async function fetchPost(slug: string, locale: StrapiLocale) {
-  const { isEnabled } = await draftMode();
-  // console.log({ slug, locale, isEnabled });
+async function fetchPostFromStrapi(slug: string, locale: StrapiLocale, isDraft: boolean) {
   const querystring = qs.stringify(
     {
       filters: { slug: { $eq: slug } },
@@ -150,20 +153,28 @@ async function fetchPost(slug: string, locale: StrapiLocale) {
       ],
       pagination: { pageSize: 1 },
       locale,
-      status: isEnabled ? 'draft' : 'published',
+      status: isDraft ? 'draft' : 'published',
     },
     { encodeValuesOnly: true }
   );
   const response = await fetch(`${env.NEXT_PUBLIC_STRAPI_URL}/api/posts?${querystring}`, {
     headers: { Authorization: `Bearer ${env.STRAPI_ADMIN_API_TOKEN}` },
-    next: {
-      revalidate: isEnabled ? 0 : env.STRAPI_CACHE_PERIOD,
-      tags: ['post', 'post-category'],
-    },
   }).then(fetchResponseHandler<PostsResponse>());
   // console.dir(response.data, { depth: 3 });
   if (!response.data?.[0]) return null;
   return response.data[0];
+}
+
+async function fetchPublishedPost(slug: string, locale: StrapiLocale) {
+  'use cache';
+  cacheLife('strapi');
+  cacheTag('post', 'post-category');
+  return fetchPostFromStrapi(slug, locale, false);
+}
+
+async function fetchPost(slug: string, locale: StrapiLocale) {
+  const { isEnabled } = await draftMode();
+  return isEnabled ? fetchPostFromStrapi(slug, locale, true) : fetchPublishedPost(slug, locale);
 }
 
 export async function getPostBySlug(slug: string, preferredLocale: StrapiLocale) {
@@ -188,6 +199,9 @@ export async function getPostBySlug(slug: string, preferredLocale: StrapiLocale)
 }
 
 export async function getPostsByCategory(categoryDocumentId: string, locale: StrapiLocale, page: number = 1) {
+  'use cache';
+  cacheLife('strapi');
+  cacheTag('post');
   const querystring = qs.stringify(
     {
       filters: { category: { documentId: { $eq: categoryDocumentId } } },
@@ -199,13 +213,15 @@ export async function getPostsByCategory(categoryDocumentId: string, locale: Str
   );
   const response = await fetch(`${env.NEXT_PUBLIC_STRAPI_URL}/api/posts?${querystring}`, {
     headers: { Authorization: `Bearer ${env.STRAPI_ADMIN_API_TOKEN}` },
-    next: { revalidate: env.STRAPI_CACHE_PERIOD, tags: ['post'] },
   }).then(fetchResponseHandler<PostsResponse>());
 
   return response;
 }
 
 export async function getPosts(locale: StrapiLocale, page: number = 1) {
+  'use cache';
+  cacheLife('strapi');
+  cacheTag('post', 'post-category');
   const querystring = qs.stringify(
     {
       populate: ['image', 'category'],
@@ -217,12 +233,14 @@ export async function getPosts(locale: StrapiLocale, page: number = 1) {
   );
   const response = await fetch(`${env.NEXT_PUBLIC_STRAPI_URL}/api/posts?${querystring}`, {
     headers: { Authorization: `Bearer ${env.STRAPI_ADMIN_API_TOKEN}` },
-    next: { revalidate: env.STRAPI_CACHE_PERIOD, tags: ['post', 'post-category'] },
   }).then(fetchResponseHandler<PostsResponse>());
   return response;
 }
 
 export async function getAllPosts(locale: StrapiLocale, populate: string[] = ['category']) {
+  'use cache';
+  cacheLife('strapi');
+  cacheTag('post', 'post-category');
   const querystring = qs.stringify(
     {
       populate,
@@ -234,7 +252,6 @@ export async function getAllPosts(locale: StrapiLocale, populate: string[] = ['c
   );
   const response = await fetch(`${env.NEXT_PUBLIC_STRAPI_URL}/api/posts?${querystring}`, {
     headers: { Authorization: `Bearer ${env.STRAPI_ADMIN_API_TOKEN}` },
-    next: { revalidate: env.STRAPI_CACHE_PERIOD, tags: ['post', 'post-category'] },
   }).then(fetchResponseHandler<PostsResponse>());
   return response.data;
 }

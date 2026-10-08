@@ -6,8 +6,6 @@ import { getAllPages } from '@/strapi/pages';
 import { getAllCategories, getAllPosts } from '@/strapi/posts';
 import { StrapiLocale } from '@/strapi/strapi';
 
-export const dynamic = 'force-dynamic';
-
 export async function generateSitemaps() {
   return locales.map((locale) => ({ id: locale, locale }));
 }
@@ -25,11 +23,9 @@ export default async function sitemap(params: { id: Promise<string> }): Promise<
     getAllCategories(locale as StrapiLocale),
   ]);
 
-  const now = new Date().toISOString();
   const sitemap: MetadataRoute.Sitemap = [];
   sitemap.push({
     url: new URL(`${locale}`, baseUrl).toString(),
-    lastModified: now,
     changeFrequency: 'daily' as const,
     priority: 1.0,
     alternates: {
@@ -74,7 +70,6 @@ export default async function sitemap(params: { id: Promise<string> }): Promise<
   // /posts
   sitemap.push({
     url: new URL(`${locale}/posts`, baseUrl).toString(),
-    lastModified: now,
     changeFrequency: 'daily' as const,
     priority: 0.5,
   });
@@ -82,7 +77,6 @@ export default async function sitemap(params: { id: Promise<string> }): Promise<
   categories.forEach((attributes) => {
     sitemap.push({
       url: new URL(`${locale}/posts/${attributes.slug}`, baseUrl).toString(),
-      lastModified: now,
       changeFrequency: 'weekly' as const,
       priority: 0.5,
     });

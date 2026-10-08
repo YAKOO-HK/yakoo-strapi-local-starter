@@ -2,7 +2,6 @@ import { draftMode } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { env } from '@/env';
 
-export const dynamic = 'force-dynamic';
 export async function GET(request: Request) {
   const draft = await draftMode();
   const url = new URL(request.url);

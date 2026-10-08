@@ -1,5 +1,6 @@
 // import { BlocksContent } from '@strapi/blocks-react-renderer';
 import qs from 'qs';
+import { cacheLife, cacheTag } from 'next/cache';
 import { env } from '@/env';
 import { fetchResponseHandler } from '@/lib/fetch-utils';
 import { PageComponent } from './components';
@@ -26,6 +27,9 @@ export type StrapiHomepage = {
 };
 
 export async function getHomepage(locale: StrapiLocale = 'en') {
+  'use cache';
+  cacheLife('strapiLong');
+  cacheTag('homepage');
   const querystring = qs.stringify(
     {
       populate: ['map', 'map.markers', 'sections', 'sections.image', 'sections.slides', 'sections.slides.image'],
@@ -35,7 +39,6 @@ export async function getHomepage(locale: StrapiLocale = 'en') {
   );
   const resp = await fetch(`${env.NEXT_PUBLIC_STRAPI_URL}/api/homepage?${querystring}`, {
     headers: { Authorization: `Bearer ${env.STRAPI_ADMIN_API_TOKEN}` },
-    next: { revalidate: env.STRAPI_CACHE_PERIOD_LONG, tags: ['homepage'] },
   }).then(fetchResponseHandler<{ data: StrapiHomepage }>());
   // console.dir(resp.data, { depth: 3 });
   return resp.data;

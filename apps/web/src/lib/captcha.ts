@@ -34,7 +34,6 @@ export async function verifyCaptcha(response: string) {
         response,
         // TODO: remoteip?
       }),
-      next: { revalidate: 0 }, // Disable Next.js revalidation
     });
 
     if (!hCaptchaVerifyResponse.ok) {
@@ -54,7 +53,6 @@ export async function verifyCaptcha(response: string) {
         response,
         // TODO: remoteip?
       }),
-      next: { revalidate: 0 }, // Disable Next.js revalidation
     });
     if (!verifyResponse.ok) {
       console.error('Captcha verification failed:', verifyResponse);

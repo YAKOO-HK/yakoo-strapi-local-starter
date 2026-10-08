@@ -1,4 +1,5 @@
 import qs from 'qs';
+import { cacheLife, cacheTag } from 'next/cache';
 import { env } from '@/env';
 import { fetchResponseHandler } from '@/lib/fetch-utils';
 import { StrapiLocale } from './strapi';
@@ -39,12 +40,14 @@ export interface ExternalNavigationItem extends BaseNavigationItem {
 }
 
 export async function getMainNavigation(locale: StrapiLocale = 'en') {
+  'use cache';
+  cacheLife('strapiLong');
+  cacheTag('navigation', 'navigation-item');
   const querystring = qs.stringify({ type: 'TREE', locale }, { encodeValuesOnly: true });
   const response = await fetch(
     `${env.NEXT_PUBLIC_STRAPI_URL}/api/navigation/render/nav-main-navigation?${querystring}`,
     {
       headers: { Authorization: `Bearer ${env.STRAPI_ADMIN_API_TOKEN}` },
-      next: { revalidate: env.STRAPI_CACHE_PERIOD_LONG, tags: ['navigation', 'navigation-item'] },
     }
   ).then(fetchResponseHandler<NavigationItem[]>());
   // console.log(response);

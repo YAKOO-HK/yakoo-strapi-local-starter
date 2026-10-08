@@ -1,4 +1,5 @@
 import qs from 'qs';
+import { cacheLife, cacheTag } from 'next/cache';
 import { env } from '@/env';
 import { fetchResponseHandler } from '@/lib/fetch-utils';
 import { StrapiLocale, StrapiMedia, StrapiSEO } from './strapi';
@@ -18,6 +19,9 @@ interface SiteMetadataResponse {
 }
 
 export async function getSiteMetadata(locale: StrapiLocale = 'en') {
+  'use cache';
+  cacheLife('strapiLong');
+  cacheTag('site-metadata');
   const querystring = qs.stringify(
     {
       populate: ['seo', 'seo.metaImage', 'favicon', 'logo', 'logo2'],
@@ -27,10 +31,6 @@ export async function getSiteMetadata(locale: StrapiLocale = 'en') {
   );
   const response = await fetch(`${env.NEXT_PUBLIC_STRAPI_URL}/api/site-metadata?${querystring}`, {
     headers: { Authorization: `Bearer ${env.STRAPI_ADMIN_API_TOKEN}` },
-    next: {
-      revalidate: env.STRAPI_CACHE_PERIOD_LONG,
-      tags: ['site-metadata'],
-    },
   }).then(fetchResponseHandler<SiteMetadataResponse>());
   // console.dir(response.data, { depth: 3 });
 
