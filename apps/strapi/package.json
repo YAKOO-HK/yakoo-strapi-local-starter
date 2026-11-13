@@ -18,23 +18,23 @@
     "@repo/plugin-ezforms": "workspace:*",
     "@repo/plugin-local-image-sharp": "workspace:*",
     "@strapi-community/plugin-seo": "2.1.1",
-    "@strapi/plugin-color-picker": "5.60.0",
-    "@strapi/plugin-users-permissions": "5.60.0",
-    "@strapi/provider-email-nodemailer": "5.60.0",
-    "@strapi/provider-upload-local": "5.60.0",
-    "@strapi/strapi": "5.60.0",
-    "axios": "1.21.0",
+    "@strapi/plugin-color-picker": "5.62.0",
+    "@strapi/plugin-users-permissions": "5.62.0",
+    "@strapi/provider-email-nodemailer": "5.62.0",
+    "@strapi/provider-upload-local": "5.62.0",
+    "@strapi/strapi": "5.62.0",
+    "axios": "1.21.1",
     "mysql2": "3.24.6",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-router-dom": "6.30.6",
     "sharp": "0.35.5",
     "strapi-identity": "0.7.5",
-    "strapi-plugin-config-sync": "3.2.0",
+    "strapi-plugin-config-sync": "3.3.0",
     "strapi-plugin-jodit-editor": "^1.1.5",
-    "strapi-plugin-navigation": "3.4.0",
+    "strapi-plugin-navigation": "3.4.2",
     "strapi-plugin-placeholder": "github:Gaylord-Julien/strapi-plugin-placeholder#v5",
-    "strapi-plugin-publisher": "2.0.9",
+    "strapi-plugin-publisher": "2.1.0",
     "styled-components": "6.6.0"
   },
   "author": {
@@ -43,13 +43,9 @@
   "strapi": {
     "uuid": "db859789-82bd-459a-8d53-6aa76ab92ec9"
   },
-  "engines": {
-    "node": ">=20.0.0 <=24.x.x",
-    "npm": ">=6.0.0"
-  },
   "license": "MIT",
   "devDependencies": {
-    "@strapi/typescript-utils": "5.60.0",
+    "@strapi/typescript-utils": "5.62.0",
     "@types/node": "24.19.2",
     "@types/react": "18.3.31",
     "@types/react-dom": "18.3.7",

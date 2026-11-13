@@ -67,3 +67,39 @@ minimumReleaseAgeExclude:
   - radix-ui@1.7.0
   - '@tanstack/query-core@5.105.1'
   - '@tanstack/react-query@5.105.1'
+  - '@strapi/admin@5.62.0'
+  - '@strapi/cloud-cli@5.62.0'
+  - '@strapi/content-manager@5.62.0'
+  - '@strapi/content-releases@5.62.0'
+  - '@strapi/content-type-builder@5.62.0'
+  - '@strapi/core@5.62.0'
+  - '@strapi/data-transfer@5.62.0'
+  - '@strapi/database@5.62.0'
+  - '@strapi/design-system@2.3.1'
+  - '@strapi/email@5.62.0'
+  - '@strapi/generators@5.62.0'
+  - '@strapi/i18n@5.62.0'
+  - '@strapi/icons@2.3.1'
+  - '@strapi/logger@5.62.0'
+  - '@strapi/openapi@5.62.0'
+  - '@strapi/permissions@5.62.0'
+  - '@strapi/plugin-color-picker@5.62.0'
+  - '@strapi/plugin-users-permissions@5.62.0'
+  - '@strapi/provider-email-nodemailer@5.62.0'
+  - '@strapi/provider-email-sendmail@5.62.0'
+  - '@strapi/provider-upload-local@5.62.0'
+  - '@strapi/review-workflows@5.62.0'
+  - '@strapi/strapi@5.62.0'
+  - '@strapi/types@5.62.0'
+  - '@strapi/typescript-utils@5.62.0'
+  - '@strapi/ui-primitives@2.3.1'
+  - '@strapi/upload@5.62.0'
+  - '@strapi/utils@5.62.0'
+  - framer-motion@14.13.0
+  - icu-minify@4.15.1
+  - motion-dom@14.13.0
+  - motion@14.13.0
+  - next-intl-swc-plugin-extractor@4.15.1
+  - next-intl@4.15.1
+  - prettier@3.10.1
+  - use-intl@4.15.1

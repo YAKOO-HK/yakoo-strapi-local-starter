@@ -13,12 +13,12 @@
     "@ianvs/prettier-plugin-sort-imports": "4.7.1",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "prettier": "3.9.9",
+    "prettier": "3.10.1",
     "prettier-plugin-tailwindcss": "0.8.1",
-    "turbo": "2.11.7"
+    "turbo": "2.11.11"
   },
-  "packageManager": "pnpm@12.10.1",
+  "packageManager": "pnpm@12.20.0",
   "engines": {
-    "node": ">=20.0.0 <=26.x.x"
+    "node": ">=22.0.0 <=26.x.x"
   }
 }
